@@ -1,0 +1,23 @@
+
+nav{
+  background-color: seashell;
+}
+
+nav img{
+  width: 51px;
+}
+nav ul{
+  float: right;
+  list-style-type: none;
+}
+
+ul li {
+  display: inline-block;
+  padding: 6px;
+}
+
+li a{
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
