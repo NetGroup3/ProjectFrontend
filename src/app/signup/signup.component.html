@@ -1,0 +1,20 @@
+<p>signup works!</p>
+<form #basicForm="ngForm" (submit)="getData(basicForm.value)">
+  <h1> Sign up</h1>
+  <p>E-mail</p>
+  <input type="text" ngModel name="E-mail" placeholder="youremail@mail.com">
+  <p>Nickname</p>
+  <input type="text" ngModel name="Nickname" placeholder="Nickname">
+  <p>First Name</p>
+  <input type="text" ngModel name="First-name" placeholder="John">
+  <p>Last Name</p>
+  <input type="text" ngModel name="Last-name" placeholder="Smith">
+  <p>Password</p>
+  <input type="password" ngModel name="Password" placeholder="********">
+  <p>Confirm Password</p>
+  <input type="password" ngModel name="Confirm-password" placeholder="********">
+  <button>Register</button>
+</form>
+<ul>
+  <li>{{userData.Nickname}}</li>
+</ul>
