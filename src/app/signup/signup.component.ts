@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators, FormBuilder} from "@angular/forms";
 import {UserService} from "../user.service";
 import {Router} from "@angular/router";
+import {User} from "../User";
 
 @Component({
   selector: 'app-signup',
@@ -15,8 +16,11 @@ export class SignupComponent implements OnInit, OnDestroy {
   constructor(
     public router: Router,
     public userService : UserService,
-    public fb : FormBuilder
+    public fb : FormBuilder,
   ) { }
+
+
+
 
   ngOnDestroy(): void {
     throw new Error('Method not implemented.');
@@ -24,7 +28,7 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      username: new FormControl(null, [Validators.required]),
+      nickname: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required, Validators.minLength(4)]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       confirmPassword: new FormControl(null, [Validators.required, Validators.minLength(4)]),
@@ -37,15 +41,22 @@ export class SignupComponent implements OnInit, OnDestroy {
     if (this.form.invalid) {
       return
     }
-    const userData: any = {
-      username: this.form?.get('username')?.value,
+    const user: User = {
+      nickname: this.form?.get('nickname')?.value,
       password: this.form?.get('password')?.value,
       email: this.form?.get('email')?.value,
-      confirmPassword: this.form?.get('confirmPassword')?.value,
       firstname: this.form?.get('firstname')?.value,
       lastname: this.form?.get('lastname')?.value
     }
 
-    console.log({userData})
+    console.log({user})
+
+    if (user) {
+      this.userService.addUser(user)
+        .subscribe(user => {
+          console.log(user);
+        });
+    }
   }
+
 }

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import {Observable, of} from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-import {MessageService} from './message.service';
 import {User} from './User';
 
 
@@ -12,11 +11,12 @@ import {User} from './User';
 })
 export class UserService {
 
-  private userUrl = 'https://spring-boot-group3.herokuapp.com'
+/*  private userUrl = 'https://spring-boot-group3.herokuapp.com/users'*/
+  private userUrl = 'http://localhost:8081/users'
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService) { }
+    ) { }
 
   private log(message: string) {
 /*    this.messageService.add('userService: ${message}');*/
@@ -59,10 +59,10 @@ export class UserService {
   }
 
   /** POST: add a new user to the server */
-  addUser(user: User): Observable<User> {
-    return this.http.post<User>(this.userUrl, user, this.httpOptions).pipe(
+  addUser(user: User): Observable<any> {
+    return this.http.post<any>(this.userUrl, user, this.httpOptions).pipe(
       tap((newUser: User) => this.log(`sign up success`)),
-      catchError(this.handleError<User>('addUser'))
+      catchError(this.handleError<any>('addUser'))
     );
   }
 
