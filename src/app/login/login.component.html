@@ -1,9 +1,37 @@
+<form class="card" [formGroup]="form" (ngSubmit)="submit()">
+  <h1 class="mb-0">Log In</h1>
+    <div appearance="outline">
+      <label>Username</label>
+      <input
+        id="username"
+        matInput
+        placeholder="Username"
+        formControlName="username"
+        type="text"
+      >
+    </div>
+    <div appearance="outline">
+      <label>Password</label>
+      <input
+        id="password"
+        matInput
+        placeholder="Password"
+        formControlName="password"
+        type="password"
+      >
+    </div>
 
-<div>
+  <div>
+    <button [disabled]="form.invalid" type="submit">Login</button>
+  </div>
+</form>
+
+
+<!--<div>
   <h1> Sign In</h1>
   <p>Nickname</p>
   <input type="text" ngModel name="Nickname" placeholder="Nickname">
   <p>Password</p>
   <input type="password" ngModel name="Password" placeholder="********">
   <button>Register</button>
-</div>
+</div>-->

@@ -1,15 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators, FormBuilder} from "@angular/forms";
+import {UserService} from "../user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  form:any
+  constructor(
+    public router: Router,
+    public userService : UserService,
+    public fb : FormBuilder
+              ) { }
+
+  ngOnDestroy(): void {
+        throw new Error('Method not implemented.');
+    }
 
   ngOnInit(): void {
+    this.form = this.fb.group({
+      username: new FormControl(null, [Validators.required]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(4)])
+
+    })
   }
 
+  submit() {
+    if (this.form.invalid) {
+      return
+    }
+
+    const userData: any = {
+      username: this.form?.get('username')?.value,
+      password: this.form?.get('password')?.value
+    }
+
+    console.log({userData})
+
+
+/*    this.userService.login(userData).subscribe((resp) => {
+      this.router.navigateByUrl(this.returnUrl)
+    })*/
+  }
 }
