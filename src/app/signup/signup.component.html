@@ -1,10 +1,7 @@
 <p>signup works!</p>
 <form class="card" [formGroup]="form" (ngSubmit)="submit()">
   <h1 class="mb-0">Sign Up</h1>
-  <div appearance="outline">
-    <label>Username</label>
-    <input id="nickname" matInput placeholder="nickname" formControlName="nickname" type="text">
-  </div>
+
   <div appearance="outline">
     <label>E-mail</label>
     <input id="email" matInput placeholder="email" formControlName="email" type="text">
@@ -13,10 +10,10 @@
     <label>Password</label>
     <input id="password" matInput placeholder="********" formControlName="password" type="password">
   </div>
-  <div appearance="outline">
+<!--  <div appearance="outline">
     <label>Confirm Password</label>
     <input id="confirmPassword" matInput placeholder="********" formControlName="confirmPassword" type="password">
-  </div>
+  </div>-->
   <div appearance="outline">
     <label>Firstname</label>
     <input id="firstname" matInput placeholder="firstname" formControlName="firstname" type="text">
@@ -27,9 +24,12 @@
   </div>
 
   <div>
-    <button [disabled]="form.invalid" type="submit">Login</button>
+    <button [disabled]="form.invalid" type="submit">Sign Up</button>
   </div>
 </form>
+<div>
+  <a routerLink="/login"> you have an account? </a>
+</div>
 
 <!--<form #basicForm="ngForm" (submit)="getData(basicForm.value)">
   <h1> Sign up</h1>

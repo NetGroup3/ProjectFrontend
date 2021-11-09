@@ -1,6 +1,5 @@
 export interface User {
   id?: number;
-  nickname?: string;
   password?: string;
   firstname?: string;
   lastname?: string;
@@ -9,4 +8,3 @@ export interface User {
   status?: boolean;
   role?: string;
 }
-

@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators, FormBuilder} from "@angular/forms";
 import {UserService} from "../user.service";
 import {Router} from "@angular/router";
-import {User} from "../User";
+import {User} from "../user";
 
 @Component({
   selector: 'app-signup',
@@ -19,19 +19,14 @@ export class SignupComponent implements OnInit, OnDestroy {
     public fb : FormBuilder,
   ) { }
 
-
-
-
   ngOnDestroy(): void {
     throw new Error('Method not implemented.');
   }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      nickname: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(4)]),
       email: new FormControl(null, [Validators.required, Validators.email]),
-      confirmPassword: new FormControl(null, [Validators.required, Validators.minLength(4)]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(4)]),
       firstname: new FormControl(null, []),
       lastname: new FormControl(null, [])
     })
@@ -42,9 +37,8 @@ export class SignupComponent implements OnInit, OnDestroy {
       return
     }
     const user: User = {
-      nickname: this.form?.get('nickname')?.value,
-      password: this.form?.get('password')?.value,
       email: this.form?.get('email')?.value,
+      password: this.form?.get('password')?.value,
       firstname: this.form?.get('firstname')?.value,
       lastname: this.form?.get('lastname')?.value
     }
@@ -58,5 +52,7 @@ export class SignupComponent implements OnInit, OnDestroy {
         });
     }
   }
+
+
 
 }

@@ -1,12 +1,12 @@
 <form class="card" [formGroup]="form" (ngSubmit)="submit()">
   <h1 class="mb-0">Log In</h1>
     <div appearance="outline">
-      <label>Username</label>
+      <label>E-mail</label>
       <input
-        id="nickname"
+        id="email"
         matInput
-        placeholder="nickname"
-        formControlName="nickname"
+        placeholder="email"
+        formControlName="email"
         type="text"
       >
     </div>
@@ -25,7 +25,9 @@
     <button [disabled]="form.invalid" type="submit">Login</button>
   </div>
 </form>
-
+<div>
+  <a routerLink="/signup"> you have an account? </a>
+</div>
 
 <!--<div>
   <h1> Sign In</h1>

@@ -23,9 +23,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      username: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required, Validators.minLength(4)])
-
     })
   }
 
@@ -35,7 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     const userData: any = {
-      username: this.form?.get('username')?.value,
+      email: this.form?.get('email')?.value,
       password: this.form?.get('password')?.value
     }
 
