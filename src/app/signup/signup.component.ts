@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators, FormBuilder} from "@angular/forms";
-import {UserService} from "../user.service";
+import {UserService} from "../services/user.service";
 import {Router} from "@angular/router";
-import {User} from "../user";
+import {User} from "../models/user";
 
 @Component({
   selector: 'app-signup',
@@ -36,7 +36,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     if (this.form.invalid) {
       return
     }
-    const user: User = {
+    const user: { password: any; firstname: any; email: any; lastname: any } = {
       email: this.form?.get('email')?.value,
       password: this.form?.get('password')?.value,
       firstname: this.form?.get('firstname')?.value,
@@ -52,7 +52,5 @@ export class SignupComponent implements OnInit, OnDestroy {
         });
     }
   }
-
-
 
 }

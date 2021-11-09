@@ -1,0 +1,33 @@
+
+
+<div
+  class="login-page__form"
+  [formGroup]="form"
+>
+  <input
+    class="login-page__input"
+    nz-input
+    placeholder="E-mail"
+    formControlName="email"
+  />
+  <nz-form-control
+    [nzValidateStatus]="form.controls.password.touched &&  form.controls.password.errors ? 'error' : ''  "
+    nzErrorTip="password error"
+  >
+    <input
+      class="login-page__input"
+      nz-input
+      placeholder="Password"
+      type="password"
+      formControlName="password"
+    />
+  </nz-form-control>
+  <button
+    class="login-page__controller"
+    nz-button
+    nzType="primary"
+      (click)="onLoginClick()"
+  >
+    Login
+  </button>
+</div>
