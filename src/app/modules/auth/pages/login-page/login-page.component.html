@@ -1,33 +1,50 @@
-
-
-<div
-  class="login-page__form"
-  [formGroup]="form"
->
-  <input
-    class="login-page__input"
-    nz-input
-    placeholder="E-mail"
-    formControlName="email"
-  />
-  <nz-form-control
-    [nzValidateStatus]="form.controls.password.touched &&  form.controls.password.errors ? 'error' : ''  "
-    nzErrorTip="password error"
+<div>
+  <h1>Login</h1>
+  <div
+    class="login-page__form"
+    [formGroup]="form"
   >
-    <input
-      class="login-page__input"
-      nz-input
-      placeholder="Password"
-      type="password"
-      formControlName="password"
-    />
-  </nz-form-control>
-  <button
-    class="login-page__controller"
-    nz-button
-    nzType="primary"
-      (click)="onLoginClick()"
-  >
-    Login
-  </button>
+    <nz-form-item>
+      <nz-form-control
+      [nzValidateStatus]="form.controls.email.touched && form.controls.email.errors ? 'error' : ' ' "
+      nzErrorTip="email error"
+      >
+        <input
+          class="login-page__input"
+          nz-input
+          placeholder="E-mail"
+          formControlName="email"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control
+        [nzValidateStatus]="form.controls.password.touched &&  form.controls.password.errors ? 'error' : ' ' "
+        nzErrorTip="password error"
+      >
+        <input
+          class="login-page__input"
+          nz-input
+          placeholder="Password"
+          type="password"
+          formControlName="password"
+        />
+      </nz-form-control>
+    </nz-form-item>
+
+    <button
+      class="login-page__controller"
+      nz-button
+      nzType="primary"
+        (click)="onLoginClick()"
+    >
+      Login
+    </button>
+    <a routerLink="#"> Forgot password? </a>
+    <p>Don’t have an account?
+      <a routerLink="/signup">Sign Up </a>
+    </p>
+  </div>
 </div>
+
+
