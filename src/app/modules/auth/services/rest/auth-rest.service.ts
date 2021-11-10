@@ -16,4 +16,8 @@ export class AuthRestService {
     return this.http.post(appLinks.login, body);
   }
 
+  public recover (body: LoginForm) : Observable<any>{
+    return this.http.post(appLinks.recovery, body);
+  }
+
 }

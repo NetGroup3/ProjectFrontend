@@ -21,6 +21,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import {NzFormControlComponent, NzFormModule} from "ng-zorro-antd/form";
+import { RecoveryPageComponent } from './modules/auth/pages/recovery-page/recovery-page.component';
 
 
 
@@ -33,6 +34,7 @@ registerLocaleData(en);
     SignupComponent,
     SignupPageComponent,
     LoginPageComponent,
+    RecoveryPageComponent,
   ],
   imports: [
     BrowserModule,
