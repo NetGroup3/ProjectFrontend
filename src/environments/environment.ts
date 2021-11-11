@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  serverUrl: "http://localhost:8081"
+  serverUrl: "http://localhost:8081",
+  addUsersUrl: "http://localhost:8081/users/{id}"
 
 };
 

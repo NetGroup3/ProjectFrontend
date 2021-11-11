@@ -1,0 +1,17 @@
+:host {
+  display: block;
+}
+
+.signup-page {
+    &__form {
+    width: 300px;
+  }
+
+  &__input {
+    margin-top: 16px;
+  }
+
+  &__controller {
+    margin-top: 16px;
+  }
+}
