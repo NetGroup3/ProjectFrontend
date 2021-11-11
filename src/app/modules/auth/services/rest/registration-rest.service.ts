@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {LoginForm} from "../../models/login-form.model";
+import {SignupForm} from "../../models/signup-form.model";
 import {Observable} from "rxjs";
 import {appLinks} from "../../../../app.links";
 
@@ -15,7 +15,7 @@ export class RegistrationRestService {
   //   return this.http.post(appLinks.signup, body);
   // }
 
-  public addUser(body: LoginForm) : Observable<any>{
+  public addUser(body: SignupForm) : Observable<any>{
     return this.http.post(appLinks.users, body);
   }
 }
