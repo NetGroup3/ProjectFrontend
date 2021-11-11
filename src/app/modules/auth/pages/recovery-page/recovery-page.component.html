@@ -1,25 +1,33 @@
-<div
-  class="recovery-page__form"
-  [formGroup]="form"
->
-  <nz-form-control
-    [nzValidateStatus]="form.controls.email.errors ? 'error' : ''  "
-    nzErrorTip="Enter valid email"
+<div class="inner">
+  <h1>Forgot your password?</h1>
+  <div
+    class="recovery-page__form"
+    [formGroup]="form"
   >
-    <input
-      class="recovery-page__input"
-      nz-input
-      placeholder="E-mail"
-      formControlName="email"
-    />
-  </nz-form-control>
+    <nz-form-control
+      [nzValidateStatus]="form.controls.email.errors ? 'error' : ''  "
+      nzErrorTip="Enter valid email"
+    >
+      <input
+        class="recovery-page__input"
+        nz-input
+        placeholder="E-mail"
+        formControlName="email"
+      />
+    </nz-form-control>
 
-  <button
-    class="recovery-page__controller"
-    nz-button
-    nzType="primary"
-    (click)="onRecoveryClick()"
-  >
-    Send list on email
-  </button>
+    <button
+      class="recovery-page__controller"
+      nz-button
+      nzType="primary"
+      (click)="onRecoveryClick()"
+    >
+      Send list on email
+    </button>
+    <div class="recovery-page__link">
+      <p>
+        <a routerLink="/login">Return to Login</a>
+      </p>
+    </div>
+  </div>
 </div>
