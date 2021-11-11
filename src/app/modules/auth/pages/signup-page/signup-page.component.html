@@ -1,0 +1,65 @@
+<h2>Sign up</h2>
+<div
+  class="signup-page__form"
+  [formGroup]="form"
+>
+
+  <input
+    class="signup-page__input"
+    nz-input
+    placeholder="E-mail"
+    formControlName="email"
+  />
+  <input
+    class="signup-page__input"
+    nz-input
+    placeholder="First Name"
+    formControlName="firstname"
+  />
+  <input
+    class="signup-page__input"
+    nz-input
+    placeholder="Last Name"
+    formControlName="lastname"
+  />
+
+  <nz-form-control
+    [nzValidateStatus]="form.controls.password.touched &&  form.controls.password.errors ? 'error' : ''  "
+    nzErrorTip="password must be 8-12 characters"
+  >
+    <input
+      class="signup-page__input"
+      nz-input
+      placeholder="Password"
+      type="password"
+      formControlName="password"
+      minlength="8" maxlength="12"
+    />
+  </nz-form-control>
+
+  <nz-form-control
+    [nzValidateStatus]="form.controls.password.touched &&  form.controls.password.errors ? 'error' : ''  "
+    nzErrorTip="confirm password required"
+  >
+    <input
+      class="signup-page__input"
+      nz-input
+      placeholder="Confirm Password"
+      type="password"
+      formControlName="confirmPassword"
+      minlength="8" maxlength="12"
+    />
+  </nz-form-control>
+
+  <button
+    class="signup-page__controller"
+    nz-button
+    nzType="primary"
+    (click)="onLoginClick()"
+  >
+    Sign up
+  </button>
+  <p>Already have an account?
+    <a routerLink="/login">Login here</a>
+  </p>
+</div>

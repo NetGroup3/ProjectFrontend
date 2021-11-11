@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+.login-page {
+  &__form {
+    width: 300px;
+  }
+
+  &__input {
+    margin-top: 16px;
+  }
+
+  &__controller {
+    margin-top: 16px;
+  }
+}
+
+.inner {
+  position: absolute;
+  width: 800px;
+  height: 691px;
+  left: 85px;
+  top: 200px;
+}
+
+
