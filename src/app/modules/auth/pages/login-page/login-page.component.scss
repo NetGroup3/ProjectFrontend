@@ -13,6 +13,13 @@
 
   &__controller {
     margin-top: 16px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  &__link {
+    margin-top: 16px;
   }
 }
 
@@ -20,7 +27,7 @@
   position: absolute;
   width: 800px;
   height: 691px;
-  left: 85px;
+  left: 820px;
   top: 200px;
 }
 
