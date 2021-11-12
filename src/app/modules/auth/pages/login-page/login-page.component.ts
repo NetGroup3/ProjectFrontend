@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthRestService} from "../../services/rest/auth-rest.service";
+import {RestapiService} from "../../services/rest/restapi.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-page',
@@ -11,7 +12,8 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authRestService: AuthRestService
+    private authRestService: RestapiService,
+    private router:Router
   ) { }
 
   public form: FormGroup = this.buildForm();
@@ -20,9 +22,11 @@ export class LoginPageComponent implements OnInit {
   }
 
   public onLoginClick(): void {
+    console.log(this.form.value.password)
     if (this.form.valid){
-      this.authRestService.login(this.form.value).subscribe((response:any)=>{
+      this.authRestService.login(this.form.value.email,this.form.value.password).subscribe((response:any)=>{
         console.log(response)
+        this.router.navigate(["/home"])
       })
     } else {
       this.form.markAllAsTouched();
