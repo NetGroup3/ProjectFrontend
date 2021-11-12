@@ -1,6 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {
+  AbstractControlOptions,
+  FormBuilder,
+  FormGroup,
+  Validators
+} from "@angular/forms";
 import {RegistrationRestService} from "../../services/rest/registration-rest.service";
+import {PasswordMatch} from "../../services/client/password-validator";
 
 @Component({
   selector: 'app-signup-page',
@@ -11,12 +17,25 @@ export class SignupPageComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private registrationRestService: RegistrationRestService
-  ) { }
-
-  ngOnInit(): void {
+  ) {
   }
 
-  public form: FormGroup = this.buildForm();
+  public form!: FormGroup;
+
+  ngOnInit(): void {
+    const options: AbstractControlOptions = {
+      validators: PasswordMatch.matchingPasswords
+    }
+
+    this.form = this.fb.group({
+        email: ['', [Validators.email]],
+        firstname: ['', [Validators.required]],
+        lastname: ['', [Validators.required]],
+        password: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]],
+        confirmPassword: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]]
+      }, options
+    )
+  }
 
   public onLoginClick(): void {
     if (this.form.valid) {
@@ -26,16 +45,6 @@ export class SignupPageComponent implements OnInit {
     } else {
       this.form.markAllAsTouched();
     }
-  }
-
-  private buildForm(): FormGroup {
-    return this.fb.group({
-      email: ['', Validators.email],
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required]
-    });
   }
 
 }
