@@ -22,6 +22,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import {NzFormControlComponent, NzFormModule} from "ng-zorro-antd/form";
 import { RecoveryPageComponent } from './modules/auth/pages/recovery-page/recovery-page.component';
+import {RestapiService} from "./modules/auth/services/rest/restapi.service";
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -35,6 +37,7 @@ registerLocaleData(en);
     SignupPageComponent,
     LoginPageComponent,
     RecoveryPageComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,7 @@ registerLocaleData(en);
     NzInputModule,
     NzFormModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, RestapiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
