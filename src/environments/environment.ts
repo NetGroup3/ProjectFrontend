@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-/*  serverUrl: "http://localhost:8081",*/
-  serverUrl: "https://spring-boot-group3.herokuapp.com/",
+  serverUrl: "http://localhost:8081",
+/*  serverUrl: "https://spring-boot-group3.herokuapp.com",*/
 /*  addUsersUrl: "http://localhost:8081/users/{id}"*/
-  addUsersUrl: "https://spring-boot-group3.herokuapp.com/users/{id}"
+/*  addUsersUrl: "https://spring-boot-group3.herokuapp.com/users/{id}"*/
 
 
 };
