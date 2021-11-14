@@ -22,6 +22,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import {NzFormControlComponent, NzFormModule} from "ng-zorro-antd/form";
 import {RestapiService} from "./modules/auth/services/rest/restapi.service";
 import { HomeComponent } from './home/home.component';
+import { UserSceletonComponent } from './sceletons/user-sceleton/user-sceleton.component';
+import {NzSelectModule} from "ng-zorro-antd/select";
 
 
 
@@ -34,6 +36,7 @@ registerLocaleData(en);
     LoginPageComponent,
     RecoveryPageComponent,
     HomeComponent,
+    UserSceletonComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,7 @@ registerLocaleData(en);
     NzButtonModule,
     NzInputModule,
     NzFormModule,
+    NzSelectModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, RestapiService],
   bootstrap: [AppComponent]
