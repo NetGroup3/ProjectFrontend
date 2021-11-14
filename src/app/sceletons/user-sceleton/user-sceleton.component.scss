@@ -1,0 +1,63 @@
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.navigation {
+  position: fixed;
+  width: 247px;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 100%);
+
+}
+
+.navigation ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.navigation ul li {
+  position: relative;
+  width: 200%;
+  list-style: none;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #495464;
+}
+
+.navigation ul li:nth-child(1) {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 39px;
+  /* identical to box height */
+
+  letter-spacing: -0.04em;
+
+  color: #495464;
+}
+
+
+.header {
+  position: absolute;
+  width: calc(100% - 247px);
+  height: 40px;
+  left: 247px;
+  top: 0px;
+}
+
+.top-bar-element {
+  margin-right: 30px;
+}
