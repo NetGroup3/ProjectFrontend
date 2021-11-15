@@ -25,5 +25,4 @@ export class AuthRestService {
   public signUp(body: SignupForm) : Observable<any>{
     return this.http.post(appLinks.signup, body);
   }
-
 }
