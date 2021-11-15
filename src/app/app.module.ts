@@ -19,11 +19,18 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import {NzFormControlComponent, NzFormModule} from "ng-zorro-antd/form";
+import {NzFormModule} from "ng-zorro-antd/form";
 import {RestapiService} from "./modules/auth/services/rest/restapi.service";
 import { HomeComponent } from './home/home.component';
 import { UserSceletonComponent } from './sceletons/user-sceleton/user-sceleton.component';
 import {NzSelectModule} from "ng-zorro-antd/select";
+import { AuthUserFavouriteComponent } from './auth-user/auth-user-favourite/auth-user-favourite.component';
+import { AuthUserCatalogueComponent } from './auth-user/auth-user-catalogue/auth-user-catalogue.component';
+import { AuthUserCalendarComponent } from './auth-user/auth-user-calendar/auth-user-calendar.component';
+import { AuthUserEventsComponent } from './auth-user/auth-user-events/auth-user-events.component';
+import { AuthUserSettingsComponent } from './auth-user/auth-user-settings/auth-user-settings.component';
+import { AuthUserFriendsComponent } from './auth-user/auth-user-friends/auth-user-friends.component';
+import { AuthUserBlogComponent } from './auth-user/auth-user-blog/auth-user-blog.component';
 
 
 
@@ -37,6 +44,13 @@ registerLocaleData(en);
     RecoveryPageComponent,
     HomeComponent,
     UserSceletonComponent,
+    AuthUserFavouriteComponent,
+    AuthUserCatalogueComponent,
+    AuthUserCalendarComponent,
+    AuthUserEventsComponent,
+    AuthUserSettingsComponent,
+    AuthUserFriendsComponent,
+    AuthUserBlogComponent,
   ],
   imports: [
     BrowserModule,

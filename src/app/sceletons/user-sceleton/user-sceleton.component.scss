@@ -5,6 +5,7 @@
 
 .header {
   position: fixed;
+  z-index: 1;
   width: 86%;
   height: 10%;
   right: 0px;
@@ -19,17 +20,6 @@
   left: 0px;
   top: 0px;
   background-color: #f9f7f4;
-}
-
-.insert_area {
-  position: fixed;
-  width: 86%;
-  height: 90%;
-  right: 0px;
-  bottom: 0px;
-  background-color: #f3f1ee;
-
-  text-align: center; /*to be removed*/
 }
 
 .navigation ul {
@@ -67,11 +57,11 @@
 
 .title {
   padding-left: 5px;
-  color: rgba(72,70,67,0.89);
+  color: rgba(72, 70, 67, 0.89);
 }
 
 .icon {
-  color: rgba(72,70,67,0.89);
+  color: rgba(72, 70, 67, 0.89);
 }
 
 nz-select {
@@ -83,14 +73,14 @@ nz-input-group {
 }
 
 #buttonSearch {
-  background-color: rgba(72,70,67,0.89);
+  background-color: rgba(72, 70, 67, 0.89);
 }
 
 #buttonLogout {
   border-radius: 2px;
   width: 120px;
   height: 40px;
-  background-color: rgba(72,70,67,0.89);
+  background-color: rgba(72, 70, 67, 0.89);
   color: white;
   font-size: 12pt;
 }
