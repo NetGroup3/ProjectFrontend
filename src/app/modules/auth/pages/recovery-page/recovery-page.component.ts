@@ -21,8 +21,9 @@ export class RecoveryPageComponent implements OnInit {
   }
 
   public onRecoveryClick(): void {
+    console.log(this.form.value.email)
     if (this.form.valid) {
-      this.authRestService.recover(this.form.value).subscribe((response: any) => {
+      this.authRestService.recover(this.form.value.email).subscribe((response: any) => {
         console.log(response)
       })
     } else {
@@ -35,6 +36,4 @@ export class RecoveryPageComponent implements OnInit {
       email: ['', Validators.email],
     });
   }
-
-
 }
