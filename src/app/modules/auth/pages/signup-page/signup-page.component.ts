@@ -5,8 +5,8 @@ import {
   FormGroup,
   Validators
 } from "@angular/forms";
-import {RegistrationRestService} from "../../services/rest/registration-rest.service";
 import {PasswordMatch} from "../../services/client/password-validator";
+import {AuthRestService} from "../../services/rest/auth-rest.service";
 
 @Component({
   selector: 'app-signup-page',
@@ -14,9 +14,10 @@ import {PasswordMatch} from "../../services/client/password-validator";
   styleUrls: ['./signup-page.component.scss']
 })
 export class SignupPageComponent implements OnInit {
+
   constructor(
     private fb: FormBuilder,
-    private registrationRestService: RegistrationRestService
+    private authRestService: AuthRestService
   ) {
   }
 
@@ -39,7 +40,7 @@ export class SignupPageComponent implements OnInit {
 
   public onLoginClick(): void {
     if (this.form.valid) {
-      this.registrationRestService.addUser(this.form.value).subscribe((response: any) => {
+      this.authRestService.signUp(this.form.value).subscribe((response: any) => {
         console.log(response)
       })
     } else {
