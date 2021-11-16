@@ -1,14 +1,5 @@
 import {environment} from "../environments/environment";
 
-/*
-export const appLinks={
-  login: `https://api.ourproject.space/login`,
-  signup: `https://api.ourproject.space/signup`,
-  recovery: `https://api.ourproject.space/recovery`,
-  users: `https://api.ourproject.space/users`
-}
-*/
-
 
 export const appLinks={
   production: true,
@@ -18,4 +9,3 @@ export const appLinks={
   users: `${environment.serverUrl}/users`
 }
 
-//https://api.ourproject.space
