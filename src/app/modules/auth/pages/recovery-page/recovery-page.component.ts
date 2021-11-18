@@ -21,9 +21,9 @@ export class RecoveryPageComponent implements OnInit {
   }
 
   public onRecoveryClick(): void {
-    console.log(this.form.value.email)
+    console.log(this.form.value)
     if (this.form.valid) {
-      this.authRestService.recover(this.form.value.email).subscribe((response: any) => {
+      this.authRestService.recover(this.form.value).subscribe((response: any) => {
         console.log(response)
       })
     } else {
