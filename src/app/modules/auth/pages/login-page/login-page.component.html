@@ -1,7 +1,10 @@
 <div>
   <div class="inner">
     <h1>Login</h1>
-    <div class="login-page__form">
+    <div
+      class="login-page__form"
+      [formGroup]="form"
+    >
       <nz-form-control
         [nzValidateStatus]="form.controls.username.touched && form.controls.username.errors ? 'error' : ' ' "
         nzErrorTip="email error"
