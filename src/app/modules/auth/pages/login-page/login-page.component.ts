@@ -25,22 +25,22 @@ export class LoginPageComponent implements OnInit {
   }
 
   public onLoginClick(): void {
-    console.log(this.form.value)
+    console.log(this.form.value);
     if (this.form.valid){
       this.authRestService.login(this.form.value).subscribe((response:any)=>{
-        console.log(response)
+        console.log(response);
         this.authService.setToken(response.token);
-        this.router.navigate(["/home"])
+        this.authService.setUserData(response.id, response.firstname, response.lastname, response.role);
+        this.router.navigate(["/home"]);
       })
     } else {
       this.form.markAllAsTouched();
     }
-
   }
 
   private buildForm(): FormGroup {
     return this.fb.group({
-      username: ['', Validators.required],
+      username: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(12)]]
     });
   }
