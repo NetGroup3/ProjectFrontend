@@ -1,5 +1,55 @@
 <app-user-sceleton></app-user-sceleton>
-<!-- INSERT ELEMENT HERE -->
-<div class="insert_area">
-  <span class="title">Settings</span>
+
+<div>
+
+  <div class="__content">
+
+    <span class="title">My Settings</span>
+
+    <div
+      class="__personal_information"
+      [formGroup]="form"
+    >
+
+      <div >
+        <nz-form-control>
+          <div>
+            <p>First name</p>
+            <input
+              class="settings_page__input"
+              nz-input
+              [(ngModel)]="firstname"
+              placeholder="John"
+              formControlName="firstname"
+            />
+          </div>
+        </nz-form-control>
+      </div>
+
+      <div>
+        <nz-form-control>
+          <div>
+            <p>Last name</p>
+            <input
+              class="settings_page__input"
+              nz-input
+              [(ngModel)]="lastname"
+              placeholder="Smith"
+              formControlName="lastname"
+            />
+          </div>
+        </nz-form-control>
+      </div>
+
+      <div>
+        <button (click)="save()" class="_save_change_personal_information"><h3 class="__button_text">Save changes</h3></button>
+      </div>
+
+    </div>
+
+    <div class="__photo_block">
+      <!-- photo block-->
+      <button class="__change_photo"><h3 class="__button_text">Change photo</h3> </button>
+    </div>
+  </div>
 </div>

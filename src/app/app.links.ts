@@ -1,21 +1,12 @@
 import {environment} from "../environments/environment";
 
-/*
-export const appLinks={
-  login: `https://api.ourproject.space/login`,
-  signup: `https://api.ourproject.space/signup`,
-  recovery: `https://api.ourproject.space/recovery`,
-  users: `https://api.ourproject.space/users`
-}
-*/
-
 
 export const appLinks={
   production: true,
-  login: `${environment.serverUrl}/login`,
-  signup: `${environment.serverUrl}/signup`,
+  login: `${environment.serverUrl}/auth/login`,
+  signup: `${environment.serverUrl}/auth/signup`,
   recovery: `${environment.serverUrl}/recovery`,
-  users: `${environment.serverUrl}/users`
+  users: `${environment.serverUrl}/users`,
+  personalInfo: `${environment.serverUrl}/personal-information`,
 }
 
-//https://api.ourproject.space
