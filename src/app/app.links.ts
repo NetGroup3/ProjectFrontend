@@ -8,6 +8,6 @@ export const appLinks={
   recovery: `${environment.serverUrl}/recovery`,
   users: `${environment.serverUrl}/users`,
   ingridients:`${environment.serverUrl}/ingridients`,
-  ingridient:`${environment.serverUrl}/ingridients/id`
+  ingridient:`${environment.serverUrl}/ingridients/id`,
+  personalInfo: `${environment.serverUrl}/personal-information`,
 }
-

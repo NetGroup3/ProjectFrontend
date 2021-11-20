@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UserRestService} from "../../modules/auth/services/rest/user-rest.service";
+import {AuthService} from "../../modules/auth/services/client/auth.service";
 
 @Component({
   selector: 'app-auth-user-settings',
@@ -7,15 +9,29 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./auth-user-settings.component.scss']
 })
 export class AuthUserSettingsComponent implements OnInit {
-  public nameForm: FormGroup = this.buildForm()
-  constructor(private fb: FormBuilder) { }
+  public firstname: string = "";
+  public lastname: string = "";
+  public form: FormGroup = this.buildForm()
+
+  constructor(private fb: FormBuilder, private userRestService :UserRestService, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.firstname = this.authService.getUserFirstname();
+    this.lastname = this.authService.getUserLastname();
+  }
+
+  save(): void {
+    if(this.form.valid)
+    this.userRestService.updatePersonalInformation(this.form.value).subscribe((response: any) => {
+      console.log(response)
+      this.authService.setUserFirstname(this.firstname);//исправить данную неточность
+      this.authService.serUserLastname(this.lastname);
+    })
   }
 
   private buildForm():FormGroup {
     return this.fb.group({
-      name: ['', Validators.required],
+      firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]]
     });
   }

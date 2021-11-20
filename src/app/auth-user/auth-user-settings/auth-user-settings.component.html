@@ -8,7 +8,7 @@
 
     <div
       class="__personal_information"
-      [formGroup]="nameForm"
+      [formGroup]="form"
     >
 
       <div >
@@ -18,8 +18,9 @@
             <input
               class="settings_page__input"
               nz-input
+              [(ngModel)]="firstname"
               placeholder="John"
-              formControlName="name"
+              formControlName="firstname"
             />
           </div>
         </nz-form-control>
@@ -32,6 +33,7 @@
             <input
               class="settings_page__input"
               nz-input
+              [(ngModel)]="lastname"
               placeholder="Smith"
               formControlName="lastname"
             />
@@ -40,7 +42,7 @@
       </div>
 
       <div>
-        <button class="_save_change_personal_information"><h3 class="__button_text">Save changes</h3></button>
+        <button (click)="save()" class="_save_change_personal_information"><h3 class="__button_text">Save changes</h3></button>
       </div>
 
     </div>
