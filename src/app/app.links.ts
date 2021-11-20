@@ -4,8 +4,10 @@ import {environment} from "../environments/environment";
 export const appLinks={
   production: true,
   login: `${environment.serverUrl}/auth/login`,
-  signup: `${environment.serverUrl}/signup`,
+  signup: `${environment.serverUrl}/auth/signup`,
   recovery: `${environment.serverUrl}/recovery`,
-  users: `${environment.serverUrl}/users`
+  users: `${environment.serverUrl}/users`,
+  ingridients:`${environment.serverUrl}/ingridients`,
+  ingridient:`${environment.serverUrl}/ingridients/id`
 }
 

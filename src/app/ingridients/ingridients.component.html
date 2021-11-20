@@ -1,0 +1,21 @@
+<div class="ingridients">
+  <h2>Ingredients</h2>
+  <div class="add_ingridient">
+    <nz-select class="options">
+      <nz-option nzValue="cocktails" nzLabel="Liquid"></nz-option>
+      <nz-option nzValue="friends" nzLabel="Alcohol"></nz-option>
+      <nz-option nzValue="events" nzLabel="Fruits"></nz-option>
+    </nz-select>
+    <button>Add ingredient</button>
+  </div>
+  <div class="ingridient" *ngFor="let ingridient of Ingridients">
+    <div class="buttons">
+      <a routerLink="/moderator/ingridients/{{ingridient.id}}">
+      <img src="./edit.png" alt="edit"></a>
+      <img src="./delete.png" alt="delete">
+    </div>
+      <p class="title">{{ingridient.title}}</p>
+    <a routerLink="/moderator/ingridients/add"></a>
+      <p class="bottom" >Ingredient</p>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+h2{
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 72px;
+  line-height: 150%;
+  color: #495464;
+  margin-left: 2%;
+}
+.add_ingridient{
+  width: 100%;
+  height: 100px;
+  margin-bottom: 50px;
+}
+.ingridients{
+  background: #F9FAFB;
+  display: flex;
+  flex-wrap: wrap;
+}
+.ingridient{
+  text-align: center;
+  height: 15%;
+  margin-left: 2%;
+  margin-right: 3%;
+  margin-bottom: 3%;
+  width: 15%;
+  float: left;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+}
+.title{
+  margin-top: 15%;
+  color: #495464;
+}
+.bottom{
+  margin-top: 45%;
+  color: #BBBFCA;
+}
+.buttons{
+  float: right;
+  margin-top: 2%;
+  margin-right: 5%;
+}
+.buttons img:hover{
+  cursor: pointer;
+}
+.add_ingridient button{
+  background: #9921E8;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 24px rgba(153, 33, 232, 0.5);
+  border-radius: 50px;
+  float: right;
+  margin-right: 4%;
+  width: 350px;
+  height: 50px;
+  color: white;
+  font-weight: bold;
+  border: none;
+}
+.add_ingridient button:hover {
+  cursor: pointer;
+  width: 360px;
+  height: 53px;
+}
+.options{
+  border-radius: 50px;
+  float: right;
+  margin-right: 4%;
+  width: 160px;
+  margin-top: 7px;
+}
