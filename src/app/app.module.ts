@@ -31,6 +31,8 @@ import { AuthUserEventsComponent } from './auth-user/auth-user-events/auth-user-
 import { AuthUserSettingsComponent } from './auth-user/auth-user-settings/auth-user-settings.component';
 import { AuthUserFriendsComponent } from './auth-user/auth-user-friends/auth-user-friends.component';
 import { AuthUserBlogComponent } from './auth-user/auth-user-blog/auth-user-blog.component';
+import { IngridientsComponent } from './ingridients/ingridients.component';
+import { AddEditIngredientComponent } from './add-edit-ingredient/add-edit-ingredient.component';
 
 
 
@@ -51,6 +53,8 @@ registerLocaleData(en);
     AuthUserSettingsComponent,
     AuthUserFriendsComponent,
     AuthUserBlogComponent,
+    IngridientsComponent,
+    AddEditIngredientComponent,
   ],
   imports: [
     BrowserModule,

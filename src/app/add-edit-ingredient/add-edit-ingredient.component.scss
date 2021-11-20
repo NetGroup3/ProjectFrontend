@@ -1,0 +1,91 @@
+.add_edit{
+  background: #F9FAFB;
+}
+h2 {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 60px;
+  color: #495464;
+  margin-left: 2%;
+}
+.upload{
+  background: #9921E8;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 24px rgba(153, 33, 232, 0.5);
+  border-radius: 50px;
+  margin-right: 4%;
+  width: 350px;
+  height: 50px;
+  color: white;
+  font-weight: bold;
+  float: left;
+  border: none;
+  margin-left: 3%;
+
+}
+.description_picture img{
+  margin-left: 3%;
+}
+.description_picture textarea{
+  width: 60%;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+  border: none;
+  height: 250px;
+  color: #495464;
+}
+.title{
+  width: 87%;
+  height: 250px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+  margin-top: 2%;
+  margin-left: 3%;
+}
+.title p{
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 35px;
+  color: #495464;
+  margin-left: 2%;
+}
+.title input{
+  width: 90%;
+  height: 90px;
+  background: #FFFFFF;
+  border-radius: 25px;
+  margin-left: 3%;
+  border-color: #495464;
+  border-width: 1px
+}
+.ok{
+  background: #9921E8;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 24px rgba(153, 33, 232, 0.5);
+  border-radius: 50px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  float: right;
+  width: 200px;
+  height: 50px;
+  margin-top: 20px;
+}
+.delete{
+  background: #495464;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 24px rgba(153, 33, 232, 0.5);
+  border-radius: 50px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  float: right;
+  width: 200px;
+  height: 50px;
+  margin-top: 20px;
+  margin-right: 10%;
+}
+button:hover{
+  cursor: pointer;
+}

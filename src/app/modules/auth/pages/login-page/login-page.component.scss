@@ -1,21 +1,42 @@
+.login{
+
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(180deg, #5F72BE 0%, #EBD3FB 100%);
+}
 :host {
   display: block;
 }
-
+h1{
+  color: #495464;
+}
 .login-page {
+
   &__form {
-    width: 300px;
+    width: 70%;
+    margin-left: 10%;
+    margin-top: 15%;
+    text-align: center;
   }
 
   &__input {
     margin-top: 16px;
+    border: 2px solid #BBBFCA;
+    box-sizing: border-box;
+    border-radius: 24px;
+    margin-bottom: 5%;
   }
 
   &__controller {
+    border: none;
     margin-top: 16px;
     position: relative;
-    left: 50%;
-    transform: translate(-50%, 0);
+    background: #9921E8;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 24px rgba(153, 33, 232, 0.5);
+    border-radius: 50px;
+    width: 60%;
+    margin-bottom: 5%;
+    height: 40px;
   }
 
   &__link {
@@ -25,10 +46,12 @@
 
 .inner {
   position: absolute;
-  width: 800px;
-  height: 691px;
-  left: 820px;
-  top: 200px;
+  background: #FFFFFF;
+  border-radius: 32px;
+  width: 30%;
+  height: 60%;
+  margin-top: 10%;
+  margin-left: 5%;
 }
 
 
