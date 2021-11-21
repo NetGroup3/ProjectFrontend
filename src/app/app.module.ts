@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -31,9 +31,9 @@ import { AuthUserEventsComponent } from './auth-user/auth-user-events/auth-user-
 import { AuthUserSettingsComponent } from './auth-user/auth-user-settings/auth-user-settings.component';
 import { AuthUserFriendsComponent } from './auth-user/auth-user-friends/auth-user-friends.component';
 import { AuthUserBlogComponent } from './auth-user/auth-user-blog/auth-user-blog.component';
+import {AuthInterceptor} from "./http-interceptors/auth-interceptor";
 import { IngridientsComponent } from './ingridients/ingridients.component';
 import { AddEditIngredientComponent } from './add-edit-ingredient/add-edit-ingredient.component';
-
 
 
 registerLocaleData(en);
@@ -70,8 +70,15 @@ registerLocaleData(en);
     NzInputModule,
     NzFormModule,
     NzSelectModule,
+    HttpClientModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }, RestapiService],
+  providers: [
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi   : true,
+    },
+    { provide: NZ_I18N, useValue: en_US }, RestapiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
