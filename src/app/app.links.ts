@@ -7,6 +7,6 @@ export const appLinks={
   signup: `${environment.serverUrl}/auth/signup`,
   recovery: `${environment.serverUrl}/recovery`,
   users: `${environment.serverUrl}/users`,
-  personalInfo: `${environment.serverUrl}/personal-information`,
+  personalInfo: `${environment.serverUrl}/users/personal-information`,
 }
 
