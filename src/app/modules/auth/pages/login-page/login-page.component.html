@@ -6,14 +6,14 @@
       [formGroup]="form"
     >
       <nz-form-control
-        [nzValidateStatus]="form.controls.email.touched && form.controls.email.errors ? 'error' : ' ' "
+        [nzValidateStatus]="form.controls.username.touched && form.controls.username.errors ? 'error' : ' ' "
         nzErrorTip="email error"
       >
         <input
           class="login-page__input"
           nz-input
           placeholder="E-mail"
-          formControlName="email"
+          formControlName="username"
         />
       </nz-form-control>
       <nz-form-control

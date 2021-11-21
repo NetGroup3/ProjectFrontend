@@ -1,5 +1,124 @@
 <app-user-sceleton></app-user-sceleton>
-<!-- INSERT ELEMENT HERE -->
-<div class="insert_area">
-  <span class="title">Settings</span>
+
+<div>
+  <div class="__content">
+    <span class="title">My Settings</span>
+
+    <div class="__personal_information" [formGroup]="form">
+      <div>
+        <nz-form-control>
+          <div>
+            <p>First name</p>
+            <input
+              class="settings_page__input"
+              nz-input
+              [(ngModel)]="firstname"
+              placeholder="John"
+              formControlName="firstname"
+            />
+          </div>
+        </nz-form-control>
+      </div>
+
+      <div>
+        <nz-form-control>
+          <div>
+            <p>Last name</p>
+            <input
+              class="settings_page__input"
+              nz-input
+              [(ngModel)]="lastname"
+              placeholder="Smith"
+              formControlName="lastname"
+            />
+          </div>
+        </nz-form-control>
+      </div>
+
+      <div>
+        <button (click)="save()" class="_save_change_personal_information">
+          <h3 class="__button_text">Save changes</h3>
+        </button>
+      </div>
+    </div>
+
+    <div class="__photo_block">
+      <!-- photo block-->
+      <button class="__change_photo">
+        <h3 class="__button_text">Change photo</h3>
+      </button>
+    </div>
+
+    <div>
+      <span class="title-change-password">Change password</span>
+
+      <div class="__change-password" [formGroup]="passwordForm">
+        <div>
+          <nz-form-control
+            [nzValidateStatus]="
+              passwordForm.controls.oldPassword.touched &&
+              passwordForm.controls.oldPassword.errors
+                ? 'error'
+                : ''
+            "
+            nzErrorTip="old password error"
+          >
+            <input
+              class="password-input"
+              nz-input
+              placeholder="Old Password"
+              type="password"
+              formControlName="oldPassword"
+            />
+          </nz-form-control>
+        </div>
+
+        <div>
+          <nz-form-control
+            [nzValidateStatus]="
+              passwordForm.controls.password.touched &&
+              passwordForm.controls.password.errors
+                ? 'error'
+                : ''
+            "
+            nzErrorTip="new password must be 8-12 characters"
+          >
+            <input
+              class="password-input"
+              nz-input
+              placeholder="New Password"
+              type="password"
+              formControlName="password"
+            />
+          </nz-form-control>
+        </div>
+
+        <div>
+          <nz-form-control
+            [nzValidateStatus]="
+              passwordForm.controls.confirmPassword.touched &&
+              passwordForm.controls.confirmPassword.errors
+                ? 'error'
+                : ''
+            "
+            nzErrorTip="confirm password must match"
+          >
+            <input
+              class="password-input"
+              nz-input
+              placeholder="Confirm Password"
+              type="password"
+              formControlName="confirmPassword"
+            />
+          </nz-form-control>
+        </div>
+
+        <div>
+          <button class="__controller">
+            <h3 class="__button_text">Save changes</h3>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

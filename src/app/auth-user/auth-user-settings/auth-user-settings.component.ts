@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControlOptions } from "@angular/forms";
+import { UserRestService } from "../../modules/auth/services/rest/user-rest.service";
+import { AuthService } from "../../modules/auth/services/client/auth.service";
+import { PasswordMatch } from "../../modules/auth/services/client/password-validator";
 
 @Component({
   selector: 'app-auth-user-settings',
@@ -6,10 +10,58 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./auth-user-settings.component.scss']
 })
 export class AuthUserSettingsComponent implements OnInit {
+  public firstname: string = "";
+  public lastname: string = "";
+  public form: FormGroup = this.buildForm()
+  public passwordForm!: FormGroup;
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder,
+    private fbPassword: FormBuilder,
+    private userRestService: UserRestService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
+    this.firstname = this.authService.getUserFirstname();
+    this.lastname = this.authService.getUserLastname();
+    const options: AbstractControlOptions = {
+      validators: PasswordMatch.matchingPasswords
+    }
+
+    this.passwordForm = this.fbPassword.group({
+      oldPassword: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]]
+    }, options
+    )
+
   }
 
+  save(): void {
+    if (this.form.valid)
+      this.userRestService.updatePersonalInformation(this.form.value).subscribe((response: any) => {
+        console.log(response)
+        this.authService.setUserFirstname(this.firstname);//исправить данную неточность
+        this.authService.serUserLastname(this.lastname);
+      })
+  }
+
+  private buildForm(): FormGroup {
+    return this.fb.group({
+      firstname: ['', [Validators.required]],
+      lastname: ['', [Validators.required]]
+    });
+  }
+
+  public onLoginClick(): void {
+    console.log(this.passwordForm.value.password)
+    if (this.passwordForm.valid) {
+      this.userRestService.changePassword(this.passwordForm.value).subscribe((response: any) => {
+        console.log(response)
+      })
+    } else {
+      this.passwordForm.markAllAsTouched();
+    }
+  }
 }
