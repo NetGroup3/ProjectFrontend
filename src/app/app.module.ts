@@ -31,7 +31,13 @@ import { AuthUserEventsComponent } from './auth-user/auth-user-events/auth-user-
 import { AuthUserSettingsComponent } from './auth-user/auth-user-settings/auth-user-settings.component';
 import { AuthUserFriendsComponent } from './auth-user/auth-user-friends/auth-user-friends.component';
 import { AuthUserBlogComponent } from './auth-user/auth-user-blog/auth-user-blog.component';
-
+import { AdminSceletonComponent } from './sceletons/admin-sceleton/admin-sceleton.component';
+import { ModeratorSceletonComponent } from './sceletons/moderator-sceleton/moderator-sceleton.component';
+import { ModeratorKitchenwareComponent } from './moderator/moderator-kitchenware/moderator-kitchenware.component';
+import { ModeratorSettingsComponent } from './moderator/moderator-settings/moderator-settings.component';
+import { ModeratorIngredientsComponent } from './moderator/moderator-ingredients/moderator-ingredients.component';
+import { ModeratorCocktailsComponent } from './moderator/moderator-cocktails/moderator-cocktails.component';
+import { AdminModeratorsComponent } from './admin/admin-moderators/admin-moderators.component';
 
 
 registerLocaleData(en);
@@ -43,7 +49,9 @@ registerLocaleData(en);
     LoginPageComponent,
     RecoveryPageComponent,
     HomeComponent,
+    AdminSceletonComponent,
     UserSceletonComponent,
+    ModeratorSceletonComponent,
     AuthUserFavouriteComponent,
     AuthUserCatalogueComponent,
     AuthUserCalendarComponent,
@@ -51,6 +59,11 @@ registerLocaleData(en);
     AuthUserSettingsComponent,
     AuthUserFriendsComponent,
     AuthUserBlogComponent,
+    ModeratorCocktailsComponent,
+    ModeratorKitchenwareComponent,
+    ModeratorSettingsComponent,
+    ModeratorIngredientsComponent,
+    AdminModeratorsComponent
   ],
   imports: [
     BrowserModule,

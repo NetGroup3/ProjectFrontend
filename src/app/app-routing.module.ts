@@ -11,6 +11,11 @@ import {AuthUserEventsComponent} from "./auth-user/auth-user-events/auth-user-ev
 import {AuthUserFavouriteComponent} from "./auth-user/auth-user-favourite/auth-user-favourite.component";
 import {AuthUserFriendsComponent} from "./auth-user/auth-user-friends/auth-user-friends.component";
 import {AuthUserSettingsComponent} from "./auth-user/auth-user-settings/auth-user-settings.component";
+import {ModeratorIngredientsComponent} from "./moderator/moderator-ingredients/moderator-ingredients.component";
+import {ModeratorKitchenwareComponent} from "./moderator/moderator-kitchenware/moderator-kitchenware.component";
+import {ModeratorSettingsComponent} from "./moderator/moderator-settings/moderator-settings.component";
+import {ModeratorCocktailsComponent} from "./moderator/moderator-cocktails/moderator-cocktails.component";
+import {AdminModeratorsComponent} from "./admin/admin-moderators/admin-moderators.component";
 
 
 const routes: Routes = [
@@ -26,6 +31,11 @@ const routes: Routes = [
   { path: 'user/favourite', component:AuthUserFavouriteComponent},
   { path: 'user/friends', component:AuthUserFriendsComponent},
   { path: 'user/settings', component:AuthUserSettingsComponent},
+  { path: 'moderator/cocktails', component: ModeratorCocktailsComponent},
+  { path: 'moderator/ingredients', component: ModeratorIngredientsComponent},
+  { path: 'moderator/kitchenware', component: ModeratorKitchenwareComponent},
+  { path: 'moderator/settings', component: ModeratorSettingsComponent},
+  { path: 'admin/moderators', component: AdminModeratorsComponent}
 ];
 
 @NgModule({
