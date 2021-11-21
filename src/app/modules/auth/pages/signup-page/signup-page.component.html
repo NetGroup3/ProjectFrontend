@@ -1,9 +1,10 @@
+<div class="signup">
 <div class="inner">
-  <h1>Sign up</h1>
+
   <div
     class="signup-page__form"
     [formGroup]="form"
-  >
+  ><h1>Sign up</h1>
     <nz-form-control
       [nzValidateStatus]="form.controls.email.touched &&  form.controls.email.errors ? 'error' : ''  "
       nzErrorTip="email error"
@@ -66,4 +67,5 @@
       </p>
     </div>
   </div>
+</div>
 </div>

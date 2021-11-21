@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {appLinks} from "../../../../app.links";
-import {PersonalInformationForm} from "../../models/personal-information-form.model";
+import {User} from "../../../../models/user";
 import { ChangePasswordForm } from "../../models/change-password-form.model";
 
 @Injectable({
@@ -12,7 +12,7 @@ import { ChangePasswordForm } from "../../models/change-password-form.model";
 export class UserRestService {
   constructor(private http: HttpClient) { }
 
-  public updatePersonalInformation (body: PersonalInformationForm): Observable<any>{
+  public updatePersonalInformation(body: User): Observable<any>{
     return this.http.put(appLinks.personalInfo, body);
   }
 

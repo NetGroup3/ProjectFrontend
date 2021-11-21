@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControlOptions } from "@angular/forms";
-import { UserRestService } from "../../modules/auth/services/rest/user-rest.service";
-import { AuthService } from "../../modules/auth/services/client/auth.service";
-import { PasswordMatch } from "../../modules/auth/services/client/password-validator";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UserRestService} from "../../modules/auth/services/rest/user-rest.service";
+import {AuthService} from "../../modules/auth/services/client/auth.service";
 
 @Component({
   selector: 'app-auth-user-settings',
@@ -50,6 +49,7 @@ export class AuthUserSettingsComponent implements OnInit {
 
   private buildForm(): FormGroup {
     return this.fb.group({
+      id: this.authService.getUserId(),
       firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]]
     });
