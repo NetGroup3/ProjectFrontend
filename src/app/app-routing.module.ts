@@ -13,6 +13,12 @@ import {AuthUserFriendsComponent} from "./auth-user/auth-user-friends/auth-user-
 import {AuthUserSettingsComponent} from "./auth-user/auth-user-settings/auth-user-settings.component";
 import {IngridientsComponent} from "./ingridients/ingridients.component";
 import {AddEditIngredientComponent} from "./add-edit-ingredient/add-edit-ingredient.component";
+import {ModeratorIngredientsComponent} from "./moderator/moderator-ingredients/moderator-ingredients.component";
+import {ModeratorKitchenwareComponent} from "./moderator/moderator-kitchenware/moderator-kitchenware.component";
+import {ModeratorSettingsComponent} from "./moderator/moderator-settings/moderator-settings.component";
+import {ModeratorCocktailsComponent} from "./moderator/moderator-cocktails/moderator-cocktails.component";
+import {AdminModeratorsComponent} from "./admin/admin-moderators/admin-moderators.component";
+
 
 
 const routes: Routes = [
@@ -30,7 +36,12 @@ const routes: Routes = [
   { path: 'user/settings', component:AuthUserSettingsComponent},
   { path: 'moderator/ingridients', component:IngridientsComponent},
   { path: 'moderator/ingridients/:id', component:AddEditIngredientComponent},
-  { path: 'moderator/ingridients/add', component:AddEditIngredientComponent}
+  { path: 'moderator/ingridients/add', component:AddEditIngredientComponent},
+  { path: 'moderator/cocktails', component: ModeratorCocktailsComponent},
+  { path: 'moderator/ingredients', component: ModeratorIngredientsComponent},
+  { path: 'moderator/kitchenware', component: ModeratorKitchenwareComponent},
+  { path: 'moderator/settings', component: ModeratorSettingsComponent},
+  { path: 'admin/moderators', component: AdminModeratorsComponent}
 ];
 
 @NgModule({
