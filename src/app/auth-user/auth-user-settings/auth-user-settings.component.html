@@ -109,13 +109,13 @@
               placeholder="Confirm Password"
               type="password"
               formControlName="confirmPassword"
-              (keyup.enter)="onLoginClick()"
+              (keyup.enter)="onSavePasswordClick()"
             />
           </nz-form-control>
         </div>
 
         <div>
-          <button class="__controller" (click)="onLoginClick()">
+          <button class="__controller" (click)="onSavePasswordClick()">
             <h3 class="__button_text">Save changes</h3>
           </button>
         </div>
