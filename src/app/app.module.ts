@@ -34,7 +34,7 @@ import { AuthUserBlogComponent } from './auth-user/auth-user-blog/auth-user-blog
 import {AuthInterceptor} from "./http-interceptors/auth-interceptor";
 import { IngridientsComponent } from './ingridients/ingridients.component';
 import { AddEditIngredientComponent } from './add-edit-ingredient/add-edit-ingredient.component';
-
+import {CloudinaryModule} from '@cloudinary/angular';
 
 registerLocaleData(en);
 
@@ -71,6 +71,7 @@ registerLocaleData(en);
     NzFormModule,
     NzSelectModule,
     HttpClientModule,
+    CloudinaryModule,
   ],
   providers: [
     {
