@@ -6,7 +6,7 @@
     [formGroup]="form"
   ><h1>Forgot your password?</h1>
     <nz-form-control
-      [nzValidateStatus]="form.controls.email.errors ? 'error' : ''  "
+      [nzValidateStatus]="form.controls.email.touched && form.controls.email.errors ? 'error' : ''  "
       nzErrorTip="Enter valid email"
     >
       <input
