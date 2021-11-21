@@ -7,7 +7,7 @@ export const appLinks={
   signup: `${environment.serverUrl}/auth/signup`,
   recovery: `${environment.serverUrl}/recovery`,
   users: `${environment.serverUrl}/users`,
-  personalInfo: `${environment.serverUrl}/personal-information`,
-  changePassword: `${environment.serverUrl}/change-password`,
+  personalInfo: `${environment.serverUrl}/users/personal-information`,
+  changePassword: `${environment.serverUrl}/users/change-password`,
 }
 
