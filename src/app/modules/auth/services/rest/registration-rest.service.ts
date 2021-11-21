@@ -11,9 +11,6 @@ export class RegistrationRestService {
 
   constructor(private http: HttpClient) {}
 
-  // public signUp(body: LoginForm): Observable<any> {
-  //   return this.http.post(appLinks.signup, body);
-  // }
 
   public addUser(body: SignupForm) : Observable<any>{
     return this.http.post(appLinks.users, body);

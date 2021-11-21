@@ -23,6 +23,7 @@ export class AuthUserSettingsComponent implements OnInit {
   save(): void {
     if(this.form.valid)
     this.userRestService.updatePersonalInformation(this.form.value).subscribe((response: any) => {
+      console.log(this.form.value)
       console.log(response)
       this.authService.setUserFirstname(this.firstname);//исправить данную неточность
       this.authService.serUserLastname(this.lastname);
@@ -31,6 +32,7 @@ export class AuthUserSettingsComponent implements OnInit {
 
   private buildForm():FormGroup {
     return this.fb.group({
+      id: this.authService.getUserId(),
       firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]]
     });
