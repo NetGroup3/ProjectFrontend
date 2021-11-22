@@ -13,6 +13,7 @@ import {AuthUserFriendsComponent} from "./auth-user/auth-user-friends/auth-user-
 import {AuthUserSettingsComponent} from "./auth-user/auth-user-settings/auth-user-settings.component";
 import {IngridientsComponent} from "./ingridients/ingridients.component";
 import {AddEditIngredientComponent} from "./add-edit-ingredient/add-edit-ingredient.component";
+import { HomeGuard} from "./home.guard.";
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupPageComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'recovery', component: RecoveryPageComponent },
-  { path: 'home', component:HomeComponent},
+  { path: 'home', component:HomeComponent, canActivate: [HomeGuard]},
+  // { path: 'home', component:HomeComponent},
   { path: 'user/blog', component:AuthUserBlogComponent},
   { path: 'user/calendar', component:AuthUserCalendarComponent},
   { path: 'user/catalogue', component:AuthUserCatalogueComponent},
@@ -35,6 +37,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers:[HomeGuard]
 })
 export class AppRoutingModule { }

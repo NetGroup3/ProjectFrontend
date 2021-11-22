@@ -17,15 +17,22 @@ export class AddEditIngredientComponent implements OnInit {
     private location: Location
   ) {}
   ngOnInit(): void {
-    this.getHero();
+    this.getIngredient();
   }
   goBack(): void {
     this.location.back();
   }
-  getHero(): void {
+
+  onAddClick():void{
+
+  }
+
+  getIngredient(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.moderatorService.get_ingridient(id)
-      .subscribe(ingridient => this.ingridient = ingridient);
+      .subscribe(ingridient => this.ingridient = <Ingredient> ingridient);
   }
+
+
 
 }
