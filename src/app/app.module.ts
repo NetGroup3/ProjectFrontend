@@ -34,7 +34,13 @@ import { AuthUserBlogComponent } from './auth-user/auth-user-blog/auth-user-blog
 import {AuthInterceptor} from "./http-interceptors/auth-interceptor";
 import { IngridientsComponent } from './ingridients/ingridients.component';
 import { AddEditIngredientComponent } from './add-edit-ingredient/add-edit-ingredient.component';
-
+import {ModeratorSceletonComponent} from "./sceletons/moderator-sceleton/moderator-sceleton.component";
+import {ModeratorCocktailsComponent} from "./moderator/moderator-cocktails/moderator-cocktails.component";
+import {ModeratorIngredientsComponent} from "./moderator/moderator-ingredients/moderator-ingredients.component";
+import {ModeratorKitchenwareComponent} from "./moderator/moderator-kitchenware/moderator-kitchenware.component";
+import {ModeratorSettingsComponent} from "./moderator/moderator-settings/moderator-settings.component";
+import {AdminModeratorsComponent} from "./admin/admin-moderators/admin-moderators.component";
+import {AdminSceletonComponent} from "./sceletons/admin-sceleton/admin-sceleton.component";
 
 registerLocaleData(en);
 
@@ -55,6 +61,13 @@ registerLocaleData(en);
     AuthUserBlogComponent,
     IngridientsComponent,
     AddEditIngredientComponent,
+    ModeratorSceletonComponent,
+    ModeratorSettingsComponent,
+    ModeratorIngredientsComponent,
+    ModeratorKitchenwareComponent,
+    ModeratorCocktailsComponent,
+    AdminModeratorsComponent,
+    AdminSceletonComponent
   ],
   imports: [
     BrowserModule,

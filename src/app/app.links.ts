@@ -10,4 +10,5 @@ export const appLinks={
   personalInfo: `${environment.serverUrl}/users/personal-information`,
   ingridients:`${environment.serverUrl}/ingredient/page`,
   ingridient:`${environment.serverUrl}/ingredient/id`,
+  changePassword: `${environment.serverUrl}/users/change-password`,
 }
