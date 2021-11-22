@@ -36,6 +36,7 @@ import { IngridientsComponent } from './ingridients/ingridients.component';
 import { AddEditIngredientComponent } from './add-edit-ingredient/add-edit-ingredient.component';
 import {CloudinaryModule} from '@cloudinary/angular';
 
+import {NgxDropzoneModule} from "ngx-dropzone";
 registerLocaleData(en);
 
 @NgModule({
@@ -61,7 +62,6 @@ registerLocaleData(en);
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     IconsProviderModule,
     NzLayoutModule,
@@ -72,6 +72,7 @@ registerLocaleData(en);
     NzSelectModule,
     HttpClientModule,
     CloudinaryModule,
+    NgxDropzoneModule,
   ],
   providers: [
     {
@@ -79,7 +80,11 @@ registerLocaleData(en);
       useClass: AuthInterceptor,
       multi   : true,
     },
-    { provide: NZ_I18N, useValue: en_US }, RestapiService],
+    {
+      provide: NZ_I18N,
+      useValue: en_US
+    },
+    RestapiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

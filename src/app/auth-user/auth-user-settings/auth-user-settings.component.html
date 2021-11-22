@@ -49,8 +49,20 @@
 
     <div class="__photo_block">
       <!-- photo block-->
-      <advanced-image [cldImg]="img"></advanced-image>
-      <button class="__change_photo"><h3 class="__button_text">Change photo</h3> </button>
+
+      <ngx-dropzone (change)="onSelect($event)">
+        <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f">
+          <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+        </ngx-dropzone-image-preview>
+      </ngx-dropzone>
+
+<!--      <advanced-image [cldImg]="img"></advanced-image>-->
+<!--      <input type="file" (click)="onPhotoSelected($event)"><h3 class="__button_text">Change photo</h3>-->
+<!--      <button type="button" (click)="onUpLoad()">Upload</button>-->
+      <div>
+        <button type="button" (click)="onUpLoad()" class="__change_photo"><h3 class="__button_text">Change photo</h3> </button>
+      </div>
     </div>
   </div>
 </div>

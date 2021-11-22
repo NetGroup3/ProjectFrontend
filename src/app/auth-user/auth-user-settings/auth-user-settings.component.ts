@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+
+//services
 import {UserRestService} from "../../modules/auth/services/rest/user-rest.service";
 import {AuthService} from "../../modules/auth/services/client/auth.service";
 
@@ -12,9 +14,10 @@ import {thumbnail} from "@cloudinary/url-gen/actions/resize";
 @Component({
   selector: 'app-auth-user-settings',
   templateUrl: './auth-user-settings.component.html',
-  styleUrls: ['./auth-user-settings.component.scss']
+  styleUrls: ['./auth-user-settings.component.scss'],
 })
 export class AuthUserSettingsComponent implements OnInit {
+  selectedFile = null;
   public firstname: string = "";
   public lastname: string = "";
   public form: FormGroup = this.buildForm();
@@ -56,4 +59,33 @@ export class AuthUserSettingsComponent implements OnInit {
       lastname: ['', [Validators.required]]
     });
   }
+
+  files: File[] = [];
+
+  onSelect(event: { addedFiles: any; }) {
+    console.log(event);
+    this.files.push(...event.addedFiles);
+  }
+
+  onRemove(event: File) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+
+  onUpLoad() {
+    if(!this.files[0]){
+      alert("you need to select image!")
+    }
+    const file_data = this.files[0];
+    const data = new FormData();
+    data.append('file', file_data);
+    data.append('upload_preset', 'netprojectautumn');
+    data.append('cloud_name', 'djcak19nu');
+    data.append('signature', '134459824627343');
+    data.append('folder', 'avatar');
+    this.userRestService.upLoadImage(data).subscribe(response=>{
+        console.log(response);
+    });
+  }
+
 }
