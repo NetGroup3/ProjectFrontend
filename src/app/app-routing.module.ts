@@ -13,6 +13,7 @@ import {AuthUserFriendsComponent} from "./auth-user/auth-user-friends/auth-user-
 import {AuthUserSettingsComponent} from "./auth-user/auth-user-settings/auth-user-settings.component";
 import {IngridientsComponent} from "./ingridients/ingridients.component";
 import {AddEditIngredientComponent} from "./add-edit-ingredient/add-edit-ingredient.component";
+import { HomeGuard} from "./home.guard.";
 import {ModeratorIngredientsComponent} from "./moderator/moderator-ingredients/moderator-ingredients.component";
 import {ModeratorKitchenwareComponent} from "./moderator/moderator-kitchenware/moderator-kitchenware.component";
 import {ModeratorSettingsComponent} from "./moderator/moderator-settings/moderator-settings.component";
@@ -20,13 +21,13 @@ import {ModeratorCocktailsComponent} from "./moderator/moderator-cocktails/moder
 import {AdminModeratorsComponent} from "./admin/admin-moderators/admin-moderators.component";
 
 
-
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'signup', component: SignupPageComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'recovery', component: RecoveryPageComponent },
-  { path: 'home', component:HomeComponent},
+  { path: 'home', component:HomeComponent, canActivate: [HomeGuard]},
+  // { path: 'home', component:HomeComponent},
   { path: 'user/blog', component:AuthUserBlogComponent},
   { path: 'user/calendar', component:AuthUserCalendarComponent},
   { path: 'user/catalogue', component:AuthUserCatalogueComponent},
@@ -46,6 +47,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers:[HomeGuard]
 })
 export class AppRoutingModule { }
