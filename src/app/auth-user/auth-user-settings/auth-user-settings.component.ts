@@ -17,38 +17,54 @@ import {thumbnail} from "@cloudinary/url-gen/actions/resize";
   styleUrls: ['./auth-user-settings.component.scss'],
 })
 export class AuthUserSettingsComponent implements OnInit {
-  selectedFile = null;
   public firstname: string = "";
   public lastname: string = "";
+  private imageId: string ="";
   public form: FormGroup = this.buildForm();
-
   public img: CloudinaryImage = this.initImage();
+  files: File[] = [];
 
   constructor(private fb: FormBuilder, private userRestService :UserRestService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.firstname = this.authService.getUserFirstname();
     this.lastname = this.authService.getUserLastname();
-
+    this.imageId = this.authService.getImageId();
+    this.initImage();
   }
 
   initImage(): CloudinaryImage {
-    // Create and configure your Cloudinary instance.
-    const cld = new Cloudinary({cloud: {cloudName: 'demo'}});
-
-    // Use the image with public ID, 'front_face'.
-    return  cld.image('front_face')
+    console.log(this.imageId);
+    const cld = new Cloudinary({cloud: {cloudName: 'djcak19nu'}});
+    return  cld.image(this.imageId)
       .resize(thumbnail().width(300).height(300))
       .roundCorners(byRadius(20));
   }
 
-  save(): void {
+  savePersonalInformation(): void {
     if(this.form.valid)
     this.userRestService.updatePersonalInformation(this.form.value).subscribe((response: any) => {
       console.log(this.form.value)
       console.log(response)
       this.authService.setUserFirstname(this.firstname);//исправить данную неточность
       this.authService.serUserLastname(this.lastname);
+    })
+  }
+
+  /** form for send image Id to backend server*/
+  private imageForm():FormGroup {
+    return this.fb.group({
+      id: this.authService.getUserId(),
+      imageId: this.imageId
+    });
+  }
+  /** Send image id to backend server */
+  saveImageId(): void {
+    this.userRestService.updateImage(this.imageForm().value).subscribe((response: any) => {
+      console.log(this.imageForm().value)
+      this.authService.setImageId(this.imageId);
+      console.log(this.imageId)
+      this.initImage();
     })
   }
 
@@ -59,8 +75,6 @@ export class AuthUserSettingsComponent implements OnInit {
       lastname: ['', [Validators.required]]
     });
   }
-
-  files: File[] = [];
 
   onSelect(event: { addedFiles: any; }) {
     console.log(event);
@@ -79,12 +93,14 @@ export class AuthUserSettingsComponent implements OnInit {
     const file_data = this.files[0];
     const data = new FormData();
     data.append('file', file_data);
-    data.append('upload_preset', 'netprojectautumn');
+    data.append('upload_preset', 'ku2dutrm');
     data.append('cloud_name', 'djcak19nu');
-    data.append('signature', '134459824627343');
-    data.append('folder', 'avatar');
     this.userRestService.upLoadImage(data).subscribe(response=>{
         console.log(response);
+        this.imageId = response.public_id;
+        console.log("imageId")
+        console.log(this.imageId)
+        this.saveImageId();
     });
   }
 

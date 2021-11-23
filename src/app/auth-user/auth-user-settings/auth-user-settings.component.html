@@ -42,7 +42,7 @@
       </div>
 
       <div>
-        <button (click)="save()" class="_save_change_personal_information"><h3 class="__button_text">Save changes</h3></button>
+        <button (click)="savePersonalInformation()" class="_save_change_personal_information"><h3 class="__button_text">Save changes</h3></button>
       </div>
 
     </div>
@@ -57,11 +57,12 @@
         </ngx-dropzone-image-preview>
       </ngx-dropzone>
 
-<!--      <advanced-image [cldImg]="img"></advanced-image>-->
-<!--      <input type="file" (click)="onPhotoSelected($event)"><h3 class="__button_text">Change photo</h3>-->
-<!--      <button type="button" (click)="onUpLoad()">Upload</button>-->
+      <advanced-image [cldImg]="img"></advanced-image>
+
+<!--      <input type="file" (click)="onPhotoSelected($event)"><h3 class="__button_text">Change photo</h3>
+      <button type="button" (click)="onUpLoad()">Upload</button>-->
       <div>
-        <button type="button" (click)="onUpLoad()" class="__change_photo"><h3 class="__button_text">Change photo</h3> </button>
+        <button type="button" (click)="onUpLoad()" class="__change_photo"><h3 class="__button_text">Save photo</h3> </button>
       </div>
     </div>
   </div>

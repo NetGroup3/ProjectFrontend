@@ -18,4 +18,8 @@ export class UserRestService {
   upLoadImage(data: FormData): Observable<any> {
     return this.http.post('https://api.cloudinary.com/v1_1/djcak19nu/image/upload', data);
   }
+
+  updateImage(body: User) {
+    return this.http.put(appLinks.userImage, body);
+  }
 }
