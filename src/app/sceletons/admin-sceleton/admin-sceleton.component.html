@@ -1,0 +1,47 @@
+<div class="container">
+  <!-- SIDEBAR -->
+  <div class="navigation">
+    <ul>
+      <li>
+        <span>
+          <span id="nameSpan" class="title">Cocktails</span>
+        </span>
+      </li>
+      <br>
+      <li>
+        <a href="#" routerLink="/admin/moderators">
+          <span class="icon"><i nz-icon nzType="audit" nzTheme="outline"></i></span>
+          <span class="title">Moderators</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- TOPBAR -->
+  <div class="header">
+    <div id="headerLeft">
+      <nz-select class="top-bar-element" ngModel="cocktails">
+        <nz-option nzValue="cocktails" nzLabel="Cocktails"></nz-option>
+        <nz-option nzValue="friends" nzLabel="Friends"></nz-option>
+        <nz-option nzValue="events" nzLabel="Events"></nz-option>
+        <nz-option nzValue="blogs" nzLabel="Blogs"></nz-option>
+      </nz-select>
+
+      <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+        <input type="text" nz-input name="search" placeholder="Search"/>
+      </nz-input-group>
+      <ng-template #suffixIconButton>
+        <button id="buttonSearch" nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+      </ng-template>
+    </div>
+
+    <div id="headerRight">
+      <img id="avatar" class="top-bar-element" src="favicon.ico">
+
+      <button id="buttonLogout" class="top-bar-element">
+        Log out
+        <i id="logOutIcon" nz-icon nzType="logout" nzTheme="outline"></i>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,17 +1,11 @@
 <app-user-sceleton></app-user-sceleton>
 
 <div>
-
   <div class="__content">
-
     <span class="title">My Settings</span>
 
-    <div
-      class="__personal_information"
-      [formGroup]="form"
-    >
-
-      <div >
+    <div class="__personal_information" [formGroup]="form">
+      <div>
         <nz-form-control>
           <div>
             <p>First name</p>
@@ -43,12 +37,13 @@
 
       <div>
         <button (click)="savePersonalInformation()" class="_save_change_personal_information"><h3 class="__button_text">Save changes</h3></button>
-      </div>
 
+      </div>
     </div>
 
     <div class="__photo_block">
       <!-- photo block-->
+
 
       <ngx-dropzone (change)="onSelect($event)">
         <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
@@ -63,6 +58,83 @@
       <button type="button" (click)="onUpLoad()">Upload</button>-->
       <div>
         <button type="button" (click)="onUpLoad()" class="__change_photo"><h3 class="__button_text">Save photo</h3> </button>
+
+      <button class="__change_photo">
+        <h3 class="__button_text">Change photo</h3>
+      </button>
+    </div>
+
+    <div>
+      <span class="title-change-password">Change password</span>
+
+      <div class="__change-password" [formGroup]="passwordForm">
+        <div>
+          <nz-form-control
+            [nzValidateStatus]="
+              passwordForm.controls.oldPassword.touched &&
+              passwordForm.controls.oldPassword.errors
+                ? 'error'
+                : ''
+            "
+            nzErrorTip="old password error"
+          >
+            <input
+              class="password-input"
+              nz-input
+              placeholder="Old Password"
+              type="password"
+              formControlName="oldPassword"
+            />
+          </nz-form-control>
+        </div>
+
+        <div>
+          <nz-form-control
+            [nzValidateStatus]="
+              passwordForm.controls.password.touched &&
+              passwordForm.controls.password.errors
+                ? 'error'
+                : ''
+            "
+            nzErrorTip="new password must be 8-12 characters"
+          >
+            <input
+              class="password-input"
+              nz-input
+              placeholder="New Password"
+              type="password"
+              formControlName="password"
+            />
+          </nz-form-control>
+        </div>
+
+        <div>
+          <nz-form-control
+            [nzValidateStatus]="
+              passwordForm.controls.confirmPassword.touched &&
+              passwordForm.controls.confirmPassword.errors
+                ? 'error'
+                : ''
+            "
+            nzErrorTip="confirm password must match"
+          >
+            <input
+              class="password-input"
+              nz-input
+              placeholder="Confirm Password"
+              type="password"
+              formControlName="confirmPassword"
+              (keyup.enter)="onSavePasswordClick()"
+            />
+          </nz-form-control>
+        </div>
+
+        <div>
+          <button class="__controller" (click)="onSavePasswordClick()">
+            <h3 class="__button_text">Save changes</h3>
+          </button>
+        </div>
+
       </div>
     </div>
   </div>

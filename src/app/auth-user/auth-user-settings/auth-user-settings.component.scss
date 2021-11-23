@@ -18,12 +18,25 @@
   top: 16px;
 }
 
+.title-change-password {
+  font-family: Montserrat, serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 64px;
+  line-height: 150%;
+  color: #495464;
+  position: absolute;
+  left: 50px;
+  top: 50%;
+}
+
 .__content{
   position: absolute;
   width: 90%;
-  height: 770px;
-  left: 18%;
-  top: 108px;
+
+  height: 150%;
+  left: 13%;
+  top: 12%;
   background-color: ghostwhite;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
@@ -73,7 +86,7 @@
 }
 .__personal_information {
   position: absolute;
-  width: 600px;
+  width: 45%;
   height: 539px;
   left: 24px;
   top: 120px;
@@ -96,10 +109,26 @@
   position: absolute;
   width: 407px;
   height: 69.81px;
-  left: 180px;
+  left: 175px;
   top: 436px;
 
   background: #9921E8;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 24px rgba(153, 33, 232, 0.5);
   border-radius: 50px;
+}
+
+.__change-password {
+  position: absolute;
+  width: 45%;
+  // height: 539px;
+  // left: 24px;
+  top: 60%;
+  background-color: white;
+  border-radius: 50px;
+}
+
+.password-input {
+  margin-top: 20px;
+  // position: absolute;
+  // top: 20%;
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ModeratorService} from "../services/moderator.service";
 import {Ingredient} from "../models/ingredient";
+import {IngridientPage} from "../modules/auth/models/ingridient-page";
 
 @Component({
   selector: 'app-ingridients',
@@ -10,29 +11,28 @@ import {Ingredient} from "../models/ingredient";
 export class IngridientsComponent implements OnInit {
 
 
-  Ingridients: Ingredient[] = [
-    { id: 1, title: 'Water', category: '', description: '', image_id:0, is_active:true, measurement: 'l'},
-    { id: 2, title: 'Water', category: '', description: '', image_id:0, is_active:true, measurement: 'l'},
-    { id: 3, title: 'Water', category: '', description: '', image_id:0, is_active:true, measurement: 'l'},
-    { id: 4, title: 'Water', category: '', description: '', image_id:0, is_active:true, measurement: 'l'},
-    { id: 5, title: 'Water', category: '', description: '', image_id:0, is_active:true, measurement: 'l'},
-    { id: 6, title: 'Water', category: '', description: '', image_id:0, is_active:true, measurement: 'l'},
-    { id: 7, title: 'Water', category: '', description: '', image_id:0, is_active:true, measurement: 'l'},
-    { id: 8, title: 'Water', category: '', description: '', image_id:0, is_active:true, measurement: 'l'},
-    { id: 9, title: 'Water', category: '', description: '', image_id:0, is_active:true, measurement: 'l'},
-    { id: 10, title: 'Water', category: '', description: '', image_id:0, is_active:true, measurement: 'l'}
-  ];
+  Ingridients: Ingredient[] = [ { id: 1, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""},
+    {id: 2, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""},
+    { id: 3, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""},
+    { id: 4, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""},
+    { id: 5, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""},
+    { id: 6, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""},
+    { id: 7, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""},
+    { id: 8, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""},
+    { id: 9, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""},
+    { id: 10, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""}];
 
   constructor(private moderatorService: ModeratorService) {
   }
 
   ngOnInit(): void {
-    this.getIngridients();
+    //this.getIngridients();
   }
 
   getIngridients(): void {
-    // this.moderatorService.get_ingridients()
-    //   .subscribe(ingridients => this.Ingridients = ingridients);
+    console.log(this.moderatorService.get_ingridients(100,20))
+    this.moderatorService.get_ingridients(100, 20)
+      .subscribe(ingridients => this.Ingridients = <Ingredient []> ingridients);
   }
 
 }
