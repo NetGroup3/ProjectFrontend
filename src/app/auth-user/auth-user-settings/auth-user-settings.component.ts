@@ -18,49 +18,99 @@ import {thumbnail} from "@cloudinary/url-gen/actions/resize";
   styleUrls: ['./auth-user-settings.component.scss'],
 })
 export class AuthUserSettingsComponent implements OnInit {
+
   public firstname: string = "";
   public lastname: string = "";
-  private imageId: string ="";
-  public form: FormGroup = this.buildForm();
+  private imageId: string = "";
+   public form: FormGroup = this.personalInformationForm();
   public img: CloudinaryImage = this.initImage();
   files: File[] = [];
   public passwordForm!: FormGroup;
-
 
   constructor(
     private fb: FormBuilder,
     private fbPassword: FormBuilder,
     private userRestService: UserRestService,
     private authService: AuthService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.firstname = this.authService.getUserFirstname();
     this.lastname = this.authService.getUserLastname();
     this.imageId = this.authService.getImageId();
     this.initImage();
+
+    const
+      options: AbstractControlOptions = {
+        validators: PasswordMatch.matchingPasswords
+      }
+
+    this.passwordForm = this.fbPassword.group({
+        id: this.authService.getUserId(),
+        oldPassword: ['', [Validators.required]],
+        password: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]],
+        confirmPassword: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]]
+      }, options
+    );
   }
 
   initImage(): CloudinaryImage {
     console.log(this.imageId);
     const cld = new Cloudinary({cloud: {cloudName: 'djcak19nu'}});
-    return  cld.image(this.imageId)
+    return cld.image(this.imageId)
       .resize(thumbnail().width(300).height(300))
       .roundCorners(byRadius(20));
   }
 
   savePersonalInformation(): void {
-    if(this.form.valid)
-    this.userRestService.updatePersonalInformation(this.form.value).subscribe((response: any) => {
-      console.log(this.form.value)
-      console.log(response)
-      this.authService.setUserFirstname(this.firstname);//исправить данную неточность
-      this.authService.serUserLastname(this.lastname);
-    })
+    if (this.form.valid)
+      this.userRestService.updatePersonalInformation(this.form.value).subscribe((response: any) => {
+        console.log(this.form.value)
+        console.log(response)
+        this.authService.setUserFirstname(this.firstname);//исправить данную неточность
+        this.authService.serUserLastname(this.lastname);
+      })
+  }
+
+  private personalInformationForm(): FormGroup {
+    return this.fb.group({
+      id: this.authService.getUserId(),
+      firstname: ['', [Validators.required]],
+      lastname: ['', [Validators.required]]
+    });
+  }
+
+  onSelect(event: { addedFiles: any; }) {
+    console.log(event);
+    this.files.push(...event.addedFiles);
+  }
+
+  onRemove(event: File) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+
+  onUpLoad() {
+    if (!this.files[0]) {
+      alert("you need to select image!")
+    }
+    const file_data = this.files[0];
+    const data = new FormData();
+    data.append('file', file_data);
+    data.append('upload_preset', 'ku2dutrm');
+    data.append('cloud_name', 'djcak19nu');
+    this.userRestService.upLoadImage(data).subscribe(response => {
+      console.log(response);
+      this.imageId = response.public_id;
+      console.log("imageId")
+      console.log(this.imageId)
+      this.saveImageId();
+    });
   }
 
   /** form for send image Id to backend server*/
-  private imageForm():FormGroup {
+  private imageForm(): FormGroup {
     return this.fb.group({
       id: this.authService.getUserId(),
       imageId: this.imageId
@@ -77,68 +127,6 @@ export class AuthUserSettingsComponent implements OnInit {
     })
   }
 
-
-
-    const options: AbstractControlOptions = {
-      validators: PasswordMatch.matchingPasswords
-    }
-
-    this.passwordForm = this.fbPassword.group({
-      id: this.authService.getUserId(),
-      oldPassword: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]],
-      confirmPassword: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]]
-    }, options
-    )
-
-  }
-
-  save(): void {
-    if (this.form.valid)
-      this.userRestService.updatePersonalInformation(this.form.value).subscribe((response: any) => {
-        console.log(response)
-        this.authService.setUserFirstname(this.firstname);//исправить данную неточность
-        this.authService.serUserLastname(this.lastname);
-      })
-  }
-
-  private buildForm(): FormGroup {
-
-    return this.fb.group({
-      id: this.authService.getUserId(),
-      firstname: ['', [Validators.required]],
-      lastname: ['', [Validators.required]]
-    });
-  }
-
-
-  onSelect(event: { addedFiles: any; }) {
-    console.log(event);
-    this.files.push(...event.addedFiles);
-  }
-
-  onRemove(event: File) {
-    console.log(event);
-    this.files.splice(this.files.indexOf(event), 1);
-  }
-
-  onUpLoad() {
-    if(!this.files[0]){
-      alert("you need to select image!")
-    }
-    const file_data = this.files[0];
-    const data = new FormData();
-    data.append('file', file_data);
-    data.append('upload_preset', 'ku2dutrm');
-    data.append('cloud_name', 'djcak19nu');
-    this.userRestService.upLoadImage(data).subscribe(response=>{
-        console.log(response);
-        this.imageId = response.public_id;
-        console.log("imageId")
-        console.log(this.imageId)
-        this.saveImageId();
-    });
-
   public onSavePasswordClick(): void {
     console.log(this.passwordForm.value.password)
     if (this.passwordForm.valid) {
@@ -149,7 +137,7 @@ export class AuthUserSettingsComponent implements OnInit {
     } else {
       this.passwordForm.markAllAsTouched();
     }
-
   }
-
 }
+
+
