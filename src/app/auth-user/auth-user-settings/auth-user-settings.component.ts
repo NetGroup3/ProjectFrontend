@@ -21,10 +21,10 @@ export class AuthUserSettingsComponent implements OnInit {
 
   public firstname: string = "";
   public lastname: string = "";
-  private imageId: string = "";
-   public form: FormGroup = this.personalInformationForm();
+  public imageId: string = "";
+  public form: FormGroup = this.personalInformationForm();
   public img: CloudinaryImage = this.initImage();
-  files: File[] = [];
+  public files: File[] = [];
   public passwordForm!: FormGroup;
 
   constructor(
@@ -39,7 +39,8 @@ export class AuthUserSettingsComponent implements OnInit {
     this.firstname = this.authService.getUserFirstname();
     this.lastname = this.authService.getUserLastname();
     this.imageId = this.authService.getImageId();
-    this.initImage();
+    console.log(this.imageId)
+    this.img = this.initImage();
 
     const
       options: AbstractControlOptions = {
@@ -57,7 +58,9 @@ export class AuthUserSettingsComponent implements OnInit {
 
   initImage(): CloudinaryImage {
     console.log(this.imageId);
+    console.log(this.authService.getImageId());
     const cld = new Cloudinary({cloud: {cloudName: 'djcak19nu'}});
+//    return cld.image(this.authService.getImageId())
     return cld.image(this.imageId)
       .resize(thumbnail().width(300).height(300))
       .roundCorners(byRadius(20));
@@ -101,10 +104,7 @@ export class AuthUserSettingsComponent implements OnInit {
     data.append('upload_preset', 'ku2dutrm');
     data.append('cloud_name', 'djcak19nu');
     this.userRestService.upLoadImage(data).subscribe(response => {
-      console.log(response);
       this.imageId = response.public_id;
-      console.log("imageId")
-      console.log(this.imageId)
       this.saveImageId();
     });
   }
@@ -120,11 +120,10 @@ export class AuthUserSettingsComponent implements OnInit {
   /** Send image id to backend server */
   saveImageId(): void {
     this.userRestService.updateImage(this.imageForm().value).subscribe((response: any) => {
-      console.log(this.imageForm().value)
       this.authService.setImageId(this.imageId);
-      console.log(this.imageId)
-      this.initImage();
     })
+    this.img = this.initImage();
+    this.files = [];
   }
 
   public onSavePasswordClick(): void {

@@ -27,9 +27,14 @@
   color: #495464;
   position: absolute;
   left: 50px;
-  top: 50%;
+  top: 90%;
 }
-
+.__photo{
+  position: center;
+  left: auto;
+  right: auto;
+  width: 50%;
+}
 .__content{
   position: absolute;
   width: 90%;
