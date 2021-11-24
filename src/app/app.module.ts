@@ -34,6 +34,11 @@ import { AuthUserBlogComponent } from './auth-user/auth-user-blog/auth-user-blog
 import {AuthInterceptor} from "./http-interceptors/auth-interceptor";
 import { IngridientsComponent } from './ingridients/ingridients.component';
 import { AddEditIngredientComponent } from './add-edit-ingredient/add-edit-ingredient.component';
+
+import {CloudinaryModule} from '@cloudinary/angular';
+
+import {NgxDropzoneModule} from "ngx-dropzone";
+
 import {ModeratorSceletonComponent} from "./sceletons/moderator-sceleton/moderator-sceleton.component";
 import {ModeratorCocktailsComponent} from "./moderator/moderator-cocktails/moderator-cocktails.component";
 import {ModeratorIngredientsComponent} from "./moderator/moderator-ingredients/moderator-ingredients.component";
@@ -74,7 +79,6 @@ registerLocaleData(en);
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     IconsProviderModule,
     NzLayoutModule,
@@ -84,6 +88,8 @@ registerLocaleData(en);
     NzFormModule,
     NzSelectModule,
     HttpClientModule,
+    CloudinaryModule,
+    NgxDropzoneModule,
   ],
   providers: [
     {
@@ -91,7 +97,11 @@ registerLocaleData(en);
       useClass: AuthInterceptor,
       multi   : true,
     },
-    { provide: NZ_I18N, useValue: en_US }, RestapiService],
+    {
+      provide: NZ_I18N,
+      useValue: en_US
+    },
+    RestapiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
