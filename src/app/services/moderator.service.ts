@@ -18,10 +18,11 @@ export class ModeratorService {
       params: new HttpParams().set('id', id)
     });
   }
-  public get_ingridients (limit: number, offset: number) {
-    return this.http.get(appLinks.ingridients, {
-      params: new HttpParams().set('limit', limit).set('offset', offset)
-    });
+  public get_ingridients (limit: number, offset: number) : Observable<Object>{
+    const params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('offset', offset.toString());
+    return this.http.get(appLinks.ingridients, {params});
   }
 
 }

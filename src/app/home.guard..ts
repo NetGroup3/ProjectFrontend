@@ -13,6 +13,7 @@ export class HomeGuard implements CanActivate {
     console.log(this.tokenService.getUserRole())
     if(this.tokenService.getUserRole() === 'USER'){
       console.log(111111)
+
       return true;
     }
     else if(this.tokenService.getUserRole() === 'MODERATOR'){
@@ -24,6 +25,7 @@ export class HomeGuard implements CanActivate {
       return true;
     }
     else {
+      this.router.navigate(['/login'])
       return false;
     }
   }
