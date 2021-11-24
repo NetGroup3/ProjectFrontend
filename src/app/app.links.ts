@@ -9,6 +9,6 @@ export const appLinks={
   users: `${environment.serverUrl}/users`,
   personalInfo: `${environment.serverUrl}/users/personal-information`,
   ingridients:`${environment.serverUrl}/ingredient/page`,
-  ingridient:`${environment.serverUrl}/ingredient/id`,
+  ingridient:`${environment.serverUrl}/ingredient`,
   changePassword: `${environment.serverUrl}/users/change-password`,
 }
