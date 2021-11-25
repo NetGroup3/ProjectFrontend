@@ -1,3 +1,5 @@
+<app-moderator-sceleton></app-moderator-sceleton>
+<div class="insert_area">
 <div *ngIf="ingridient">
 <div class="add_edit">
   <h2>Add/edit ingredient</h2>
@@ -6,20 +8,14 @@
     <img src="assets/img.png"> <br/>
     <button class="upload">Upload photo</button>
   </div>
-  <textarea [(ngModel)]="ingridient.description"></textarea>
+  <textarea required [(ngModel)]="ingridient.description"></textarea>
   </div>
 <div class="title">
   <p>Title</p>
-  <input [(ngModel)]="ingridient.title" placeholder="Text"/>
+  <input required [(ngModel)]="ingridient.title" placeholder="Text"/>
 </div>
-  <button class="delete">Delete</button>
+<!--  <button class="delete">Delete</button>-->
   <button class="ok"  (click)="onAddClick()">Ok!</button>
-<!--  <h2>{{ingridient.title }} Details</h2>-->
-<!--  <div><span>id: </span>{{ingridient.id}}</div>-->
-<!--  <div>-->
-<!--    <label for="hero-name">Ingredient title: </label>-->
-<!--    <input id="hero-name" [(ngModel)]="ingridient.title" placeholder="name">-->
-<!--  </div>-->
-<!--  <button (click)="goBack()">go back</button>-->
+</div>
 </div>
 </div>

@@ -9,32 +9,45 @@ import {IngridientPage} from "../modules/auth/models/ingridient-page";
   styleUrls: ['./ingridients.component.scss']
 })
 export class IngridientsComponent implements OnInit {
-
+  limit: number = 10;
+  page: number = 0;
   Ingridients: Ingredient[] = [];
-  // Ingridients: Ingredient[] = [ { id: 1, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""},
-  //   {id: 2, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""},
-  //   { id: 3, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""},
-  //   { id: 4, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""},
-  //   { id: 5, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""},
-  //   { id: 6, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""},
-  //   { id: 7, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""},
-  //   { id: 8, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""},
-  //   { id: 9, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""},
-  //   { id: 10, title: 'water', category: "", description: "", image_id: 0, is_active:true, measurement: ""}];
 
   constructor(private moderatorService: ModeratorService) {
   }
-//this.Ingridients = <Ingredient []> ingredients
+  toggle: boolean = true;
   ngOnInit(): void {
-    this.getIngridients();
+    this.getIngridients(this.limit, this.page);
   }
 
-  getIngridients(): void {
-    this.moderatorService.get_ingridients(20, 0)
+  getIngridients(limit: number, page: number): void {
+    this.moderatorService.get_ingridients(limit, page)
       .subscribe((response:any)=>{
         console.log(response.body)
         this.Ingridients = response.body
       });
   }
 
+  next() {
+    this.page = this.page + 1;
+    this.ngOnInit();
+  }
+
+  prev() {
+    if(this.page > 0) {
+      this.page = this.page - 1;
+      this.ngOnInit();
+    }
+  }
+
+  cancel() {
+      this.toggle = !this.toggle;
+  }
+
+  ok(id: number) {
+    this.toggle = !this.toggle;
+    this.moderatorService.delete_ingredient(id).subscribe((response:any)=>{
+      console.log(response)
+    });
+  }
 }

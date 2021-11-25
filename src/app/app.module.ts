@@ -41,6 +41,8 @@ import {ModeratorKitchenwareComponent} from "./moderator/moderator-kitchenware/m
 import {ModeratorSettingsComponent} from "./moderator/moderator-settings/moderator-settings.component";
 import {AdminModeratorsComponent} from "./admin/admin-moderators/admin-moderators.component";
 import {AdminSceletonComponent} from "./sceletons/admin-sceleton/admin-sceleton.component";
+import { KitchenwareComponent } from './kitchenware/kitchenware.component';
+import { AddEditKitchenwareComponent } from './add-edit-kitchenware/add-edit-kitchenware.component';
 
 registerLocaleData(en);
 
@@ -67,7 +69,9 @@ registerLocaleData(en);
     ModeratorKitchenwareComponent,
     ModeratorCocktailsComponent,
     AdminModeratorsComponent,
-    AdminSceletonComponent
+    AdminSceletonComponent,
+    KitchenwareComponent,
+    AddEditKitchenwareComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,17 @@
   height: 100vh;
   background: linear-gradient(180deg, #5F72BE 0%, #EBD3FB 100%);
 }
+.picture{
+  height: 100vh;
+  width: auto;
+  float: right;
+  margin-left: 10%;
+}
+.picture img{
+  height: 100vh;
+  width: 800px;
+  margin: 0;
+}
 :host {
   display: block;
 }

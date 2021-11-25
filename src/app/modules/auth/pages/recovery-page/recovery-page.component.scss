@@ -9,6 +9,17 @@
 h1{
   color: #495464;
 }
+.picture{
+  height: 100vh;
+  width: auto;
+  float: right;
+  margin-left: 10%;
+}
+.picture img{
+  height: 100vh;
+  width: 800px;
+  margin: 0;
+}
 .recovery-page {
 
   &__form {
@@ -47,7 +58,7 @@ h1{
   position: absolute;
   background: #FFFFFF;
   border-radius: 32px;
-  width: 40%;
+  width: 35%;
   height: 50%;
   margin-top: 15%;
   margin-left: 5%;
