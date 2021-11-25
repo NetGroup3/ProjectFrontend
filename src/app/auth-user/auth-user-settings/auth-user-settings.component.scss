@@ -5,7 +5,9 @@
   right: 0px;
   background-color: #f3f1ee;
 }
-
+.dn{
+  display: none;
+}
 .title {
   font-family: Montserrat, serif;
   font-style: normal;
@@ -26,10 +28,18 @@
   line-height: 150%;
   color: #495464;
   position: absolute;
+  left: 50px;
+  top: 90%;
+}
+.__photo{
+  position: center;
+  left: auto;
+  right: auto;
+  width: 50%;
   //left: 0%;
   top: 100%;
-}
 
+}
 .__content{
   position: absolute;
   width: 90%;

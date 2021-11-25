@@ -42,29 +42,22 @@
       </div>
     </div>
 
+    <!-- photo block-->
     <div class="__photo_block">
-      <!-- photo block-->
 
-
-      <ngx-dropzone (change)="onSelect($event)">
-        <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
-        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f">
-          <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-        </ngx-dropzone-image-preview>
-      </ngx-dropzone>
-
-      <advanced-image [cldImg]="img"></advanced-image>
-
-      <!--      <input type="file" (click)="onPhotoSelected($event)"><h3 class="__button_text">Change photo</h3>
-            <button type="button" (click)="onUpLoad()">Upload</button>-->
-      <div>
-        <button type="button" (click)="onUpLoad()" class="__change_photo"><h3 class="__button_text">Save photo</h3>
-        </button>
-
-        <!--      <button class="__change_photo">
-                <h3 class="__button_text">Change photo</h3>
-              </button>-->
+      <div class="__photo">
+      <advanced-image [cldImg]="img" ></advanced-image>
+<!--      </div>
+      <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f"> </ngx-dropzone-image-preview>
+      <div>-->
+        <input type="file" (change)="onFileSelect($event)" class="dn" #uploadFile>
+        <div (click)="uploadFile.click()" class="p-4">
+<!--          <h1>Click me for change avatar, baby!</h1>-->
+          <button type="button"  class="__change_photo"><h3 class="__button_text">Change photo</h3></button>
+        </div>
       </div>
+    </div>
+
 
       <div>
         <span class="change-password-title">Change password</span>

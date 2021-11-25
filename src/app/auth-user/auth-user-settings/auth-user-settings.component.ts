@@ -21,10 +21,10 @@ export class AuthUserSettingsComponent implements OnInit {
 
   public firstname: string = "";
   public lastname: string = "";
-  private imageId: string = "";
+  public imageId: string = "";
   public form: FormGroup = this.personalInformationForm();
   public img: CloudinaryImage = this.initImage();
-  files: File[] = [];
+  public files: File[] = [];
   public passwordForm!: FormGroup;
 
   constructor(
@@ -39,7 +39,8 @@ export class AuthUserSettingsComponent implements OnInit {
     this.firstname = this.authService.getUserFirstname();
     this.lastname = this.authService.getUserLastname();
     this.imageId = this.authService.getImageId();
-    this.initImage();
+    console.log(this.imageId)
+    this.img = this.initImage();
 
     const
       options: AbstractControlOptions = {
@@ -81,14 +82,9 @@ export class AuthUserSettingsComponent implements OnInit {
     });
   }
 
-  onSelect(event: { addedFiles: any; }) {
-    console.log(event);
-    this.files.push(...event.addedFiles);
-  }
-
-  onRemove(event: File) {
-    console.log(event);
-    this.files.splice(this.files.indexOf(event), 1);
+  onFileSelect($event: any) {
+    this.files[0] = $event.target.files[0];
+    this.onUpLoad();
   }
 
   onUpLoad() {
@@ -101,10 +97,7 @@ export class AuthUserSettingsComponent implements OnInit {
     data.append('upload_preset', 'ku2dutrm');
     data.append('cloud_name', 'djcak19nu');
     this.userRestService.upLoadImage(data).subscribe(response => {
-      console.log(response);
       this.imageId = response.public_id;
-      console.log("imageId")
-      console.log(this.imageId)
       this.saveImageId();
     });
   }
@@ -120,11 +113,11 @@ export class AuthUserSettingsComponent implements OnInit {
   /** Send image id to backend server */
   saveImageId(): void {
     this.userRestService.updateImage(this.imageForm().value).subscribe((response: any) => {
-      console.log(this.imageForm().value)
       this.authService.setImageId(this.imageId);
-      console.log(this.imageId)
-      this.initImage();
     })
+    this.authService.setImageId(this.imageId)
+    this.img = this.initImage();
+    this.files = [];
   }
 
   public onSavePasswordClick(): void {
@@ -138,6 +131,7 @@ export class AuthUserSettingsComponent implements OnInit {
       this.passwordForm.markAllAsTouched();
     }
   }
+
 }
 
 
