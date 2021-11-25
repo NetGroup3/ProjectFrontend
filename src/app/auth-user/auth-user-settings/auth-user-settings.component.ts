@@ -48,7 +48,7 @@ export class AuthUserSettingsComponent implements OnInit {
       }
 
     this.passwordForm = this.fbPassword.group({
-        id: this.authService.getUserId(),
+        userId: this.authService.getUserId(),
         oldPassword: ['', [Validators.required]],
         password: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]],
         confirmPassword: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]]
@@ -123,7 +123,7 @@ export class AuthUserSettingsComponent implements OnInit {
   public onSavePasswordClick(): void {
     console.log(this.passwordForm.value.password)
     if (this.passwordForm.valid) {
-      console.log(this.passwordForm.value)
+      // console.log(this.passwordForm.value)
       this.userRestService.changePassword(this.passwordForm.value).subscribe((response: any) => {
         console.log(response)
       })

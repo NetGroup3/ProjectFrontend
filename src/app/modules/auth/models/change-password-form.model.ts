@@ -1,6 +1,6 @@
 export interface ChangePasswordForm {
-    oldPassword: string;
-    password: string;
-    confirmPassword: string;
-  }
-  
+  userId: number;
+  oldPassword: string;
+  password: string;
+
+}

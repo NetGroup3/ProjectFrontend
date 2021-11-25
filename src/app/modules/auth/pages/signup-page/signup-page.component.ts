@@ -33,7 +33,9 @@ export class SignupPageComponent implements OnInit {
         firstname: ['', [Validators.required]],
         lastname: ['', [Validators.required]],
         password: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]],
-        confirmPassword: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]]
+        confirmPassword: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]],
+        status: "NOT_VERIFY",
+        role: "USER"
       }, options
     )
   }
