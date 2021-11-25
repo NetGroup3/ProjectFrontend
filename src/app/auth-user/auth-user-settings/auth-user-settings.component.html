@@ -36,7 +36,8 @@
       </div>
 
       <div>
-        <button (click)="savePersonalInformation()" class="_save_change_personal_information"><h3 class="__button_text">Save changes</h3></button>
+        <button (click)="savePersonalInformation()" class="_save_change_personal_information"><h3 class="__button_text">
+          Save changes</h3></button>
 
       </div>
     </div>
@@ -46,101 +47,90 @@
 
       <div class="__photo">
       <advanced-image [cldImg]="img" ></advanced-image>
-      </div>
+<!--      </div>
       <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f"> </ngx-dropzone-image-preview>
-
-      <ngx-dropzone (change)="onSelect($event)" >
-        <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
-      </ngx-dropzone>
-
-      <div>
-<!--        <button type="button" (click)="uploadFile.change" class="__select_photo"><h3 class="__button_text">Select photo</h3> </button>-->
-        <button type="button" (click)="onUpLoad()" class="__change_photo"><h3 class="__button_text">Save photo</h3> </button>
+      <div>-->
+        <input type="file" (change)="onFileSelect($event)" class="dn" #uploadFile>
+        <div (click)="uploadFile.click()" class="p-4">
+<!--          <h1>Click me for change avatar, baby!</h1>-->
+          <button type="button"  class="__change_photo"><h3 class="__button_text">Change photo</h3></button>
+        </div>
       </div>
-
-<!--
-     <input type="file" class="input-file" [accept]="acceptTypes" (change)="changeListener($event)" #uploadFile>
-      <div class="d-flex" (click)="uploadFile.click()">
-        <p class="label-display">
-          <mat-label>{{label}}</mat-label>
-        </p>
-      </div> -->
-
-
-
     </div>
 
-    <div>
-      <span class="title-change-password">Change password</span>
 
-      <div class="__change-password" [formGroup]="passwordForm">
-        <div>
-          <nz-form-control
-            [nzValidateStatus]="
+      <div>
+        <span class="change-password-title">Change password</span>
+
+        <div class="__change-password" [formGroup]="passwordForm">
+          <div>
+            <nz-form-control
+              [nzValidateStatus]="
               passwordForm.controls.oldPassword.touched &&
               passwordForm.controls.oldPassword.errors
                 ? 'error'
                 : ''
             "
-            nzErrorTip="old password error"
-          >
-            <input
-              class="password-input"
-              nz-input
-              placeholder="Old Password"
-              type="password"
-              formControlName="oldPassword"
-            />
-          </nz-form-control>
-        </div>
+              nzErrorTip="old password error"
+            >
+              <input
+                class="password-input"
+                nz-input
+                placeholder="Old Password"
+                type="password"
+                formControlName="oldPassword"
+              />
+            </nz-form-control>
+          </div>
 
-        <div>
-          <nz-form-control
-            [nzValidateStatus]="
+          <div>
+            <nz-form-control
+              [nzValidateStatus]="
               passwordForm.controls.password.touched &&
               passwordForm.controls.password.errors
                 ? 'error'
                 : ''
             "
-            nzErrorTip="new password must be 8-12 characters"
-          >
-            <input
-              class="password-input"
-              nz-input
-              placeholder="New Password"
-              type="password"
-              formControlName="password"
-            />
-          </nz-form-control>
-        </div>
+              nzErrorTip="new password must be 8-12 characters"
+            >
+              <input
+                class="password-input"
+                nz-input
+                placeholder="New Password"
+                type="password"
+                formControlName="password"
+              />
+            </nz-form-control>
+          </div>
 
-        <div>
-          <nz-form-control
-            [nzValidateStatus]="
+          <div>
+            <nz-form-control
+              [nzValidateStatus]="
               passwordForm.controls.confirmPassword.touched &&
               passwordForm.controls.confirmPassword.errors
                 ? 'error'
                 : ''
             "
-            nzErrorTip="confirm password must match"
-          >
-            <input
-              class="password-input"
-              nz-input
-              placeholder="Confirm Password"
-              type="password"
-              formControlName="confirmPassword"
-              (keyup.enter)="onSavePasswordClick()"
-            />
-          </nz-form-control>
-        </div>
+              nzErrorTip="confirm password must match"
+            >
+              <input
+                class="password-input"
+                nz-input
+                placeholder="Confirm Password"
+                type="password"
+                formControlName="confirmPassword"
+                (keyup.enter)="onSavePasswordClick()"
+              />
+            </nz-form-control>
+          </div>
 
-        <div>
-          <button class="__controller" (click)="onSavePasswordClick()">
-            <h3 class="__button_text">Save changes</h3>
-          </button>
-        </div>
+          <div>
+            <button class="__controller" (click)="onSavePasswordClick()">
+              <h3 class="__button_text">Save changes</h3>
+            </button>
+          </div>
 
+        </div>
       </div>
     </div>
   </div>

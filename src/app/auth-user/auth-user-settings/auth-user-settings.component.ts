@@ -48,7 +48,7 @@ export class AuthUserSettingsComponent implements OnInit {
       }
 
     this.passwordForm = this.fbPassword.group({
-        id: this.authService.getUserId(),
+        userId: this.authService.getUserId(),
         oldPassword: ['', [Validators.required]],
         password: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]],
         confirmPassword: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]]
@@ -58,9 +58,7 @@ export class AuthUserSettingsComponent implements OnInit {
 
   initImage(): CloudinaryImage {
     console.log(this.imageId);
-    console.log(this.authService.getImageId());
     const cld = new Cloudinary({cloud: {cloudName: 'djcak19nu'}});
-//    return cld.image(this.authService.getImageId())
     return cld.image(this.imageId)
       .resize(thumbnail().width(300).height(300))
       .roundCorners(byRadius(20));
@@ -84,14 +82,9 @@ export class AuthUserSettingsComponent implements OnInit {
     });
   }
 
-  onSelect(event: { addedFiles: any; }) {
-    console.log(event);
-    this.files.push(...event.addedFiles);
-  }
-
-  onRemove(event: File) {
-    console.log(event);
-    this.files.splice(this.files.indexOf(event), 1);
+  onFileSelect($event: any) {
+    this.files[0] = $event.target.files[0];
+    this.onUpLoad();
   }
 
   onUpLoad() {
@@ -122,6 +115,7 @@ export class AuthUserSettingsComponent implements OnInit {
     this.userRestService.updateImage(this.imageForm().value).subscribe((response: any) => {
       this.authService.setImageId(this.imageId);
     })
+    this.authService.setImageId(this.imageId)
     this.img = this.initImage();
     this.files = [];
   }
@@ -129,7 +123,7 @@ export class AuthUserSettingsComponent implements OnInit {
   public onSavePasswordClick(): void {
     console.log(this.passwordForm.value.password)
     if (this.passwordForm.valid) {
-      console.log(this.passwordForm.value)
+      // console.log(this.passwordForm.value)
       this.userRestService.changePassword(this.passwordForm.value).subscribe((response: any) => {
         console.log(response)
       })
@@ -137,6 +131,7 @@ export class AuthUserSettingsComponent implements OnInit {
       this.passwordForm.markAllAsTouched();
     }
   }
+
 }
 
 
