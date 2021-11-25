@@ -8,9 +8,11 @@ export const appLinks={
   recovery: `${environment.serverUrl}/recovery`,
   users: `${environment.serverUrl}/users`,
   personalInfo: `${environment.serverUrl}/users/personal-information`,
-  userImage:`${environment.serverUrl}/users/user-image`,
-  ingridients:`${environment.serverUrl}/ingredient/page`,
-  ingridient:`${environment.serverUrl}/ingredient/id`,
+  ingredients:`${environment.serverUrl}/ingredient/page`,
+  ingredient:`${environment.serverUrl}/ingredient`,
   changePassword: `${environment.serverUrl}/users/change-password`,
-
+  Kitchenware: `${environment.serverUrl}/kitchenware/page`,
+  kitchenware: `${environment.serverUrl}/kitchenware`,
+  userImage:`${environment.serverUrl}/users/user-image`,
+  changePassword: `${environment.serverUrl}/users/change-password`,
 }

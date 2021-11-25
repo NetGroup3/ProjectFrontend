@@ -1,0 +1,41 @@
+<div class="main">
+  <div class="Kitchenware">
+    <h2>Kitchenware</h2>
+    <div class="add_kitchenware">
+      <nz-select class="options">
+        <nz-option nzValue="cocktails" nzLabel="Liquid"></nz-option>
+        <nz-option nzValue="friends" nzLabel="Alcohol"></nz-option>
+        <nz-option nzValue="events" nzLabel="Fruits"></nz-option>
+      </nz-select>
+      <a routerLink="/moderator/kitchenware/add">
+        <button> Add kitchenware</button></a>
+    </div>
+
+    <div class="kitchenware" *ngFor="let kitchenware of Kitchenware">
+      <div class="buttons">
+        <a routerLink="/moderator/kitchenware/{{kitchenware.id}}">
+          <img src="../../assets/edit.png" alt="edit"></a>
+        <img (click)="cancel()" src="../../assets/delete.png" alt="delete">
+      </div>
+      <p class="title">{{kitchenware.title}}</p>
+      <img src="{{kitchenware.image_id}}">
+      <p class="bottom" >Ingredient</p>
+      <div [ngClass]="{'fixed-overlay': toggle, 'fixed': !toggle}" class="fixed-overlay">
+        <div class="modal">
+          <div class="popup">
+            <div class="field"></div>
+            <span>Delete the ingredient {{kitchenware.title}}?</span>
+            <div class="field"></div>
+            <button (click)="ok(kitchenware.id)" class="delete-ok">OK</button>
+            <button (click)="cancel()" class="delete-cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="button">
+    <button (click)="prev()" class="next"><</button>
+    <button (click)="next()" class="next">></button>
+  </div>
+</div>

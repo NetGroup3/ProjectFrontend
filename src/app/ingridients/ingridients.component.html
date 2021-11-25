@@ -1,3 +1,4 @@
+<div class="main">
 <div class="ingridients">
   <h2>Ingredients</h2>
   <div class="add_ingridient">
@@ -6,19 +7,35 @@
       <nz-option nzValue="friends" nzLabel="Alcohol"></nz-option>
       <nz-option nzValue="events" nzLabel="Fruits"></nz-option>
     </nz-select>
-    <a routerLink="/moderator/ingridients/add">
-      <button> Add ingredient</button>></a>
+    <a routerLink="/moderator/ingredients/add">
+      <button> Add ingredient</button></a>
   </div>
+
   <div class="ingridient" *ngFor="let ingridient of Ingridients">
     <div class="buttons">
-      <a routerLink="/moderator/ingridients/{{ingridient.id}}">
-        <div class="edit"></div>
-        <div>edit</div></a>
-        <p>delete</p>
-<!--      <img src="src/app/ingridients/edit.png" alt="edit"></a>-->
-<!--      <img src="./delete.png" alt="delete">-->
+      <a routerLink="/moderator/ingredients/{{ingridient.id}}">
+      <img src="../../assets/edit.png" alt="edit"></a>
+      <img (click)="cancel()" src="../../assets/delete.png" alt="delete">
     </div>
       <p class="title">{{ingridient.title}}</p>
+      <img src="{{ingridient.image_id}}">
       <p class="bottom" >Ingredient</p>
+    <div [ngClass]="{'fixed-overlay': toggle, 'fixed': !toggle}" class="fixed-overlay">
+      <div class="modal">
+        <div class="popup">
+          <div class="field"></div>
+          <span>Delete the ingredient {{ingridient.title}}?</span>
+          <div class="field"></div>
+          <button (click)="ok(ingridient.id)" class="delete-ok">OK</button>
+          <button (click)="cancel()" class="delete-cancel">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+</div>
+</div>
+  <div class="button">
+  <button (click)="prev()" class="next"><</button>
+  <button (click)="next()" class="next">></button>
   </div>
 </div>

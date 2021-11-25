@@ -12,18 +12,18 @@ export class HomeGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
     console.log(this.tokenService.getUserRole())
     if(this.tokenService.getUserRole() === 'USER'){
-      console.log(111111)
       return true;
     }
     else if(this.tokenService.getUserRole() === 'MODERATOR'){
-      this.router.navigate(['/moderator'])
+      //this.router.navigate(['/moderator'])
       return true;
     }
     else if(this.tokenService.getUserRole() === 'ADMIN'){
-      this.router.navigate(['/admin'])
+      //this.router.navigate(['/admin'])
       return true;
     }
     else {
+      this.router.navigate(['/login'])
       return false;
     }
   }

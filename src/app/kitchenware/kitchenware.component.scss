@@ -6,12 +6,12 @@ h2{
   color: #495464;
   margin-left: 2%;
 }
-.add_ingridient{
+.add_kitchenware{
   width: 100%;
   height: 100px;
   margin-bottom: 50px;
 }
-.ingridients{
+.Kitchenware{
   background: #F9FAFB;
   display: flex;
   flex-wrap: wrap;
@@ -19,7 +19,7 @@ h2{
 .main{
   background: #F9FAFB;
 }
-.ingridient{
+.kitchenware{
   text-align: center;
   height: 15%;
   margin-left: 2%;
@@ -47,7 +47,7 @@ h2{
 .buttons img:hover{
   cursor: pointer;
 }
-.add_ingridient button{
+.add_kitchenware button{
   background: #9921E8;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 24px rgba(153, 33, 232, 0.5);
   border-radius: 50px;
@@ -121,7 +121,7 @@ img{
   width: 600px;
   height: 300px;
   background-color:white;
-  box-shadow:0 0 10px 4px rgba(3, 14, 109, 0.185);
+  box-shadow:0 0 15px 4px rgba(3, 14, 109, 0.185);
   border-radius:10px;
   text-align: center;
   font-size: 30px
