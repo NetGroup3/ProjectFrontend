@@ -11,6 +11,7 @@ import {AuthUserEventsComponent} from "./auth-user/auth-user-events/auth-user-ev
 import {AuthUserFavouriteComponent} from "./auth-user/auth-user-favourite/auth-user-favourite.component";
 import {AuthUserFriendsComponent} from "./auth-user/auth-user-friends/auth-user-friends.component";
 import {AuthUserSettingsComponent} from "./auth-user/auth-user-settings/auth-user-settings.component";
+import {ChangePasswordComponent} from "./auth-user/auth-user-settings/change-password/change-password.component";
 import {IngridientsComponent} from "./ingridients/ingridients.component";
 import {AddEditIngredientComponent} from "./add-edit-ingredient/add-edit-ingredient.component";
 import { HomeGuard} from "./home.guard.";
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'user/favourite', component:AuthUserFavouriteComponent},
   { path: 'user/friends', component:AuthUserFriendsComponent},
   { path: 'user/settings', component:AuthUserSettingsComponent},
+  { path: 'user/settings', component:ChangePasswordComponent},
   { path: 'moderator/ingridients', component:IngridientsComponent},
   { path: 'moderator/ingridients/:id', component:AddEditIngredientComponent},
   { path: 'moderator/ingridients/add', component:AddEditIngredientComponent},

@@ -40,19 +40,6 @@ export class AuthUserSettingsComponent implements OnInit {
     this.lastname = this.authService.getUserLastname();
     this.imageId = this.authService.getImageId();
     this.initImage();
-
-    const
-      options: AbstractControlOptions = {
-        validators: PasswordMatch.matchingPasswords
-      }
-
-    this.passwordForm = this.fbPassword.group({
-        userId: this.authService.getUserId(),
-        oldPassword: ['', [Validators.required]],
-        password: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]],
-        confirmPassword: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]]
-      }, options
-    );
   }
 
   initImage(): CloudinaryImage {
@@ -127,17 +114,4 @@ export class AuthUserSettingsComponent implements OnInit {
     })
   }
 
-  public onSavePasswordClick(): void {
-    console.log(this.passwordForm.value.password)
-    if (this.passwordForm.valid) {
-      // console.log(this.passwordForm.value)
-      this.userRestService.changePassword(this.passwordForm.value).subscribe((response: any) => {
-        console.log(response)
-      })
-    } else {
-      this.passwordForm.markAllAsTouched();
-    }
-  }
 }
-
-

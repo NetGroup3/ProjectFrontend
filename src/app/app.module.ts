@@ -29,6 +29,7 @@ import { AuthUserCatalogueComponent } from './auth-user/auth-user-catalogue/auth
 import { AuthUserCalendarComponent } from './auth-user/auth-user-calendar/auth-user-calendar.component';
 import { AuthUserEventsComponent } from './auth-user/auth-user-events/auth-user-events.component';
 import { AuthUserSettingsComponent } from './auth-user/auth-user-settings/auth-user-settings.component';
+import {ChangePasswordComponent} from "./auth-user/auth-user-settings/change-password/change-password.component";
 import { AuthUserFriendsComponent } from './auth-user/auth-user-friends/auth-user-friends.component';
 import { AuthUserBlogComponent } from './auth-user/auth-user-blog/auth-user-blog.component';
 import {AuthInterceptor} from "./http-interceptors/auth-interceptor";
@@ -62,6 +63,7 @@ registerLocaleData(en);
     AuthUserCalendarComponent,
     AuthUserEventsComponent,
     AuthUserSettingsComponent,
+    ChangePasswordComponent,
     AuthUserFriendsComponent,
     AuthUserBlogComponent,
     IngridientsComponent,
