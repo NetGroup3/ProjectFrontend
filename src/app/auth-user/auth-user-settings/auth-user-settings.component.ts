@@ -4,7 +4,6 @@ import {AbstractControlOptions, FormBuilder, FormGroup, Validators} from "@angul
 //services
 import {UserRestService} from "../../modules/auth/services/rest/user-rest.service";
 import {AuthService} from "../../modules/auth/services/client/auth.service";
-import {PasswordMatch} from "../../modules/auth/services/client/password-validator";
 
 // In your component.ts use `@cloudinary/url-gen` to generate your transformations.
 import {Cloudinary, CloudinaryImage} from '@cloudinary/url-gen';
@@ -25,7 +24,6 @@ export class AuthUserSettingsComponent implements OnInit {
   public form: FormGroup = this.personalInformationForm();
   public img: CloudinaryImage = this.initImage();
   public files: File[] = [];
-  public passwordForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -42,18 +40,6 @@ export class AuthUserSettingsComponent implements OnInit {
     console.log(this.imageId)
     this.img = this.initImage();
 
-    const
-      options: AbstractControlOptions = {
-        validators: PasswordMatch.matchingPasswords
-      }
-
-    this.passwordForm = this.fbPassword.group({
-        userId: this.authService.getUserId(),
-        oldPassword: ['', [Validators.required]],
-        password: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]],
-        confirmPassword: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]]
-      }, options
-    );
   }
 
   initImage(): CloudinaryImage {
