@@ -58,9 +58,7 @@ export class AuthUserSettingsComponent implements OnInit {
 
   initImage(): CloudinaryImage {
     console.log(this.imageId);
-    console.log(this.authService.getImageId());
     const cld = new Cloudinary({cloud: {cloudName: 'djcak19nu'}});
-//    return cld.image(this.authService.getImageId())
     return cld.image(this.imageId)
       .resize(thumbnail().width(300).height(300))
       .roundCorners(byRadius(20));
@@ -84,14 +82,9 @@ export class AuthUserSettingsComponent implements OnInit {
     });
   }
 
-  onSelect(event: { addedFiles: any; }) {
-    console.log(event);
-    this.files.push(...event.addedFiles);
-  }
-
-  onRemove(event: File) {
-    console.log(event);
-    this.files.splice(this.files.indexOf(event), 1);
+  onFileSelect($event: any) {
+    this.files[0] = $event.target.files[0];
+    this.onUpLoad();
   }
 
   onUpLoad() {
@@ -122,6 +115,7 @@ export class AuthUserSettingsComponent implements OnInit {
     this.userRestService.updateImage(this.imageForm().value).subscribe((response: any) => {
       this.authService.setImageId(this.imageId);
     })
+    this.authService.setImageId(this.imageId)
     this.img = this.initImage();
     this.files = [];
   }
@@ -137,6 +131,7 @@ export class AuthUserSettingsComponent implements OnInit {
       this.passwordForm.markAllAsTouched();
     }
   }
+
 }
 
 
