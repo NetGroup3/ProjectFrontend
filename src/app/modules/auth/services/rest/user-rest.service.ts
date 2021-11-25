@@ -16,6 +16,14 @@ export class UserRestService {
     return this.http.put(appLinks.personalInfo, body);
   }
 
+  upLoadImage(data: FormData): Observable<any> {
+    return this.http.post('https://api.cloudinary.com/v1_1/djcak19nu/image/upload', data);
+  }
+
+  updateImage(body: User) {
+    return this.http.put(appLinks.userImage, body);
+  }
+
   public changePassword (body: ChangePasswordForm): Observable<any>{
     return this.http.put(appLinks.changePassword, body);
   }

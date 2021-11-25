@@ -1,29 +1,31 @@
 import { Injectable } from '@angular/core';
-import {AuthRestService} from "../rest/auth-rest.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private authRestService: AuthRestService) { }
+  constructor() { }
 
   private readonly TOKEN_KEY: string = "AUTH_TOKEN";
   private readonly USER_ID: string = "USER_ID";
   private readonly USER_FIRSTNAME: string = "USER_FIRSTNAME";
   private readonly USER_LASTNAME: string = "USER_LASTNAME";
   private readonly USER_ROLE: string = "USER_ROLE";
+  private readonly USER_IMAGE_ID: string = "USER_IMAGE_ID";
   private token: string = "";
   private id: string = "";
   private firstname: string = "";
   private lastname: string = "";
   private role: string = "";
+  private imageId: string = "";
 
   public loadUserData(): void{
     this.id = <string> localStorage.getItem(this.USER_ID);
     this.firstname = <string> localStorage.getItem(this.USER_FIRSTNAME);
     this.lastname = <string> localStorage.getItem(this.USER_LASTNAME);
     this.role = <string> localStorage.getItem(this.USER_ROLE);
+    this.imageId = <string> localStorage.getItem(this.USER_IMAGE_ID);
   }
 
   public loadToken(): void{
@@ -40,7 +42,7 @@ export class AuthService {
     localStorage.setItem(this.USER_LASTNAME, this.lastname)
   }
 
-  public setUserData(id: string, firstname: string, lastname: string, role: string ): void{
+  public setUserData(id: string, firstname: string, lastname: string, role: string): void{
     this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
@@ -76,5 +78,12 @@ export class AuthService {
     return this.role;
   }
 
+  setImageId(imageId: string) {
+    this.imageId = imageId;
+    localStorage.setItem(this.USER_IMAGE_ID, this.imageId);
+  }
 
+  public getImageId(): string {
+    return this.imageId;
+  }
 }

@@ -31,6 +31,8 @@ export class LoginPageComponent implements OnInit {
         console.log(response);
         this.authService.setToken(response.token);
         this.authService.setUserData(response.id, response.firstname, response.lastname, response.role);
+        console.log("image id " + response.imageId);
+        console.log("image id " + response.imageid);
         this.router.navigate(["/home"]);
       })
     } else {

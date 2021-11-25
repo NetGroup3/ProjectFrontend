@@ -20,5 +20,6 @@ export class AppComponent implements OnInit {
     console.log(this.authService.getUserFirstname());
     console.log(this.authService.getUserLastname());
     console.log(this.authService.getUserRole());
+    console.log(this.authService.getImageId());
   }
 }
