@@ -14,5 +14,4 @@ export const appLinks={
   Kitchenware: `${environment.serverUrl}/kitchenware/page`,
   kitchenware: `${environment.serverUrl}/kitchenware`,
   userImage:`${environment.serverUrl}/users/user-image`,
-  changePassword: `${environment.serverUrl}/users/change-password`,
 }

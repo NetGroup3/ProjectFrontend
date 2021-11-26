@@ -1,0 +1,37 @@
+<div class="__personal_information" [formGroup]="form">
+  <div>
+    <nz-form-control>
+      <div>
+        <p>First name</p>
+        <input
+          class="settings_page__input"
+          nz-input
+          [(ngModel)]="firstname"
+          placeholder="John"
+          formControlName="firstname"
+        />
+      </div>
+    </nz-form-control>
+  </div>
+
+  <div>
+    <nz-form-control>
+      <div>
+        <p>Last name</p>
+        <input
+          class="settings_page__input"
+          nz-input
+          [(ngModel)]="lastname"
+          placeholder="Smith"
+          formControlName="lastname"
+        />
+      </div>
+    </nz-form-control>
+  </div>
+
+  <div>
+    <button (click)="savePersonalInformation()" class="_save_change_personal_information"><h3 class="__button_text">
+      Save changes</h3></button>
+  </div>
+
+</div>

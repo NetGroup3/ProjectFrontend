@@ -48,6 +48,9 @@ import {AdminModeratorsComponent} from "./admin/admin-moderators/admin-moderator
 import {AdminSceletonComponent} from "./sceletons/admin-sceleton/admin-sceleton.component";
 import { KitchenwareComponent } from './kitchenware/kitchenware.component';
 import { AddEditKitchenwareComponent } from './add-edit-kitchenware/add-edit-kitchenware.component';
+import {UploadImageComponent} from "./auth-user/auth-user-settings/upload-image/upload-image.component";
+import {PersonalInformationComponent} from "./auth-user/auth-user-settings/personal-information/personal-information.component";
+import {ChangePasswordComponent} from "./auth-user/auth-user-settings/change-password/change-password.component";
 
 registerLocaleData(en);
 
@@ -76,7 +79,10 @@ registerLocaleData(en);
     AdminModeratorsComponent,
     AdminSceletonComponent,
     KitchenwareComponent,
-    AddEditKitchenwareComponent
+    AddEditKitchenwareComponent,
+    UploadImageComponent,
+    PersonalInformationComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
