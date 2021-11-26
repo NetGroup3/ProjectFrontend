@@ -14,4 +14,6 @@ export const appLinks={
   Kitchenware: `${environment.serverUrl}/kitchenware/page`,
   kitchenware: `${environment.serverUrl}/kitchenware`,
   userImage:`${environment.serverUrl}/users/user-image`,
+  uploadImage:`https://api.cloudinary.com/v1_1/djcak19nu/image/upload`,
+
 }

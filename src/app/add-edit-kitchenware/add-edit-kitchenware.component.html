@@ -6,7 +6,9 @@
       <div class="description_picture">
         <div class="picture">
           <img src="assets/img.png"> <br/>
-          <button class="upload">Upload photo</button>
+          <advanced-image [cldImg]="img"></advanced-image>
+          <input type="file" (change)="onFileSelect($event)" class="dn" #uploadFile>
+          <button class="upload" (click)="uploadFile.click()" >Upload photo</button>
         </div>
         <textarea required [(ngModel)]="kitchenware.description"></textarea>
       </div>
