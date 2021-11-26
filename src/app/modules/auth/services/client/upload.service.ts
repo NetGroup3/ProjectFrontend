@@ -20,7 +20,7 @@ export class UploadService {
     data.append('file', file_data);
     data.append('upload_preset', 'ku2dutrm');
     data.append('cloud_name', 'djcak19nu');
-   return this.http.post(appLinks.uploadImage, data);
+   return this.http.post("https://api.cloudinary.com/v1_1/djcak19nu/image/upload", data);
   }
 
   initImage(imageId: string): CloudinaryImage {

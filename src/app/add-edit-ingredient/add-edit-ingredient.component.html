@@ -6,8 +6,8 @@
       <h2>Add/edit ingredient</h2>
       <div class="description_picture">
         <div class="picture">
-          <img src="assets/img.png">
-          <advanced-image [cldImg]="img"></advanced-image>
+<!--          <img src="assets/img.png">-->
+          <advanced-image [cldImg]="img"></advanced-image><br>
           <input type="file" (change)="onFileSelect($event)" class="dn" #uploadFile>
           <button class="upload" (click)="uploadFile.click()">Upload photo</button>
         </div>

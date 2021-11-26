@@ -48,6 +48,7 @@ export class SignupPageComponent implements OnInit {
       })
       this.toggle = !this.toggle;
     } else {
+      alert("Fill in all the fields")
       this.form.markAllAsTouched();
     }
 
