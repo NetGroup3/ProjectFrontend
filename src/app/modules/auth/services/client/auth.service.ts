@@ -42,15 +42,22 @@ export class AuthService {
     localStorage.setItem(this.USER_LASTNAME, this.lastname)
   }
 
-  public setUserData(id: string, firstname: string, lastname: string, role: string): void{
+  setImageId(imageId: string) {
+    this.imageId = imageId;
+    localStorage.setItem(this.USER_IMAGE_ID, this.imageId);
+  }
+
+  public setUserData(id: string, firstname: string, lastname: string, role: string, imageId: string): void{
     this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
     this.role = role;
+    this.imageId = imageId
     localStorage.setItem(this.USER_ID, this.id);
     localStorage.setItem(this.USER_FIRSTNAME, this.firstname);
     localStorage.setItem(this.USER_LASTNAME, this.lastname);
     localStorage.setItem(this.USER_ROLE, this.role);
+    localStorage.setItem(this.USER_IMAGE_ID, this.imageId);
   }
 
   public setToken(token: string): void{
@@ -76,11 +83,6 @@ export class AuthService {
 
   public getUserRole(): string {
     return this.role;
-  }
-
-  setImageId(imageId: string) {
-    this.imageId = imageId;
-    localStorage.setItem(this.USER_IMAGE_ID, this.imageId);
   }
 
   public getImageId(): string {
