@@ -1,10 +1,4 @@
-.insert_area {
-  position: absolute;
-  top: 10%;
-  width: 86%;
-  right: 0px;
-  background-color: #f3f1ee;
-}
+
 .title {
   font-family: Montserrat, serif;
   font-style: normal;
@@ -17,121 +11,29 @@
   top: 16px;
 }
 
-.change-password-title {
-  font-family: Montserrat, serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 64px;
-  line-height: 150%;
-  color: #495464;
-  position: absolute;
-  left: 50px;
-  top: 90%;
-}
-.__photo{
-  position: center;
-  left: auto;
-  right: auto;
-  width: 50%;
-  //left: 0%;
-  top: 100%;
 
-}
+
+
 .__content{
   position: absolute;
-  width: 90%;
-
-  height: 150%;
-  left: 13%;
-  top: 12%;
-  background-color: ghostwhite;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  top: 10%;
+  width: 86%;
+  right: 0px;
+  background-color: #F9FAFB;
 }
 
-.__photo_block{
-  position: absolute;
-  width: 600px;
-  height: 539px;
-  left: 680px;
-  top: 120px;
-  background-color: white;
-  border-radius: 50px;
-}
 
-.__change_photo{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 12px 117px;
 
-  position: absolute;
-  width: 300px;
-  height: 70px;
-  left: 260px;
-  top: 436px;
-
-  background: #9921E8;
-  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25), 0px 0px 24px rgba(153, 33, 232, 0.5);
-  border-radius: 50px;
-}
-
-.__button_text {
-  position: static;
-  left: 20%;
-  right: 20%;
-  top: 24.29%;
-  bottom: 24.29%;
-
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 150%;
-  /* identical to box height, or 36px */
-  color: #FFFFFF;
-}
 .__personal_information {
-  position: absolute;
-  width: 45%;
-  height: 539px;
-  left: 24px;
-  top: 120px;
-  background-color: white;
-  border-radius: 50px;
+
 }
 
 ._save_change_personal_information {
-  /* Button - default */
 
-
-  /* Auto Layout */
-
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 12px 117px;
-
-  position: absolute;
-  width: 407px;
-  height: 60px;
-  left: 175px;
-  top: 436px;
-
-  background: #9921E8;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 24px rgba(153, 33, 232, 0.5);
-  border-radius: 50px;
 }
 
 .__change-password {
-  position: absolute;
-  width: 100%;
-   height: 400px;
-  // left: 24px;
-  top: 120%;
-  background-color: white;
-  border-radius: 50px;
+
 }
 
 .__controller {
@@ -156,4 +58,16 @@
   margin-top: 20px;
   // position: absolute;
   // top: 20%;
+}
+.password{
+margin-left: 5%;
+}
+.info{
+
+}
+.top{
+  display: flex;
+  width: 100%;
+  height: 50%;
+  margin-top: 7%;
 }
