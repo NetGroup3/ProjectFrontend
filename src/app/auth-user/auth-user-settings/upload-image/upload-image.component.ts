@@ -5,6 +5,7 @@ import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {AuthService} from "../../../modules/auth/services/client/auth.service";
 import {UserRestService} from "../../../modules/auth/services/rest/user-rest.service";
+import {UploadService} from "../../../modules/auth/services/client/upload.service";
 
 @Component({
   selector: 'app-upload-image',
@@ -15,12 +16,12 @@ export class UploadImageComponent implements OnInit {
 
   public imageId: string = "";
   public img: CloudinaryImage = this.initImage();
-  public files: File[] = [];
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private userRestService: UserRestService,
+    private uploadService: UploadService
   ) { }
 
   ngOnInit(): void {
@@ -37,23 +38,18 @@ export class UploadImageComponent implements OnInit {
   }
 
   onFileSelect($event: any) {
-    this.files[0] = $event.target.files[0];
-    this.onUpLoad();
-  }
-
-  onUpLoad() {
-    if (!this.files[0]) {
-      alert("you need to select image!")
-    }
-    const file_data = this.files[0];
-    const data = new FormData();
-    data.append('file', file_data);
-    data.append('upload_preset', 'ku2dutrm');
-    data.append('cloud_name', 'djcak19nu');
-    this.userRestService.upLoadImage(data).subscribe(response => {
+    console.log("event");
+    this.uploadService.onUpLoad($event.target.files[0]).subscribe(response => {
       this.imageId = response.public_id;
+      this.img = this.initImage();
       this.saveImageId();
     });
+  }
+
+  saveImageId(): void {
+    this.userRestService.updateImage(this.imageForm().value).subscribe((response: any) => {
+      this.authService.setImageId(this.imageId);
+    })
   }
 
   /** form for send image Id to backend server*/
@@ -63,14 +59,4 @@ export class UploadImageComponent implements OnInit {
       imageId: this.imageId
     });
   }
-
-  saveImageId(): void {
-    this.userRestService.updateImage(this.imageForm().value).subscribe((response: any) => {
-      this.authService.setImageId(this.imageId);
-    })
-    this.authService.setImageId(this.imageId)
-    this.img = this.initImage();
-    this.files = [];
-  }
-
 }

@@ -15,7 +15,6 @@ export class AuthRestService {
 
 
   public login (body: LoginForm) : Observable<any>{
-    console.log(this.http.post(appLinks.login, body))
     return this.http.post(appLinks.login, body);
   }
 
