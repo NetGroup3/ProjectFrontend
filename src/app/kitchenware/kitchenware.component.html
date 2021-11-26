@@ -18,7 +18,8 @@
         <img (click)="cancel()" src="../../assets/delete.png" alt="delete">
       </div>
       <p class="title">{{kitchenware.title}}</p>
-      <img src="{{kitchenware.image_id}}">
+<!--      <advanced-image [cldImg]="initImage(kitchenware.image_id)"></advanced-image>-->
+<!--      <img src="{{kitchenware.image_id}}">-->
       <p class="bottom" >Ingredient</p>
       <div [ngClass]="{'fixed-overlay': toggle, 'fixed': !toggle}" class="fixed-overlay">
         <div class="modal">
@@ -31,8 +32,8 @@
           </div>
         </div>
       </div>
-
     </div>
+
   </div>
   <div class="button">
     <button (click)="prev()" class="next"><</button>
