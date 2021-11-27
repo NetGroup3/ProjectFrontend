@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {appLinks} from "../app.links";
 import {Ingredient} from "../models/ingredient";
 import {Kitchenware} from "../models/kitchenware";
+import {Dish} from "../models/dish";
 
 @Injectable({
   providedIn: 'root'
@@ -75,5 +76,29 @@ export class ModeratorService {
       params: new HttpParams().set('id', id)
     });
   }
+  public get_dish(id: number): Observable<Object>{
+    return this.http.get(appLinks.dish+'/'+id)
+  }
 
+  public add_dish (body: Dish){
+    console.log( this.http.post(appLinks.dish, body))
+    return this.http.post(appLinks.dish, body);
+  }
+
+  public edit_dish(body: Dish){
+    console.log( this.http.put(appLinks.dish, body))
+    return this.http.put(appLinks.dish, body);
+  }
+  public get_dishes(limit: number, page: number) {
+    const params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('page', page.toString());
+    return this.http.get(appLinks.dishes, {params});
+  }
+
+  public delete_dish(id: number) {
+    return this.http.delete(appLinks.dish, {
+      params: new HttpParams().set('id', id)
+    });
+  }
 }
