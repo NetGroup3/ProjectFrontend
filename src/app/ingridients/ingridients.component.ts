@@ -15,6 +15,16 @@ export class IngridientsComponent implements OnInit {
   page: number = 0;
   Ingridients: Ingredient[] = [];
 
+  delIngredient: Ingredient = {
+    id: 0,
+    title: "",
+    description: "",
+    category: "",
+    imageId: "",
+    isActive: false,
+    measurement: ""
+  }
+
   constructor(private moderatorService: ModeratorService) {
   }
   toggle: boolean = true;
@@ -31,8 +41,15 @@ export class IngridientsComponent implements OnInit {
   }
 
   next() {
-    this.page = this.page + 1;
-    this.ngOnInit();
+    if(this.Ingridients.length === 0 || this.Ingridients.length < 10){
+      this.page = 0;
+      this.ngOnInit();
+    }
+    else{
+      this.page = this.page + 1;
+      this.ngOnInit();
+    }
+
   }
 
   prev() {
@@ -42,15 +59,17 @@ export class IngridientsComponent implements OnInit {
     }
   }
 
-  cancel() {
+  change() {
       this.toggle = !this.toggle;
   }
 
-  ok(id: number) {
+  ok() {
     this.toggle = !this.toggle;
-    this.moderatorService.delete_ingredient(id).subscribe((response:any)=>{
+    console.log(this.delIngredient)
+    this.moderatorService.delete_ingredient(this.delIngredient.id).subscribe((response:any)=>{
       console.log(response)
     });
+    location.reload();
   }
 
   initImage(imageId: string): CloudinaryImage {
@@ -58,5 +77,11 @@ export class IngridientsComponent implements OnInit {
     return cld.image(imageId)
       .resize(thumbnail().width(50).height(50))
       .roundCorners(byRadius(10));
+  }
+
+  delete(ingridient: Ingredient) {
+    this.delIngredient = ingridient;
+    this.toggle = !this.toggle;
+
   }
 }

@@ -4,6 +4,24 @@
 
     <h2>Kitchenware</h2>
     <div class="add_kitchenware">
+      <input type="text" placeholder="Search by name">
+      <div class="wrapper">
+        <input type="radio" name="select" id="option-1">
+        <input type="radio" name="select" id="option-2">
+        <input type="radio" name="select" id="option-3">
+        <label for="option-1" class="option option-1">
+          <div class="dot"></div>
+          <span>Id</span>
+        </label>
+        <label for="option-2" class="option option-2">
+          <div class="dot"></div>
+          <span>Title</span>
+        </label>
+        <label for="option-3" class="option option-3">
+          <div class="dot"></div>
+          <span>Category</span>
+        </label>
+      </div>
       <nz-select class="options">
         <nz-option nzValue="cocktails" nzLabel="Liquid"></nz-option>
         <nz-option nzValue="friends" nzLabel="Alcohol"></nz-option>
@@ -15,24 +33,23 @@
 
     <div class="kitchenware" *ngFor="let kitchenware of Kitchenware">
       <div class="buttons">
-        <a routerLink="/moderator/kitchenware/{{kitchenware.id}}">
-          <img src="../../assets/edit.png" alt="edit"></a>
-        <img (click)="cancel()" src="../../assets/delete.png" alt="delete">
+        <i routerLink="/moderator/ingredients/{{kitchenware.id}}" class="edit" nz-icon nzType="edit" nzTheme="outline"> </i>
+        <i (click)="delete(kitchenware)" nz-icon nzType="delete" id="delete" nzTheme="outline"></i>
+        <div [hidden]="toggle" class="fixed-overlay">
+          <div class="modal">
+            <div class="popup">
+              <div class="field"></div>
+              <span>Delete this kitchenware?</span>
+              <div class="field"></div>
+              <button (click)="ok()" class="delete-ok">OK</button>
+              <button (click)="change()" class="delete-cancel">Cancel</button>
+            </div>
+          </div>
+        </div>
       </div>
       <p class="title">{{kitchenware.title}}</p>
       <advanced-image [cldImg]="kitchenware.imageId | getPicture"></advanced-image>
       <p class="bottom" >Ingredient</p>
-      <div [ngClass]="{'fixed-overlay': toggle, 'fixed': !toggle}" class="fixed-overlay">
-        <div class="modal">
-          <div class="popup">
-            <div class="field"></div>
-            <span>Delete the ingredient {{kitchenware.title}}?</span>
-            <div class="field"></div>
-            <button (click)="ok(kitchenware.id)" class="delete-ok">OK</button>
-            <button (click)="cancel()" class="delete-cancel">Cancel</button>
-          </div>
-        </div>
-      </div>
     </div>
 
   </div>

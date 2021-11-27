@@ -29,8 +29,14 @@ export class DishComponent implements OnInit {
   }
 
   next() {
-    this.page = this.page + 1;
-    this.ngOnInit();
+    if(this.Dishes.length === 0 || this.Dishes.length < 10){
+      this.page = 0;
+      this.ngOnInit();
+    }
+    else{
+      this.page = this.page + 1;
+      this.ngOnInit();
+    }
   }
 
   prev() {

@@ -21,11 +21,11 @@ h2{
 }
 .ingridient{
   text-align: center;
-  height: 15%;
-  margin-left: 2%;
-  margin-right: 3%;
+
+  margin-left: 1%;
+  margin-right: 1%;
   margin-bottom: 3%;
-  width: 15%;
+  width: 18%;
   float: left;
   background: #FFFFFF;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -36,15 +36,15 @@ h2{
   color: #495464;
 }
 .bottom{
-  margin-top: 45%;
+  margin-top: 5%;
   color: #BBBFCA;
 }
 .buttons{
   float: right;
   margin-top: 2%;
-  margin-right: 5%;
+  margin-right: 10%;
 }
-.buttons img:hover{
+.buttons i:hover{
   cursor: pointer;
 }
 .add_ingridient button{
@@ -94,7 +94,6 @@ img{
   top: 0;
   width: 100%;
   height: 100%;
-  display:none;
   backdrop-filter: blur(3px);
 }
 .fixed{
@@ -121,7 +120,7 @@ img{
   width: 600px;
   height: 300px;
   background-color:white;
-  box-shadow:0 0 10px 4px rgba(3, 14, 109, 0.185);
+  box-shadow:0 0 10px 4px rgba(165, 97, 231, 0.18);
   border-radius:10px;
   text-align: center;
   font-size: 30px
@@ -139,4 +138,96 @@ img{
 }
 .field{
   height: 40px;
+}
+i{
+color: #495464;
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Lato:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+}
+html,body{
+  display: grid;
+  height: 100%;
+  place-items: center;
+  background: #a561e7;
+  font-family: 'Lato', sans-serif;
+}
+.wrapper{
+  display: inline-flex;
+  background: #fff;
+  height: 60px;
+  width: 400px;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 5px;
+  padding: 10px 5px;
+}
+.wrapper .option{
+  background: #fff;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0 10px;
+  border: 2px solid lightgrey;
+  transition: all 0.3s ease;
+}
+.wrapper .option .dot{
+  height: 20px;
+  width: 20px;
+  background: #d9d9d9;
+  border-radius: 50%;
+  position: relative;
+}
+.wrapper .option .dot::before{
+  position: absolute;
+  content: "";
+  top: 4px;
+  left: 4px;
+  width: 12px;
+  height: 12px;
+  background: #a561e7;
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(1.5);
+  transition: all 0.3s ease;
+}
+input[type="radio"]{
+  display: none;
+}
+#option-1:checked:checked ~ .option-1,
+#option-2:checked:checked ~ .option-2,
+#option-3:checked:checked ~ .option-3{
+  border-color: #a561e7;
+  background: #a561e7;
+}
+#option-1:checked:checked ~ .option-1 .dot,
+#option-2:checked:checked ~ .option-2 .dot,
+#option-3:checked:checked ~ .option-3 .dot{
+  background: #fff;
+}
+#option-1:checked:checked ~ .option-1 .dot::before,
+#option-2:checked:checked ~ .option-2 .dot::before,
+#option-3:checked:checked ~ .option-3 .dot::before{
+  opacity: 1;
+  transform: scale(1);
+}
+.wrapper .option span{
+  font-size: 20px;
+  color: #808080;
+}
+#option-1:checked:checked ~ .option-1 span,
+#option-2:checked:checked ~ .option-2 span,
+#option-3:checked:checked ~ .option-3 span{
+  color: #fff;
 }
