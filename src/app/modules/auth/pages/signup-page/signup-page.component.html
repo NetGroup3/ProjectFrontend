@@ -1,6 +1,19 @@
 <div class="signup">
+  <div class="picture">
+    <img src="assets/kitchen.png">
+  </div>
 <div class="inner">
 
+  <div [ngClass]="{'fixed-overlay': toggle, 'fixed': !toggle}" class="fixed-overlay">
+    <div class="modal">
+      <div class="popup">
+        <div class="field"></div>
+        <span>Confirm email</span>
+        <div class="field"></div>
+        <a routerLink="/login">Login here</a>
+      </div>
+    </div>
+  </div>
   <div
     class="signup-page__form"
     [formGroup]="form"
@@ -30,7 +43,7 @@
     />
     <nz-form-control
       [nzValidateStatus]="form.controls.password.touched &&  form.controls.password.errors ? 'error' : ''  "
-      nzErrorTip="password must be 8-12 characters"
+      nzErrorTip="password must be more 8 characters"
     >
       <input
         class="signup-page__input"

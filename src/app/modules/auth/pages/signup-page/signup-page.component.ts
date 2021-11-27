@@ -22,6 +22,7 @@ export class SignupPageComponent implements OnInit {
   }
 
   public form!: FormGroup;
+  toggle: boolean = true;
 
   ngOnInit(): void {
     const options: AbstractControlOptions = {
@@ -32,8 +33,8 @@ export class SignupPageComponent implements OnInit {
         email: ['', [Validators.email]],
         firstname: ['', [Validators.required]],
         lastname: ['', [Validators.required]],
-        password: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]],
-        confirmPassword: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]],
+        password: ['', [Validators.required, Validators.maxLength(128), Validators.minLength(8)]],
+        confirmPassword: ['', [Validators.required, Validators.maxLength(128), Validators.minLength(8)]],
         status: "NOT_VERIFY",
         role: "USER"
       }, options
@@ -45,9 +46,12 @@ export class SignupPageComponent implements OnInit {
       this.authRestService.signUp(this.form.value).subscribe((response: any) => {
         console.log(response)
       })
+      this.toggle = !this.toggle;
     } else {
+      alert("Fill in all the fields")
       this.form.markAllAsTouched();
     }
+
   }
 
 }

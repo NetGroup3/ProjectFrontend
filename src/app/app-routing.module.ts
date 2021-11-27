@@ -19,6 +19,9 @@ import {ModeratorKitchenwareComponent} from "./moderator/moderator-kitchenware/m
 import {ModeratorSettingsComponent} from "./moderator/moderator-settings/moderator-settings.component";
 import {ModeratorCocktailsComponent} from "./moderator/moderator-cocktails/moderator-cocktails.component";
 import {AdminModeratorsComponent} from "./admin/admin-moderators/admin-moderators.component";
+import {AddEditKitchenwareComponent} from "./add-edit-kitchenware/add-edit-kitchenware.component";
+import {ModeratorSceletonComponent} from "./sceletons/moderator-sceleton/moderator-sceleton.component";
+import {AddEditDishComponent} from "./add-edit-dish/add-edit-dish.component";
 
 
 const routes: Routes = [
@@ -35,14 +38,18 @@ const routes: Routes = [
   { path: 'user/favourite', component:AuthUserFavouriteComponent},
   { path: 'user/friends', component:AuthUserFriendsComponent},
   { path: 'user/settings', component:AuthUserSettingsComponent},
-  { path: 'moderator/ingredients', component:IngridientsComponent},
+  { path: 'moderator', component:ModeratorSceletonComponent},
+  { path: 'moderator/ingredients', component:ModeratorIngredientsComponent},
   { path: 'moderator/ingredients/:id', component:AddEditIngredientComponent},
   { path: 'moderator/ingredients/add', component:AddEditIngredientComponent},
   { path: 'moderator/cocktails', component: ModeratorCocktailsComponent},
-  { path: 'moderator/ingredients', component: ModeratorIngredientsComponent},
+  { path: 'moderator/dish/:id', component:AddEditDishComponent},
+  { path: 'moderator/dish/add', component:AddEditDishComponent},
   { path: 'moderator/kitchenware', component: ModeratorKitchenwareComponent},
+  { path: 'moderator/kitchenware/add', component: AddEditKitchenwareComponent},
+  { path: 'moderator/kitchenware/:id', component: AddEditKitchenwareComponent},
   { path: 'moderator/settings', component: ModeratorSettingsComponent},
-  { path: 'admin/moderators', component: AdminModeratorsComponent}
+  { path: 'admin/moderators', component: AdminModeratorsComponent},
 ];
 
 @NgModule({

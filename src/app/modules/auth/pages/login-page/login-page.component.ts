@@ -31,8 +31,6 @@ export class LoginPageComponent implements OnInit {
         console.log(response);
         this.authService.setToken(response.token);
         this.authService.setUserData(response.id, response.firstname, response.lastname, response.role, response.imageId);
-        console.log("image id " + response.imageId);
-        console.log("image id " + response.imageid);
         this.router.navigate(["/home"]);
       })
     } else {
@@ -43,7 +41,7 @@ export class LoginPageComponent implements OnInit {
   private buildForm(): FormGroup {
     return this.fb.group({
       username: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(12)]]
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(128)]]
     });
   }
 

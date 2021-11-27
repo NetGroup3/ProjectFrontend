@@ -1,0 +1,11 @@
+<div class="picture">
+  <div>
+    <div class="img">
+    <advanced-image [cldImg]="img"></advanced-image>
+    <input type="file" (change)="onFileSelect($event)" class="dn" #uploadFile>
+    <div (click)="uploadFile.click()" class="p-4">
+      <button type="button"><h3>Change photo</h3></button>
+    </div>
+    </div>
+  </div>
+</div>

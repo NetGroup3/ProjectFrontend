@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {appLinks} from "../../../../app.links";
 import {User} from "../../../../models/user";
 import { ChangePasswordForm } from "../../models/change-password-form.model";
+import {UserId} from "../../models/user-id";
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,6 @@ export class UserRestService {
     return this.http.put(appLinks.personalInfo, body);
   }
 
-  upLoadImage(data: FormData): Observable<any> {
-    return this.http.post('https://api.cloudinary.com/v1_1/djcak19nu/image/upload', data);
-  }
-
   updateImage(body: User) {
     return this.http.put(appLinks.userImage, body);
   }
@@ -27,4 +24,5 @@ export class UserRestService {
   public changePassword (body: ChangePasswordForm): Observable<any>{
     return this.http.put(appLinks.changePassword, body);
   }
+
 }

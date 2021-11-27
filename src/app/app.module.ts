@@ -47,35 +47,53 @@ import {ModeratorSettingsComponent} from "./moderator/moderator-settings/moderat
 import {AdminModeratorsComponent} from "./admin/admin-moderators/admin-moderators.component";
 import {AdminSceletonComponent} from "./sceletons/admin-sceleton/admin-sceleton.component";
 import {EditModeratorComponent} from "./admin/edit-moderator/edit-moderator.component";
+import {KitchenwareComponent} from './kitchenware/kitchenware.component';
+import {AddEditKitchenwareComponent} from './add-edit-kitchenware/add-edit-kitchenware.component';
+import {UploadImageComponent} from "./auth-user/auth-user-settings/upload-image/upload-image.component";
+import {PersonalInformationComponent} from "./auth-user/auth-user-settings/personal-information/personal-information.component";
+import {ChangePasswordComponent} from "./auth-user/auth-user-settings/change-password/change-password.component";
+import {PicturePipe} from "./picture.pipe";
+import { DishComponent } from './dish/dish.component';
+import { AddEditDishComponent } from './add-edit-dish/add-edit-dish.component';
 
 registerLocaleData(en);
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        SignupPageComponent,
-        LoginPageComponent,
-        RecoveryPageComponent,
-        HomeComponent,
-        UserSceletonComponent,
-        AuthUserFavouriteComponent,
-        AuthUserCatalogueComponent,
-        AuthUserCalendarComponent,
-        AuthUserEventsComponent,
-        AuthUserSettingsComponent,
-        AuthUserFriendsComponent,
-        AuthUserBlogComponent,
-        IngridientsComponent,
-        AddEditIngredientComponent,
-        ModeratorSceletonComponent,
-        ModeratorSettingsComponent,
-        ModeratorIngredientsComponent,
-        ModeratorKitchenwareComponent,
-        ModeratorCocktailsComponent,
-        AdminModeratorsComponent,
-        AdminSceletonComponent,
-        EditModeratorComponent
-    ],
+
+  declarations: [
+    AppComponent,
+    SignupPageComponent,
+    LoginPageComponent,
+    RecoveryPageComponent,
+    HomeComponent,
+    UserSceletonComponent,
+    AuthUserFavouriteComponent,
+    AuthUserCatalogueComponent,
+    AuthUserCalendarComponent,
+    AuthUserEventsComponent,
+    AuthUserSettingsComponent,
+    AuthUserFriendsComponent,
+    AuthUserBlogComponent,
+    IngridientsComponent,
+    AddEditIngredientComponent,
+    ModeratorSceletonComponent,
+    ModeratorSettingsComponent,
+    ModeratorIngredientsComponent,
+    ModeratorKitchenwareComponent,
+    ModeratorCocktailsComponent,
+    AdminModeratorsComponent,
+    AdminSceletonComponent,
+    KitchenwareComponent,
+    AddEditKitchenwareComponent,
+    UploadImageComponent,
+    PersonalInformationComponent,
+    ChangePasswordComponent,
+    PicturePipe,
+    DishComponent,
+    AddEditDishComponent,
+    EditModeratorComponent
+  ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
