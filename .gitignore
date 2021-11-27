@@ -7,7 +7,8 @@
 /out-tsc
 angular-build/
 /angular-build/**
-
+bower_components/
+/bower_components/**
 # Only exists if Bazel was run
 /bazel-out
 
