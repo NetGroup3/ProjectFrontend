@@ -1,5 +1,7 @@
 <div class="main">
+
   <div class="Kitchenware">
+
     <h2>Kitchenware</h2>
     <div class="add_kitchenware">
       <nz-select class="options">
@@ -18,8 +20,7 @@
         <img (click)="cancel()" src="../../assets/delete.png" alt="delete">
       </div>
       <p class="title">{{kitchenware.title}}</p>
-<!--      <advanced-image [cldImg]="initImage(kitchenware.image_id)"></advanced-image>-->
-<!--      <img src="{{kitchenware.image_id}}">-->
+      <advanced-image [cldImg]="kitchenware.imageId | getPicture"></advanced-image>
       <p class="bottom" >Ingredient</p>
       <div [ngClass]="{'fixed-overlay': toggle, 'fixed': !toggle}" class="fixed-overlay">
         <div class="modal">
@@ -35,6 +36,7 @@
     </div>
 
   </div>
+
   <div class="button">
     <button (click)="prev()" class="next"><</button>
     <button (click)="next()" class="next">></button>

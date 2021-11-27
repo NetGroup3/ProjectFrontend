@@ -3,6 +3,6 @@ export interface Kitchenware {
   title: string;
   description: string;
   category: string;
-  image_id: string;
-  is_active: boolean;
+  imageId: string;
+  isActive: boolean;
 }
