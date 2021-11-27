@@ -29,7 +29,7 @@ export class AddEditIngredientComponent implements OnInit {
 
   getIngredient(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.moderatorService.get_ingridient(id)
+    this.moderatorService.get_ingredient(id)
       .subscribe(ingridient => this.ingridient = <Ingredient> ingridient);
   }
 

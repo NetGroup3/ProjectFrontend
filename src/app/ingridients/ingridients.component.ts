@@ -30,8 +30,8 @@ export class IngridientsComponent implements OnInit {
   }
 
   getIngridients(): void {
-    console.log(this.moderatorService.get_ingridients(100,20))
-    this.moderatorService.get_ingridients(100, 20)
+    console.log(this.moderatorService.get_ingredients(100,20))
+    this.moderatorService.get_ingredients(100, 20)
       .subscribe(ingridients => this.Ingridients = <Ingredient []> ingridients);
   }
 

@@ -13,13 +13,13 @@ import {Ingredient} from "../models/ingredient";
 export class ModeratorService {
 
   constructor(private http: HttpClient) { }
-   public get_ingridient(id: number): Observable<Object>{
-    return this.http.get(appLinks.ingridient, {
+   public get_ingredient(id: number): Observable<Object>{
+    return this.http.get(appLinks.ingredient, {
       params: new HttpParams().set('id', id)
     });
   }
-  public get_ingridients (limit: number, offset: number) {
-    return this.http.get(appLinks.ingridients, {
+  public get_ingredients (limit: number, offset: number) {
+    return this.http.get(appLinks.ingredients, {
       params: new HttpParams().set('limit', limit).set('offset', offset)
     });
   }

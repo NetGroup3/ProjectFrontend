@@ -46,34 +46,36 @@ import {ModeratorKitchenwareComponent} from "./moderator/moderator-kitchenware/m
 import {ModeratorSettingsComponent} from "./moderator/moderator-settings/moderator-settings.component";
 import {AdminModeratorsComponent} from "./admin/admin-moderators/admin-moderators.component";
 import {AdminSceletonComponent} from "./sceletons/admin-sceleton/admin-sceleton.component";
+import {EditModeratorComponent} from "./admin/edit-moderator/edit-moderator.component";
 
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SignupPageComponent,
-    LoginPageComponent,
-    RecoveryPageComponent,
-    HomeComponent,
-    UserSceletonComponent,
-    AuthUserFavouriteComponent,
-    AuthUserCatalogueComponent,
-    AuthUserCalendarComponent,
-    AuthUserEventsComponent,
-    AuthUserSettingsComponent,
-    AuthUserFriendsComponent,
-    AuthUserBlogComponent,
-    IngridientsComponent,
-    AddEditIngredientComponent,
-    ModeratorSceletonComponent,
-    ModeratorSettingsComponent,
-    ModeratorIngredientsComponent,
-    ModeratorKitchenwareComponent,
-    ModeratorCocktailsComponent,
-    AdminModeratorsComponent,
-    AdminSceletonComponent
-  ],
+    declarations: [
+        AppComponent,
+        SignupPageComponent,
+        LoginPageComponent,
+        RecoveryPageComponent,
+        HomeComponent,
+        UserSceletonComponent,
+        AuthUserFavouriteComponent,
+        AuthUserCatalogueComponent,
+        AuthUserCalendarComponent,
+        AuthUserEventsComponent,
+        AuthUserSettingsComponent,
+        AuthUserFriendsComponent,
+        AuthUserBlogComponent,
+        IngridientsComponent,
+        AddEditIngredientComponent,
+        ModeratorSceletonComponent,
+        ModeratorSettingsComponent,
+        ModeratorIngredientsComponent,
+        ModeratorKitchenwareComponent,
+        ModeratorCocktailsComponent,
+        AdminModeratorsComponent,
+        AdminSceletonComponent,
+        EditModeratorComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
