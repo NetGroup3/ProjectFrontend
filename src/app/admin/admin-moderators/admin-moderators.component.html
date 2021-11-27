@@ -1,5 +1,56 @@
 <app-admin-sceleton></app-admin-sceleton>
-<!-- INSERT ELEMENT HERE -->
+
 <div class="insert_area">
-  <span class="title">Moderators</span>
+
+  <button [disabled]="buttonDisabled" nz-button nzType="primary" (click)="onAddEditClicked(undefined)">Add moderator</button>
+
+  <h3>Search for moderators:</h3>
+  <form [formGroup]="settingsForm">
+
+    <label for="searchFirstname">Name: </label>
+    <input id="searchFirstname" type="text" formControlName="searchFirstname">
+
+    <label for="searchLastname">Surname: </label>
+    <input id="searchLastname" type="text" formControlName="searchLastname">
+
+    <label for="searchEmail">Email: </label>
+    <input id="searchEmail" type="text" formControlName="searchEmail">
+
+    <button [disabled]="buttonDisabled" nz-button nzType="primary" (click)="onSubmit()">
+      Go!
+    </button>
+  </form>
+
+  <table *ngIf="!emptyList">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Surname</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let moder of moderatorList">
+        <th>{{moder.email}}</th>
+        <th>{{moder.firstname}}</th>
+        <th>{{moder.lastname}}</th>
+        <input type="hidden" />
+        <th><button [disabled]="buttonDisabled" (click)="onAddEditClicked(moder)"><i nz-icon nzType="edit" nzTheme="outline"></i></button></th>
+        <th><button [disabled]="buttonDisabled" (click)="deleteModer(moder.id)"><i nz-icon nzType="delete" nzTheme="outline"></i></button></th>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="emptyList">No moderators found</p>
+
+  <div id="injected">
+    <app-add-edit-moderator
+        [inputModerData]="inputData"
+        [type]="type"
+        (closeEmit)="setShowInjected($event)"
+        (updateEmit)="loadList(formValue)"
+        *ngIf="showInjected">
+    </app-add-edit-moderator>
+  </div>
+
 </div>

@@ -46,6 +46,7 @@ import {ModeratorKitchenwareComponent} from "./moderator/moderator-kitchenware/m
 import {ModeratorSettingsComponent} from "./moderator/moderator-settings/moderator-settings.component";
 import {AdminModeratorsComponent} from "./admin/admin-moderators/admin-moderators.component";
 import {AdminSceletonComponent} from "./sceletons/admin-sceleton/admin-sceleton.component";
+import {EditModeratorComponent} from "./admin/edit-moderator/edit-moderator.component";
 import {KitchenwareComponent} from './kitchenware/kitchenware.component';
 import {AddEditKitchenwareComponent} from './add-edit-kitchenware/add-edit-kitchenware.component';
 import {UploadImageComponent} from "./auth-user/auth-user-settings/upload-image/upload-image.component";
@@ -58,6 +59,7 @@ import { AddEditDishComponent } from './add-edit-dish/add-edit-dish.component';
 registerLocaleData(en);
 
 @NgModule({
+
   declarations: [
     AppComponent,
     SignupPageComponent,
@@ -89,7 +91,9 @@ registerLocaleData(en);
     PicturePipe,
     DishComponent,
     AddEditDishComponent,
+    EditModeratorComponent
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
