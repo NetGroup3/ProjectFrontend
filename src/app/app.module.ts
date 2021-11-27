@@ -52,6 +52,9 @@ import {UploadImageComponent} from "./auth-user/auth-user-settings/upload-image/
 import {PersonalInformationComponent} from "./auth-user/auth-user-settings/personal-information/personal-information.component";
 import {ChangePasswordComponent} from "./auth-user/auth-user-settings/change-password/change-password.component";
 import {PicturePipe} from "./picture.pipe";
+import {UploadService} from "./modules/auth/services/client/upload.service";
+import { DishComponent } from './dish/dish.component';
+import { AddEditDishComponent } from './add-edit-dish/add-edit-dish.component';
 
 registerLocaleData(en);
 
@@ -85,6 +88,8 @@ registerLocaleData(en);
     PersonalInformationComponent,
     ChangePasswordComponent,
     PicturePipe,
+    DishComponent,
+    AddEditDishComponent,
   ],
   imports: [
     BrowserModule,
