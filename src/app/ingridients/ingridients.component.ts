@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ModeratorService} from "../services/moderator.service";
 import {Ingredient} from "../models/ingredient";
-import {IngridientPage} from "../modules/auth/models/ingridient-page";
+import {Cloudinary, CloudinaryImage} from "@cloudinary/url-gen";
+import {thumbnail} from "@cloudinary/url-gen/actions/resize";
+import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
 
 @Component({
   selector: 'app-ingridients',
@@ -49,5 +51,12 @@ export class IngridientsComponent implements OnInit {
     this.moderatorService.delete_ingredient(id).subscribe((response:any)=>{
       console.log(response)
     });
+  }
+
+  initImage(imageId: string): CloudinaryImage {
+    const cld = new Cloudinary({cloud: {cloudName: 'djcak19nu'}});
+    return cld.image(imageId)
+      .resize(thumbnail().width(50).height(50))
+      .roundCorners(byRadius(10));
   }
 }

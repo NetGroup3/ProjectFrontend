@@ -17,8 +17,8 @@ export class AddEditKitchenwareComponent implements OnInit {
     title: "",
     description: "",
     category: "",
-    image_id: "",
-    is_active: false,
+    imageId: "",
+    isActive: false,
   };
   public img: any;
   constructor(
@@ -58,14 +58,14 @@ export class AddEditKitchenwareComponent implements OnInit {
       .subscribe((response:any)=>{
         console.log(response.body)
         this.kitchenware = response.body
-        this.img = this.uploadService.initImage(this.kitchenware.image_id);
+        this.img = this.uploadService.initImage(this.kitchenware.imageId);
       });
   }
 
   onFileSelect($event: any) {
     this.uploadService.onUpLoad($event.target.files[0]).subscribe(response =>{
-      this.kitchenware.image_id = response.public_id;
-      this.img = this.uploadService.initImage(this.kitchenware.image_id);
+      this.kitchenware.imageId = response.public_id;
+      this.img = this.uploadService.initImage(this.kitchenware.imageId);
       this.onAddClick();
     });
   }

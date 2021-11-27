@@ -1,11 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ModeratorService} from "../services/moderator.service";
 import {Ingredient} from "../models/ingredient";
-import { Location } from '@angular/common';
-import {Cloudinary, CloudinaryImage} from "@cloudinary/url-gen";
-import {thumbnail} from "@cloudinary/url-gen/actions/resize";
-import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
+import {Location} from '@angular/common';
 import {UploadService} from "../modules/auth/services/client/upload.service";
 
 @Component({
@@ -15,19 +12,20 @@ import {UploadService} from "../modules/auth/services/client/upload.service";
 })
 export class AddEditIngredientComponent implements OnInit {
 
-  description: string = ""
-  title: string = ""
+  public img: any;
+  description: string = "";
+  title: string = "";
+
   ingridient: Ingredient = {
     id: 0,
     title: "",
     description: "",
     category: "",
-    image_id: "",
-    is_active: false,
+    imageId: "",
+    isActive: false,
     measurement: ""
   };
-  public img: any;
-//  public img: CloudinaryImage = this.initImage();
+
   constructor(
     private route: ActivatedRoute,
     private moderatorService: ModeratorService,
@@ -37,8 +35,6 @@ export class AddEditIngredientComponent implements OnInit {
   ngOnInit(): void {
     if(Number(this.route.snapshot.paramMap.get('id')) > 0){
       this.getIngredient();
-      console.log(this.ingridient.image_id);
-      this.img = this.initImage();
     }
 
   }
@@ -66,21 +62,15 @@ export class AddEditIngredientComponent implements OnInit {
       .subscribe((response:any)=>{
         console.log(response.body)
         this.ingridient = response.body
-        this.img = this.initImage();
+        console.log(this.ingridient.imageId)
+        this.img = this.uploadService.initImage(this.ingridient.imageId);
       });
-  }
-
-  initImage(): CloudinaryImage {
-    const cld = new Cloudinary({cloud: {cloudName: 'djcak19nu'}});
-    return cld.image(this.ingridient.image_id)
-      .resize(thumbnail().width(180).height(180))
-      .roundCorners(byRadius(10));
   }
 
   onFileSelect($event: any) {
     this.uploadService.onUpLoad($event.target.files[0]).subscribe(response =>{
-      this.ingridient.image_id = response.public_id;
-      this.img = this.initImage();
+      this.ingridient.imageId = response.public_id;
+      this.img = this.uploadService.initImage(this.ingridient.imageId);
       this.onAddClick();
     });
   }
