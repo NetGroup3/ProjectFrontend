@@ -4,6 +4,7 @@ import {ModeratorService} from "../services/moderator.service";
 import {Ingredient} from "../models/ingredient";
 import {Location} from '@angular/common';
 import {UploadService} from "../modules/auth/services/client/upload.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-edit-ingredient',
@@ -30,7 +31,8 @@ export class AddEditIngredientComponent implements OnInit {
     private route: ActivatedRoute,
     private moderatorService: ModeratorService,
     private location: Location,
-    private uploadService: UploadService
+    private uploadService: UploadService,
+    private router: Router
   ) {}
   ngOnInit(): void {
     if(Number(this.route.snapshot.paramMap.get('id')) > 0){
@@ -54,6 +56,9 @@ export class AddEditIngredientComponent implements OnInit {
         console.log(response)
       });
     }
+    console.log(this.ingridient)
+    this.router.navigate(['/moderator/ingredients'])
+
   }
 
   getIngredient(): void {
