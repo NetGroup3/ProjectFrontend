@@ -13,6 +13,9 @@ import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
 export class IngridientsComponent implements OnInit {
   limit: number = 10;
   page: number = 0;
+  key: string = ""
+  category: string = ""
+  sortedBy: string = ""
   Ingridients: Ingredient[] = [];
 
   delIngredient: Ingredient = {
@@ -28,12 +31,17 @@ export class IngridientsComponent implements OnInit {
   constructor(private moderatorService: ModeratorService) {
   }
   toggle: boolean = true;
+  id: boolean = false;
+  title: boolean = false;
+  Category: boolean = false;
+
   ngOnInit(): void {
-    this.getIngridients(this.limit, this.page);
+    this.search()
   }
 
-  getIngridients(limit: number, page: number): void {
-    this.moderatorService.get_ingridients(limit, page)
+  getIngridients(limit: number, page: number, key: string, category: string, sortedBy: string): void {
+    console.log(key)
+    this.moderatorService.get_ingridients(limit, page, key, category, sortedBy)
       .subscribe((response:any)=>{
         console.log(response.body)
         this.Ingridients = response.body
@@ -83,5 +91,18 @@ export class IngridientsComponent implements OnInit {
     this.delIngredient = ingridient;
     this.toggle = !this.toggle;
 
+  }
+
+  search() {
+    if(this.id){
+      this.sortedBy = "id"
+    }
+    else if(this.title){
+      this.sortedBy = "title"
+    }
+    else if(this.category){
+      this.sortedBy = "category"
+    }
+    this.getIngridients(this.limit, this.page, this.key, this.category, this.sortedBy);
   }
 }

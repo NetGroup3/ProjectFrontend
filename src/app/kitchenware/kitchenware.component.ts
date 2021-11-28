@@ -16,6 +16,12 @@ export class KitchenwareComponent implements OnInit {
   page: number = 0;
   Kitchenware: Kitchenware[] = [];
   img: any;
+  key: string = ""
+  category: string = ""
+  sortedBy: string = ""
+  id: boolean = false;
+  title: boolean = false;
+  Category: boolean = false;
   kitchenware: Kitchenware = {
     id: 0,
     title: "",
@@ -28,11 +34,11 @@ export class KitchenwareComponent implements OnInit {
   }
   toggle: boolean = true;
   ngOnInit(): void {
-    this.getKitchenware(this.limit, this.page);
+    this.search()
   }
 
-  getKitchenware(limit: number, page: number): void {
-    this.moderatorService.get_Kitchenware(limit, page)
+  getKitchenware(limit: number, page: number, key: string, category: string, sortedBy: string): void {
+    this.moderatorService.get_Kitchenware(limit, page, key, category, sortedBy)
       .subscribe((response:any)=>{
         console.log(response.body)
         this.Kitchenware = response.body
@@ -85,4 +91,16 @@ export class KitchenwareComponent implements OnInit {
       .roundCorners(byRadius(10));
   }
 
+  search() {
+    if(this.id){
+      this.sortedBy = "id"
+    }
+    else if(this.title){
+      this.sortedBy = "title"
+    }
+    else if(this.category){
+      this.sortedBy = "category"
+    }
+    this.getKitchenware(this.limit, this.page, this.key, this.category, this.sortedBy);
+  }
 }

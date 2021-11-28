@@ -22,10 +22,14 @@ export class ModeratorService {
     });
   }
 
-  public get_ingridients (limit: number, page: number) : Observable<any>{
+  public get_ingridients (limit: number, page: number, key: string, category: string, sortedBy: string) : Observable<any>{
     const params = new HttpParams()
       .set('limit', limit.toString())
-      .set('page', page.toString());
+      .set('page', page.toString())
+      .set('key', key)
+      .set('category', category)
+      .set('sortedBy', sortedBy)
+    ;
     return this.http.get(appLinks.ingredients, {params});
   }
 
@@ -48,10 +52,14 @@ export class ModeratorService {
     });
   }
 
-  get_Kitchenware(limit: number, page: number) : Observable<any>{
+  get_Kitchenware(limit: number, page: number,  key: string, category: string, sortedBy: string) : Observable<any>{
     const params = new HttpParams()
       .set('limit', limit.toString())
-      .set('page', page.toString());
+      .set('page', page.toString())
+      .set('key', key)
+      .set('category', category)
+      .set('sortedBy', sortedBy)
+    ;
     return this.http.get(appLinks.Kitchenware, {params});
   }
 

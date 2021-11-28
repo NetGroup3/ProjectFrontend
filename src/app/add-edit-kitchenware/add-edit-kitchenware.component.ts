@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ModeratorService} from "../services/moderator.service";
 import {Location} from "@angular/common";
 import {Kitchenware} from "../models/kitchenware";
@@ -25,7 +25,8 @@ export class AddEditKitchenwareComponent implements OnInit {
     private route: ActivatedRoute,
     private moderatorService: ModeratorService,
     private location: Location,
-  private uploadService: UploadService
+  private uploadService: UploadService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +51,8 @@ export class AddEditKitchenwareComponent implements OnInit {
         console.log(response)
       });
     }
+    console.log(this.kitchenware)
+    this.router.navigate(['/moderator/kitchenware'])
   }
 
   getKitchenware(): void {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Ingredient} from "../models/ingredient";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ModeratorService} from "../services/moderator.service";
 import {Location} from "@angular/common";
 import {UploadService} from "../modules/auth/services/client/upload.service";
@@ -22,14 +22,19 @@ export class AddEditDishComponent implements OnInit {
     id: 0,
     title: "",
     image_id: "",
-  };
+    description: "",
+    category: "",
+    receipt: "",
+    active: false
+  }
   public img: any;
 //  public img: CloudinaryImage = this.initImage();
   constructor(
     private route: ActivatedRoute,
     private moderatorService: ModeratorService,
     private location: Location,
-    private uploadService: UploadService
+    private uploadService: UploadService,
+    private router: Router
   ) {}
   ngOnInit(): void {
     if(Number(this.route.snapshot.paramMap.get('id')) > 0){
@@ -55,6 +60,8 @@ export class AddEditDishComponent implements OnInit {
         console.log(response)
       });
     }
+    console.log(this.dish)
+    this.router.navigate(['/moderator/dishes'])
   }
 
   getDish(): void {
