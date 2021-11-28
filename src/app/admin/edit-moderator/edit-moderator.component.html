@@ -1,23 +1,49 @@
-<div>
+<div id="main">
 
-  <h3>{{type}} moderator</h3>
+  <h2>{{type}} moderator</h2>
 
-  <form [formGroup]="moderInfoForm">
+  <form [formGroup]="moderInfoForm" novalidate>
 
-    <label for="firstname">Name: </label>
-    <input id="firstname" type="text" value="{{fn}}" required minlength="4" formControlName="firstname">
+    <label for="firstname">Name:<br>
+      <input id="firstname" type="text" class="form-control" required minlength="4" formControlName="firstname">
+    </label><br>
 
-    <label for="lastname">Surname: </label>
-    <input id="lastname" type="text" value="{{ln}}" formControlName="lastname">
+    <div *ngIf="moderInfoForm.controls['firstname'].invalid && (moderInfoForm.controls['firstname'].dirty || moderInfoForm.controls['firstname'].touched)" class="alert alert-danger">
+      <div *ngIf="moderInfoForm.controls['firstname'].errors">
+        Name is required.
+      </div>
+    </div>
+    <br>
 
-    <label for="email">Email: </label>
-    <input id="email" type="text" value="{{em}}" formControlName="email">
+    <label for="lastname">Surname:<br>
+      <input id="lastname" type="text" class="form-control" formControlName="lastname">
+    </label><br>
 
-    <button nz-button nzType="primary" (click)="close()">
+    <div *ngIf="moderInfoForm.controls['lastname'].invalid && (moderInfoForm.controls['lastname'].dirty || moderInfoForm.controls['lastname'].touched)" class="alert alert-danger">
+      <div *ngIf="moderInfoForm.controls['lastname'].errors">
+        Surname is required.
+      </div>
+    </div>
+    <br>
+
+    <label for="email">Email:<br>
+      <input id="email" type="text" class="form-control" formControlName="email">
+    </label><br>
+
+    <div *ngIf="moderInfoForm.controls['email'].invalid && (moderInfoForm.controls['email'].dirty || moderInfoForm.controls['email'].touched)" class="alert alert-danger">
+      <div *ngIf="moderInfoForm.controls['email'].errors">
+        Email is required.
+      </div>
+    </div>
+    <br>
+
+    <br>
+
+    <button class="button" (click)="close()">
       Cancel
     </button>
 
-    <button nz-button nzType="primary" (click)="onSubmit()">
+    <button class="button" (click)="onSubmit()">
       Submit
     </button>
   </form>

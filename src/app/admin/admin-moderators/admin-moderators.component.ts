@@ -13,11 +13,29 @@ export class AdminModeratorsComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private http: HttpClient) {}
 
+  toggle: boolean = true;
+
+  change() {
+    this.toggle = !this.toggle;
+    this.buttonDisabled = !this.buttonDisabled;
+  }
+
   moderatorList: ModeratorModel[] = [];
-  formValue = {};
+
+  formValue = {
+    searchFirstname: "",
+    searchLastname: "",
+    searchEmail: "",
+    pageNo: 1
+  };
+
   showInjected: boolean = false;
   emptyList: boolean = true;
   buttonDisabled: boolean = false;
+  idToDelete: number = -1;
+
+  buttonB: boolean = false;
+  buttonF: boolean = true;
 
   inputData: ModeratorModel | undefined;
   type: string = "";
@@ -34,10 +52,37 @@ export class AdminModeratorsComponent implements OnInit {
   }
 
   onSubmit() {
+    this.buttonF = true;
+    this.buttonB = false;
     let obj = this.settingsForm.value;
     obj.pageNo = 1;
     this.formValue = obj;
     this.loadList(this.formValue);
+  }
+
+  onForward() {
+    if (this.emptyList) {
+      this.buttonF = false;
+    }
+    else {
+      this.formValue.pageNo++;
+      this.loadList(this.formValue);
+    }
+    this.buttonB = true;
+  }
+
+  onBackward() {
+    if (this.formValue.pageNo != 1) {
+      this.buttonF = true;
+      this.formValue.pageNo --;
+      this.loadList(this.formValue);
+      if (this.formValue.pageNo === 1) {
+        this.buttonB = false;
+      }
+    }
+    else {
+      this.buttonB = false;
+    }
   }
 
   setShowInjected(value: boolean) {
@@ -66,8 +111,14 @@ export class AdminModeratorsComponent implements OnInit {
     this.setShowInjected(true);
   }
 
-  deleteModer(id: number) {                             //check!!!
-    this.http.delete(appLinks.moderator + "/" + id)
+  onDeleteConfirm(id: number) {
+    this.idToDelete = id;
+    this.change();
+  }
+
+  deleteModer() {
+    this.change();
+    this.http.delete(appLinks.moderator + "/" + this.idToDelete)
       .subscribe(() => {
         this.loadList(this.formValue);
     });

@@ -9,7 +9,7 @@ export const appLinks={
   users: `${environment.serverUrl}/users`,
   personalInfo: `${environment.serverUrl}/users/personal-information`,
   moderatorList: `${environment.serverUrl}/admin/moderators`,
-  moderator: `${environment.serverUrl}/moderator`
+  moderator: `${environment.serverUrl}/moderator`,
   ingredients:`${environment.serverUrl}/ingredient/page`,
   ingredient:`${environment.serverUrl}/ingredient`,
   changePassword: `${environment.serverUrl}/users/change-password`,
