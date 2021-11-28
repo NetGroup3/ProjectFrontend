@@ -55,6 +55,7 @@ import {ChangePasswordComponent} from "./auth-user/auth-user-settings/change-pas
 import {PicturePipe} from "./picture.pipe";
 import { DishComponent } from './dish/dish.component';
 import { AddEditDishComponent } from './add-edit-dish/add-edit-dish.component';
+import {PersonalStockComponent} from "./personal-stock/personal-stock.component";
 
 registerLocaleData(en);
 
@@ -91,7 +92,8 @@ registerLocaleData(en);
     PicturePipe,
     DishComponent,
     AddEditDishComponent,
-    EditModeratorComponent
+    EditModeratorComponent,
+    PersonalStockComponent,
   ],
 
   imports: [
