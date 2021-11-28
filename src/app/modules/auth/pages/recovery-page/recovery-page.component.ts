@@ -25,7 +25,8 @@ export class RecoveryPageComponent implements OnInit {
     if (this.form.valid) {
       this.authRestService.recover(this.form.value).subscribe((response: any) => {
         console.log(response)
-      })
+
+      });
     } else {
       this.form.markAllAsTouched();
     }
@@ -33,7 +34,7 @@ export class RecoveryPageComponent implements OnInit {
 
   private buildForm(): FormGroup {
     return this.fb.group({
-      email: ['', Validators.email],
+      email: ['',  [Validators.required, Validators.email]],
     });
   }
 }
