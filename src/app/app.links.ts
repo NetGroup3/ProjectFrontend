@@ -8,14 +8,15 @@ export const appLinks={
   recovery: `${environment.serverUrl}/recovery`,
   users: `${environment.serverUrl}/users`,
   personalInfo: `${environment.serverUrl}/users/personal-information`,
-  ingredients:`${environment.serverUrl}/ingredient/page`,
+  moderatorList: `${environment.serverUrl}/admin/moderators`,
+  moderator: `${environment.serverUrl}/moderator`,
+  ingredients:`${environment.serverUrl}/ingredient/search`,
   ingredient:`${environment.serverUrl}/ingredient`,
   changePassword: `${environment.serverUrl}/users/change-password`,
-  Kitchenware: `${environment.serverUrl}/kitchenware/page`,
+  Kitchenware: `${environment.serverUrl}/kitchenware/search`,
   kitchenware: `${environment.serverUrl}/kitchenware`,
   userImage:`${environment.serverUrl}/users/user-image`,
   uploadImage:`https://api.cloudinary.com/v1_1/djcak19nu/image/upload`,
   dishes:`${environment.serverUrl}/dish/page`,
   dish:`${environment.serverUrl}/dish`,
-
 }

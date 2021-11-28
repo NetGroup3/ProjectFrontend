@@ -65,11 +65,17 @@ h2{
   height: 53px;
 }
 .options{
-  border-radius: 50px;
-  float: right;
   margin-right: 4%;
   width: 160px;
-  margin-top: 7px;
+  border: none;
+  background: #fff;
+  height: 85%;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 2px solid lightgrey;
+  transition: all 0.3s ease;
 }
 img{
   width: 15px;
@@ -159,19 +165,28 @@ html,body{
   font-family: 'Lato', sans-serif;
 }
 .wrapper{
+  margin-left: 1%;
   display: inline-flex;
   background: #fff;
   height: 60px;
-  width: 400px;
+  width: 800px;
   align-items: center;
   justify-content: space-evenly;
   border-radius: 5px;
   padding: 10px 5px;
 }
+.wrapper button{
+  width: 60px;
+  height: 100%;
+}
+.wrapper button:hover{
+  width: 60px;
+  height: 100%;
+  cursor: pointer;
+}
 .wrapper .option{
   background: #fff;
-  height: 100%;
-  width: 100%;
+
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -230,4 +245,18 @@ input[type="radio"]{
 #option-2:checked:checked ~ .option-2 span,
 #option-3:checked:checked ~ .option-3 span{
   color: #fff;
+}
+.search{
+  border: none;
+  background: #fff;
+  height: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0 10px;
+  border: 2px solid lightgrey;
+  transition: all 0.3s ease;
 }
