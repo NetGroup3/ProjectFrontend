@@ -36,6 +36,7 @@ export class AddEditIngredientComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     if(Number(this.route.snapshot.paramMap.get('id')) > 0){
+      console.log(111111111111)
       this.getIngredient();
     }
 
