@@ -1,36 +1,58 @@
 <div class="main">
-  <div class="dishes">
-    <h2>Dishes</h2>
-    <div class="add_dish">
-      <nz-select class="options">
-        <nz-option nzValue="cocktails" nzLabel="Liquid"></nz-option>
-        <nz-option nzValue="friends" nzLabel="Alcohol"></nz-option>
-        <nz-option nzValue="events" nzLabel="Fruits"></nz-option>
-      </nz-select>
-      <a routerLink="/moderator/dish/add">
-        <button> Add new dish</button></a>
-    </div>
+  <div class="ingridients">
+    <h2>Ingredients</h2>
+    <div class="add_ingridient">
 
-    <div class="dish" *ngFor="let dish of Dishes">
-      <div class="buttons">
-        <a routerLink="/moderator/dish/{{dish.id}}">
-          <img src="../../assets/edit.png" alt="edit"></a>
-        <img (click)="cancel()" src="../../assets/delete.png" alt="delete">
+
+      <div class="wrapper">
+        <input (keydown.enter)='search()' class="search" type="text" placeholder="Search by name" [(ngModel)]="key">
+        <input type="radio" name="select" id="option-1" [checked]="id" (click)="id = !id">
+        <input type="radio" name="select" id="option-2" [checked]="title" (click)="title = !title">
+        <input type="radio" name="select" id="option-3" [checked]="Category" (click)="Category = !Category">
+        <label for="option-1" class="option option-1">
+          <div class="dot"></div>
+          <span>Id</span>
+        </label>
+        <label for="option-2" class="option option-2">
+          <div class="dot"></div>
+          <span>Title</span>
+        </label>
+        <label for="option-3" class="option option-3">
+          <div class="dot"></div>
+          <span>Category</span>
+        </label>
+        <nz-select class="options">
+          <nz-option nzValue="cocktails" nzLabel="Liquid"></nz-option>
+          <nz-option nzValue="friends" nzLabel="Alcohol"></nz-option>
+          <nz-option nzValue="events" nzLabel="Fruits"></nz-option>
+        </nz-select>
+        <button (click)="search()">Ok</button>
       </div>
-      <p class="title">{{dish.title}}</p>
-      <img src="{{dish.image_id}}">
-      <p class="bottom" >Ingredient</p>
-      <div [ngClass]="{'fixed-overlay': toggle, 'fixed': !toggle}" class="fixed-overlay">
-        <div class="modal">
-          <div class="popup">
-            <div class="field"></div>
-            <span>Delete the ingredient {{dish.title}}?</span>
-            <div class="field"></div>
-            <button (click)="ok(dish.id)" class="delete-ok">OK</button>
-            <button (click)="cancel()" class="delete-cancel">Cancel</button>
+
+      <a routerLink="/moderator/dish/add">
+        <button> Add ingredient</button></a>
+    </div>
+    <!--  [ngClass]="{'fixed-overlay': toggle, 'fixed': !toggle}-->
+    <div class="ingridient" *ngFor="let dish of Dishes">
+      <div class="buttons">
+        <i routerLink="/moderator/dish/{{dish.id}}" class="edit" nz-icon nzType="edit" nzTheme="outline"> </i>
+        <i (click)="delete(dish)" nz-icon nzType="delete" id="delete" nzTheme="outline"></i>
+        <div [hidden]="toggle" class="fixed-overlay">
+          <div class="modal">
+            <div class="popup">
+              <div class="field"></div>
+              <span>Delete this dish?</span>
+              <div class="field"></div>
+              <button (click)="ok()" class="delete-ok">OK</button>
+              <button (click)="change()" class="delete-cancel">Cancel</button>
+            </div>
           </div>
         </div>
       </div>
+      <p class="title">{{dish.title}}</p>
+      <advanced-image [cldImg]="dish.image_id | getPicture"></advanced-image>
+      <p class="bottom" >Dish</p>
+
 
     </div>
   </div>
