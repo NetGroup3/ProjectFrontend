@@ -22,6 +22,7 @@ import {AdminModeratorsComponent} from "./admin/admin-moderators/admin-moderator
 import {AddEditKitchenwareComponent} from "./add-edit-kitchenware/add-edit-kitchenware.component";
 import {ModeratorSceletonComponent} from "./sceletons/moderator-sceleton/moderator-sceleton.component";
 import {AddEditDishComponent} from "./add-edit-dish/add-edit-dish.component";
+import {PersonalStockComponent} from "./personal-stock/personal-stock.component";
 
 
 const routes: Routes = [
@@ -50,6 +51,7 @@ const routes: Routes = [
   { path: 'moderator/kitchenware/:id', component: AddEditKitchenwareComponent},
   { path: 'moderator/settings', component: ModeratorSettingsComponent},
   { path: 'admin/moderators', component: AdminModeratorsComponent},
+  { path: 'personal-stock', component: PersonalStockComponent},
 ];
 
 @NgModule({

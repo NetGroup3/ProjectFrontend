@@ -24,6 +24,7 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
   public onLoginClick(): void {
     console.log(this.form.value);
     if (this.form.valid){
@@ -32,9 +33,10 @@ export class LoginPageComponent implements OnInit {
         this.authService.setToken(response.token);
         this.authService.setUserData(response.id, response.firstname, response.lastname, response.role, response.imageId);
         this.router.navigate(["/home"]);
-      })
+      });
     } else {
       this.form.markAllAsTouched();
+      alert("Incorrect data!")
     }
   }
 
