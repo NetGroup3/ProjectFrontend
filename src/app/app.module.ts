@@ -49,6 +49,7 @@ import {AdminModeratorsComponent} from "./admin/admin-moderators/admin-moderator
 import {AdminSceletonComponent} from "./sceletons/admin-sceleton/admin-sceleton.component";
 import { KitchenwareComponent } from './kitchenware/kitchenware.component';
 import { AddEditKitchenwareComponent } from './add-edit-kitchenware/add-edit-kitchenware.component';
+import {FooterComponent} from "./modules/footer/footer.component";
 
 registerLocaleData(en);
 
@@ -78,7 +79,8 @@ registerLocaleData(en);
     AdminModeratorsComponent,
     AdminSceletonComponent,
     KitchenwareComponent,
-    AddEditKitchenwareComponent
+    AddEditKitchenwareComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
