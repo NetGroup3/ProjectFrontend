@@ -5,6 +5,8 @@ import {appLinks} from "../app.links";
 import {Ingredient} from "../models/ingredient";
 import {Kitchenware} from "../models/kitchenware";
 import {Dish} from "../models/dish";
+import {Dish_ingredients} from "../models/dish_ingredients";
+import {Dish_kitchenware} from "../models/dish_kitchenware";
 
 @Injectable({
   providedIn: 'root'
@@ -86,7 +88,7 @@ export class ModeratorService {
     });
   }
   public get_dish(id: number): Observable<Object>{
-    return this.http.get(appLinks.dish+'/'+id)
+    return this.http.get(appLinks.dish, { params: new HttpParams().set('id', id)})
   }
 
   public add_dish (body: Dish){
@@ -109,9 +111,26 @@ export class ModeratorService {
     return this.http.get(appLinks.dishes, {params});
   }
 
+  public get_labels(limit: number, page: number) : Observable<any>{
+    const params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('page', page.toString())
+    ;
+    return this.http.get(appLinks.label, {params});
+  }
   public delete_dish(id: number) {
     return this.http.delete(appLinks.dish, {
       params: new HttpParams().set('id', id)
     });
+  }
+
+  public post_ingredient_dish(body: Dish_ingredients){
+    console.log( this.http.put(appLinks.dish, body))
+    return this.http.post(appLinks.dishIngredient, body);
+  }
+
+  public post_kitchenware_dish(body: Dish_kitchenware){
+    console.log( this.http.put(appLinks.dish, body))
+    return this.http.post(appLinks.dishKitchenware, body);
   }
 }

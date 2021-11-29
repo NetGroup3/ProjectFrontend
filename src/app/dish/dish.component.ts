@@ -21,13 +21,14 @@ export class DishComponent implements OnInit {
   sortedBy: string = ""
 
   delDish: Dish = {
-    id:  0,
+    id: 0,
     title: "",
-    image_id: "",
     description: "",
     category: "",
     receipt: "",
-    active: false
+    imageId: "",
+    active: false,
+    likes: 0
   }
 
   constructor(private moderatorService: ModeratorService) {
