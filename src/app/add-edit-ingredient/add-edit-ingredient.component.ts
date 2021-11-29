@@ -48,10 +48,12 @@ export class AddEditIngredientComponent implements OnInit {
     console.log(this.ingridient)
     if(this.ingridient.id === 0){
       this.moderatorService.add_ingredient(this.ingridient).subscribe((response:any)=>{
+        console.log(this.ingridient.imageId)
       console.log(response)
       });
     }
     else {
+      console.log(this.ingridient.imageId)
       this.moderatorService.edit_ingredient(this.ingridient).subscribe((response:any)=>{
         console.log(response)
       });
@@ -75,8 +77,9 @@ export class AddEditIngredientComponent implements OnInit {
   onFileSelect($event: any) {
     this.uploadService.onUpLoad($event.target.files[0]).subscribe(response =>{
       this.ingridient.imageId = response.public_id;
+      console.log(this.ingridient.imageId)
       this.img = this.uploadService.initImage(this.ingridient.imageId);
-      this.onAddClick();
+      //this.onAddClick();
     });
   }
 

@@ -69,7 +69,7 @@ export class AddEditKitchenwareComponent implements OnInit {
     this.uploadService.onUpLoad($event.target.files[0]).subscribe(response =>{
       this.kitchenware.imageId = response.public_id;
       this.img = this.uploadService.initImage(this.kitchenware.imageId);
-      this.onAddClick();
+      //this.onAddClick();
     });
   }
 

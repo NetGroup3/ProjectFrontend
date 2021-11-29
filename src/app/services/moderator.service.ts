@@ -98,10 +98,14 @@ export class ModeratorService {
     console.log( this.http.put(appLinks.dish, body))
     return this.http.put(appLinks.dish, body);
   }
-  public get_dishes(limit: number, page: number) {
+  public get_dishes(limit: number, page: number,  key: string, category: string, sortedBy: string) : Observable<any>{
     const params = new HttpParams()
       .set('limit', limit.toString())
-      .set('page', page.toString());
+      .set('page', page.toString())
+      .set('key', key)
+      .set('category', category)
+      .set('sortedBy', sortedBy)
+    ;
     return this.http.get(appLinks.dishes, {params});
   }
 
