@@ -13,14 +13,15 @@ import {StockModel} from "../modules/auth/models/stock.model";
 })
 export class PersonalStockComponent implements OnInit {
 
+  limit: number = 20;
+  page: number = 0;
   initLoading = true; // bug
   loadingMore = false;
   data: StockModel[] = [];
 
   constructor(
     private stockService: StockService,
-    private msg: MessageService,
-    private authService: AuthService) { }
+    private msg: MessageService) { }
 
   ngOnInit(): void {
     this.getData((res: any) => {
@@ -32,7 +33,7 @@ export class PersonalStockComponent implements OnInit {
 
   getData(callback: (res: any) => void): void {
     this.stockService
-      .getData(this.authService.getUserId())
+      .getData(this.limit, this.page)
       .pipe(catchError(() => of({ results: [] })))
       .subscribe((res: any) => callback(res));
   }
@@ -54,4 +55,9 @@ export class PersonalStockComponent implements OnInit {
     this.msg.success(item.title);
   }
 
+  remove(stock: StockModel) {
+    this.stockService.delete(stock.ingredient.title).subscribe((res: any)=> {
+      console.log(res)
+    });
+  }
 }

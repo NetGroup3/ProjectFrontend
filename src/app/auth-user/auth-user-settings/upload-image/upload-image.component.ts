@@ -30,7 +30,6 @@ export class UploadImageComponent implements OnInit {
   }
 
   initImage(): CloudinaryImage {
-    console.log(this.imageId);
     const cld = new Cloudinary({cloud: {cloudName: 'djcak19nu'}});
     return cld.image(this.imageId)
       .resize(thumbnail().width(300).height(300))
@@ -38,7 +37,6 @@ export class UploadImageComponent implements OnInit {
   }
 
   onFileSelect($event: any) {
-    console.log("event");
     this.uploadService.onUpLoad($event.target.files[0]).subscribe(response => {
       this.imageId = response.public_id;
       this.img = this.initImage();

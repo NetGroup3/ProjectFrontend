@@ -7,7 +7,7 @@ import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
   name: 'getPicture'
 })
 export class PicturePipe implements PipeTransform {
-  transform(imageId: string, ...args: any[]): CloudinaryImage {
+  transform(imageId: string): CloudinaryImage {
     const cld = new Cloudinary({cloud: {cloudName: 'djcak19nu'}});
     return cld.image(imageId)
       .resize(thumbnail().width(150).height(150))
