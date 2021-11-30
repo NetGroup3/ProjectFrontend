@@ -3,55 +3,12 @@
 <div>
   <div class="__content">
     <span class="title">My Settings</span>
-
-    <div class="__personal_information" [formGroup]="form">
-      <div>
-        <nz-form-control>
-          <div>
-            <p>First name</p>
-            <input
-              class="settings_page__input"
-              nz-input
-              [(ngModel)]="firstname"
-              placeholder="John"
-              formControlName="firstname"
-            />
-          </div>
-        </nz-form-control>
-      </div>
-
-      <div>
-        <nz-form-control>
-          <div>
-            <p>Last name</p>
-            <input
-              class="settings_page__input"
-              nz-input
-              [(ngModel)]="lastname"
-              placeholder="Smith"
-              formControlName="lastname"
-            />
-          </div>
-        </nz-form-control>
-      </div>
-
-      <div>
-        <button (click)="savePersonalInformation()" class="_save_change_personal_information"><h3 class="__button_text">
-          Save changes</h3></button>
-      </div>
-
+    <div class="top">
+    <div class="info"><app-personal-information></app-personal-information></div>
+    <div class="password"><app-change-password></app-change-password></div>
     </div>
+    <app-upload-image></app-upload-image>
 
-    <!-- photo block-->
-    <div class="__photo_block">
-      <div class="__photo">
-        <advanced-image [cldImg]="img"></advanced-image>
-        <input type="file" (change)="onFileSelect($event)" class="dn" #uploadFile>
-        <div (click)="uploadFile.click()" class="p-4">
-          <button type="button" class="__change_photo"><h3 class="__button_text">Change photo</h3></button>
-        </div>
-      </div>
-    </div>
-    <app-change-password></app-change-password>
   </div>
 </div>
+

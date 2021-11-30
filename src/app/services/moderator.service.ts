@@ -1,28 +1,37 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {appLinks} from "../app.links";
-import {IngridientPage} from "../modules/auth/models/ingridient-page";
-import {LoginForm} from "../modules/auth/models/login-form.model";
 import {Ingredient} from "../models/ingredient";
 import {Kitchenware} from "../models/kitchenware";
-
+import {Dish} from "../models/dish";
+import {Dish_ingredients} from "../models/dish_ingredients";
+import {Dish_kitchenware} from "../models/dish_kitchenware";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModeratorService {
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) {
+
+  }
+
    public get_ingridient(id: number): Observable<Object>{
     return this.http.get(appLinks.ingredient, {
       params: new HttpParams().set('id', id)
     });
   }
-  public get_ingridients (limit: number, page: number) : Observable<any>{
+
+  public get_ingridients (limit: number, page: number, key: string, category: string, sortedBy: string) : Observable<any>{
     const params = new HttpParams()
       .set('limit', limit.toString())
-      .set('page', page.toString());
+      .set('page', page.toString())
+      .set('key', key)
+      .set('category', category)
+      .set('sortedBy', sortedBy)
+    ;
     return this.http.get(appLinks.ingredients, {params});
   }
 
@@ -31,10 +40,11 @@ export class ModeratorService {
     return this.http.post(appLinks.ingredient, body);
   }
 
- public edit_ingredient(body: Ingredient){
-   console.log( this.http.put(appLinks.ingredient, body))
-   return this.http.put(appLinks.ingredient, body);
- }
+   public edit_ingredient(body: Ingredient){
+     console.log( this.http.put(appLinks.ingredient, body))
+     return this.http.put(appLinks.ingredient, body);
+   }
+
   public delete_ingredient(id: number){
     console.log( this.http.delete(appLinks.ingredient, {
       params: new HttpParams().set('id', id)
@@ -44,15 +54,21 @@ export class ModeratorService {
     });
   }
 
-  get_Kitchenware(limit: number, page: number) : Observable<any>{
+  get_Kitchenware(limit: number, page: number,  key: string, category: string, sortedBy: string) : Observable<any>{
     const params = new HttpParams()
       .set('limit', limit.toString())
-      .set('page', page.toString());
+      .set('page', page.toString())
+      .set('key', key)
+      .set('category', category)
+      .set('sortedBy', sortedBy)
+    ;
     return this.http.get(appLinks.Kitchenware, {params});
   }
+
   public get_kitchenware(id: number): Observable<Object>{
     return this.http.get(appLinks.kitchenware+'/'+id)
   }
+
   public add_kitchenware (body: Kitchenware){
     console.log( this.http.post(appLinks.kitchenware, body))
     return this.http.post(appLinks.kitchenware, body);
@@ -62,6 +78,7 @@ export class ModeratorService {
     console.log( this.http.put(appLinks.kitchenware, body))
     return this.http.put(appLinks.kitchenware, body);
   }
+
   public delete_kitchenware(id: number){
     console.log( this.http.delete(appLinks.kitchenware, {
       params: new HttpParams().set('id', id)
@@ -69,5 +86,51 @@ export class ModeratorService {
     return this.http.delete(appLinks.kitchenware, {
       params: new HttpParams().set('id', id)
     });
+  }
+  public get_dish(id: number): Observable<Object>{
+    return this.http.get(appLinks.dish, { params: new HttpParams().set('id', id)})
+  }
+
+  public add_dish (body: Dish){
+    console.log( this.http.post(appLinks.dish, body))
+    return this.http.post(appLinks.dish, body);
+  }
+
+  public edit_dish(body: Dish){
+    console.log( this.http.put(appLinks.dish, body))
+    return this.http.put(appLinks.dish, body);
+  }
+  public get_dishes(limit: number, page: number,  key: string, category: string, sortedBy: string) : Observable<any>{
+    const params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('page', page.toString())
+      .set('key', key)
+      .set('category', category)
+      .set('sortedBy', sortedBy)
+    ;
+    return this.http.get(appLinks.dishes, {params});
+  }
+
+  public get_labels(limit: number, page: number) : Observable<any>{
+    const params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('page', page.toString())
+    ;
+    return this.http.get(appLinks.label, {params});
+  }
+  public delete_dish(id: number) {
+    return this.http.delete(appLinks.dish, {
+      params: new HttpParams().set('id', id)
+    });
+  }
+
+  public post_ingredient_dish(body: Dish_ingredients){
+    console.log( this.http.put(appLinks.dish, body))
+    return this.http.post(appLinks.dishIngredient, body);
+  }
+
+  public post_kitchenware_dish(body: Dish_kitchenware){
+    console.log( this.http.put(appLinks.dish, body))
+    return this.http.post(appLinks.dishKitchenware, body);
   }
 }

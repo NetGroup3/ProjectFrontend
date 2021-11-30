@@ -1,21 +1,24 @@
 <app-moderator-sceleton></app-moderator-sceleton>
+
 <div class="insert_area">
-<div *ngIf="ingridient">
-<div class="add_edit">
-  <h2>Add/edit ingredient</h2>
-  <div class="description_picture">
-  <div class="picture">
-    <img src="assets/img.png"> <br/>
-    <button class="upload">Upload photo</button>
+  <div *ngIf="ingridient">
+    <div class="add_edit">
+      <h2>Add/edit ingredient</h2>
+      <div class="description_picture">
+        <div class="picture">
+<!--          <img src="assets/img.png">-->
+          <advanced-image [cldImg]="img"></advanced-image><br>
+          <input type="file" (change)="onFileSelect($event)" class="dn" #uploadFile>
+          <button class="upload" (click)="uploadFile.click()">Upload photo</button>
+        </div>
+        <textarea required [(ngModel)]="ingridient.description"></textarea>
+      </div>
+      <div class="title">
+        <p>Title</p>
+        <input required [(ngModel)]="ingridient.title" placeholder="Text"/>
+      </div>
+      <!--  <button class="delete">Delete</button>-->
+      <button class="ok"  (click)="onAddClick()">Ok!</button>
+    </div>
   </div>
-  <textarea required [(ngModel)]="ingridient.description"></textarea>
-  </div>
-<div class="title">
-  <p>Title</p>
-  <input required [(ngModel)]="ingridient.title" placeholder="Text"/>
-</div>
-<!--  <button class="delete">Delete</button>-->
-  <button class="ok"  (click)="onAddClick()">Ok!</button>
-</div>
-</div>
 </div>

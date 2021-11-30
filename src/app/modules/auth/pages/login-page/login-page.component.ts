@@ -24,26 +24,26 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
   public onLoginClick(): void {
     console.log(this.form.value);
     if (this.form.valid){
       this.authRestService.login(this.form.value).subscribe((response:any)=>{
         console.log(response);
         this.authService.setToken(response.token);
-        this.authService.setUserData(response.id, response.firstname, response.lastname, response.role);
-        console.log("image id " + response.imageId);
-        console.log("image id " + response.imageid);
+        this.authService.setUserData(response.id, response.firstname, response.lastname, response.role, response.imageId);
         this.router.navigate(["/home"]);
-      })
+      });
     } else {
       this.form.markAllAsTouched();
+      alert("Incorrect data!")
     }
   }
 
   private buildForm(): FormGroup {
     return this.fb.group({
       username: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(12)]]
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(128)]]
     });
   }
 

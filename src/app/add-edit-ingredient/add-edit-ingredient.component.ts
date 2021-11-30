@@ -1,8 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ModeratorService} from "../services/moderator.service";
 import {Ingredient} from "../models/ingredient";
-import { Location } from '@angular/common';
+import {Location} from '@angular/common';
+import {UploadService} from "../modules/auth/services/client/upload.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-edit-ingredient',
@@ -11,24 +13,30 @@ import { Location } from '@angular/common';
 })
 export class AddEditIngredientComponent implements OnInit {
 
-  description: string = ""
-  title: string = ""
+  public img: any;
+  description: string = "";
+  title: string = "";
+
   ingridient: Ingredient = {
     id: 0,
     title: "",
     description: "",
     category: "",
-    image_id: 0,
-    is_active: false,
+    imageId: "",
+    isActive: false,
     measurement: ""
   };
+
   constructor(
     private route: ActivatedRoute,
     private moderatorService: ModeratorService,
-    private location: Location
+    private location: Location,
+    private uploadService: UploadService,
+    private router: Router
   ) {}
   ngOnInit(): void {
     if(Number(this.route.snapshot.paramMap.get('id')) > 0){
+      console.log(111111111111)
       this.getIngredient();
     }
 
@@ -37,18 +45,23 @@ export class AddEditIngredientComponent implements OnInit {
     this.location.back();
   }
 
-  onAddClick():void{
+  onAddClick(): void{
     console.log(this.ingridient)
     if(this.ingridient.id === 0){
       this.moderatorService.add_ingredient(this.ingridient).subscribe((response:any)=>{
+        console.log(this.ingridient.imageId)
       console.log(response)
       });
     }
     else {
+      console.log(this.ingridient.imageId)
       this.moderatorService.edit_ingredient(this.ingridient).subscribe((response:any)=>{
         console.log(response)
       });
     }
+    console.log(this.ingridient)
+    this.router.navigate(['/moderator/ingredients'])
+
   }
 
   getIngredient(): void {
@@ -57,9 +70,18 @@ export class AddEditIngredientComponent implements OnInit {
       .subscribe((response:any)=>{
         console.log(response.body)
         this.ingridient = response.body
+        console.log(this.ingridient.imageId)
+        this.img = this.uploadService.initImage(this.ingridient.imageId);
       });
   }
 
-
+  onFileSelect($event: any) {
+    this.uploadService.onUpLoad($event.target.files[0]).subscribe(response =>{
+      this.ingridient.imageId = response.public_id;
+      console.log(this.ingridient.imageId)
+      this.img = this.uploadService.initImage(this.ingridient.imageId);
+      //this.onAddClick();
+    });
+  }
 
 }

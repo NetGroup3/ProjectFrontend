@@ -33,8 +33,8 @@ export class SignupPageComponent implements OnInit {
         email: ['', [Validators.email]],
         firstname: ['', [Validators.required]],
         lastname: ['', [Validators.required]],
-        password: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]],
-        confirmPassword: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]],
+        password: ['', [Validators.required, Validators.maxLength(128), Validators.minLength(8)]],
+        confirmPassword: ['', [Validators.required, Validators.maxLength(128), Validators.minLength(8)]],
         status: "NOT_VERIFY",
         role: "USER"
       }, options
@@ -48,6 +48,7 @@ export class SignupPageComponent implements OnInit {
       })
       this.toggle = !this.toggle;
     } else {
+      alert("Fill in all the fields")
       this.form.markAllAsTouched();
     }
 

@@ -29,7 +29,6 @@ import { AuthUserCatalogueComponent } from './auth-user/auth-user-catalogue/auth
 import { AuthUserCalendarComponent } from './auth-user/auth-user-calendar/auth-user-calendar.component';
 import { AuthUserEventsComponent } from './auth-user/auth-user-events/auth-user-events.component';
 import { AuthUserSettingsComponent } from './auth-user/auth-user-settings/auth-user-settings.component';
-import {ChangePasswordComponent} from "./auth-user/auth-user-settings/change-password/change-password.component";
 import { AuthUserFriendsComponent } from './auth-user/auth-user-friends/auth-user-friends.component';
 import { AuthUserBlogComponent } from './auth-user/auth-user-blog/auth-user-blog.component';
 import {AuthInterceptor} from "./http-interceptors/auth-interceptor";
@@ -47,13 +46,22 @@ import {ModeratorKitchenwareComponent} from "./moderator/moderator-kitchenware/m
 import {ModeratorSettingsComponent} from "./moderator/moderator-settings/moderator-settings.component";
 import {AdminModeratorsComponent} from "./admin/admin-moderators/admin-moderators.component";
 import {AdminSceletonComponent} from "./sceletons/admin-sceleton/admin-sceleton.component";
-import { KitchenwareComponent } from './kitchenware/kitchenware.component';
-import { AddEditKitchenwareComponent } from './add-edit-kitchenware/add-edit-kitchenware.component';
+import {EditModeratorComponent} from "./admin/edit-moderator/edit-moderator.component";
+import {KitchenwareComponent} from './kitchenware/kitchenware.component';
+import {AddEditKitchenwareComponent} from './add-edit-kitchenware/add-edit-kitchenware.component';
+import {UploadImageComponent} from "./auth-user/auth-user-settings/upload-image/upload-image.component";
+import {PersonalInformationComponent} from "./auth-user/auth-user-settings/personal-information/personal-information.component";
+import {ChangePasswordComponent} from "./auth-user/auth-user-settings/change-password/change-password.component";
+import {PicturePipe} from "./picture.pipe";
+import { DishComponent } from './dish/dish.component';
+import { AddEditDishComponent } from './add-edit-dish/add-edit-dish.component';
+import {PersonalStockComponent} from "./personal-stock/personal-stock.component";
 import {FooterComponent} from "./modules/footer/footer.component";
 
 registerLocaleData(en);
 
 @NgModule({
+
   declarations: [
     AppComponent,
     SignupPageComponent,
@@ -66,7 +74,6 @@ registerLocaleData(en);
     AuthUserCalendarComponent,
     AuthUserEventsComponent,
     AuthUserSettingsComponent,
-    ChangePasswordComponent,
     AuthUserFriendsComponent,
     AuthUserBlogComponent,
     IngridientsComponent,
@@ -80,8 +87,17 @@ registerLocaleData(en);
     AdminSceletonComponent,
     KitchenwareComponent,
     AddEditKitchenwareComponent,
-    FooterComponent
+    UploadImageComponent,
+    PersonalInformationComponent,
+    ChangePasswordComponent,
+    PicturePipe,
+    DishComponent,
+    AddEditDishComponent,
+    EditModeratorComponent,
+    PersonalStockComponent,
+    FooterComponent,
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,

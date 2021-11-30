@@ -1,5 +1,88 @@
 <app-admin-sceleton></app-admin-sceleton>
-<!-- INSERT ELEMENT HERE -->
+
 <div class="insert_area">
-  <span class="title">Moderators</span>
+
+  <div id="addButton">
+    <button [disabled]="buttonDisabled" (click)="onAddEditClicked(undefined)">Add moderator</button>
+  </div>
+
+  <h2>Search for moderators:</h2>
+
+  <div id="d1">
+   <form [formGroup]="settingsForm">
+
+     <input class="input" id="searchFirstname" type="text" placeholder="Name" formControlName="searchFirstname">
+     <input class="input" id="searchLastname" type="text" placeholder="Surname" formControlName="searchLastname">
+     <input class="input" id="searchEmail" type="text" placeholder="Email" formControlName="searchEmail">
+     <button id="goButton" [disabled]="buttonDisabled" (click)="onSubmit()">
+        Go!
+     </button>
+  </form>
+  </div>
+
+  <div id="d2" class="align">
+
+  <div id="d3">
+  <table *ngIf="!emptyList">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Status</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let moder of moderatorList">
+        <td>{{moder.email}}</td>
+        <td>{{moder.firstname}}</td>
+        <td>{{moder.lastname}}</td>
+        <td>{{moder.status}}</td>
+        <td><button class="navBut" [disabled]="buttonDisabled" (click)="onAddEditClicked(moder)"><i nz-icon nzType="edit" nzTheme="outline"></i></button></td>
+        <td><button class="navBut" [disabled]="buttonDisabled" (click)="onDeleteConfirm(moder.id)"><i nz-icon nzType="delete" nzTheme="outline"></i></button></td>
+
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div [hidden]="toggle" class="fixed-overlay">
+    <div class="modal">
+      <div class="popup">
+        <h2>Delete this moderator?</h2>
+        <button (click)="deleteModer()" class="button">
+          OK
+        </button>
+        <button (click)="change()" class="button">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="align">
+    <h3 *ngIf="emptyList">No moderators found</h3>
+  </div>
+
+  <div class="align">
+    <button class="navBut" [disabled]="buttonDisabled || !buttonB" (click)="onBackward()"><</button>
+    <p style="display: inline-block;"><b>&emsp;{{formValue.pageNo}}&emsp;</b></p>
+    <button class="navBut" [disabled]="buttonDisabled || !buttonF" (click)="onForward()">></button>
+  </div>
+
+  </div>
+
+
+  <div id="injected">
+    <app-add-edit-moderator
+        [inputModerData]="inputData"
+        [type]="type"
+        (closeEmit)="setShowInjected($event)"
+        (updateEmit)="loadList(formValue)"
+        *ngIf="showInjected">
+    </app-add-edit-moderator>
+  </div>
+
 </div>

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Ingredient} from "../models/ingredient";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ModeratorService} from "../services/moderator.service";
 import {Location} from "@angular/common";
 import {Kitchenware} from "../models/kitchenware";
+import {UploadService} from "../modules/auth/services/client/upload.service";
 
 @Component({
   selector: 'app-add-edit-kitchenware',
@@ -17,20 +17,24 @@ export class AddEditKitchenwareComponent implements OnInit {
     title: "",
     description: "",
     category: "",
-    image_id: 0,
-    is_active: false,
+    imageId: "",
+    isActive: false,
   };
+  public img: any;
   constructor(
     private route: ActivatedRoute,
     private moderatorService: ModeratorService,
-    private location: Location
+    private location: Location,
+  private uploadService: UploadService,
+    private router: Router
   ) {}
+
   ngOnInit(): void {
     if(Number(this.route.snapshot.paramMap.get('id')) > 0){
       this.getKitchenware();
     }
-
   }
+
   goBack(): void {
     this.location.back();
   }
@@ -47,6 +51,8 @@ export class AddEditKitchenwareComponent implements OnInit {
         console.log(response)
       });
     }
+    console.log(this.kitchenware)
+    this.router.navigate(['/moderator/kitchenware'])
   }
 
   getKitchenware(): void {
@@ -55,8 +61,16 @@ export class AddEditKitchenwareComponent implements OnInit {
       .subscribe((response:any)=>{
         console.log(response.body)
         this.kitchenware = response.body
+        this.img = this.uploadService.initImage(this.kitchenware.imageId);
       });
   }
 
+  onFileSelect($event: any) {
+    this.uploadService.onUpLoad($event.target.files[0]).subscribe(response =>{
+      this.kitchenware.imageId = response.public_id;
+      this.img = this.uploadService.initImage(this.kitchenware.imageId);
+      //this.onAddClick();
+    });
+  }
 
 }
