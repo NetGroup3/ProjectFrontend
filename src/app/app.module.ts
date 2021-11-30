@@ -56,6 +56,7 @@ import {PicturePipe} from "./picture.pipe";
 import { DishComponent } from './dish/dish.component';
 import { AddEditDishComponent } from './add-edit-dish/add-edit-dish.component';
 import {PersonalStockComponent} from "./personal-stock/personal-stock.component";
+import {FooterComponent} from "./modules/footer/footer.component";
 
 registerLocaleData(en);
 
@@ -94,6 +95,7 @@ registerLocaleData(en);
     AddEditDishComponent,
     EditModeratorComponent,
     PersonalStockComponent,
+    FooterComponent,
   ],
 
   imports: [
