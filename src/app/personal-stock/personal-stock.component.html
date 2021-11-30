@@ -1,14 +1,31 @@
-<app-user-sceleton></app-user-sceleton>
-<div class="main">
-
-  <div class="stock">
+<!--<app-user-sceleton></app-user-sceleton>-->
+<div class="stock">
 
     <h1>Personal stock</h1>
 
-<!--    <div class="stock" *ngFor="let ingredient of ingredients">
+    <nz-list class="demo-loadmore-list" [nzLoading]="initLoading">
+      <nz-list-item *ngFor="let stock of data">
+        <!--               <advanced-image [cldImg]="stock.ingredient.imageId | getPicture"></advanced-image>-->
+          <nz-list-item-meta
+            nzDescription={{stock.ingredient.description}}
+          >
+            <nz-list-item-meta-title>
+              <a href="/moderator/ingredients/{{stock.ingredient.id}}">{{stock.ingredient.title}}</a>
+            </nz-list-item-meta-title>
+          </nz-list-item-meta>
+        {{stock.amount}}
+         {{stock.ingredient.measurement}}
 
-    </div>-->
+          <ul nz-list-item-actions>
+            <nz-list-item-action><a (click)="edit(stock)">edit</a></nz-list-item-action>
+            <nz-list-item-action><a (click)="edit(stock)">remove</a></nz-list-item-action>
+          </ul>
+
+      </nz-list-item>
+      <div class="loadmore" nz-list-load-more>
+        <button nz-button *ngIf="!loadingMore" (click)="onLoadMore()">loading more</button>
+      </div>
+    </nz-list>
 
   </div>
 
-</div>

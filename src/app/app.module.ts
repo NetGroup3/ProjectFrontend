@@ -56,6 +56,8 @@ import {PicturePipe} from "./picture.pipe";
 import { DishComponent } from './dish/dish.component';
 import { AddEditDishComponent } from './add-edit-dish/add-edit-dish.component';
 import {PersonalStockComponent} from "./personal-stock/personal-stock.component";
+import {NzSkeletonModule} from "ng-zorro-antd/skeleton";
+import {NzListModule} from "ng-zorro-antd/list";
 
 registerLocaleData(en);
 
@@ -112,6 +114,8 @@ registerLocaleData(en);
     HttpClientModule,
     CloudinaryModule,
     NgxDropzoneModule,
+    NzSkeletonModule,
+    NzListModule,
   ],
   providers: [
     {

@@ -6,4 +6,10 @@ import { Injectable } from '@angular/core';
 export class MessageService {
 
   constructor() { }
+
+
+    success(title: string): void{
+      console.log("success");
+  }
+
 }

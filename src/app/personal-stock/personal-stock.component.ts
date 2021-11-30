@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {MessageService} from "../services/message.service";
+import {StockService} from "../modules/auth/services/rest/stock.service";
+import {catchError} from "rxjs/operators";
+import {of} from "rxjs";
+import {AuthService} from "../modules/auth/services/client/auth.service";
+import {StockModel} from "../modules/auth/models/stock.model";
 
 @Component({
   selector: 'app-personal-stock',
@@ -7,26 +13,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonalStockComponent implements OnInit {
 
-  constructor() { }
+  initLoading = true; // bug
+  loadingMore = false;
+  data: StockModel[] = [];
+
+  constructor(
+    private stockService: StockService,
+    private msg: MessageService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.getData((res: any) => {
+      console.log(res)
+      this.data = res;
+      this.initLoading = false;
+    });
   }
 
-  ingredients = [
-    {id: 1, title:'Vodka', description: 'just simple vodka', category: 'Alcohol', imageId: 'ewef2r42', active:true, measurement:'measurement' },
-    {id: 2, title:'Vine', description: 'just simple vodka', category: 'Alcohol', imageId: 'ewef2r42', active:true, measurement:'measurement' },
-    {id: 3, title:'Vicki', description: 'just simple vodka', category: 'Alcohol', imageId: 'ewef2r42', active:true, measurement:'measurement' },
-    {id: 4, title:'Beer', description: 'just simple vodka', category: 'Alcohol', imageId: 'ewef2r42', active:true, measurement:'measurement' },
-    {id: 5, title:'Rom', description: 'just simple vodka', category: 'Alcohol', imageId: 'ewef2r42', active:true, measurement:'measurement' },
-    {id: 6, title:'', description: 'just simple vodka', category: 'Alcohol', imageId: 'ewef2r42', active:true, measurement:'measurement' },
-    {id: 7, title:'Vodka', description: 'just simple vodka', category: 'Alcohol', imageId: 'ewef2r42', active:true, measurement:'measurement' },
-  ];
+  getData(callback: (res: any) => void): void {
+    this.stockService
+      .getData(this.authService.getUserId())
+      .pipe(catchError(() => of({ results: [] })))
+      .subscribe((res: any) => callback(res));
+  }
 
-/*  int id;
-  String title;
-  String description;
-  String category;
-  String image_id;
-  boolean active;
-  String measurement;*/
+  onLoadMore(): void {
+/*    this.loadingMore = true;
+    this.list = this.data.concat([...Array(count)].fill({}).map(() => ({ loading: true, name: {} })));
+    this.stockService
+      .getData(this.authService.getUserId())
+      .pipe(catchError(() => of({ results: [] })))
+      .subscribe((res: any) => {
+        this.data = this.data.concat(res.results);
+        this.list = [...this.data];
+        this.loadingMore = false;
+      });*/
+  }
+
+  edit(item: any): void {
+    this.msg.success(item.title);
+  }
+
 }
