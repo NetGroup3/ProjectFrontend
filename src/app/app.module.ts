@@ -22,15 +22,9 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import {NzFormModule} from "ng-zorro-antd/form";
 import {RestapiService} from "./modules/auth/services/rest/restapi.service";
 import { HomeComponent } from './home/home.component';
-import { UserSceletonComponent } from './sceletons/user-sceleton/user-sceleton.component';
+import { UserSceletonComponent } from './modules/core/user-sceleton/user-sceleton.component';
 import {NzSelectModule} from "ng-zorro-antd/select";
-import { AuthUserFavouriteComponent } from './auth-user/auth-user-favourite/auth-user-favourite.component';
-import { AuthUserCatalogueComponent } from './auth-user/auth-user-catalogue/auth-user-catalogue.component';
-import { AuthUserCalendarComponent } from './auth-user/auth-user-calendar/auth-user-calendar.component';
-import { AuthUserEventsComponent } from './auth-user/auth-user-events/auth-user-events.component';
-import { AuthUserSettingsComponent } from './auth-user/auth-user-settings/auth-user-settings.component';
-import { AuthUserFriendsComponent } from './auth-user/auth-user-friends/auth-user-friends.component';
-import { AuthUserBlogComponent } from './auth-user/auth-user-blog/auth-user-blog.component';
+import { AuthUserSettingsComponent } from './settings/auth-user-settings.component';
 import {AuthInterceptor} from "./http-interceptors/auth-interceptor";
 import { IngridientsComponent } from './ingridients/ingridients.component';
 import { AddEditIngredientComponent } from './add-edit-ingredient/add-edit-ingredient.component';
@@ -39,24 +33,23 @@ import {CloudinaryModule} from '@cloudinary/angular';
 
 import {NgxDropzoneModule} from "ngx-dropzone";
 
-import {ModeratorSceletonComponent} from "./sceletons/moderator-sceleton/moderator-sceleton.component";
 import {ModeratorCocktailsComponent} from "./moderator/moderator-cocktails/moderator-cocktails.component";
 import {ModeratorIngredientsComponent} from "./moderator/moderator-ingredients/moderator-ingredients.component";
 import {ModeratorKitchenwareComponent} from "./moderator/moderator-kitchenware/moderator-kitchenware.component";
-import {ModeratorSettingsComponent} from "./moderator/moderator-settings/moderator-settings.component";
 import {AdminModeratorsComponent} from "./admin/admin-moderators/admin-moderators.component";
-import {AdminSceletonComponent} from "./sceletons/admin-sceleton/admin-sceleton.component";
 import {EditModeratorComponent} from "./admin/edit-moderator/edit-moderator.component";
 import {KitchenwareComponent} from './kitchenware/kitchenware.component';
 import {AddEditKitchenwareComponent} from './add-edit-kitchenware/add-edit-kitchenware.component';
-import {UploadImageComponent} from "./auth-user/auth-user-settings/upload-image/upload-image.component";
-import {PersonalInformationComponent} from "./auth-user/auth-user-settings/personal-information/personal-information.component";
-import {ChangePasswordComponent} from "./auth-user/auth-user-settings/change-password/change-password.component";
+import {UploadImageComponent} from "./settings/upload-image/upload-image.component";
+import {PersonalInformationComponent} from "./settings/personal-information/personal-information.component";
+import {ChangePasswordComponent} from "./settings/change-password/change-password.component";
 import {PicturePipe} from "./picture.pipe";
 import { DishComponent } from './dish/dish.component';
 import { AddEditDishComponent } from './add-edit-dish/add-edit-dish.component';
 import {PersonalStockComponent} from "./personal-stock/personal-stock.component";
-import {FooterComponent} from "./modules/footer/footer.component";
+import {FooterComponent} from "./modules/core/footer/footer.component";
+import {SidebarComponent} from "./modules/core/sidebar/sidebar.component";
+import {HeaderComponent} from "./modules/core/header/header.component";
 
 registerLocaleData(en);
 
@@ -69,22 +62,13 @@ registerLocaleData(en);
     RecoveryPageComponent,
     HomeComponent,
     UserSceletonComponent,
-    AuthUserFavouriteComponent,
-    AuthUserCatalogueComponent,
-    AuthUserCalendarComponent,
-    AuthUserEventsComponent,
     AuthUserSettingsComponent,
-    AuthUserFriendsComponent,
-    AuthUserBlogComponent,
     IngridientsComponent,
     AddEditIngredientComponent,
-    ModeratorSceletonComponent,
-    ModeratorSettingsComponent,
     ModeratorIngredientsComponent,
     ModeratorKitchenwareComponent,
     ModeratorCocktailsComponent,
     AdminModeratorsComponent,
-    AdminSceletonComponent,
     KitchenwareComponent,
     AddEditKitchenwareComponent,
     UploadImageComponent,
@@ -96,6 +80,8 @@ registerLocaleData(en);
     EditModeratorComponent,
     PersonalStockComponent,
     FooterComponent,
+    SidebarComponent,
+    HeaderComponent,
   ],
 
   imports: [
