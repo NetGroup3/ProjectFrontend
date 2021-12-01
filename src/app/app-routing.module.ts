@@ -10,7 +10,6 @@ import {AddEditIngredientComponent} from "./add-edit-ingredient/add-edit-ingredi
 import { HomeGuard} from "./home.guard.";
 import {ModeratorIngredientsComponent} from "./moderator/moderator-ingredients/moderator-ingredients.component";
 import {ModeratorKitchenwareComponent} from "./moderator/moderator-kitchenware/moderator-kitchenware.component";
-import {ModeratorSettingsComponent} from "./moderator/moderator-settings/moderator-settings.component";
 import {ModeratorCocktailsComponent} from "./moderator/moderator-cocktails/moderator-cocktails.component";
 import {AdminModeratorsComponent} from "./admin/admin-moderators/admin-moderators.component";
 import {AddEditKitchenwareComponent} from "./add-edit-kitchenware/add-edit-kitchenware.component";
@@ -35,7 +34,6 @@ const routes: Routes = [
   { path: 'moderator/kitchenware', component: ModeratorKitchenwareComponent},
   { path: 'moderator/kitchenware/add', component: AddEditKitchenwareComponent},
   { path: 'moderator/kitchenware/:id', component: AddEditKitchenwareComponent},
-  { path: 'moderator/settings', component: ModeratorSettingsComponent},
   { path: 'admin/moderators', component: AdminModeratorsComponent},
   { path: 'personal-stock', component: PersonalStockComponent},
 ];

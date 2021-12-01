@@ -36,7 +36,6 @@ import {NgxDropzoneModule} from "ngx-dropzone";
 import {ModeratorCocktailsComponent} from "./moderator/moderator-cocktails/moderator-cocktails.component";
 import {ModeratorIngredientsComponent} from "./moderator/moderator-ingredients/moderator-ingredients.component";
 import {ModeratorKitchenwareComponent} from "./moderator/moderator-kitchenware/moderator-kitchenware.component";
-import {ModeratorSettingsComponent} from "./moderator/moderator-settings/moderator-settings.component";
 import {AdminModeratorsComponent} from "./admin/admin-moderators/admin-moderators.component";
 import {AdminSceletonComponent} from "./sceletons/admin-sceleton/admin-sceleton.component";
 import {EditModeratorComponent} from "./admin/edit-moderator/edit-moderator.component";
@@ -67,7 +66,6 @@ registerLocaleData(en);
     AuthUserSettingsComponent,
     IngridientsComponent,
     AddEditIngredientComponent,
-    ModeratorSettingsComponent,
     ModeratorIngredientsComponent,
     ModeratorKitchenwareComponent,
     ModeratorCocktailsComponent,
