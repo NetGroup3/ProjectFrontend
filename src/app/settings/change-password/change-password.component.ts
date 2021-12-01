@@ -23,10 +23,10 @@ export class ChangePasswordComponent implements OnInit {
       }
 
     this.passwordForm = this.fbPassword.group({
-        userId: this.authService.getUserId(),
+        // userId: this.authService.getUserId(),
         oldPassword: ['', [Validators.required]],
-        password: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]],
-        confirmPassword: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(8)]]
+        password: ['', [Validators.required, Validators.maxLength(128), Validators.minLength(8)]],
+        confirmPassword: ['', [Validators.required, Validators.maxLength(128), Validators.minLength(8)]]
       }, options
     );
   }
