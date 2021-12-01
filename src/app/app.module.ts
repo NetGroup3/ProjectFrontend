@@ -24,13 +24,7 @@ import {RestapiService} from "./modules/auth/services/rest/restapi.service";
 import { HomeComponent } from './home/home.component';
 import { UserSceletonComponent } from './sceletons/user-sceleton/user-sceleton.component';
 import {NzSelectModule} from "ng-zorro-antd/select";
-import { AuthUserFavouriteComponent } from './auth-user/auth-user-favourite/auth-user-favourite.component';
-import { AuthUserCatalogueComponent } from './auth-user/auth-user-catalogue/auth-user-catalogue.component';
-import { AuthUserCalendarComponent } from './auth-user/auth-user-calendar/auth-user-calendar.component';
-import { AuthUserEventsComponent } from './auth-user/auth-user-events/auth-user-events.component';
 import { AuthUserSettingsComponent } from './auth-user/auth-user-settings/auth-user-settings.component';
-import { AuthUserFriendsComponent } from './auth-user/auth-user-friends/auth-user-friends.component';
-import { AuthUserBlogComponent } from './auth-user/auth-user-blog/auth-user-blog.component';
 import {AuthInterceptor} from "./http-interceptors/auth-interceptor";
 import { IngridientsComponent } from './ingridients/ingridients.component';
 import { AddEditIngredientComponent } from './add-edit-ingredient/add-edit-ingredient.component';
@@ -71,13 +65,7 @@ registerLocaleData(en);
     RecoveryPageComponent,
     HomeComponent,
     UserSceletonComponent,
-    AuthUserFavouriteComponent,
-    AuthUserCatalogueComponent,
-    AuthUserCalendarComponent,
-    AuthUserEventsComponent,
     AuthUserSettingsComponent,
-    AuthUserFriendsComponent,
-    AuthUserBlogComponent,
     IngridientsComponent,
     AddEditIngredientComponent,
     ModeratorSceletonComponent,
