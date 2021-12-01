@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'recovery', component: RecoveryPageComponent },
   { path: 'home', component:HomeComponent, canActivate: [HomeGuard]},
   // { path: 'home', component:HomeComponent},
-  { path: 'user/settings', component:AuthUserSettingsComponent},
+  { path: 'settings', component:AuthUserSettingsComponent}, // Authuser settings - rename to just settings
   { path: 'moderator/ingredients', component:ModeratorIngredientsComponent},
   { path: 'moderator/ingredients/:id', component:AddEditIngredientComponent},
   { path: 'moderator/ingredients/add', component:AddEditIngredientComponent},
