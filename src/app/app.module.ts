@@ -57,6 +57,8 @@ import { DishComponent } from './dish/dish.component';
 import { AddEditDishComponent } from './add-edit-dish/add-edit-dish.component';
 import {PersonalStockComponent} from "./personal-stock/personal-stock.component";
 import {FooterComponent} from "./modules/footer/footer.component";
+import {SidebarComponent} from "./sceletons/sidebar/sidebar.component";
+import {HeaderComponent} from "./sceletons/header/header.component";
 
 registerLocaleData(en);
 
@@ -96,6 +98,8 @@ registerLocaleData(en);
     EditModeratorComponent,
     PersonalStockComponent,
     FooterComponent,
+    SidebarComponent,
+    HeaderComponent,
   ],
 
   imports: [
