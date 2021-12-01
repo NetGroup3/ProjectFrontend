@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../../../modules/auth/services/client/auth.service";
+import {AuthService} from "../../modules/auth/services/client/auth.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {UserRestService} from "../../../modules/auth/services/rest/user-rest.service";
+import {UserRestService} from "../../modules/auth/services/rest/user-rest.service";
 
 @Component({
   selector: 'app-personal-information',

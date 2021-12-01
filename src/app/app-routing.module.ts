@@ -4,7 +4,7 @@ import {SignupPageComponent} from "./modules/auth/pages/signup-page/signup-page.
 import {LoginPageComponent} from "./modules/auth/pages/login-page/login-page.component";
 import {RecoveryPageComponent} from "./modules/auth/pages/recovery-page/recovery-page.component";
 import {HomeComponent} from "./home/home.component";
-import {AuthUserSettingsComponent} from "./auth-user/auth-user-settings/auth-user-settings.component";
+import {AuthUserSettingsComponent} from "./settings/auth-user-settings.component";
 import {IngridientsComponent} from "./ingridients/ingridients.component";
 import {AddEditIngredientComponent} from "./add-edit-ingredient/add-edit-ingredient.component";
 import { HomeGuard} from "./home.guard.";
@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'recovery', component: RecoveryPageComponent },
   { path: 'home', component:HomeComponent, canActivate: [HomeGuard]},
   // { path: 'home', component:HomeComponent},
-  { path: 'settings', component:AuthUserSettingsComponent}, // Authuser settings - rename to just settings
+  { path: 'settings', component:AuthUserSettingsComponent},
   { path: 'moderator/ingredients', component:ModeratorIngredientsComponent},
   { path: 'moderator/ingredients/:id', component:AddEditIngredientComponent},
   { path: 'moderator/ingredients/add', component:AddEditIngredientComponent},

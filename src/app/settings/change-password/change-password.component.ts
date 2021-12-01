@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControlOptions, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {PasswordMatch} from "../../../modules/auth/services/client/password-validator";
-import {AuthService} from "../../../modules/auth/services/client/auth.service";
-import {UserRestService} from "../../../modules/auth/services/rest/user-rest.service";
+import {PasswordMatch} from "../../modules/auth/services/client/password-validator";
+import {AuthService} from "../../modules/auth/services/client/auth.service";
+import {UserRestService} from "../../modules/auth/services/rest/user-rest.service";
 
 @Component({
   selector: 'app-change-password',

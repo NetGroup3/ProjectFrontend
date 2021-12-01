@@ -3,9 +3,9 @@ import {Cloudinary, CloudinaryImage} from "@cloudinary/url-gen";
 import {thumbnail} from "@cloudinary/url-gen/actions/resize";
 import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {AuthService} from "../../../modules/auth/services/client/auth.service";
-import {UserRestService} from "../../../modules/auth/services/rest/user-rest.service";
-import {UploadService} from "../../../modules/auth/services/client/upload.service";
+import {AuthService} from "../../modules/auth/services/client/auth.service";
+import {UserRestService} from "../../modules/auth/services/rest/user-rest.service";
+import {UploadService} from "../../modules/auth/services/client/upload.service";
 
 @Component({
   selector: 'app-upload-image',
