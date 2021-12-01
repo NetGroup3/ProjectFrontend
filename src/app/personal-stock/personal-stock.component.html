@@ -17,8 +17,16 @@
          {{stock.ingredient.measurement}}
 
           <ul nz-list-item-actions>
+
             <nz-list-item-action><a (click)="edit(stock)">edit</a></nz-list-item-action>
-            <nz-list-item-action><a (click)="remove(stock.ingredient.id)">remove</a></nz-list-item-action>
+
+            <nz-list-item-action>
+
+              <a nz-popconfirm (nzOnConfirm)="remove(stock.ingredient.id)"  nzPopconfirmTitle="Are you sure?" [nzIcon]="iconTpl">Delete</a>
+              <ng-template #iconTpl>
+                <i nz-icon nzType="question-circle-o" style="color: red;"></i>
+              </ng-template>
+            </nz-list-item-action>
           </ul>
 
       </nz-list-item>

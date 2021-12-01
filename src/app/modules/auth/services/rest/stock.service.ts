@@ -20,19 +20,19 @@ export class StockService {
 
   delete(id: number) {
     return this.http.delete(appLinks.stock, {
-      params: new HttpParams().set('id', id)
+      params: new HttpParams().set('ingredientId', id)
     });
   }
 
   create(id: number, amount: number){
     return this.http.post(appLinks.stock, {
-      params: new HttpParams().set('id', id).set('amount', amount)
+      params: new HttpParams().set('ingredientId', id).set('amount', amount)
     });
   }
 
   update(id: number, amount: number){
     return this.http.patch(appLinks.stock, {
-      params: new HttpParams().set('id', id).set('amount', amount)
+      params: new HttpParams().set('ingredientId', id).set('amount', amount)
     });
   }
 

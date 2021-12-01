@@ -61,15 +61,6 @@ export class PersonalStockComponent implements OnInit {
       console.log(res)
       this.data = this.data.filter(stock=>stock.id!==id);
     });
-
   }
-
- /* cancel(): void {
-    this.nzMessageService.info('click cancel');
-  }
-
-  confirm(): void {
-    this.nzMessageService.info('click confirm');
-  }*/
 
 }
