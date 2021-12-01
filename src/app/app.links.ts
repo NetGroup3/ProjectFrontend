@@ -18,9 +18,9 @@ export const appLinks={
   userImage:`${environment.serverUrl}/users/user-image`,
   uploadImage:`https://api.cloudinary.com/v1_1/djcak19nu/image/upload`,
   dishes:`${environment.serverUrl}/dish/page`,
+  stock:`${environment.serverUrl}/user/stock`,
   dish:`${environment.serverUrl}/dish`,
   label: `${environment.serverUrl}/dish/label/edit`,
   dishIngredient:`${environment.serverUrl}/dish/ingredient`,
-  dishKitchenware:`${environment.serverUrl}/dish/kitchenware`,
-  stock:`${environment.serverUrl}/user/stock`,
+  dishKitchenware:`${environment.serverUrl}/dish/kitchenware`
 }
