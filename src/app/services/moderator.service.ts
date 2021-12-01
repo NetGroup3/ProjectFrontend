@@ -2,11 +2,11 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {appLinks} from "../app.links";
-import {Ingredient} from "../models/ingredient";
-import {Kitchenware} from "../models/kitchenware";
-import {Dish} from "../models/dish";
-import {Dish_ingredients} from "../models/dish_ingredients";
-import {Dish_kitchenware} from "../models/dish_kitchenware";
+import {Ingredient} from "../modules/models/ingredient";
+import {Kitchenware} from "../modules/models/kitchenware";
+import {Dish} from "../modules/models/dish";
+import {Dish_ingredients} from "../modules/models/dish_ingredients";
+import {Dish_kitchenware} from "../modules/models/dish_kitchenware";
 
 @Injectable({
   providedIn: 'root'

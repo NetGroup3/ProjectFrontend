@@ -3,18 +3,18 @@ import { RouterModule, Routes } from '@angular/router';
 import {SignupPageComponent} from "./modules/auth/pages/signup-page/signup-page.component";
 import {LoginPageComponent} from "./modules/auth/pages/login-page/login-page.component";
 import {RecoveryPageComponent} from "./modules/auth/pages/recovery-page/recovery-page.component";
-import {HomeComponent} from "./home/home.component";
-import {AuthUserSettingsComponent} from "./settings/auth-user-settings.component";
-import {IngridientsComponent} from "./ingridients/ingridients.component";
-import {AddEditIngredientComponent} from "./add-edit-ingredient/add-edit-ingredient.component";
-import { HomeGuard} from "./home.guard.";
-import {ModeratorIngredientsComponent} from "./moderator/moderator-ingredients/moderator-ingredients.component";
-import {ModeratorKitchenwareComponent} from "./moderator/moderator-kitchenware/moderator-kitchenware.component";
-import {ModeratorCocktailsComponent} from "./moderator/moderator-cocktails/moderator-cocktails.component";
-import {AdminModeratorsComponent} from "./admin/admin-moderators/admin-moderators.component";
-import {AddEditKitchenwareComponent} from "./add-edit-kitchenware/add-edit-kitchenware.component";
-import {AddEditDishComponent} from "./add-edit-dish/add-edit-dish.component";
-import {PersonalStockComponent} from "./personal-stock/personal-stock.component";
+import {HomeComponent} from "./modules/cocktails/home/home.component";
+import {AuthUserSettingsComponent} from "./modules/settings/auth-user-settings.component";
+import {IngridientsComponent} from "./modules/cocktails/ingridients/ingridients.component";
+import {AddEditIngredientComponent} from "./modules/cocktails/add-edit-ingredient/add-edit-ingredient.component";
+import { HomeGuard} from "./modules/core/home.guard.";
+import {ModeratorIngredientsComponent} from "./modules/moderator/moderator-ingredients/moderator-ingredients.component";
+import {ModeratorKitchenwareComponent} from "./modules/moderator/moderator-kitchenware/moderator-kitchenware.component";
+import {ModeratorCocktailsComponent} from "./modules/moderator/moderator-cocktails/moderator-cocktails.component";
+import {AdminModeratorsComponent} from "./modules/admin/admin-moderators/admin-moderators.component";
+import {AddEditKitchenwareComponent} from "./modules/cocktails/add-edit-kitchenware/add-edit-kitchenware.component";
+import {AddEditDishComponent} from "./modules/cocktails/add-edit-dish/add-edit-dish.component";
+import {PersonalStockComponent} from "./modules/cocktails/personal-stock/personal-stock.component";
 
 
 const routes: Routes = [
