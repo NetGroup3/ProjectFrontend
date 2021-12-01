@@ -37,7 +37,6 @@ import {ModeratorCocktailsComponent} from "./moderator/moderator-cocktails/moder
 import {ModeratorIngredientsComponent} from "./moderator/moderator-ingredients/moderator-ingredients.component";
 import {ModeratorKitchenwareComponent} from "./moderator/moderator-kitchenware/moderator-kitchenware.component";
 import {AdminModeratorsComponent} from "./admin/admin-moderators/admin-moderators.component";
-import {AdminSceletonComponent} from "./sceletons/admin-sceleton/admin-sceleton.component";
 import {EditModeratorComponent} from "./admin/edit-moderator/edit-moderator.component";
 import {KitchenwareComponent} from './kitchenware/kitchenware.component';
 import {AddEditKitchenwareComponent} from './add-edit-kitchenware/add-edit-kitchenware.component';
@@ -70,7 +69,6 @@ registerLocaleData(en);
     ModeratorKitchenwareComponent,
     ModeratorCocktailsComponent,
     AdminModeratorsComponent,
-    AdminSceletonComponent,
     KitchenwareComponent,
     AddEditKitchenwareComponent,
     UploadImageComponent,
