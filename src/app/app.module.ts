@@ -52,6 +52,7 @@ import {SidebarComponent} from "./modules/core/sidebar/sidebar.component";
 import {HeaderComponent} from "./modules/core/header/header.component";
 import {NzSkeletonModule} from "ng-zorro-antd/skeleton";
 import {NzListModule} from "ng-zorro-antd/list";
+import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
 
 registerLocaleData(en);
 
@@ -86,25 +87,26 @@ registerLocaleData(en);
     HeaderComponent,
   ],
 
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    IconsProviderModule,
-    NzLayoutModule,
-    NzMenuModule,
-    NzButtonModule,
-    NzInputModule,
-    NzFormModule,
-    NzSelectModule,
-    HttpClientModule,
-    CloudinaryModule,
-    NgxDropzoneModule,
-    NzSkeletonModule,
-    NzListModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        IconsProviderModule,
+        NzLayoutModule,
+        NzMenuModule,
+        NzButtonModule,
+        NzInputModule,
+        NzFormModule,
+        NzSelectModule,
+        HttpClientModule,
+        CloudinaryModule,
+        NgxDropzoneModule,
+        NzSkeletonModule,
+        NzListModule,
+        NzPopconfirmModule,
+    ],
   providers: [
     {
       provide : HTTP_INTERCEPTORS,

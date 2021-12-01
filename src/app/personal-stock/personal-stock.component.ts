@@ -3,8 +3,8 @@ import {MessageService} from "../services/message.service";
 import {StockService} from "../modules/auth/services/rest/stock.service";
 import {catchError} from "rxjs/operators";
 import {of} from "rxjs";
-import {AuthService} from "../modules/auth/services/client/auth.service";
 import {StockModel} from "../modules/auth/models/stock.model";
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
   selector: 'app-personal-stock',
@@ -21,7 +21,8 @@ export class PersonalStockComponent implements OnInit {
 
   constructor(
     private stockService: StockService,
-    private msg: MessageService) { }
+    private msg: MessageService,
+    ) { }
 
   ngOnInit(): void {
     this.getData((res: any) => {
@@ -62,4 +63,13 @@ export class PersonalStockComponent implements OnInit {
     });
 
   }
+
+ /* cancel(): void {
+    this.nzMessageService.info('click cancel');
+  }
+
+  confirm(): void {
+    this.nzMessageService.info('click confirm');
+  }*/
+
 }
