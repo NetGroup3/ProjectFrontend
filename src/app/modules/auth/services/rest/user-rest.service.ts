@@ -4,7 +4,6 @@ import {Observable} from "rxjs";
 import {appLinks} from "../../../../app.links";
 import {User} from "../../../../models/user";
 import { ChangePasswordForm } from "../../models/change-password-form.model";
-import {UserId} from "../../models/user-id";
 
 @Injectable({
   providedIn: 'root'

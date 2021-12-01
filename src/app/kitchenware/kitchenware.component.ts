@@ -1,10 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ModeratorService} from "../services/moderator.service";
 import {Kitchenware} from "../models/kitchenware";
-import {Cloudinary, CloudinaryImage} from "@cloudinary/url-gen";
-import {thumbnail} from "@cloudinary/url-gen/actions/resize";
-import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
-import {Ingredient} from "../models/ingredient";
 
 @Component({
   selector: 'app-kitchenware',
@@ -81,14 +77,6 @@ export class KitchenwareComponent implements OnInit {
   delete(kitchenware: Kitchenware) {
     this.kitchenware = kitchenware;
     this.toggle = !this.toggle;
-
-  }
-
-  initImage(imageId: string): CloudinaryImage {
-    const cld = new Cloudinary({cloud: {cloudName: 'djcak19nu'}});
-    return cld.image(imageId)
-      .resize(thumbnail().width(100).height(100))
-      .roundCorners(byRadius(10));
   }
 
   search() {

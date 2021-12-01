@@ -80,13 +80,6 @@ export class IngridientsComponent implements OnInit {
     location.reload();
   }
 
-  initImage(imageId: string): CloudinaryImage {
-    const cld = new Cloudinary({cloud: {cloudName: 'djcak19nu'}});
-    return cld.image(imageId)
-      .resize(thumbnail().width(50).height(50))
-      .roundCorners(byRadius(10));
-  }
-
   delete(ingridient: Ingredient) {
     this.delIngredient = ingridient;
     this.toggle = !this.toggle;

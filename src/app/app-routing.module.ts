@@ -34,6 +34,7 @@ const routes: Routes = [
   { path: 'moderator/kitchenware', component: ModeratorKitchenwareComponent},
   { path: 'moderator/kitchenware/add', component: AddEditKitchenwareComponent},
   { path: 'moderator/kitchenware/:id', component: AddEditKitchenwareComponent},
+  { path: 'moderator/settings', component: AuthUserSettingsComponent},
   { path: 'admin/moderators', component: AdminModeratorsComponent},
   { path: 'personal-stock', component: PersonalStockComponent},
 ];
