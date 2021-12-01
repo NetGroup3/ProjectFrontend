@@ -55,9 +55,11 @@ export class PersonalStockComponent implements OnInit {
     this.msg.success(item.title);
   }
 
-  remove(stock: StockModel) {
-    this.stockService.delete(stock.ingredient.title).subscribe((res: any)=> {
+  remove(id: number) {
+    this.stockService.delete(id).subscribe((res: any)=> {
       console.log(res)
+      this.data = this.data.filter(stock=>stock.id!==id);
     });
+
   }
 }

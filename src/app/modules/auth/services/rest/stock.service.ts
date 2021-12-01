@@ -18,27 +18,21 @@ export class StockService {
     });
   }
 
-/*  delete(id: number) {
+  delete(id: number) {
     return this.http.delete(appLinks.stock, {
       params: new HttpParams().set('id', id)
     });
-  }*/
-
-  delete(ingredient: string) {
-    return this.http.delete(appLinks.stock, {
-      params: new HttpParams().set('ingredient', ingredient)
-    });
   }
 
-  create(ingredient: string, amount: number){
+  create(id: number, amount: number){
     return this.http.post(appLinks.stock, {
-      params: new HttpParams().set('ingredient', ingredient).set('amount', amount)
+      params: new HttpParams().set('id', id).set('amount', amount)
     });
   }
 
-  update(ingredient: string, amount: number){
+  update(id: number, amount: number){
     return this.http.patch(appLinks.stock, {
-      params: new HttpParams().set('ingredient', ingredient).set('amount', amount)
+      params: new HttpParams().set('id', id).set('amount', amount)
     });
   }
 
