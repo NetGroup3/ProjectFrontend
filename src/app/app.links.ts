@@ -23,4 +23,5 @@ export const appLinks={
   dishIngredient:`${environment.serverUrl}/dish/ingredient`,
   dishKitchenware:`${environment.serverUrl}/dish/kitchenware`,
   stock:`${environment.serverUrl}/user/stock`,
+  stockIngredients: `${environment.serverUrl}/user/stock/ingredients`,
 }

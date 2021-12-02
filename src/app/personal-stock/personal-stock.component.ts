@@ -4,7 +4,9 @@ import {StockService} from "../modules/auth/services/rest/stock.service";
 import {catchError} from "rxjs/operators";
 import {of} from "rxjs";
 import {StockModel} from "../modules/auth/models/stock.model";
-import {NzMessageService} from "ng-zorro-antd/message";
+import {Ingredient} from "../models/ingredient";
+import {StockAddDto} from "../models/stock-add-dto";
+
 
 @Component({
   selector: 'app-personal-stock',
@@ -18,6 +20,15 @@ export class PersonalStockComponent implements OnInit {
   initLoading = true; // bug
   loadingMore = false;
   data: StockModel[] = [];
+  show: boolean = true;
+  ingredients: Ingredient[] = [];
+  isLoading = false;
+  selectedIngredientId: number = 0;
+  amount: number = 0;
+  stockAdd: StockAddDto = {
+    id: 0,
+    amount: 0
+  }
 
   constructor(
     private stockService: StockService,
@@ -30,6 +41,11 @@ export class PersonalStockComponent implements OnInit {
       this.data = res;
       this.initLoading = false;
     });
+    this.getIngredients((res: any) => {
+      console.log(res)
+      this.ingredients = res;
+      this.initLoading = false;
+    });
   }
 
   getData(callback: (res: any) => void): void {
@@ -39,28 +55,42 @@ export class PersonalStockComponent implements OnInit {
       .subscribe((res: any) => callback(res));
   }
 
-  onLoadMore(): void {
-/*    this.loadingMore = true;
-    this.list = this.data.concat([...Array(count)].fill({}).map(() => ({ loading: true, name: {} })));
+  getIngredients(callback: (res: any) => void): void {
     this.stockService
-      .getData(this.authService.getUserId())
+      .getIngredients(this.limit, this.page)
       .pipe(catchError(() => of({ results: [] })))
-      .subscribe((res: any) => {
-        this.data = this.data.concat(res.results);
-        this.list = [...this.data];
-        this.loadingMore = false;
-      });*/
+      .subscribe((res: any) => callback(res));
+  }
+
+  loadMore() {
+    console.log("load more ingredient");
+  }
+
+  onLoadMore(): void {
+    console.log("load more stock");
   }
 
   edit(item: any): void {
     this.msg.success(item.title);
+    this.show = !this.show;
   }
 
-  remove(id: number) {
-    this.stockService.delete(id).subscribe((res: any)=> {
+  delete(stock: StockModel) {
+    const id: number = stock.id
+    this.stockService.delete(stock.ingredient.id).subscribe((res: any)=> {
       console.log(res)
       this.data = this.data.filter(stock=>stock.id!==id);
     });
   }
 
+  addStock(): void {
+    console.log(this.selectedIngredientId);
+    console.log(this.amount);
+    this.stockAdd.id = this.selectedIngredientId;
+    this.stockAdd.amount = this.amount;
+    this.stockService.create(this.stockAdd).subscribe((res: any)=> {
+      console.log(res)
+      this.ingredients = this.ingredients.filter(ingredient=>ingredient.id!==this.selectedIngredientId);
+    });
+  }
 }

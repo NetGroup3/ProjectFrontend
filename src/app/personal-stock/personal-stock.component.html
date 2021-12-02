@@ -4,36 +4,66 @@
     <h1>Personal stock</h1>
 
     <nz-list class="demo-loadmore-list" [nzLoading]="initLoading">
+
       <nz-list-item *ngFor="let stock of data">
-        <!--               <advanced-image [cldImg]="stock.ingredient.imageId | getPicture"></advanced-image>-->
-          <nz-list-item-meta
-            nzDescription={{stock.ingredient.description}}
-          >
-            <nz-list-item-meta-title>
-              <a href="/moderator/ingredients/{{stock.ingredient.id}}">{{stock.ingredient.title}}</a>
-            </nz-list-item-meta-title>
-          </nz-list-item-meta>
-        {{stock.amount}}
-         {{stock.ingredient.measurement}}
-
-          <ul nz-list-item-actions>
-
-            <nz-list-item-action><a (click)="edit(stock)">edit</a></nz-list-item-action>
-
-            <nz-list-item-action>
-
-              <a nz-popconfirm (nzOnConfirm)="remove(stock.ingredient.id)"  nzPopconfirmTitle="Are you sure?" [nzIcon]="iconTpl">Delete</a>
-              <ng-template #iconTpl>
-                <i nz-icon nzType="question-circle-o" style="color: red;"></i>
-              </ng-template>
-            </nz-list-item-action>
-          </ul>
-
+        <nz-list-item-meta [nzDescription]="stock.ingredient.description" >
+          <nz-list-item-meta-title>
+            <a href="/moderator/ingredients/{{stock.ingredient.id}}">{{stock.ingredient.title}}</a>
+          </nz-list-item-meta-title>
+        </nz-list-item-meta>
+        <h1 *ngIf="show; then ifBlock else elseBlock"></h1>
+        <ng-template #ifBlock>
+          {{stock.amount}}
+        </ng-template>
+        <ng-template #elseBlock>
+          <nz-input-number
+            [(ngModel)]="stock.amount"
+            [nzMin]="0.1"
+            [nzStep]="0.1"
+            [nzPlaceHolder]="'Digital'"
+          ></nz-input-number>
+        </ng-template>
+        {{stock.ingredient.measurement}}
+        <ul nz-list-item-actions>
+          <nz-list-item-action><a (click)="edit(stock)">edit</a></nz-list-item-action>
+          <nz-list-item-action>
+            <a nz-popconfirm (nzOnConfirm)="delete(stock)"  nzPopconfirmTitle="Are you sure?" [nzIcon]="iconTpl">Delete</a>
+            <ng-template #iconTpl>
+              <i nz-icon nzType="question-circle-o" style="color: red;"></i>
+            </ng-template>
+          </nz-list-item-action>
+        </ul>
       </nz-list-item>
+
+
       <div class="loadmore" nz-list-load-more>
         <button nz-button *ngIf="!loadingMore" (click)="onLoadMore()">loading more</button>
       </div>
     </nz-list>
+
+  <div>
+    <nz-select
+      [(ngModel)]="selectedIngredientId"
+      (nzScrollToBottom)="loadMore()"
+      nzPlaceHolder="Select a ingredient"
+      nzAllowClear
+      [nzDropdownRender]="renderTemplate"
+    >
+      <nz-option *ngFor="let ingredient of ingredients" [nzValue]="ingredient.id" [nzLabel]="ingredient.title"></nz-option>
+    </nz-select>
+    <ng-template #renderTemplate>
+      <nz-spin *ngIf="isLoading"></nz-spin>
+    </ng-template>
+
+    <nz-input-number
+      [(ngModel)]="amount"
+      [nzMin]="0.1"
+      [nzStep]="0.1"
+      [nzPlaceHolder]="'Digital'"
+    ></nz-input-number>
+
+    <button nz-button (click)="addStock()">Add ingredient</button>
+  </div>
 
   </div>
 
