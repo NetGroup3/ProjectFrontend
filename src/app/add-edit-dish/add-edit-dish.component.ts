@@ -164,7 +164,7 @@ export class AddEditDishComponent implements OnInit {
             console.log(response)
       });
     }
-    location.reload();
+    //location.reload();
 
   }
   submitKitchenware() {
