@@ -15,6 +15,7 @@ import {AdminModeratorsComponent} from "./modules/admin/admin-moderators/admin-m
 import {AddEditKitchenwareComponent} from "./modules/cocktails/add-edit-kitchenware/add-edit-kitchenware.component";
 import {AddEditDishComponent} from "./modules/cocktails/add-edit-dish/add-edit-dish.component";
 import {PersonalStockComponent} from "./modules/cocktails/personal-stock/personal-stock.component";
+import {PageNotFoundComponent} from "./modules/core/page-not-found/page-not-found.component";
 
 
 const routes: Routes = [
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'moderator/settings', component: AuthUserSettingsComponent},
   { path: 'admin/moderators', component: AdminModeratorsComponent},
   { path: 'personal-stock', component: PersonalStockComponent},
+  {path: "**", component: PageNotFoundComponent},
 ];
 
 @NgModule({
