@@ -1,0 +1,28 @@
+<div
+  class="stock"
+  (dblclick)="onChange(stock)"
+>
+  <h3>
+    {{stock.ingredient.title}}
+    <fa-icon
+      (click)="onDelete(stock)"
+      [ngStyle]="{'color':'red'}"
+      [icon]="faTimes" >
+    </fa-icon>
+  </h3>
+  <p>{{stock.ingredient.description}}</p>
+  <h1 *ngIf="selected; then ifBlock else elseBlock"></h1>
+  <ng-template #ifBlock>
+    {{stock.amount}}
+  </ng-template>
+  <ng-template #elseBlock>
+    <nz-input-number
+      [(ngModel)]="stock.amount"
+      [nzMin]="0.1"
+      [nzStep]="0.1"
+      [nzPlaceHolder]="'Digital'"
+    >
+    </nz-input-number>
+  </ng-template>
+  {{stock.ingredient.measurement}}
+</div>
