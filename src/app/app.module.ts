@@ -49,10 +49,12 @@ import { AddEditDishComponent } from './modules/cocktails/add-edit-dish/add-edit
 import {PersonalStockComponent} from "./modules/cocktails/personal-stock/personal-stock.component";
 import {FooterComponent} from "./modules/core/footer/footer.component";
 import {SidebarComponent} from "./modules/core/sidebar/sidebar.component";
+import {PageNotFoundComponent} from "./modules/core/page-not-found/page-not-found.component";
 import {HeaderComponent} from "./modules/core/header/header.component";
 import {NzSkeletonModule} from "ng-zorro-antd/skeleton";
 import {NzListModule} from "ng-zorro-antd/list";
 import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
+import {RouterModule} from "@angular/router";
 
 registerLocaleData(en);
 
@@ -85,6 +87,7 @@ registerLocaleData(en);
     FooterComponent,
     SidebarComponent,
     HeaderComponent,
+    PageNotFoundComponent,
   ],
 
     imports: [
@@ -106,6 +109,9 @@ registerLocaleData(en);
         NzSkeletonModule,
         NzListModule,
         NzPopconfirmModule,
+      RouterModule.forRoot([
+        {path: "**", component: PageNotFoundComponent}
+      ])
     ],
   providers: [
     {
