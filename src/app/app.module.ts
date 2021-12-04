@@ -53,6 +53,8 @@ import {HeaderComponent} from "./modules/core/header/header.component";
 import {NzSkeletonModule} from "ng-zorro-antd/skeleton";
 import {NzListModule} from "ng-zorro-antd/list";
 import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
+import {NzTransferModule} from "ng-zorro-antd/transfer";
+import {NzSwitchModule} from "ng-zorro-antd/switch";
 
 registerLocaleData(en);
 
@@ -87,26 +89,28 @@ registerLocaleData(en);
     HeaderComponent,
   ],
 
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        IconsProviderModule,
-        NzLayoutModule,
-        NzMenuModule,
-        NzButtonModule,
-        NzInputModule,
-        NzFormModule,
-        NzSelectModule,
-        HttpClientModule,
-        CloudinaryModule,
-        NgxDropzoneModule,
-        NzSkeletonModule,
-        NzListModule,
-        NzPopconfirmModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    IconsProviderModule,
+    NzLayoutModule,
+    NzMenuModule,
+    NzButtonModule,
+    NzInputModule,
+    NzFormModule,
+    NzSelectModule,
+    HttpClientModule,
+    CloudinaryModule,
+    NgxDropzoneModule,
+    NzSkeletonModule,
+    NzListModule,
+    NzPopconfirmModule,
+    NzTransferModule,
+    NzSwitchModule,
+  ],
   providers: [
     {
       provide : HTTP_INTERCEPTORS,
