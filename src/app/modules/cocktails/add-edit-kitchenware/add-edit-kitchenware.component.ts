@@ -59,8 +59,8 @@ export class AddEditKitchenwareComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.moderatorService.get_kitchenware(id)
       .subscribe((response:any)=>{
-        console.log(response.body)
-        this.kitchenware = response.body
+        console.log(response)
+        this.kitchenware = response
         this.img = this.uploadService.initImage(this.kitchenware.imageId);
       });
   }

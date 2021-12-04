@@ -133,4 +133,8 @@ export class ModeratorService {
     console.log( this.http.put(appLinks.dish, body))
     return this.http.post(appLinks.dishKitchenware, body);
   }
+
+  public like(dish: number){
+    return this.http.post(appLinks.dishLike, dish);
+  }
 }
