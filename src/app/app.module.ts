@@ -57,6 +57,7 @@ import { DishComponent } from './dish/dish.component';
 import { AddEditDishComponent } from './add-edit-dish/add-edit-dish.component';
 import {PersonalStockComponent} from "./personal-stock/personal-stock.component";
 import {FooterComponent} from "./modules/footer/footer.component";
+import {AuthUserRequestsComponent} from "./auth-user/auth-user-friends/auth-user-requests/auth-user-requests.component";
 
 registerLocaleData(en);
 
@@ -75,6 +76,7 @@ registerLocaleData(en);
     AuthUserEventsComponent,
     AuthUserSettingsComponent,
     AuthUserFriendsComponent,
+    AuthUserRequestsComponent,
     AuthUserBlogComponent,
     IngridientsComponent,
     AddEditIngredientComponent,

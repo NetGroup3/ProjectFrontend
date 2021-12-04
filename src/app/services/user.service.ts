@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import {Observable, of} from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import {User} from '../models/user';
+import {appLinks} from "../app.links";
 
 
 @Injectable({
@@ -64,6 +65,45 @@ export class UserService {
       tap((newUser: User) => this.log(`sign up success`)),
       catchError(this.handleError<any>('addUser'))
     );
+  }
+
+  public getFriends(limit: number, offset: number) : Observable<any>{
+    const params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('offset', offset.toString());
+    console.log('link: ',params);
+    return this.http.get(appLinks.friends, {params});
+  }
+
+  public deleteFriend(id: number){
+    console.log( this.http.delete(appLinks.delFriend, {
+      params: new HttpParams().set('id', id)
+    }))
+    return this.http.delete(appLinks.delFriend, {
+      params: new HttpParams().set('id', id)
+    });
+  }
+
+  public getRequests(limit: number, offset: number) : Observable<any>{
+    const params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('offset', offset.toString());
+    return this.http.get(appLinks.requests, {params});
+  }
+
+  public declineInvite(id: number){
+    console.log( this.http.delete(appLinks.declineInvite, {
+      params: new HttpParams().set('id', id)
+    }))
+    return this.http.delete(appLinks.declineInvite, {
+      params: new HttpParams().set('id', id)
+    });
+  }
+
+  public acceptInvite(id: number){
+    return this.http.put(appLinks.acceptInvite, undefined,{
+      params: new HttpParams().set('id', id)
+    });
   }
 
 }

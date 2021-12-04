@@ -23,6 +23,7 @@ import {AddEditKitchenwareComponent} from "./add-edit-kitchenware/add-edit-kitch
 import {ModeratorSceletonComponent} from "./sceletons/moderator-sceleton/moderator-sceleton.component";
 import {AddEditDishComponent} from "./add-edit-dish/add-edit-dish.component";
 import {PersonalStockComponent} from "./personal-stock/personal-stock.component";
+import {AuthUserRequestsComponent} from "./auth-user/auth-user-friends/auth-user-requests/auth-user-requests.component";
 
 
 const routes: Routes = [
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'user/events', component:AuthUserEventsComponent},
   { path: 'user/favourite', component:AuthUserFavouriteComponent},
   { path: 'user/friends', component:AuthUserFriendsComponent},
+  { path: 'user/requests', component:AuthUserRequestsComponent},
   { path: 'user/settings', component:AuthUserSettingsComponent},
   { path: 'moderator', component:ModeratorSceletonComponent},
   { path: 'moderator/ingredients', component:ModeratorIngredientsComponent},

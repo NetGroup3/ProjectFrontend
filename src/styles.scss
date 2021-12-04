@@ -10,3 +10,16 @@ button:hover{
   cursor: pointer;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 24px rgba(153, 33, 232, 0.5);
 }
+.next.ant-btn-circle{
+  background: #9921E8 !important;
+  border-radius: 50px !important;
+  height: 50px !important;
+  color: white !important;
+  font-weight: bold !important;
+  border: none !important;
+}
+.ant-btn[disabled]{
+  background-color: #f5f5f5 !important;
+  color: #313131 !important;
+  border: 1px solid #d9d9d9 !important;
+}
