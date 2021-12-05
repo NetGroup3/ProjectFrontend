@@ -32,7 +32,7 @@ export class ModeratorService {
       .set('category', category)
       .set('sortedBy', sortedBy)
     ;
-    return this.http.get(appLinks.ingredients, {params});
+    return this.http.get(appLinks.ingredients, {params})
   }
 
   public add_ingredient (body: Ingredient){
