@@ -44,7 +44,7 @@ export class IngridientsComponent implements OnInit {
     this.moderatorService.get_ingridients(limit, page, key, category, sortedBy)
       .subscribe((response:any)=>{
         console.log(response.body)
-        this.Ingridients = response.body
+        this.Ingridients = response
       });
   }
 
