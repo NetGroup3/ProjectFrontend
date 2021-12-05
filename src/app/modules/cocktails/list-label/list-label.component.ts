@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {TransferChange, TransferItem, TransferSelectChange} from "ng-zorro-antd/transfer";
 import {Kitchenware} from "../../models/kitchenware";
 import {ModeratorService} from "../../../services/moderator.service";
+import {InitDishService} from "../../../services/init-dish.service";
 
 @Component({
   selector: 'app-list-label',
@@ -20,7 +21,8 @@ export class ListLabelComponent implements OnInit {
   limit: number = 10;
   page: number = 0;
 
-  constructor(private moderatorService: ModeratorService) {
+  constructor(private moderatorService: ModeratorService,
+              private initDishService: InitDishService) {
   }
 
   ngOnInit(): void {
@@ -54,7 +56,7 @@ export class ListLabelComponent implements OnInit {
 
   change(ret: TransferChange): void {
     ret.list.forEach(el => {
-      this.changes.push(el)
+      this.initDishService.changedLabel.push(el)
     })
     console.log('nzChange', ret);
     const listKeys = ret.list.map(l => l.key);
@@ -69,12 +71,6 @@ export class ListLabelComponent implements OnInit {
       }
       return e;
     });
-  }
-
-  check():any {
-    const ch = this.changes
-    console.log(this.changes)
-    return ch
   }
 
 

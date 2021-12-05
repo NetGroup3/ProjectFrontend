@@ -3,6 +3,7 @@ import {TransferChange, TransferItem, TransferSelectChange} from "ng-zorro-antd/
 import {ModeratorService} from "../../../services/moderator.service";
 import {Ingredient} from "../../models/ingredient";
 import {AddEditDishComponent} from "../add-edit-dish/add-edit-dish.component";
+import {InitDishService} from "../../../services/init-dish.service";
 
 @Component({
   selector: 'app-list',
@@ -21,7 +22,8 @@ export class ListComponent implements OnInit {
   limit: number = 10;
   page: number = 0;
 
-  constructor(private moderatorService: ModeratorService) {
+  constructor(private moderatorService: ModeratorService,
+              private initDishService: InitDishService) {
   }
 
   ngOnInit(): void {
@@ -55,7 +57,7 @@ export class ListComponent implements OnInit {
 
   change(ret: TransferChange): void {
     ret.list.forEach(el => {
-      this.changes.push(el)
+      this.initDishService.changedIngredients.push(el)
     })
     console.log('nzChange', ret);
     const listKeys = ret.list.map(l => l.key);
@@ -70,13 +72,5 @@ export class ListComponent implements OnInit {
       }
       return e;
     });
-  }
-
-
-  check():any {
-    const ch = this.changes
-    console.log(1111)
-    console.log(this.changes)
-    return ch
   }
 }

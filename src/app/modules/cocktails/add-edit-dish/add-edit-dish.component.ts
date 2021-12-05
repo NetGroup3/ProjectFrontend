@@ -13,6 +13,10 @@ import {Dish_ingredients} from "../../models/dish_ingredients";
 import {Dish_kitchenware} from "../../models/dish_kitchenware";
 import {TransferItem} from "ng-zorro-antd/transfer";
 import {ListComponent} from "../list/list.component";
+import {AuthService} from "../../auth/services/client/auth.service";
+import {InitDishService} from "../../../services/init-dish.service";
+import {DishWrapperDto} from "../../models/dishWrapperDto";
+import {DishIngredientDto} from "../../models/dishIngredientDto";
 
 @Component({
   selector: 'app-add-edit-dish',
@@ -44,28 +48,24 @@ export class AddEditDishComponent implements OnInit {
     likes: 0
   }
   public img: any;
-//  public img: CloudinaryImage = this.initImage();
-  Ingridients: Ingredient [] = [];
-  AllIngridients: Ingredient [] = [];
-  //checked: boolean [] = [];
-  Kitchenware: Kitchenware [] = [];
-  AllKitchenware: Kitchenware [] = [];
-  selectedIngredients: any;
-  selectedKitchenware: any;
-  selectedLabels: any;
-  Labels: any;
-  AllLabels: any;
-  dish_ingredient: Dish_ingredients = {
-    id: 0,
-    dish: 0,
+
+  dishIngredientDto: DishIngredientDto = {
     ingredient: 0,
     amount: 0
-  };
-  dish_kitchenware: Dish_kitchenware = {
-    id: 0,
-    dish: 0,
-    kitchenware: 0
-  };
+  }
+  kitchenware: number [] = [];
+  labels: number [] = [];
+  ingredients: DishIngredientDto [] = []
+
+  dish_ingredient: Dish_ingredients [] = []
+  dish_kitchenware: Dish_kitchenware [] = []
+
+  dishWrapperDto: DishWrapperDto = {
+    dish: this.dish,
+    ingredients: this.ingredients,
+    kitchenware: this.kitchenware,
+    lable: this.labels,
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -73,62 +73,55 @@ export class AddEditDishComponent implements OnInit {
     private location: Location,
     private uploadService: UploadService,
     private router: Router,
-    private ingredientList: ListComponent
+    private ingredientList: ListComponent,
+    private authService: AuthService,
+    private initDishService: InitDishService
   ) {
   }
 
   ngOnInit(): void {
     if (Number(this.route.snapshot.paramMap.get('id')) > 0) {
       this.getDish();
-      console.log(this.dish.imageId);
-      this.img = this.initImage();
     }
   }
 
-
-
   onAddClick(): void {
-    this.ingredientList.check()
-    this.changesIngredient = this.ingredientList.changes
-    console.log(this.ingredientList.changes)
-    // if (this.dish.id === 0) {
-    //   this.moderatorService.add_dish(this.dish).subscribe((response: any) => {
-    //     console.log(response)
-    //   });
-    // } else {
-    //   this.moderatorService.edit_dish(this.dish).subscribe((response: any) => {
-    //     console.log(response)
-    //   });
-    // }
-    // console.log(this.dish)
-    // this.router.navigate(['moderator/cocktails'])
+    this.initDishService.changedIngredients.forEach(item => {
+      this.dishIngredientDto.ingredient = +item.key
+      this.dishIngredientDto.amount = 0
+      this.ingredients.push(this.dishIngredientDto)
+    })
+    this.initDishService.changedKitchenware.forEach(item => this.kitchenware.push(+item.key))
+    this.initDishService.changedLabel.forEach(item => this.labels.push(+item.key))
+    if (this.dish.id === 0) {
+      this.moderatorService.add_dish(this.dishWrapperDto).subscribe((response: any) => {
+        console.log(response)
+      });
+    } else {
+      this.moderatorService.edit_dish(this.dish).subscribe((response: any) => {
+        console.log(response)
+      });
+    }
+    //this.router.navigate(['moderator/cocktails'])
   }
 
   getDish(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.moderatorService.get_dish(id)
+    this.moderatorService.get_dish(id, +this.authService.getUserId())
       .subscribe((response: any) => {
         console.log(response)
         this.dish = response.dish
-        this.Ingridients = response.ingredients
-        this.Kitchenware = response.kitchenware
-        console.log(this.Ingridients)
-        this.img = this.initImage();
+        this.img = this.uploadService.initImage(this.dish.imageId);
       });
   }
 
-  initImage(): CloudinaryImage {
-    const cld = new Cloudinary({cloud: {cloudName: 'djcak19nu'}});
-    return cld.image(this.dish.imageId)
-      .resize(thumbnail().width(180).height(180))
-      .roundCorners(byRadius(10));
-  }
 
   onFileSelect($event: any) {
     this.uploadService.onUpLoad($event.target.files[0]).subscribe(response => {
       this.dish.imageId = response.public_id;
-      this.img = this.initImage();
-      this.onAddClick();
+      console.log(this.dish.imageId)
+      this.img = this.uploadService.initImage(this.dish.imageId);
+      //this.onAddClick();
     });
   }
 }
