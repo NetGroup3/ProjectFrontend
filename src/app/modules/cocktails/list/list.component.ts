@@ -72,6 +72,7 @@ export class ListComponent implements OnInit {
     });
   }
 
+
   check():any {
     const ch = this.changes
     console.log(1111)
