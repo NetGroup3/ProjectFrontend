@@ -20,6 +20,7 @@ export class DishComponent implements OnInit {
   key: string = ""
   category: string = ""
   sortedBy: string = ""
+  desc: boolean = false
 
   delDish: Dish = {
     id: 0,
@@ -62,9 +63,9 @@ export class DishComponent implements OnInit {
     this.search()
   }
 
-  getIngridients(limit: number, page: number, key: string, category: string, sortedBy: string): void {
+  getIngridients(limit: number, page: number, desc: boolean, key: string, category: string, sortedBy: string, userId: number): void {
     console.log(key)
-    this.moderatorService.get_dishes(limit, page, key, category, sortedBy)
+    this.moderatorService.get_dishes(limit, page, desc, key, category, sortedBy, userId)
       .subscribe((response:any)=>{
         console.log(response)
         this.Dishes = response
@@ -126,7 +127,7 @@ export class DishComponent implements OnInit {
     else if(this.category){
       this.sortedBy = "category"
     }
-    this.getIngridients(this.limit, this.page, this.key, this.category, this.sortedBy);
+    this.getIngridients(this.limit, this.page, this.desc, this.key, this.category, this.sortedBy, +this.authService.getUserId());
   }
 
   likes(id: number) {
