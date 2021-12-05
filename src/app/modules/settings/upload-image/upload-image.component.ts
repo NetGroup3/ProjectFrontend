@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {AuthService} from "../../auth/services/client/auth.service";
 import {UserRestService} from "../../auth/services/rest/user-rest.service";
 import {UploadService} from "../../auth/services/client/upload.service";
+import {NzNotificationService} from "ng-zorro-antd/notification";
 
 @Component({
   selector: 'app-upload-image',
@@ -21,7 +22,8 @@ export class UploadImageComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private userRestService: UserRestService,
-    private uploadService: UploadService
+    private uploadService: UploadService,
+    private notification: NzNotificationService
   ) { }
 
   ngOnInit(): void {
@@ -57,4 +59,11 @@ export class UploadImageComponent implements OnInit {
       imageId: this.imageId
     });
   }
+
+  createBasicNotification(): void {
+    this.notification.blank('Personal information changed', '', {
+      nzKey: 'key'
+    });
+  }
+
 }

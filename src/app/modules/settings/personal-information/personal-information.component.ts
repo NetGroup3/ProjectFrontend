@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../auth/services/client/auth.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserRestService} from "../../auth/services/rest/user-rest.service";
+import {NzNotificationService} from "ng-zorro-antd/notification";
 
 @Component({
   selector: 'app-personal-information',
@@ -12,7 +13,12 @@ export class PersonalInformationComponent implements OnInit {
   public firstname: string = "";
   public lastname: string = "";
   public form: FormGroup = this.personalInformationForm();
-  constructor(private authService: AuthService, private userRestService: UserRestService, private fb: FormBuilder) { }
+
+  constructor(private authService: AuthService,
+              private userRestService: UserRestService,
+              private fb: FormBuilder,
+              private notification: NzNotificationService) {
+  }
 
   ngOnInit(): void {
     this.firstname = this.authService.getUserFirstname();
@@ -34,6 +40,12 @@ export class PersonalInformationComponent implements OnInit {
       id: this.authService.getUserId(),
       firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]]
+    });
+  }
+
+  createBasicNotification(): void {
+    this.notification.blank('Personal information changed', '', {
+      nzKey: 'key'
     });
   }
 

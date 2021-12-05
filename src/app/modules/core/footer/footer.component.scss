@@ -1,4 +1,5 @@
 .footer {
+  z-index: 100;
   position: fixed;
   bottom: 0px;
   background-color: #f9f7f4;
@@ -49,7 +50,7 @@ ul.hr li {
 }
 .social-links {
   margin-top: 5%;
-  margin-left: 60%;
+  margin-left: 50%;
 }
 
 .footer-col .social-links a {

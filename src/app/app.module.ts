@@ -55,6 +55,9 @@ import {NzSkeletonModule} from "ng-zorro-antd/skeleton";
 import {NzListModule} from "ng-zorro-antd/list";
 import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
 import {NzResultModule} from 'ng-zorro-antd/result';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import {AuthUserFriendsComponent} from "./modules/friends/auth-user-friends.component";
+import {AuthUserRequestsComponent} from "./modules/friends/auth-user-requests/auth-user-requests.component";
 
 registerLocaleData(en);
 
@@ -88,6 +91,8 @@ registerLocaleData(en);
     SidebarComponent,
     HeaderComponent,
     PageNotFoundComponent,
+    AuthUserFriendsComponent,
+    AuthUserRequestsComponent,
   ],
 
   imports: [
@@ -110,6 +115,7 @@ registerLocaleData(en);
     NzListModule,
     NzPopconfirmModule,
     NzResultModule,
+    NzNotificationModule
   ],
   providers: [
     {
