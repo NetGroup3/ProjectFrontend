@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Cloudinary, CloudinaryImage} from "@cloudinary/url-gen";
 import {FormBuilder, FormGroup} from "@angular/forms";
@@ -31,6 +31,8 @@ export class HeaderComponent implements OnInit {
   private readonly USER_IMAGE_ID: string = "USER_IMAGE_ID";
   public imageId: string = "";
   public img: CloudinaryImage = this.initImage();
+  public firstname: string = "";
+  public lastname: string = "";
 
 
   logOut() {
@@ -46,6 +48,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.imageId = this.authService.getImageId();
     this.img = this.initImage();
+    this.firstname = this.authService.getUserFirstname();
+    this.lastname = this.authService.getUserLastname();
   }
 
   initImage(): CloudinaryImage {

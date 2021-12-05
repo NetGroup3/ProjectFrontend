@@ -1,9 +1,8 @@
 <div class="header">
-  <div id="headerRight">
-    <advanced-image id="avatar" class="top-bar-element" [cldImg]="img"></advanced-image>
-    <button id="buttonLogout" class="top-bar-element" (click) = "logOut()">
-      Log out
-      <i id="logOutIcon" nz-icon nzType="logout" nzTheme="outline"></i>
-    </button>
-  </div>
+  <button id="buttonLogout" (click)="logOut()" class="top-bar-element">
+    Log out
+    <i id="logOutIcon" nz-icon nzType="logout" nzTheme="outline"></i>
+  </button>
+  <i id="name" class="top-bar-element">{{this.lastname}}<br>{{this.firstname}}</i>
+  <advanced-image id="avatar" [cldImg]="img" class="top-bar-element"></advanced-image>
 </div>
