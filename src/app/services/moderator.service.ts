@@ -18,6 +18,13 @@ export class ModeratorService {
 
   }
 
+  public getLabels(limit: number, page: number) : Observable<any>{
+    const params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('page', page.toString());
+    return this.http.get(appLinks.labels, {params})
+  }
+
    public get_ingridient(id: number): Observable<Object>{
     return this.http.get(appLinks.ingredient, {
       params: new HttpParams().set('id', id)

@@ -24,4 +24,5 @@ export const appLinks={
   dishIngredient:`${environment.serverUrl}/dish/ingredient`,
   dishKitchenware:`${environment.serverUrl}/dish/kitchenware`,
   dishLike:`${environment.serverUrl}/dish/like`,
+  labels:`${environment.serverUrl}/dish/label/edit`,
 }

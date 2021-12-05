@@ -55,6 +55,11 @@ import {NzListModule} from "ng-zorro-antd/list";
 import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
 import {NzTransferModule} from "ng-zorro-antd/transfer";
 import {NzSwitchModule} from "ng-zorro-antd/switch";
+import { ListComponent } from './modules/cocktails/list/list.component';
+import {NzTableModule} from "ng-zorro-antd/table";
+import {NzTagModule} from "ng-zorro-antd/tag";
+import { ListKitchenwareComponent } from './modules/cocktails/list-kitchenware/list-kitchenware.component';
+import { ListLabelComponent } from './modules/cocktails/list-label/list-label.component';
 
 registerLocaleData(en);
 
@@ -87,6 +92,9 @@ registerLocaleData(en);
     FooterComponent,
     SidebarComponent,
     HeaderComponent,
+    ListComponent,
+    ListKitchenwareComponent,
+    ListLabelComponent,
   ],
 
   imports: [
@@ -110,6 +118,8 @@ registerLocaleData(en);
     NzPopconfirmModule,
     NzTransferModule,
     NzSwitchModule,
+    NzTableModule,
+    NzTagModule,
   ],
   providers: [
     {
