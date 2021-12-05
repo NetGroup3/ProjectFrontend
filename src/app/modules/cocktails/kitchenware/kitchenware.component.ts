@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ModeratorService} from "../../../services/moderator.service";
-import {Kitchenware} from "../../models/kitchenware";
+import {ModeratorService} from "../../core/services/moderator.service";
+import {Kitchenware} from "../../core/models/kitchenware";
 
 @Component({
   selector: 'app-kitchenware',

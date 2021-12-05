@@ -1,6 +1,6 @@
 import {Component, OnInit, TemplateRef} from "@angular/core";
-import {FRequest} from "../../models/friendRequest";
-import {FriendService} from "../../../services/friend.service";
+import {FRequest} from "../../core/models/friendRequest";
+import {FriendService} from "../../core/services/friend.service";
 import {NzNotificationService} from 'ng-zorro-antd/notification';
 
 

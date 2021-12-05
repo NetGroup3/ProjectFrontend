@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {TransferChange, TransferItem, TransferSelectChange} from "ng-zorro-antd/transfer";
-import {Ingredient} from "../../models/ingredient";
-import {ModeratorService} from "../../../services/moderator.service";
-import {Kitchenware} from "../../models/kitchenware";
-import {InitDishService} from "../../../services/init-dish.service";
+import {Ingredient} from "../../core/models/ingredient";
+import {ModeratorService} from "../../core/services/moderator.service";
+import {Kitchenware} from "../../core/models/kitchenware";
+import {InitDishService} from "../../core/services/init-dish.service";
 
 @Component({
   selector: 'app-list-kitchenware',

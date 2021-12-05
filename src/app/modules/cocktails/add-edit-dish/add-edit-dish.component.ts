@@ -1,22 +1,22 @@
 import {Component, OnInit} from '@angular/core';
-import {Ingredient} from "../../models/ingredient";
+import {Ingredient} from "../../core/models/ingredient";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ModeratorService} from "../../../services/moderator.service";
+import {ModeratorService} from "../../core/services/moderator.service";
 import {Location} from "@angular/common";
 import {UploadService} from "../../auth/services/client/upload.service";
 import {Cloudinary, CloudinaryImage} from "@cloudinary/url-gen";
 import {thumbnail} from "@cloudinary/url-gen/actions/resize";
 import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
-import {Dish} from "../../models/dish";
-import {Kitchenware} from "../../models/kitchenware";
-import {Dish_ingredients} from "../../models/dish_ingredients";
-import {Dish_kitchenware} from "../../models/dish_kitchenware";
+import {Dish} from "../../core/models/dish";
+import {Kitchenware} from "../../core/models/kitchenware";
+import {Dish_ingredients} from "../../core/models/dish_ingredients";
+import {Dish_kitchenware} from "../../core/models/dish_kitchenware";
 import {TransferItem} from "ng-zorro-antd/transfer";
 import {ListComponent} from "../list/list.component";
 import {AuthService} from "../../auth/services/client/auth.service";
-import {InitDishService} from "../../../services/init-dish.service";
-import {DishWrapperDto} from "../../models/dishWrapperDto";
-import {DishIngredientDto} from "../../models/dishIngredientDto";
+import {InitDishService} from "../../core/services/init-dish.service";
+import {DishWrapperDto} from "../../core/models/dishWrapperDto";
+import {DishIngredientDto} from "../../core/models/dishIngredientDto";
 
 @Component({
   selector: 'app-add-edit-dish',

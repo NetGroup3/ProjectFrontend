@@ -25,7 +25,7 @@ import { HomeComponent } from './modules/cocktails/home/home.component';
 import { UserSceletonComponent } from './modules/core/user-sceleton/user-sceleton.component';
 import {NzSelectModule} from "ng-zorro-antd/select";
 import { AuthUserSettingsComponent } from './modules/settings/auth-user-settings.component';
-import {AuthInterceptor} from "./http-interceptors/auth-interceptor";
+import {AuthInterceptor} from "./modules/core/common/interceptors/http-interceptors/auth-interceptor";
 import { IngridientsComponent } from './modules/cocktails/ingridients/ingridients.component';
 import { AddEditIngredientComponent } from './modules/cocktails/add-edit-ingredient/add-edit-ingredient.component';
 

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Friend} from "../models/friend";
-import {FriendService} from "../../services/friend.service";
+import {Friend} from "../core/models/friend";
+import {FriendService} from "../core/services/friend.service";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 
 
