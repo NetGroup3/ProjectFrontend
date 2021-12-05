@@ -46,7 +46,7 @@ export class IngridientsComponent implements OnInit {
     console.log(key)
     this.moderatorService.get_ingridients(limit, page, key, category, sortedBy)
       .subscribe((response:any)=>{
-        console.log(response.body)
+        console.log(response)
         this.Ingridients = response
       });
   }
@@ -96,7 +96,6 @@ export class IngridientsComponent implements OnInit {
       this.sortedBy = "id"
     }
     else if(this.title){
-      console.log(111111111)
       this.sortedBy = "title"
     }
     else if(this.category){

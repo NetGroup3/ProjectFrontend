@@ -36,7 +36,7 @@ export class KitchenwareComponent implements OnInit {
   getKitchenware(limit: number, page: number, key: string, category: string, sortedBy: string): void {
     this.moderatorService.get_Kitchenware(limit, page, key, category, sortedBy)
       .subscribe((response:any)=>{
-        console.log(response.body)
+        console.log(response)
         this.Kitchenware = response
       });
   }

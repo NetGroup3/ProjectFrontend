@@ -68,8 +68,8 @@ export class AddEditIngredientComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.moderatorService.get_ingridient(id)
       .subscribe((response:any)=>{
-        console.log(response.body)
-        this.ingridient = response.body
+        console.log(response)
+        this.ingridient = response
         console.log(this.ingridient.imageId)
         this.img = this.uploadService.initImage(this.ingridient.imageId);
       });

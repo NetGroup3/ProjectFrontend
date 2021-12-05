@@ -64,6 +64,14 @@ import {AddStockComponent} from "./modules/cocktails/personal-stock/add-stock/ad
 import { StockItemComponent } from './modules/cocktails/personal-stock/stock-item/stock-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import {NzTransferModule} from "ng-zorro-antd/transfer";
+import {NzSwitchModule} from "ng-zorro-antd/switch";
+import { ListComponent } from './modules/cocktails/list/list.component';
+import {NzTableModule} from "ng-zorro-antd/table";
+import {NzTagModule} from "ng-zorro-antd/tag";
+import { ListKitchenwareComponent } from './modules/cocktails/list-kitchenware/list-kitchenware.component';
+import { ListLabelComponent } from './modules/cocktails/list-label/list-label.component';
+
 registerLocaleData(en);
 
 @NgModule({
@@ -95,12 +103,21 @@ registerLocaleData(en);
     FooterComponent,
     SidebarComponent,
     HeaderComponent,
+    ListComponent,
+    ListKitchenwareComponent,
+    ListLabelComponent,
+    ListComponent,
+    ListKitchenwareComponent,
+    ListLabelComponent,
     PageNotFoundComponent,
     AuthUserFriendsComponent,
     AuthUserRequestsComponent,
     ButtonComponent,
     AddStockComponent,
     StockItemComponent,
+    AddStockComponent,
+    ButtonComponent
+
   ],
 
   imports: [
@@ -122,6 +139,14 @@ registerLocaleData(en);
     NzSkeletonModule,
     NzListModule,
     NzPopconfirmModule,
+    NzTransferModule,
+    NzSwitchModule,
+    NzTableModule,
+    NzTagModule,
+    NzInputNumberModule,
+    FontAwesomeModule
+
+  ],
     NzInputNumberModule,
     FontAwesomeModule,
     NzResultModule,

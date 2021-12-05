@@ -18,6 +18,13 @@ export class ModeratorService {
 
   }
 
+  public getLabels(limit: number, page: number) : Observable<any>{
+    const params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('page', page.toString());
+    return this.http.get(appLinks.labels, {params})
+  }
+
    public get_ingridient(id: number): Observable<Object>{
     return this.http.get(appLinks.ingredient, {
       params: new HttpParams().set('id', id)
@@ -32,7 +39,7 @@ export class ModeratorService {
       .set('category', category)
       .set('sortedBy', sortedBy)
     ;
-    return this.http.get(appLinks.ingredients, {params});
+    return this.http.get(appLinks.ingredients, {params})
   }
 
   public add_ingredient (body: Ingredient){
@@ -132,5 +139,9 @@ export class ModeratorService {
   public post_kitchenware_dish(body: Dish_kitchenware){
     console.log( this.http.put(appLinks.dish, body))
     return this.http.post(appLinks.dishKitchenware, body);
+  }
+
+  public like(dish: number){
+    return this.http.post(appLinks.dishLike, dish);
   }
 }
