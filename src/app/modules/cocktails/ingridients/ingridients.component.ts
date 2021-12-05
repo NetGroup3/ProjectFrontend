@@ -4,6 +4,9 @@ import {Ingredient} from "../../models/ingredient";
 import {Cloudinary, CloudinaryImage} from "@cloudinary/url-gen";
 import {thumbnail} from "@cloudinary/url-gen/actions/resize";
 import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
+import {Observable} from "rxjs";
+import {appLinks} from "../../../app.links";
+import {HttpParams} from "@angular/common/http";
 
 @Component({
   selector: 'app-ingridients',
@@ -47,6 +50,8 @@ export class IngridientsComponent implements OnInit {
         this.Ingridients = response
       });
   }
+
+
 
   next() {
     if(this.Ingridients.length === 0 || this.Ingridients.length < 10){

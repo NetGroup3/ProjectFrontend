@@ -17,6 +17,10 @@ import {AddEditDishComponent} from "./modules/cocktails/add-edit-dish/add-edit-d
 import {PersonalStockComponent} from "./modules/cocktails/personal-stock/personal-stock.component";
 import {ListComponent} from "./modules/cocktails/list/list.component";
 import {ListKitchenwareComponent} from "./modules/cocktails/list-kitchenware/list-kitchenware.component";
+import {PageNotFoundComponent} from "./modules/core/page-not-found/page-not-found.component";
+import {AuthUserFriendsComponent} from "./modules/friends/auth-user-friends.component";
+import {AuthUserRequestsComponent} from "./modules/friends/auth-user-requests/auth-user-requests.component";
+
 
 
 const routes: Routes = [
@@ -27,6 +31,8 @@ const routes: Routes = [
   { path: 'home', component:HomeComponent, canActivate: [HomeGuard]},
   // { path: 'home', component:HomeComponent},
   { path: 'settings', component:AuthUserSettingsComponent},
+  { path: 'user/friends', component:AuthUserFriendsComponent},
+  { path: 'user/requests', component:AuthUserRequestsComponent},
   { path: 'moderator/ingredients', component:ModeratorIngredientsComponent},
   { path: 'moderator/ingredients/:id', component:AddEditIngredientComponent},
   { path: 'moderator/ingredients/add', component:AddEditIngredientComponent},
@@ -40,6 +46,7 @@ const routes: Routes = [
   { path: 'admin/moderators', component: AdminModeratorsComponent},
   { path: 'personal-stock', component: PersonalStockComponent},
   { path: 'list', component: ListKitchenwareComponent},
+  {path: "**", component: PageNotFoundComponent},
 ];
 
 @NgModule({

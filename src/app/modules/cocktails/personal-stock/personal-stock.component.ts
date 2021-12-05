@@ -6,6 +6,8 @@ import {Observable, of} from "rxjs";
 import {StockModel} from "../../models/stock.model";
 import {Ingredient} from "../../models/ingredient";
 import {StockAddDto} from "../../models/StockAddDto";
+import {UiService} from "../../../services/ui.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-personal-stock',
@@ -13,6 +15,9 @@ import {StockAddDto} from "../../models/StockAddDto";
   styleUrls: ['./personal-stock.component.scss']
 })
 export class PersonalStockComponent implements OnInit {
+
+  showAddStock: boolean = false;
+  subscription!: Subscription;
 
   limit: number = 20;
   page: number = 0;
@@ -30,7 +35,12 @@ export class PersonalStockComponent implements OnInit {
   constructor(
     private stockService: StockService,
     private msg: MessageService,
-  ) { }
+    private uiService: UiService,
+  ) {
+    this.subscription = this.uiService
+      .onToggle()
+      .subscribe(value => (this.showAddStock = value));
+  }
 
   ngOnInit(): void {
     this.getData((res: any) => {
@@ -78,9 +88,8 @@ export class PersonalStockComponent implements OnInit {
     });
   }
 
-
   toggleAddStock() {
-    console.log("toggle")
+    this.uiService.toggleAddStock();
   }
 
 

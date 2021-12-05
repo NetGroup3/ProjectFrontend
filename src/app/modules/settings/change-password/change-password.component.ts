@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbstractControlOptions, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PasswordMatch} from "../../auth/services/client/password-validator";
 import {AuthService} from "../../auth/services/client/auth.service";
 import {UserRestService} from "../../auth/services/rest/user-rest.service";
+import {NzNotificationService} from "ng-zorro-antd/notification";
 
 @Component({
   selector: 'app-change-password',
@@ -14,7 +15,11 @@ export class ChangePasswordComponent implements OnInit {
   public passwordForm!: FormGroup;
 
 
-  constructor(private authService: AuthService, private userRestService: UserRestService, private fbPassword: FormBuilder) { }
+  constructor(private authService: AuthService,
+              private userRestService: UserRestService,
+              private fbPassword: FormBuilder,
+              private notification: NzNotificationService) {
+  }
 
   ngOnInit(): void {
     const
@@ -35,9 +40,16 @@ export class ChangePasswordComponent implements OnInit {
     console.log(this.passwordForm.value.password)
     if (this.passwordForm.valid) {
       this.userRestService.changePassword(this.passwordForm.value).subscribe((response: any) => {
+        this.notification.blank('Password changed', '', {
+          nzKey: 'key'
+        });
       })
+      this.notification.blank('Incorrect password', '', {
+        nzKey: 'key'
+      });
     } else {
       this.passwordForm.markAllAsTouched();
+
     }
   }
 
