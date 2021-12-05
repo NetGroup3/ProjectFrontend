@@ -30,7 +30,7 @@ import { IngridientsComponent } from './modules/cocktails/ingridients/ingridient
 import { AddEditIngredientComponent } from './modules/cocktails/add-edit-ingredient/add-edit-ingredient.component';
 
 import {CloudinaryModule} from '@cloudinary/angular';
-
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import {NgxDropzoneModule} from "ngx-dropzone";
 
 import {ModeratorCocktailsComponent} from "./modules/moderator/moderator-cocktails/moderator-cocktails.component";
@@ -139,6 +139,7 @@ registerLocaleData(en);
     NzPopconfirmModule,
     NzTransferModule,
     NzSwitchModule,
+    NzNotificationModule,
     NzTableModule,
     NzTagModule,
     NzInputNumberModule,
