@@ -13,6 +13,7 @@ import {AddEditDishComponent} from "../add-edit-dish/add-edit-dish.component";
 export class ListComponent implements OnInit {
 
   changes: any [] = []
+
   list: TransferItem[] = [];
   $asTransferItems = (data: unknown): TransferItem[] => data as TransferItem[];
   disabled = false;
