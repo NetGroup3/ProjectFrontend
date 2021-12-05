@@ -55,6 +55,11 @@ import {NzListModule} from "ng-zorro-antd/list";
 import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
 import {NzTransferModule} from "ng-zorro-antd/transfer";
 import {NzSwitchModule} from "ng-zorro-antd/switch";
+import { ListComponent } from './modules/cocktails/list/list.component';
+import {NzTableModule} from "ng-zorro-antd/table";
+import {NzTagModule} from "ng-zorro-antd/tag";
+import { ListKitchenwareComponent } from './modules/cocktails/list-kitchenware/list-kitchenware.component';
+import { ListLabelComponent } from './modules/cocktails/list-label/list-label.component';
 import { ButtonComponent } from './components/button/button.component';
 import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 import {AddStockComponent} from "./modules/cocktails/personal-stock/add-stock/add-stock.component";
@@ -95,26 +100,28 @@ registerLocaleData(en);
     HeaderComponent,
   ],
 
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        IconsProviderModule,
-        NzLayoutModule,
-        NzMenuModule,
-        NzButtonModule,
-        NzInputModule,
-        NzFormModule,
-        NzSelectModule,
-        HttpClientModule,
-        CloudinaryModule,
-        NgxDropzoneModule,
-        NzSkeletonModule,
-        NzListModule,
-        NzPopconfirmModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    IconsProviderModule,
+    NzLayoutModule,
+    NzMenuModule,
+    NzButtonModule,
+    NzInputModule,
+    NzFormModule,
+    NzSelectModule,
+    HttpClientModule,
+    CloudinaryModule,
+    NgxDropzoneModule,
+    NzSkeletonModule,
+    NzListModule,
+    NzPopconfirmModule,
+    NzTransferModule,
+    NzSwitchModule,
+  ],
   providers: [
     {
       provide : HTTP_INTERCEPTORS,
