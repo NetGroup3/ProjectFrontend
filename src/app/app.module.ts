@@ -67,6 +67,7 @@ import {NzTagModule} from "ng-zorro-antd/tag";
 import { ListKitchenwareComponent } from './modules/cocktails/list-kitchenware/list-kitchenware.component';
 import { ListLabelComponent } from './modules/cocktails/list-label/list-label.component';
 
+
 registerLocaleData(en);
 
 @NgModule({
@@ -101,6 +102,13 @@ registerLocaleData(en);
     ListComponent,
     ListKitchenwareComponent,
     ListLabelComponent,
+    ListComponent,
+    ListKitchenwareComponent,
+    ListLabelComponent,
+    StockItemComponent,
+    AddStockComponent,
+    ButtonComponent
+
   ],
 
   imports: [
@@ -126,6 +134,9 @@ registerLocaleData(en);
     NzSwitchModule,
     NzTableModule,
     NzTagModule,
+    NzInputNumberModule,
+    FontAwesomeModule
+
   ],
   providers: [
     {
