@@ -15,6 +15,9 @@ import {AdminModeratorsComponent} from "./modules/admin/admin-moderators/admin-m
 import {AddEditKitchenwareComponent} from "./modules/cocktails/add-edit-kitchenware/add-edit-kitchenware.component";
 import {AddEditDishComponent} from "./modules/cocktails/add-edit-dish/add-edit-dish.component";
 import {PersonalStockComponent} from "./modules/cocktails/personal-stock/personal-stock.component";
+import {PageNotFoundComponent} from "./modules/core/page-not-found/page-not-found.component";
+import {AuthUserFriendsComponent} from "./modules/friends/auth-user-friends.component";
+import {AuthUserRequestsComponent} from "./modules/friends/auth-user-requests/auth-user-requests.component";
 
 
 const routes: Routes = [
@@ -25,6 +28,8 @@ const routes: Routes = [
   { path: 'home', component:HomeComponent, canActivate: [HomeGuard]},
   // { path: 'home', component:HomeComponent},
   { path: 'settings', component:AuthUserSettingsComponent},
+  { path: 'user/friends', component:AuthUserFriendsComponent},
+  { path: 'user/requests', component:AuthUserRequestsComponent},
   { path: 'moderator/ingredients', component:ModeratorIngredientsComponent},
   { path: 'moderator/ingredients/:id', component:AddEditIngredientComponent},
   { path: 'moderator/ingredients/add', component:AddEditIngredientComponent},
@@ -37,6 +42,7 @@ const routes: Routes = [
   { path: 'moderator/settings', component: AuthUserSettingsComponent},
   { path: 'admin/moderators', component: AdminModeratorsComponent},
   { path: 'personal-stock', component: PersonalStockComponent},
+  {path: "**", component: PageNotFoundComponent},
 ];
 
 @NgModule({

@@ -23,5 +23,10 @@ export const appLinks={
   label: `${environment.serverUrl}/dish/label/edit`,
   dishIngredient:`${environment.serverUrl}/dish/ingredient`,
   dishKitchenware:`${environment.serverUrl}/dish/kitchenware`,
+  friends: `${environment.serverUrl}/friend/friends`,
+  delFriend: `${environment.serverUrl}/friend/remove-friend`,
+  requests: `${environment.serverUrl}/friend/requests`,
+  declineInvite: `${environment.serverUrl}/friend/decline-invite`,
+  acceptInvite: `${environment.serverUrl}/friend/accept-invite`,
   stockIngredients:`${environment.serverUrl}/user/stock/ingredients`,
 }
