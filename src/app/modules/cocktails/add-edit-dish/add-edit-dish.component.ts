@@ -20,7 +20,11 @@ import {TransferItem} from "ng-zorro-antd/transfer";
 })
 export class AddEditDishComponent implements OnInit {
 
+  limit: number = 20
+  page: number = 0
+
   list: TransferItem[] = [];
+  list1: TransferItem[] = [];
   disabled = false;
 
   description: string = ""
@@ -68,81 +72,38 @@ export class AddEditDishComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+   await this.getIngredients(this.limit, this.page)
     if (Number(this.route.snapshot.paramMap.get('id')) > 0) {
       this.getDish();
       console.log(this.dish.imageId);
       this.img = this.initImage();
     }
 
-    this.getIngredients(20, 0, "", "", "");
-
-    console.log(this.Ingridients)
-
-    // for (let i = 0; i < this.Ingridients.length; i++) {
-    //   this.list.push({
-    //     key: i.toString(),
-    //     title: `${this.Ingridients[i]}`,
-    //     description: `description of content${i + 1}`,
-    //     direction: Math.random() * 2 > 1 ? 'right' : undefined
-    //   });
-    // }
-
-    //
-    // this.moderatorService.get_ingridients(20, 0, "", "", "").subscribe((response:any)=>{
-    //   console.log(this.Ingridients)
-    //   for (let i = 0; i < response.body.length; i++) {
-    //     let isExists = false;
-    //     for (let j = 0; j < this.Ingridients.length; j++) {
-    //       console.log(response.body[i].id,"   ", this.Ingridients[j].id)
-    //       if (response.body[i].id == this.Ingridients[j].id) {
-    //         console.log(111111)
-    //         isExists = true;
-    //       }
-    //     }
-    //     if (!isExists) {
-    //       this.AllIngridients.push(response.body[i])
-    //     }
-    //   }
-    // });
-    //
-    // this.moderatorService.get_Kitchenware(20, 0, "", "", "").subscribe((response:any)=>{
-    //   console.log(this.Kitchenware)
-    //   for (let i = 0; i < response.body.length; i++) {
-    //     let isExists = false;
-    //     for (let j = 0; j < this.Kitchenware.length; j++) {
-    //       if (response.body[i].id == this.Kitchenware[j].id) {
-    //         isExists = true;
-    //       }
-    //     }
-    //     if (!isExists) {
-    //       this.AllKitchenware.push(response.body[i])
-    //     }
-    //   }
-
-    // });
-
+    console.log(this.list)
   }
 
-  getIngredients(limit: number, page: number, key: string, category: string, sortedBy: string): void {
-    this.moderatorService.get_ingridients(limit, page, key, category, sortedBy)
-      .subscribe((response: any) => {
-        console.log(response)
-        this.Ingridients = response
-        console.log(this.Ingridients)
-
-
-
-      })
-    for (let i = 0; i < 4; i++) {
+  initList(array: any[]){
+    for (let i = 0; i < array.length; i++) {
       this.list.push({
         key: i.toString(),
-        title: `${i}`,
+        title: array[i].title,
         description: `description of content${i + 1}`,
         direction: Math.random() * 2 > 1 ? 'right' : undefined
       });
     }
+    console.log(array)
+    console.log(this.list)
   }
+
+  getIngredients(limit: number, page: number): any {
+    this.moderatorService.get_ingridients(limit, page, "", "", "")
+      .subscribe((response: any) => {
+        this.Ingridients = response
+        return this.initList(response)
+      })
+  }
+
 
   filterOption(inputValue: string, item: any): boolean {
     return item.description.indexOf(inputValue) > -1;
