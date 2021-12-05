@@ -3,7 +3,8 @@
     <header>
       <h1>Personal stock</h1>
       <app-button
-        text="Add Stock"
+        color = "{{showAddStock? '#495464' : '#9921E8' }}"
+        text="{{showAddStock? 'Close Add' : 'Add Stock' }}"
         (btnClick)="toggleAddStock()"
       >
       </app-button>
@@ -18,14 +19,4 @@
     >
       {{ stock.ingredient.title}}
     </app-stock-item>
-<!--for push-->
-<!--  <nz-list class="demo-loadmore-list" [nzLoading]="initLoading">
-
-
-    <div class="loadmore">
-      <button *ngIf="!loadingMore" (click)="onLoadMore()">Loading more</button>
-    </div>
-
-  </nz-list>-->
-
 </div>

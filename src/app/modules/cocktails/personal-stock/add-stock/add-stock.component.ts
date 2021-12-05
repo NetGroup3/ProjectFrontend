@@ -4,6 +4,8 @@ import {of} from "rxjs";
 import {StockService} from "../../../../services/stock.service";
 import {Ingredient} from "../../../models/ingredient";
 import {StockAddDto} from "../../../models/StockAddDto";
+import {UiService} from "../../../../services/ui.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-add-stock',
@@ -20,10 +22,16 @@ export class AddStockComponent implements OnInit {
   amount: number = 0;
 
   ingredients: Ingredient[] = [];
-
+  showAddStock: boolean = false;
+  subscription!: Subscription;
   constructor(
-    private stockService: StockService
-  ) { }
+    private stockService: StockService,
+    private uiService: UiService,
+  ) {
+    this.subscription = this.uiService
+      .onToggle()
+      .subscribe(value => (this.showAddStock = value));
+  }
 
   ngOnInit(): void {
     this.getIngredients((res: any) => {

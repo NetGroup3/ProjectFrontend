@@ -25,5 +25,10 @@ export const appLinks={
   dishKitchenware:`${environment.serverUrl}/dish/kitchenware`,
   dishLike:`${environment.serverUrl}/dish/like`,
   labels:`${environment.serverUrl}/dish/label/edit`,
+  friends: `${environment.serverUrl}/friend/friends`,
+  delFriend: `${environment.serverUrl}/friend/remove-friend`,
+  requests: `${environment.serverUrl}/friend/requests`,
+  declineInvite: `${environment.serverUrl}/friend/decline-invite`,
+  acceptInvite: `${environment.serverUrl}/friend/accept-invite`,
   stockIngredients:`${environment.serverUrl}/user/stock/ingredients`,
 }
