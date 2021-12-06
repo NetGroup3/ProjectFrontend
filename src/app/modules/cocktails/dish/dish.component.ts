@@ -63,7 +63,7 @@ export class DishComponent implements OnInit {
     this.search()
   }
 
-  getIngridients(limit: number, page: number, desc: boolean, key: string, category: string, sortedBy: string, userId: number): void {
+  getDishes(limit: number, page: number, desc: boolean, key: string, category: string, sortedBy: string, userId: number): void {
     console.log(key)
     this.moderatorService.get_dishes(limit, page, desc, key, category, sortedBy, userId)
       .subscribe((response:any)=>{
@@ -127,7 +127,7 @@ export class DishComponent implements OnInit {
     else if(this.category){
       this.sortedBy = "category"
     }
-    this.getIngridients(this.limit, this.page, this.desc, this.key, this.category, this.sortedBy, +this.authService.getUserId());
+    this.getDishes(this.limit, this.page, this.desc, this.key, this.category, this.sortedBy, +this.authService.getUserId());
   }
 
   likes(id: number) {
