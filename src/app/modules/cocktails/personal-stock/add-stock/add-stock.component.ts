@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {catchError} from "rxjs/operators";
 import {of} from "rxjs";
 import {StockService} from "../../../core/services/stock.service";
@@ -12,18 +12,21 @@ import {Subscription} from "rxjs";
   templateUrl: './add-stock.component.html',
   styleUrls: ['./add-stock.component.scss']
 })
-export class AddStockComponent implements OnInit {
+export class AddStockComponent implements OnInit, OnChanges {
 
   private limit: number = 50;
   private page: number = 0;
 
   @Output() onAddStock: EventEmitter<StockAddDto> = new EventEmitter<StockAddDto>();
+  @Input()   ingredient!: Ingredient;
+
   selectedIngredientId: number = 0;
   amount: number = 0;
 
   ingredients: Ingredient[] = [];
   showAddStock: boolean = false;
   subscription!: Subscription;
+
   constructor(
     private stockService: StockService,
     private uiService: UiService,
@@ -65,7 +68,10 @@ export class AddStockComponent implements OnInit {
     this.amount = 0;
   }
 
-  addIngredient(ingredient: Ingredient){
-    this.ingredients.push(ingredient);
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.ingredient){
+      this.ingredients.push(this.ingredient);
+    }
   }
+
 }
