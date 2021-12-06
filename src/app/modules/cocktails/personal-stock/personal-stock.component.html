@@ -4,19 +4,21 @@
       <h1>Personal stock</h1>
       <app-button
         color = "{{showAddStock? '#495464' : '#9921E8' }}"
-        text="{{showAddStock? 'Close Add' : 'Add Stock' }}"
+        text = "{{showAddStock? 'Close Add' : 'Add Stock' }}"
         (btnClick)="toggleAddStock()"
       >
       </app-button>
     </header>
-    <app-add-stock (onAddStock)="addStock($event)"></app-add-stock>
-
+    <app-add-stock
+      (onAddStock)="addStock($event)"
+      [ingredient]="ingredient"
+    >
+    </app-add-stock>
     <app-stock-item
       *ngFor="let stock of stocks"
       [stock]="stock"
       (onDeleteStock)="delete(stock)"
       (onChangeStock)="change(stock)"
     >
-      {{ stock.ingredient.title}}
     </app-stock-item>
 </div>
