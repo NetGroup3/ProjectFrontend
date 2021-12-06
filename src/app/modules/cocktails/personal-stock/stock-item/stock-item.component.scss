@@ -1,0 +1,16 @@
+.stock {
+  background-color: #f4f4f4;
+  margin: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.stock.remainder {
+  border-left: 8px solid green;
+}
+
+.stock h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

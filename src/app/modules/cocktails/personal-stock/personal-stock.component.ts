@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {MessageService} from "../../../services/message.service";
-import {StockService} from "../../auth/services/rest/stock.service";
+import {StockService} from "../../../services/stock.service";
 import {catchError} from "rxjs/operators";
-import {of} from "rxjs";
-import {StockModel} from "../../auth/models/stock.model";
-import {NzMessageService} from "ng-zorro-antd/message";
+import {Observable, of} from "rxjs";
+import {StockModel} from "../../models/stock.model";
+import {Ingredient} from "../../models/ingredient";
+import {StockAddDto} from "../../models/StockAddDto";
 
 @Component({
   selector: 'app-personal-stock',
@@ -15,61 +16,72 @@ export class PersonalStockComponent implements OnInit {
 
   limit: number = 20;
   page: number = 0;
+
   initLoading = true; // bug
   loadingMore = false;
-  data: StockModel[] = [];
+  stocks: StockModel[] = [];
+  show: boolean = true;
+  ingredients: Ingredient[] = [];
+  isLoading = false;
+  selectedIngredientId: number = 0;
+  amount: number = 0;
+
 
   constructor(
     private stockService: StockService,
     private msg: MessageService,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.getData((res: any) => {
       console.log(res)
-      this.data = res;
+      this.stocks = res;
       this.initLoading = false;
     });
   }
 
   getData(callback: (res: any) => void): void {
     this.stockService
-      .getData(this.limit, this.page)
+      .getStocks(this.limit, this.page)
       .pipe(catchError(() => of({ results: [] })))
       .subscribe((res: any) => callback(res));
   }
 
+
   onLoadMore(): void {
-/*    this.loadingMore = true;
-    this.list = this.data.concat([...Array(count)].fill({}).map(() => ({ loading: true, name: {} })));
-    this.stockService
-      .getData(this.authService.getUserId())
-      .pipe(catchError(() => of({ results: [] })))
-      .subscribe((res: any) => {
-        this.data = this.data.concat(res.results);
-        this.list = [...this.data];
-        this.loadingMore = false;
-      });*/
+    console.log("load more stock");
   }
 
   edit(item: any): void {
     this.msg.success(item.title);
+    this.show = !this.show;
   }
 
-  remove(id: number) {
-    this.stockService.delete(id).subscribe((res: any)=> {
+  delete(stock: StockModel) {
+    const id: number = stock.id
+    this.stockService.delete(stock.ingredient.id).subscribe((res: any)=> {
       console.log(res)
-      this.data = this.data.filter(stock=>stock.id!==id);
+      this.stocks = this.stocks.filter(stock=>stock.id!==id);
+//      this.addStockComponent.addIngredient(stock.ingredient);
     });
-
   }
 
- /* cancel(): void {
-    this.nzMessageService.info('click cancel');
+  change(stock: StockModel) {
+    this.stockService.update(stock.ingredient.id, stock.amount).subscribe();
   }
 
-  confirm(): void {
-    this.nzMessageService.info('click confirm');
-  }*/
+  addStock(stockAdd: StockAddDto): void {
+    this.stockService.create(stockAdd).subscribe((res: StockModel)=> {
+      console.log(res)
+      this.stocks.push(res);
+      this.ingredients = this.ingredients.filter(ingredient=>ingredient.id!==this.selectedIngredientId);
+    });
+  }
+
+
+  toggleAddStock() {
+    console.log("toggle")
+  }
+
 
 }

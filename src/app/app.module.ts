@@ -58,6 +58,11 @@ import {NzResultModule} from 'ng-zorro-antd/result';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import {AuthUserFriendsComponent} from "./modules/friends/auth-user-friends.component";
 import {AuthUserRequestsComponent} from "./modules/friends/auth-user-requests/auth-user-requests.component";
+import { ButtonComponent } from './components/button/button.component';
+import {NzInputNumberModule} from "ng-zorro-antd/input-number";
+import {AddStockComponent} from "./modules/cocktails/personal-stock/add-stock/add-stock.component";
+import { StockItemComponent } from './modules/cocktails/personal-stock/stock-item/stock-item.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {NzToolTipModule} from "ng-zorro-antd/tooltip";
 
 registerLocaleData(en);
@@ -94,6 +99,9 @@ registerLocaleData(en);
     PageNotFoundComponent,
     AuthUserFriendsComponent,
     AuthUserRequestsComponent,
+    ButtonComponent,
+    AddStockComponent,
+    StockItemComponent,
   ],
 
   imports: [
@@ -115,10 +123,13 @@ registerLocaleData(en);
     NzSkeletonModule,
     NzListModule,
     NzPopconfirmModule,
+    NzInputNumberModule,
+    FontAwesomeModule,
     NzResultModule,
     NzNotificationModule,
     NzToolTipModule
   ],
+
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
