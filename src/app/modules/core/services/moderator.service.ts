@@ -113,9 +113,8 @@ export class ModeratorService {
       .set('limit', limit.toString())
       .set('page', page.toString())
       .set('desc', desc)
-      .set('key', key)
+      .set('title', key)
       .set('category', category)
-      .set('sortedBy', sortedBy)
       .set('userId', userId)
     ;
     return this.http.get(appLinks.dishes, {params});
