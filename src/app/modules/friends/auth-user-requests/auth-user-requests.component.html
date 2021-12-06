@@ -35,9 +35,11 @@
                 </div>
               </div>
             </ng-template>
-            <i nz-button (click)="createNotification(template)" (click)="accept(request)" nz-icon nzType="check"
-               nzTheme="outline"></i>
-            <i nz-button class="circle" (click)="decline(request)" nz-icon nzType="close" nzTheme="outline"></i>
+            <span nz-tooltip nzTooltipTitle="Accept invite"><i nz-button (click)="createNotification(template)"
+                                                               (click)="accept(request)" nz-icon nzType="check"
+                                                               nzTheme="outline"></i></span>
+            <span nz-tooltip nzTooltipTitle="Decline invite"><i nz-button class="circle" (click)="decline(request)"
+                                                                nz-icon nzType="close" nzTheme="outline"></i></span>
           </div>
         </div>
       </div>

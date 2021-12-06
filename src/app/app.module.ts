@@ -58,6 +58,7 @@ import {NzResultModule} from 'ng-zorro-antd/result';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import {AuthUserFriendsComponent} from "./modules/friends/auth-user-friends.component";
 import {AuthUserRequestsComponent} from "./modules/friends/auth-user-requests/auth-user-requests.component";
+import {NzToolTipModule} from "ng-zorro-antd/tooltip";
 
 registerLocaleData(en);
 
@@ -115,7 +116,8 @@ registerLocaleData(en);
     NzListModule,
     NzPopconfirmModule,
     NzResultModule,
-    NzNotificationModule
+    NzNotificationModule,
+    NzToolTipModule
   ],
   providers: [
     {
