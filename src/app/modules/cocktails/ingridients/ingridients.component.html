@@ -6,13 +6,8 @@
 
     <div class="wrapper">
       <input (keydown.enter)='search()' class="search" type="text" placeholder="Search by name" [(ngModel)]="key">
-      <input type="radio" name="select" id="option-1" [checked]="id" (click)="id = !id">
       <input type="radio" name="select" id="option-2" [checked]="title" (click)="title = !title">
       <input type="radio" name="select" id="option-3" [checked]="Category" (click)="Category = !Category">
-      <label for="option-1" class="option option-1">
-        <div class="dot"></div>
-        <span>Id</span>
-      </label>
       <label for="option-2" class="option option-2">
         <div class="dot"></div>
         <span>Title</span>
@@ -21,11 +16,7 @@
         <div class="dot"></div>
         <span>Category</span>
       </label>
-      <nz-select class="options">
-        <nz-option nzValue="cocktails" nzLabel="Liquid"></nz-option>
-        <nz-option nzValue="friends" nzLabel="Alcohol"></nz-option>
-        <nz-option nzValue="events" nzLabel="Fruits"></nz-option>
-      </nz-select>
+      <input (keydown.enter)='search()' class="search" type="text" placeholder="Search by category" [(ngModel)]="category">
       <button (click)="search()">Ok</button>
     </div>
 

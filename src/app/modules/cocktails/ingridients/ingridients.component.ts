@@ -103,4 +103,5 @@ export class IngridientsComponent implements OnInit {
     }
     this.getIngridients(this.limit, this.page, this.key, this.category, this.sortedBy);
   }
+
 }
