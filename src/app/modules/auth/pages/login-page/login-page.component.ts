@@ -32,7 +32,7 @@ export class LoginPageComponent implements OnInit {
         console.log(response);
         this.authService.setToken(response.token);
         this.authService.setUserData(response.id, response.firstname, response.lastname, response.role, response.imageId);
-        this.router.navigate(["/home"]);
+        this.router.navigate(["/settings"]);
       });
     } else {
       this.form.markAllAsTouched();

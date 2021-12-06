@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {ModeratorService} from "../../../services/moderator.service";
-import {Dish} from "../../models/dish";
-import {Ingredient} from "../../models/ingredient";
+import {ModeratorService} from "../../core/services/moderator.service";
+import {Dish} from "../../core/models/dish";
+import {Ingredient} from "../../core/models/ingredient";
 import {Cloudinary, CloudinaryImage} from "@cloudinary/url-gen";
 import {thumbnail} from "@cloudinary/url-gen/actions/resize";
 import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
+import {AuthService} from "../../auth/services/client/auth.service";
 
 @Component({
   selector: 'app-dish',
@@ -19,6 +20,7 @@ export class DishComponent implements OnInit {
   key: string = ""
   category: string = ""
   sortedBy: string = ""
+  desc: boolean = false
 
   delDish: Dish = {
     id: 0,
@@ -31,20 +33,39 @@ export class DishComponent implements OnInit {
     likes: 0
   }
 
-  constructor(private moderatorService: ModeratorService) {
+  constructor(private moderatorService: ModeratorService,
+              private authService: AuthService) {
   }
   toggle: boolean = true;
   id: boolean = false;
   title: boolean = false;
   Category: boolean = false;
+  edit_delete: boolean = false;
+  like: boolean = true;
+  favourite: boolean = true;
+  liked: boolean = false;
+
 
   ngOnInit(): void {
+    if(this.authService.getUserRole() == "MODERATOR"){
+      this.edit_delete = false
+    }
+    else if(this.authService.getUserRole() == "USER"){
+      this.edit_delete = true
+      this.like = false
+      this.favourite = false
+    }
+    else {
+      this.edit_delete = true
+      this.like = false
+      this.favourite = true
+    }
     this.search()
   }
 
-  getIngridients(limit: number, page: number, key: string, category: string, sortedBy: string): void {
+  getIngridients(limit: number, page: number, desc: boolean, key: string, category: string, sortedBy: string, userId: number): void {
     console.log(key)
-    this.moderatorService.get_dishes(limit, page, key, category, sortedBy)
+    this.moderatorService.get_dishes(limit, page, desc, key, category, sortedBy, userId)
       .subscribe((response:any)=>{
         console.log(response)
         this.Dishes = response
@@ -101,12 +122,20 @@ export class DishComponent implements OnInit {
       this.sortedBy = "id"
     }
     else if(this.title){
-      console.log(111111111)
       this.sortedBy = "title"
     }
     else if(this.category){
       this.sortedBy = "category"
     }
-    this.getIngridients(this.limit, this.page, this.key, this.category, this.sortedBy);
+    this.getIngridients(this.limit, this.page, this.desc, this.key, this.category, this.sortedBy, +this.authService.getUserId());
+  }
+
+  likes(id: number) {
+    this.liked = !this.liked;
+    if(this.liked){
+      this.moderatorService.like(id).subscribe((response:any) => {
+        console.log(response)
+      })
+    }
   }
 }

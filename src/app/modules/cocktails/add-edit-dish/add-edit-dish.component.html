@@ -1,65 +1,39 @@
-
 <app-user-sceleton></app-user-sceleton>
 <div class="insert_area">
   <div *ngIf="dish">
     <div class="add_edit">
       <h2>Add/edit dish</h2>
       <div class="description_picture">
-        <div class="picture">
-          <img src="../../../../assets/img.png">
-          <advanced-image [cldImg]="img"></advanced-image>
-          <input type="file" (change)="($event)" class="dn" #uploadFile>
-          <button class="upload" (click)="uploadFile.click()">Upload photo</button>
-        </div>
+
         <div class="ingridients-kitchenware">
-          <div class="ingridients">
-          <select [(ngModel)]="selectedIngredients" name="select" size="4" multiple>
-            <optgroup label="Dish's ingredients">
-            <option selected="selected" *ngFor="let ingridient of Ingridients"  value="{{ingridient.id}}">{{ingridient.title}}</option>
-            </optgroup>
-            <optgroup label="Other ingredients">
-              <option selected="selected" *ngFor="let ingridient of AllIngridients"  value="{{ingridient.id}}">{{ingridient.title}}</option>
-            </optgroup>
-          </select>
-
-            <input class="submit" type="button" (click)="submitIngredients()" value="submit"/>
-
-            <select [(ngModel)]="selectedKitchenware" name="select" size="4" multiple>
-              <optgroup label="Dish's kitchenware">
-                <option selected="selected" *ngFor="let kitchenware of Kitchenware"  value="{{kitchenware.id}}">{{kitchenware.title}}</option>
-              </optgroup>
-              <optgroup label="Other kitchenware">
-                <option selected="selected" *ngFor="let kitchenware of AllKitchenware"  value="{{kitchenware.id}}">{{kitchenware.title}}</option>
-              </optgroup>
-            </select>
-
-            <input class="submit" type="button" (click)="submitKitchenware()" value="submit"/>
-
-<!--            <select [(ngModel)]="selectedLabels" name="select" size="4" multiple>-->
-<!--              <optgroup label="Dish's kitchenware">-->
-<!--                <option selected="selected" *ngFor="let label of Labels"  value="{{label.id}}">{{label.title}}</option>-->
-<!--              </optgroup>-->
-<!--              <optgroup label="Other kitchenware">-->
-<!--                <option selected="selected" *ngFor="let label of AllLabels"  value="{{label.id}}">{{label.title}}</option>-->
-<!--              </optgroup>-->
-<!--            </select>-->
-
-<!--            <input type="button" (click)="submitLabels()" value="submit"/>-->
+          <div>
+            <app-list></app-list>
+          </div>
+          <div>
+            <app-list-kitchenware></app-list-kitchenware>
+          </div>
+          <div>
+            <app-list-label></app-list-label>
+          </div>
         </div>
-        </div>
+      </div>
+      <div class="picture">
+        <advanced-image [cldImg]="img"></advanced-image><br>
+        <input type="file" (change)="onFileSelect($event)" class="dn" #uploadFile>
+        <button class="upload" (click)="uploadFile.click()">Upload photo</button>
       </div>
       <div class="title">
         <div class="title_description">
-        <p>Title</p>
-        <input class="title_input" required [(ngModel)]="dish.title" placeholder="Text"/>
-        <p>Description</p>
-        <input class="description" required [(ngModel)]="dish.description" placeholder="Text"/>
+          <p>Title</p>
+          <input class="title_input" [(ngModel)]="dish.title" placeholder="Text">
+          <p>Description</p>
+          <input class="description" [(ngModel)]="dish.description" placeholder="Text">
         </div>
         <p>Receipt</p>
         <textarea class="receipt" required [(ngModel)]="dish.receipt" placeholder="Text"></textarea>
+        <button class="ok" (click)="onAddClick()">Ok!</button>
       </div>
-      <!--  <button class="delete">Delete</button>-->
-      <button class="ok"  (click)="onAddClick()">Ok!</button>
+
     </div>
   </div>
 </div>

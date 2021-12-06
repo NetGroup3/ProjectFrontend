@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {ModeratorService} from "../../../services/moderator.service";
-import {Ingredient} from "../../models/ingredient";
+import {ModeratorService} from "../../core/services/moderator.service";
+import {Ingredient} from "../../core/models/ingredient";
 import {Location} from '@angular/common';
 import {UploadService} from "../../auth/services/client/upload.service";
 import {Router} from "@angular/router";
@@ -36,7 +36,6 @@ export class AddEditIngredientComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     if(Number(this.route.snapshot.paramMap.get('id')) > 0){
-      console.log(111111111111)
       this.getIngredient();
     }
 
@@ -68,8 +67,8 @@ export class AddEditIngredientComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.moderatorService.get_ingridient(id)
       .subscribe((response:any)=>{
-        console.log(response.body)
-        this.ingridient = response.body
+        console.log(response)
+        this.ingridient = response
         console.log(this.ingridient.imageId)
         this.img = this.uploadService.initImage(this.ingridient.imageId);
       });

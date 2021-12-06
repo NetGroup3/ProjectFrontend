@@ -125,9 +125,10 @@ export class AdminModeratorsComponent implements OnInit {
   }
 
   loadList (obj: Object) {
-    this.http.post<ModeratorModel[]>(appLinks.moderatorList, obj).subscribe(
+    this.http.post<any>(appLinks.moderatorList, obj).subscribe(
     (res) => {
-      this.moderatorList = res;
+      this.moderatorList = res.list;
+      console.log(this.moderatorList)
       this.emptyList = false;
     },
     (err) => {

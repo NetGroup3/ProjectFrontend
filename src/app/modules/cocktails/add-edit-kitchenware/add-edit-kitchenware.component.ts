@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {ModeratorService} from "../../../services/moderator.service";
+import {ModeratorService} from "../../core/services/moderator.service";
 import {Location} from "@angular/common";
-import {Kitchenware} from "../../models/kitchenware";
+import {Kitchenware} from "../../core/models/kitchenware";
 import {UploadService} from "../../auth/services/client/upload.service";
 
 @Component({
@@ -59,8 +59,8 @@ export class AddEditKitchenwareComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.moderatorService.get_kitchenware(id)
       .subscribe((response:any)=>{
-        console.log(response.body)
-        this.kitchenware = response.body
+        console.log(response)
+        this.kitchenware = response
         this.img = this.uploadService.initImage(this.kitchenware.imageId);
       });
   }
