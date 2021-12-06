@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {ModeratorService} from "../../../services/moderator.service";
+import {ModeratorService} from "../../core/services/moderator.service";
 import {Location} from "@angular/common";
-import {Kitchenware} from "../../models/kitchenware";
+import {Kitchenware} from "../../core/models/kitchenware";
 import {UploadService} from "../../auth/services/client/upload.service";
 
 @Component({

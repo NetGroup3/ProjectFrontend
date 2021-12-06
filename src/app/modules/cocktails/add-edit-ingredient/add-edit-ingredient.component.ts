@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {ModeratorService} from "../../../services/moderator.service";
-import {Ingredient} from "../../models/ingredient";
+import {ModeratorService} from "../../core/services/moderator.service";
+import {Ingredient} from "../../core/models/ingredient";
 import {Location} from '@angular/common';
 import {UploadService} from "../../auth/services/client/upload.service";
 import {Router} from "@angular/router";

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ModeratorService} from "../../../services/moderator.service";
-import {Ingredient} from "../../models/ingredient";
+import {ModeratorService} from "../../core/services/moderator.service";
+import {Ingredient} from "../../core/models/ingredient";
 import {Cloudinary, CloudinaryImage} from "@cloudinary/url-gen";
 import {thumbnail} from "@cloudinary/url-gen/actions/resize";
 import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";

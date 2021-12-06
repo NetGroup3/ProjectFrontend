@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {MessageService} from "../../../services/message.service";
-import {StockService} from "../../../services/stock.service";
+import {MessageService} from "../../core/services/message.service";
+import {StockService} from "../../core/services/stock.service";
 import {catchError} from "rxjs/operators";
 import {Observable, of} from "rxjs";
-import {StockModel} from "../../models/stock.model";
-import {Ingredient} from "../../models/ingredient";
-import {StockAddDto} from "../../models/StockAddDto";
-import {UiService} from "../../../services/ui.service";
+import {StockModel} from "../../core/models/stock.model";
+import {Ingredient} from "../../core/models/ingredient";
+import {StockAddDto} from "../../core/models/StockAddDto";
+import {UiService} from "../../core/services/ui.service";
 import {Subscription} from "rxjs";
 
 @Component({

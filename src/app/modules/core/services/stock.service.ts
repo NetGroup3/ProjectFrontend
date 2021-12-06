@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {appLinks} from "../app.links";
-import {StockModel} from "../modules/models/stock.model";
-import {StockAddDto} from "../modules/models/StockAddDto";
-import {Ingredient} from "../modules/models/ingredient";
+import {appLinks} from "../../../app.links";
+import {StockModel} from "../models/stock.model";
+import {StockAddDto} from "../models/StockAddDto";
+import {Ingredient} from "../models/ingredient";
 
 @Injectable({
   providedIn: 'root'

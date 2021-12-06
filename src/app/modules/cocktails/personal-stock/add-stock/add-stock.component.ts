@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {catchError} from "rxjs/operators";
 import {of} from "rxjs";
-import {StockService} from "../../../../services/stock.service";
-import {Ingredient} from "../../../models/ingredient";
-import {StockAddDto} from "../../../models/StockAddDto";
-import {UiService} from "../../../../services/ui.service";
+import {StockService} from "../../../core/services/stock.service";
+import {Ingredient} from "../../../core/models/ingredient";
+import {StockAddDto} from "../../../core/models/StockAddDto";
+import {UiService} from "../../../core/services/ui.service";
 import {Subscription} from "rxjs";
 
 @Component({

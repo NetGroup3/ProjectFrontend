@@ -1,9 +1,9 @@
 import {Component, NgModule, OnInit} from '@angular/core';
 import {TransferChange, TransferItem, TransferSelectChange} from "ng-zorro-antd/transfer";
-import {ModeratorService} from "../../../services/moderator.service";
-import {Ingredient} from "../../models/ingredient";
+import {ModeratorService} from "../../core/services/moderator.service";
+import {Ingredient} from "../../core/models/ingredient";
 import {AddEditDishComponent} from "../add-edit-dish/add-edit-dish.component";
-import {InitDishService} from "../../../services/init-dish.service";
+import {InitDishService} from "../../core/services/init-dish.service";
 
 @Component({
   selector: 'app-list',

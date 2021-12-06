@@ -25,12 +25,12 @@ import { HomeComponent } from './modules/cocktails/home/home.component';
 import { UserSceletonComponent } from './modules/core/user-sceleton/user-sceleton.component';
 import {NzSelectModule} from "ng-zorro-antd/select";
 import { AuthUserSettingsComponent } from './modules/settings/auth-user-settings.component';
-import {AuthInterceptor} from "./http-interceptors/auth-interceptor";
+import {AuthInterceptor} from "./modules/core/common/interceptors/http-interceptors/auth-interceptor";
 import { IngridientsComponent } from './modules/cocktails/ingridients/ingridients.component';
 import { AddEditIngredientComponent } from './modules/cocktails/add-edit-ingredient/add-edit-ingredient.component';
 
 import {CloudinaryModule} from '@cloudinary/angular';
-
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import {NgxDropzoneModule} from "ngx-dropzone";
 
 import {ModeratorCocktailsComponent} from "./modules/moderator/moderator-cocktails/moderator-cocktails.component";
@@ -139,6 +139,7 @@ registerLocaleData(en);
     NzPopconfirmModule,
     NzTransferModule,
     NzSwitchModule,
+    NzNotificationModule,
     NzTableModule,
     NzTagModule,
     NzInputNumberModule,

@@ -1,8 +1,8 @@
-import {AuthService} from "../modules/auth/services/client/auth.service";
+import {AuthService} from "../../../../auth/services/client/auth.service";
 import {Injectable} from "@angular/core";
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {environment} from "../../environments/environment";
+import {environment} from "../../../../../../environments/environment";
 
 
 @Injectable()

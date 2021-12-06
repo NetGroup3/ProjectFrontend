@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {TransferChange, TransferItem, TransferSelectChange} from "ng-zorro-antd/transfer";
-import {Kitchenware} from "../../models/kitchenware";
-import {ModeratorService} from "../../../services/moderator.service";
-import {InitDishService} from "../../../services/init-dish.service";
+import {Kitchenware} from "../../core/models/kitchenware";
+import {ModeratorService} from "../../core/services/moderator.service";
+import {InitDishService} from "../../core/services/init-dish.service";
 
 @Component({
   selector: 'app-list-label',
