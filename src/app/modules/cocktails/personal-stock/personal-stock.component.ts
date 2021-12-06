@@ -1,13 +1,11 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {MessageService} from "../../core/services/message.service";
+import {Component, OnInit} from '@angular/core';
 import {StockService} from "../../core/services/stock.service";
 import {catchError} from "rxjs/operators";
-import {Observable, of} from "rxjs";
+import {of, Subscription} from "rxjs";
 import {StockModel} from "../../core/models/stock.model";
 import {Ingredient} from "../../core/models/ingredient";
 import {StockAddDto} from "../../core/models/StockAddDto";
 import {UiService} from "../../core/services/ui.service";
-import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-personal-stock',
@@ -26,17 +24,15 @@ export class PersonalStockComponent implements OnInit {
 
   initLoading = true; // bug
   loadingMore = false;
-  stocks: StockModel[] = [];
-  show: boolean = true;
-/*  ingredients: Ingredient[] = [];*/
   isLoading = false;
+
+  stocks: StockModel[] = [];
   selectedIngredientId: number = 0;
   amount: number = 0;
 
 
   constructor(
     private stockService: StockService,
-    private msg: MessageService,
     private uiService: UiService,
   ) {
     this.subscription = this.uiService
@@ -45,13 +41,13 @@ export class PersonalStockComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getData((res: any) => {
+    this.getData((res: StockModel[]) => {
       this.stocks = res;
       this.initLoading = false;
     });
   }
 
-  getData(callback: (res: any) => void): void {
+  getData(callback: (res: StockModel[]) => void): void {
     this.stockService
       .getStocks(this.limit, this.page)
       .pipe(catchError(() => of({ results: [] })))
@@ -59,12 +55,15 @@ export class PersonalStockComponent implements OnInit {
   }
 
   onLoadMore(): void {
-    console.log("load more stock");
-  }
-
-  edit(item: any): void {
-    this.msg.success(item.title);
-    this.show = !this.show;
+    if (this.isLoading){
+      return;
+    }
+    this.isLoading = true;
+    this.stockService.getStocks(this.limit, this.page)
+      .subscribe(data => {
+      this.isLoading = false;
+      this.stocks = [...this.stocks, ...data];
+    });
   }
 
   delete(stock: StockModel) {

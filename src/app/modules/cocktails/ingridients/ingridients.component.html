@@ -2,8 +2,6 @@
 <div class="ingridients">
   <h2>Ingredients</h2>
   <div class="add_ingridient">
-
-
     <div class="wrapper">
       <input (keydown.enter)='search()' class="search" type="text" placeholder="Search by name" [(ngModel)]="key">
       <input type="radio" name="select" id="option-1" [checked]="id" (click)="id = !id">
@@ -52,9 +50,7 @@
       <p class="title">{{ingridient.title}}</p>
     <advanced-image [cldImg]="ingridient.imageId | getPicture"></advanced-image>
       <p class="bottom" >Ingredient</p>
-
-
-</div>
+  </div>
 </div>
   <div class="button">
   <button (click)="prev()" class="next"><</button>
