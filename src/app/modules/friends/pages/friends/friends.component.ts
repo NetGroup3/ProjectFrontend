@@ -1,20 +1,27 @@
 import {Component, OnInit} from '@angular/core';
-import {Friend} from "../core/models/friend";
-import {FriendService} from "../core/services/friend.service";
+import {Friend} from "../../models/friend";
+import {FriendService} from "../../services/friend.service";
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import {FriendRequest} from "../../models/friendRequest";
 
 
 @Component({
   selector: 'app-auth-user-friends',
-  templateUrl: './auth-user-friends.component.html',
-  styleUrls: ['./auth-user-friends.component.scss']
+  templateUrl: './friends.component.html',
+  styleUrls: ['./friends.component.scss']
 })
-export class AuthUserFriendsComponent implements OnInit {
+export class FriendsComponent implements OnInit {
   limit: number = 10;
   offset: number = 0;
   friends: Friend[] = [];
-
+  notifications = 0;
   toggle: boolean = true;
+
+  delFriend: Friend = {
+    id: 0,
+    firstName: "",
+    imageId: ""
+  }
 
   constructor(private friendService: FriendService,
               private notification: NzNotificationService) {
@@ -31,12 +38,6 @@ export class AuthUserFriendsComponent implements OnInit {
       });
   }
 
-  delFriend: Friend = {
-    id: 0,
-    firstName: "",
-    imageId: ""
-  }
-
   delete(friend: Friend) {
     this.delFriend = friend;
     this.toggle = !this.toggle;
@@ -45,11 +46,11 @@ export class AuthUserFriendsComponent implements OnInit {
 
   ok() {
     this.toggle = !this.toggle;
-    console.log(this.delFriend)
-    this.friendService.deleteFriend(this.delFriend.id).subscribe((response) => {
-      this.friends = this.friends.filter((friend) => friend.id !== this.delFriend.id);
-      this.notification.blank('Friend removed', '', {
-      });
+    this.friendService.deleteFriend(this.delFriend.id).subscribe({
+      next: (): void => {
+        this.friends = this.friends.filter((friend) => friend.id !== this.delFriend.id);
+        this.notification.blank('Friend removed', '', {});
+      }
     });
   }
 

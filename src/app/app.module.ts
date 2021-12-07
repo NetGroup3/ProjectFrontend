@@ -67,11 +67,11 @@ import {NzTableModule} from "ng-zorro-antd/table";
 import {NzTagModule} from "ng-zorro-antd/tag";
 import { ListKitchenwareComponent } from './modules/cocktails/list-kitchenware/list-kitchenware.component';
 import { ListLabelComponent } from './modules/cocktails/list-label/list-label.component';
-import {AuthUserRequestsComponent} from "./modules/friends/auth-user-requests/auth-user-requests.component";
-import {AuthUserFriendsComponent} from "./modules/friends/auth-user-friends.component";
+import {RequestsComponent} from "./modules/friends/pages/friends-requests/requests.component";
+import {FriendsComponent} from "./modules/friends/pages/friends/friends.component";
 import {PageNotFoundComponent} from "./modules/core/page-not-found/page-not-found.component";
 import {NzResultModule} from "ng-zorro-antd/result";
-
+import {NzBadgeModule} from "ng-zorro-antd/badge";
 
 registerLocaleData(en);
 
@@ -113,8 +113,8 @@ registerLocaleData(en);
     StockItemComponent,
     AddStockComponent,
     ButtonComponent,
-    AuthUserRequestsComponent,
-    AuthUserFriendsComponent,
+    RequestsComponent,
+    FriendsComponent,
     PageNotFoundComponent,
 
   ],
@@ -146,7 +146,8 @@ registerLocaleData(en);
     NzInputNumberModule,
     FontAwesomeModule,
     NzResultModule,
-    NzToolTipModule
+    NzToolTipModule,
+    NzBadgeModule
   ],
 
   providers: [
