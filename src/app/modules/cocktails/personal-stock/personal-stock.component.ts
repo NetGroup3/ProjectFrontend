@@ -28,7 +28,7 @@ export class PersonalStockComponent implements OnInit {
   loadingMore = false;
   stocks: StockModel[] = [];
   show: boolean = true;
-  ingredients: Ingredient[] = [];
+/*  ingredients: Ingredient[] = [];*/
   isLoading = false;
   selectedIngredientId: number = 0;
   amount: number = 0;
@@ -82,7 +82,6 @@ export class PersonalStockComponent implements OnInit {
   addStock(stockAdd: StockAddDto): void {
     this.stockService.create(stockAdd).subscribe((res: StockModel)=> {
       this.stocks.push(res);
-      this.ingredients = this.ingredients.filter(ingredient=>ingredient.id!==this.selectedIngredientId);
     });
   }
 

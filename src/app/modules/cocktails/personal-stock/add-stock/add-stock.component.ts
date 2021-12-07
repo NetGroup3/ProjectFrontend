@@ -64,6 +64,7 @@ export class AddStockComponent implements OnInit, OnChanges {
       amount: this.amount
     }
     this.onAddStock.emit(stockAddDto);
+    this.ingredients = this.ingredients.filter(ingredient=>ingredient.id!==this.selectedIngredientId);
     this.selectedIngredientId = 0;
     this.amount = 0;
   }

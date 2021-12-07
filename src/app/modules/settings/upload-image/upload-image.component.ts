@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Cloudinary, CloudinaryImage} from "@cloudinary/url-gen";
-import {thumbnail} from "@cloudinary/url-gen/actions/resize";
-import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
+import {Component, OnInit} from '@angular/core';
+import {CloudinaryImage} from "@cloudinary/url-gen";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {AuthService} from "../../auth/services/client/auth.service";
 import {UserRestService} from "../../auth/services/rest/user-rest.service";
@@ -32,10 +30,7 @@ export class UploadImageComponent implements OnInit {
   }
 
   initImage(): CloudinaryImage {
-    const cld = new Cloudinary({cloud: {cloudName: 'djcak19nu'}});
-    return cld.image(this.imageId)
-      .resize(thumbnail().width(300).height(300))
-      .roundCorners(byRadius(20));
+    return this.uploadService.initImageWithSize(this.imageId, 300, 300);
   }
 
   onFileSelect($event: any) {
