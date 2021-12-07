@@ -2,6 +2,16 @@
   <div class="insert_area">
     <header>
       <h1>Personal stock</h1>
+
+      <input type="text" placeholder="search" #search (keyup)="upSearch(search.value)">
+      <nz-space>
+        <nz-select *nzSpaceItem [(ngModel)]="sortedBy">
+          <nz-option nzValue="id" nzLabel=""></nz-option>
+          <nz-option nzValue="title" nzLabel="Title"></nz-option>
+          <nz-option nzValue="description" nzLabel="Description"></nz-option>
+          <nz-option nzValue="category" nzLabel="Category"></nz-option>
+        </nz-select>
+      </nz-space>
       <app-button
         color = "{{showAddStock? '#495464' : '#9921E8' }}"
         text = "{{showAddStock? 'Close Add' : 'Add Stock' }}"
@@ -21,4 +31,5 @@
       (onChangeStock)="change(stock)"
     >
     </app-stock-item>
+    <nz-spin *ngIf="isLoading" nzSimple [nzSize]="'large'"></nz-spin>
 </div>
