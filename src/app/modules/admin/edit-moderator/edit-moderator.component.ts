@@ -69,7 +69,8 @@ export class EditModeratorComponent implements OnInit {
           this.updateEmit.emit();
         });
       } else if (this.type === "Add") {
-        this.http.post<void>(appLinks.moderator, obj).subscribe(() => {
+        this.http.post<void>(appLinks.moderator, obj).subscribe((res:any) => {
+          console.log(res)
           this.close();
           this.updateEmit.emit();
         });

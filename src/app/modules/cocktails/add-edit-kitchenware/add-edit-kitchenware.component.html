@@ -15,8 +15,9 @@
       <div class="title">
         <p>Title</p>
         <input required [(ngModel)]="kitchenware.title" placeholder="Text"/>
+        <p>Category</p>
+        <input class="description" [(ngModel)]="kitchenware.category" placeholder="Text">
       </div>
-      <!--  <button class="delete">Delete</button>-->
       <button class="ok"  (click)="onAddClick()">Ok!</button>
     </div>
   </div>

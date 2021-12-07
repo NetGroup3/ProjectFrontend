@@ -102,7 +102,7 @@ export class AddEditDishComponent implements OnInit {
         console.log(response)
       });
     }
-    //this.router.navigate(['moderator/cocktails'])
+    this.router.navigate(['moderator/cocktails'])
   }
 
   getDish(): void {
