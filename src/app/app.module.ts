@@ -58,6 +58,7 @@ import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 import {AddStockComponent} from "./modules/cocktails/personal-stock/add-stock/add-stock.component";
 import { StockItemComponent } from './modules/cocktails/personal-stock/stock-item/stock-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {NzToolTipModule} from "ng-zorro-antd/tooltip";
 
 import {NzTransferModule} from "ng-zorro-antd/transfer";
 import {NzSwitchModule} from "ng-zorro-antd/switch";
@@ -66,11 +67,11 @@ import {NzTableModule} from "ng-zorro-antd/table";
 import {NzTagModule} from "ng-zorro-antd/tag";
 import { ListKitchenwareComponent } from './modules/cocktails/list-kitchenware/list-kitchenware.component';
 import { ListLabelComponent } from './modules/cocktails/list-label/list-label.component';
-import {AuthUserRequestsComponent} from "./modules/friends/auth-user-requests/auth-user-requests.component";
-import {AuthUserFriendsComponent} from "./modules/friends/auth-user-friends.component";
+import {RequestsComponent} from "./modules/friends/pages/friends-requests/requests.component";
+import {FriendsComponent} from "./modules/friends/pages/friends/friends.component";
 import {PageNotFoundComponent} from "./modules/core/page-not-found/page-not-found.component";
 import {NzResultModule} from "ng-zorro-antd/result";
-
+import {NzBadgeModule} from "ng-zorro-antd/badge";
 
 registerLocaleData(en);
 
@@ -112,8 +113,8 @@ registerLocaleData(en);
     StockItemComponent,
     AddStockComponent,
     ButtonComponent,
-    AuthUserRequestsComponent,
-    AuthUserFriendsComponent,
+    RequestsComponent,
+    FriendsComponent,
     PageNotFoundComponent,
 
   ],
@@ -144,14 +145,16 @@ registerLocaleData(en);
     NzTagModule,
     NzInputNumberModule,
     FontAwesomeModule,
-    NzResultModule
-
+    NzResultModule,
+    NzToolTipModule,
+    NzBadgeModule
   ],
+
   providers: [
     {
-      provide : HTTP_INTERCEPTORS,
+      provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi   : true,
+      multi: true,
     },
     {
       provide: NZ_I18N,
@@ -160,4 +163,5 @@ registerLocaleData(en);
     RestapiService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

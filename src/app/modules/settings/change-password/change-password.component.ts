@@ -4,6 +4,7 @@ import {PasswordMatch} from "../../auth/services/client/password-validator";
 import {AuthService} from "../../auth/services/client/auth.service";
 import {UserRestService} from "../../auth/services/rest/user-rest.service";
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import {of} from "rxjs";
 
 @Component({
   selector: 'app-change-password',
@@ -31,25 +32,23 @@ export class ChangePasswordComponent implements OnInit {
         // userId: this.authService.getUserId(),
         oldPassword: ['', [Validators.required]],
         password: ['', [Validators.required, Validators.maxLength(128), Validators.minLength(8)]],
-        confirmPassword: ['', [Validators.required, Validators.maxLength(128), Validators.minLength(8)]]
+        confirmPassword: ['', [Validators.required, Validators.maxLength(128), Validators.minLength(8)]]  ///вынести
       }, options
     );
   }
 
   public onSavePasswordClick(): void {
-    console.log(this.passwordForm.value.password)
     if (this.passwordForm.valid) {
-      this.userRestService.changePassword(this.passwordForm.value).subscribe((response: any) => {
-        this.notification.blank('Password changed', '', {
-          nzKey: 'key'
-        });
-      })
-      this.notification.blank('Incorrect password', '', {
-        nzKey: 'key'
+      this.userRestService.changePassword(this.passwordForm.value).subscribe({
+        next: (): void => {
+          this.notification.blank('Password changed', '', {});
+        },
+        error: (): void => {
+          this.notification.blank('Incorrect password', '', {});
+        }
       });
     } else {
       this.passwordForm.markAllAsTouched();
-
     }
   }
 

@@ -18,8 +18,8 @@ import {PersonalStockComponent} from "./modules/cocktails/personal-stock/persona
 import {ListComponent} from "./modules/cocktails/list/list.component";
 import {ListKitchenwareComponent} from "./modules/cocktails/list-kitchenware/list-kitchenware.component";
 import {PageNotFoundComponent} from "./modules/core/page-not-found/page-not-found.component";
-import {AuthUserFriendsComponent} from "./modules/friends/auth-user-friends.component";
-import {AuthUserRequestsComponent} from "./modules/friends/auth-user-requests/auth-user-requests.component";
+import {FriendsComponent} from "./modules/friends/pages/friends/friends.component";
+import {RequestsComponent} from "./modules/friends/pages/friends-requests/requests.component";
 
 
 
@@ -31,8 +31,8 @@ const routes: Routes = [
   { path: 'home', component:HomeComponent, canActivate: [HomeGuard]},
   // { path: 'home', component:HomeComponent},
   { path: 'settings', component:AuthUserSettingsComponent},
-  { path: 'user/friends', component:AuthUserFriendsComponent},
-  { path: 'user/requests', component:AuthUserRequestsComponent},
+  { path: 'user/friends', component:FriendsComponent},
+  { path: 'user/requests', component:RequestsComponent},
   { path: 'moderator/ingredients', component:ModeratorIngredientsComponent},
   { path: 'moderator/ingredients/:id', component:AddEditIngredientComponent},
   { path: 'moderator/ingredients/add', component:AddEditIngredientComponent},

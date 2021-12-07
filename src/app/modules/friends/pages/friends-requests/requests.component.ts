@@ -1,18 +1,18 @@
 import {Component, OnInit, TemplateRef} from "@angular/core";
-import {FRequest} from "../../core/models/friendRequest";
-import {FriendService} from "../../core/services/friend.service";
+import {FriendRequest} from "../../models/friendRequest";
+import {FriendService} from "../../services/friend.service";
 import {NzNotificationService} from 'ng-zorro-antd/notification';
 
 
 @Component({
   selector: 'app-auth-user-requests',
-  templateUrl: './auth-user-requests.component.html',
-  styleUrls: ['./auth-user-requests.component.scss']
+  templateUrl: './requests.component.html',
+  styleUrls: ['./requests.component.scss']
 })
-export class AuthUserRequestsComponent implements OnInit {
+export class RequestsComponent implements OnInit {
   limit: number = 10;
   offset: number = 0;
-  fRequests: FRequest[] = [];
+  friendRequests: FriendRequest[] = [];
 
   toggle: boolean = true;
 
@@ -28,38 +28,37 @@ export class AuthUserRequestsComponent implements OnInit {
     this.friendService.getRequests(limit, offset)
       .subscribe((response) => {
         console.log('test', response)
-        this.fRequests = response
+        this.friendRequests = response
       });
   }
 
-  fRequest: FRequest = {
+  fRequest: FriendRequest = {
     id: 0,
     firstName: "",
     imageId: ""
   }
 
-  accept(fRequest: FRequest) {
+  accept(fRequest: FriendRequest) {
     this.fRequest = fRequest;
-    console.log(this.fRequest.id)
-    this.friendService.acceptInvite(this.fRequest.id).subscribe((response) => {
-      console.log(response)
-      this.fRequests = this.fRequests.filter((req) => req.id !== this.fRequest.id);
+    this.friendService.acceptInvite(this.fRequest.id).subscribe({
+      next: (): void => {
+        this.friendRequests = this.friendRequests.filter((req) => req.id !== this.fRequest.id);
+      }
     });
   }
 
-  decline(fRequest: FRequest) {
+  decline(fRequest: FriendRequest) {
     this.fRequest = fRequest;
     this.toggle = !this.toggle;
   }
 
   ok() {
     this.toggle = !this.toggle;
-    console.log(this.fRequest)
-    this.friendService.declineInvite(this.fRequest.id).subscribe((response) => {
-      console.log(response)
-      this.fRequests = this.fRequests.filter((req) => req.id !== this.fRequest.id);
-      this.notification.blank('Invite declined', '', {
-      });
+    this.friendService.declineInvite(this.fRequest.id).subscribe({
+      next: (): void => {
+        this.friendRequests = this.friendRequests.filter((req) => req.id !== this.fRequest.id);
+        this.notification.blank('Invite declined', '', {});
+      }
     });
   }
 
@@ -68,7 +67,7 @@ export class AuthUserRequestsComponent implements OnInit {
   }
 
   next() {
-    if (this.fRequests.length === 0 || this.fRequests.length < 10) {
+    if (this.friendRequests.length === 0 || this.friendRequests.length < 10) {
     } else {
       this.offset = this.offset + 10;
       this.getFRequests(this.limit, this.offset);
