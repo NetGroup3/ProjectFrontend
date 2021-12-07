@@ -27,7 +27,6 @@ export class RequestsComponent implements OnInit {
   getFRequests(limit: number, offset: number): void {
     this.friendService.getRequests(limit, offset)
       .subscribe((response) => {
-        console.log('test', response)
         this.friendRequests = response
       });
   }

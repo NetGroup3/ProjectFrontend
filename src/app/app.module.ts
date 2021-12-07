@@ -72,6 +72,8 @@ import {FriendsComponent} from "./modules/friends/pages/friends/friends.componen
 import {PageNotFoundComponent} from "./modules/core/page-not-found/page-not-found.component";
 import {NzResultModule} from "ng-zorro-antd/result";
 import {NzBadgeModule} from "ng-zorro-antd/badge";
+import {UserSearchComponent} from "./modules/user/pages/searchUser/user-search.component";
+import {NzAutocompleteModule} from "ng-zorro-antd/auto-complete";
 
 registerLocaleData(en);
 
@@ -116,7 +118,7 @@ registerLocaleData(en);
     RequestsComponent,
     FriendsComponent,
     PageNotFoundComponent,
-
+    UserSearchComponent,
   ],
 
   imports: [
@@ -147,7 +149,8 @@ registerLocaleData(en);
     FontAwesomeModule,
     NzResultModule,
     NzToolTipModule,
-    NzBadgeModule
+    NzBadgeModule,
+    NzAutocompleteModule,
   ],
 
   providers: [
