@@ -33,6 +33,7 @@ export const appLinks={
   acceptInvite: `${environment.serverUrl}/friend/accept-invite`,
   stockIngredients:`${environment.serverUrl}/user/stock/ingredients`,
   addDish: `${environment.serverUrl}/dish/full`,
+  stockSearch:`${environment.serverUrl}/user/stock/search`,
   userSearch: `${environment.serverUrl}/users/user-search`,
 
 }

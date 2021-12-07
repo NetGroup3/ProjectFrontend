@@ -14,7 +14,8 @@ import {Subscription} from "rxjs";
 })
 export class AddStockComponent implements OnInit, OnChanges {
 
-  private limit: number = 50;
+  private isLoading = false;
+  private limit: number = 10;
   private page: number = 0;
 
   @Output() onAddStock: EventEmitter<StockAddDto> = new EventEmitter<StockAddDto>();
@@ -51,7 +52,16 @@ export class AddStockComponent implements OnInit, OnChanges {
   }
 
   loadMore() {
-    console.log("load more ingredient");
+    if (this.isLoading){
+      return;
+    }
+    this.isLoading = true;
+    this.page++;
+    this.stockService.getIngredients(this.limit, this.page)
+      .subscribe(data => {
+        this.isLoading = false;
+        this.ingredients = [...this.ingredients, ...data];
+      });
   }
 
   onSubmit(){
