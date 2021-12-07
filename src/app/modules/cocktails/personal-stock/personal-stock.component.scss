@@ -28,3 +28,19 @@ header {
   width: 33%;
 
 }
+
+input {
+  width: 20%;
+  border: 2px solid #BBBFCA;
+  box-sizing: border-box;
+  border-radius: 24px;
+  color: #495464;
+}
+
+nz-spin {
+  text-align: center;
+}
+
+nz-select {
+  width: 200px;
+}

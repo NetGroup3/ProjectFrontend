@@ -70,6 +70,9 @@ import {AuthUserRequestsComponent} from "./modules/friends/auth-user-requests/au
 import {AuthUserFriendsComponent} from "./modules/friends/auth-user-friends.component";
 import {PageNotFoundComponent} from "./modules/core/page-not-found/page-not-found.component";
 import {NzResultModule} from "ng-zorro-antd/result";
+import {NzSpinModule} from "ng-zorro-antd/spin";
+import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
+import {NzSpaceModule} from "ng-zorro-antd/space";
 
 
 registerLocaleData(en);
@@ -144,7 +147,10 @@ registerLocaleData(en);
     NzTagModule,
     NzInputNumberModule,
     FontAwesomeModule,
-    NzResultModule
+    NzResultModule,
+    NzSpinModule,
+    NzDatePickerModule,
+    NzSpaceModule
 
   ],
   providers: [
