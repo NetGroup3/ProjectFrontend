@@ -20,6 +20,7 @@ export class PersonalStockComponent implements OnInit {
 
   private limit: number = 10;
   private page: number = 0;
+  private pages: number = 0;
   private searchText: string = "";
   public category: string = "";
   public sortedBy: string = "";
@@ -41,6 +42,13 @@ export class PersonalStockComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
+    this.getPages();
+  }
+
+  getPages(): void {
+    this.stockService.getPages(this.limit).subscribe( (pages: number) => {
+      this.pages = pages;
+    });
   }
 
   getData(): void {
@@ -53,19 +61,20 @@ export class PersonalStockComponent implements OnInit {
       .subscribe((stocks: Stock[]) => {
         this.stocks = stocks;
         this.isLoading = false;
+        this.page++;
       });
   }
 
   onLoadMore(): void {
-    if (this.isLoading){
+    if (this.isLoading || this.page===this.pages){
       return;
     }
     this.isLoading = true;
-    this.page++;
     this.stockService.getStocks(this.limit, this.page)
       .subscribe(data => {
       this.isLoading = false;
       this.stocks = [...this.stocks, ...data];
+      this.page++;
     });
   }
 
@@ -111,17 +120,11 @@ export class PersonalStockComponent implements OnInit {
   }
 
   @HostListener('window:scroll', ['$event'])
-  onWindowScroll($event: any) {
-    if (window.innerHeight + window.scrollY === document.body.scrollHeight) {
-      console.log('bottom');
-    }
-    //In chrome and some browser scroll is given to body tag
+  onWindowScroll() {
     let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
-    let max = document.documentElement.scrollHeight;
-// pos/max will give you the distance between scroll bottom and and bottom of screen in percentage.
-    if(pos == max )   {
+    if(pos == document.documentElement.scrollHeight )   {
       this.onLoadMore();
     }
-
   }
+
 }

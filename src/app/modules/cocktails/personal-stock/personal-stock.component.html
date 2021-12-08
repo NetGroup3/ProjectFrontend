@@ -3,7 +3,7 @@
     <header>
       <h1>Personal stock</h1>
 
-      <input type="text" placeholder="search" #search (keyup)="upSearch(search.value)">
+      <input type="text" placeholder="search" #search (keyup)="upSearch(search.value)" >
       <nz-space>
         <nz-select *nzSpaceItem [(ngModel)]="sortedBy">
           <nz-option nzValue="id" nzLabel=""></nz-option>
