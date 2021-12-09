@@ -54,5 +54,11 @@ export class StockService {
       params: new HttpParams().set('limit', limit).set('page', page)
     });
   }
+
+  getPages(limit: number): Observable<number> {
+    return this.http.get<number>(appLinks.stockPages, {
+      params: new HttpParams().set('limit', limit)
+    });
+  }
 }
 

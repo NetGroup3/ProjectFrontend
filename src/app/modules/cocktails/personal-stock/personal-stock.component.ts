@@ -18,8 +18,9 @@ export class PersonalStockComponent implements OnInit {
   public showAddStock: boolean = false;
   public subscription!: Subscription;
 
-  private limit: number = 10;
+  private limit: number = 11;
   private page: number = 0;
+  private pages: number = 0;
   private searchText: string = "";
   public category: string = "";
   public sortedBy: string = "";
@@ -41,6 +42,33 @@ export class PersonalStockComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
+    this.getPages();
+  }
+
+  sortedByTitle(){
+    this.sortedBy = "title";
+    this.upSearch("")
+  }
+
+  sortedByDescription() {
+    this.sortedBy = "description";
+    this.upSearch("")
+  }
+
+  sortedByCategory() {
+    this.sortedBy = "category";
+    this.upSearch("")
+  }
+
+  sortedByAmount() {
+    this.sortedBy = "amount";
+    this.upSearch("")
+  }
+
+  getPages(): void {
+    this.stockService.getPages(this.limit).subscribe( (pages: number) => {
+      this.pages = pages;
+    });
   }
 
   getData(): void {
@@ -48,24 +76,54 @@ export class PersonalStockComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    this.stockService
-      .getStocks(this.limit, this.page)
-      .subscribe((stocks: Stock[]) => {
+    this.stockService.search(
+      this.limit,
+      this.page,
+      this.searchText,
+      this.category,
+      this.sortedBy
+    ).subscribe((stocks: Stock[]) => {
         this.stocks = stocks;
         this.isLoading = false;
+        this.page++;
       });
   }
 
   onLoadMore(): void {
-    if (this.isLoading){
+    if (this.isLoading || this.page===this.pages){
       return;
     }
     this.isLoading = true;
-    this.page++;
-    this.stockService.getStocks(this.limit, this.page)
-      .subscribe(data => {
+    this.stockService.search(
+      this.limit,
+      this.page,
+      this.searchText,
+      this.category,
+      this.sortedBy
+    ).subscribe((stocks: Stock[]) => {
       this.isLoading = false;
-      this.stocks = [...this.stocks, ...data];
+      this.stocks = [...this.stocks, ...stocks];
+      this.page++;
+    });
+  }
+
+  upSearch(value: string) {
+    this.searchText = value
+    if(this.isLoading){
+      return;
+    }
+    this.isLoading = true;
+    this.page = 0;
+    this.stockService.search(
+      this.limit,
+      this.page,
+      this.searchText,
+      this.category,
+      this.sortedBy
+    ).subscribe((stocks: Stock[])=> {
+      this.isLoading = false;
+      this.stocks = stocks;
+      this.page++;
     });
   }
 
@@ -91,37 +149,12 @@ export class PersonalStockComponent implements OnInit {
     this.uiService.toggleAddStock();
   }
 
-  upSearch(value: string) {
-    this.searchText = value
-    if(this.isLoading){
-      return;
-    }
-    this.isLoading = true;
-    this.page = 0;
-    this.stockService.search(
-      this.limit,
-      this.page,
-      this.searchText,
-      this.category,
-      this.sortedBy
-    ).subscribe((res: Stock[])=> {
-      this.isLoading = false;
-      this.stocks = res;
-    });
-  }
-
   @HostListener('window:scroll', ['$event'])
-  onWindowScroll($event: any) {
-    if (window.innerHeight + window.scrollY === document.body.scrollHeight) {
-      console.log('bottom');
-    }
-    //In chrome and some browser scroll is given to body tag
+  onWindowScroll() {
     let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
-    let max = document.documentElement.scrollHeight;
-// pos/max will give you the distance between scroll bottom and and bottom of screen in percentage.
-    if(pos == max )   {
+    if(pos == document.documentElement.scrollHeight )   {
       this.onLoadMore();
     }
-
   }
+
 }

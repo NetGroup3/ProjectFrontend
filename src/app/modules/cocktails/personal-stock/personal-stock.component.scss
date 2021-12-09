@@ -4,7 +4,25 @@ header {
   align-items: center;
   margin-bottom: 20px;
 }
+.header_table{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
 
+.title{
+  width: 12%;
+}
+.category{
+  width: 12%;
+}
+.description{
+  width: 64%;
+}
+.amount {
+  width: 12%;
+}
 
 .insert_area {
   position: absolute;
