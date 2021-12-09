@@ -5,9 +5,10 @@
 
 
       <div class="wrapper">
-        <input (keydown.enter)='search()' class="search" type="text" placeholder="Search by name" [(ngModel)]="key">
-        <input type="radio" name="select" id="option-2" [checked]="title" (click)="title = !title">
-        <input type="radio" name="select" id="option-3" [checked]="Category" (click)="Category = !Category">
+        <input (keyup)='search("")' class="search" type="text" placeholder="Search by name" [(ngModel)]="key">
+        <input (keyup)='search("")' class="search" type="text" placeholder="Search by category" [(ngModel)]="category">
+        <input type="radio" name="select" id="option-2" [checked]="title" (click)="search('title')">
+        <input type="radio" name="select" id="option-3" [checked]="Category" (click)="search('category')">
         <label for="option-2" class="option option-2">
           <div class="dot"></div>
           <span>Title</span>
@@ -16,8 +17,6 @@
           <div class="dot"></div>
           <span>Category</span>
         </label>
-        <input (keydown.enter)='search()' class="search" type="text" placeholder="Search by category" [(ngModel)]="category">
-        <button (click)="search()">Ok</button>
       </div>
 
       <a routerLink="/moderator/dish/add">

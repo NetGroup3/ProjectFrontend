@@ -115,7 +115,6 @@ export class ModeratorService {
       .set('desc', desc)
       .set('title', key)
       .set('category', category)
-      .set('userId', userId)
     ;
     return this.http.get(appLinks.dishes, {params});
   }

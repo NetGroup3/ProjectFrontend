@@ -31,8 +31,6 @@ export class AddEditDishComponent implements OnInit {
   limit: number = 20
   page: number = 0
 
-  list: TransferItem[] = [];
-  list1: TransferItem[] = [];
   disabled = false;
 
   description: string = ""
@@ -50,6 +48,8 @@ export class AddEditDishComponent implements OnInit {
   public img: any;
 
   dishIngredientDto: DishIngredientDto = {
+    id: 0,
+    dish: 0,
     ingredient: 0,
     amount: 0
   }
@@ -87,9 +87,7 @@ export class AddEditDishComponent implements OnInit {
 
   onAddClick(): void {
     this.initDishService.changedIngredients.forEach(item => {
-      this.dishIngredientDto.ingredient = +item.key
-      this.dishIngredientDto.amount = 0
-      this.ingredients.push(this.dishIngredientDto)
+      this.ingredients.push({id: 0, dish: this.dish.id, amount: 0, ingredient:+item.key})
     })
     this.initDishService.changedKitchenware.forEach(item => this.kitchenware.push(+item.key))
     this.initDishService.changedLabel.forEach(item => this.labels.push(+item.key))
@@ -112,6 +110,13 @@ export class AddEditDishComponent implements OnInit {
         console.log(response)
         this.dish = response.dish
         this.img = this.uploadService.initImage(this.dish.imageId);
+        // for (let i = 0; i < response.ingredients.length; i++) {
+        //   if(this.initDishService.ingredients.includes(response.ingredients[i].id)){
+        //
+        //    this.ingredientList.toRight(i)
+        //
+        //   }
+        // }
       });
   }
 

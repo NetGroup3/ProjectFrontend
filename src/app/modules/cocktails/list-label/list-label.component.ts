@@ -3,6 +3,8 @@ import {TransferChange, TransferItem, TransferSelectChange} from "ng-zorro-antd/
 import {Kitchenware} from "../../core/models/kitchenware";
 import {ModeratorService} from "../../core/services/moderator.service";
 import {InitDishService} from "../../core/services/init-dish.service";
+import {ActivatedRoute} from "@angular/router";
+import {AuthService} from "../../auth/services/client/auth.service";
 
 @Component({
   selector: 'app-list-label',
@@ -22,34 +24,59 @@ export class ListLabelComponent implements OnInit {
   page: number = 0;
 
   constructor(private moderatorService: ModeratorService,
-              private initDishService: InitDishService) {
+              private initDishService: InitDishService,
+              private route: ActivatedRoute,
+              private authService: AuthService,) {
   }
 
   ngOnInit(): void {
-
-    this.getLabels((res: any) => {
-      this.initList(res)
-    })
+    if(!isNaN(Number(this.route.snapshot.paramMap.get('id')))) {
+      this.getLabels((all: any) => {
+        this.getDish((res: any) => {
+          console.log(res.labels)
+          this.initList(all, res.labels)
+        })
+      })
+    }
+    else {
+      this.getLabels((all: any) => {
+        this.initList(all, [])
+      })
+    }
 
   }
 
-  initList(array: any[]){
+  initList(array: any[], right: any []){
+    array.forEach(el =>{
+      this.initDishService.ingredients.push(el.id)
+    })
     this.list = []
     for (let i = 0; i < array.length; i++) {
       this.list.push({
         key: array[i].id.toString(),
         title: array[i].title,
         description: `description of content${i + 1}`,
-        //disabled: i % 4 === 0,
         checked: false
       });
     }
+
+    right.forEach(i => {
+      console.log(i)
+      console.log(this.list[i.id])
+      this.list[i.id].direction = 'right'
+    })
   }
+
   getLabels(callback: (res: any) => void): void {
     this.moderatorService.getLabels(this.limit, this.page)
       .subscribe((res: any) => callback(res));
   }
 
+  getDish(callback: (res: any) => void): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.moderatorService.get_dish(id, +this.authService.getUserId())
+      .subscribe((res: any) => callback(res));
+  }
   select(ret: TransferSelectChange): void {
     console.log('nzSelectChange', ret);
   }
