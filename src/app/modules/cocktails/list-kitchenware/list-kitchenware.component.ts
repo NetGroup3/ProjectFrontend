@@ -31,14 +31,18 @@ export class ListKitchenwareComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.getKitchenware((all: any) => {
-      this.getDish((res: any) =>
-      {
-        this.initList(all, res.kitchenware)
+    if(!isNaN(Number(this.route.snapshot.paramMap.get('id')))) {
+      this.getKitchenware((all: any) => {
+        this.getDish((res: any) => {
+          this.initList(all, res.kitchenware)
+        })
       })
-    })
-
+    }
+    else {
+      this.getKitchenware((all: any) => {
+        this.initList(all, [])
+      })
+    }
   }
 
   getDish(callback: (res: any) => void): void {

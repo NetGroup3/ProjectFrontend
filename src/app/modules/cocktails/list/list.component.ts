@@ -15,6 +15,7 @@ import {AuthService} from "../../auth/services/client/auth.service";
 })
 
 export class ListComponent implements OnInit {
+  id = Number(this.route.snapshot.paramMap.get('id'));
   list: TransferItem[] = []
   changes: any [] = []
   $asTransferItems = (data: unknown): TransferItem[] => data as TransferItem[];
@@ -34,14 +35,19 @@ export class ListComponent implements OnInit {
   dishIngredients: number[] = []
   ngOnInit(): void {
 
-    this.getIngredients((all: any) => {
-      this.getDish((res: any) =>
-      {
-        this.initList(all, res.ingredients)
+    if(!isNaN(Number(this.route.snapshot.paramMap.get('id')))) {
+      this.getIngredients((all: any) => {
+        this.getDish((res: any) => {
+          this.initList(all, res.ingredients)
+        })
+
       })
-
-    })
-
+    }
+    else {
+      this.getIngredients((all: any) => {
+        this.initList(all, [])
+      })
+    }
   }
 
   initList(array: any[], right: any []){
@@ -66,8 +72,8 @@ export class ListComponent implements OnInit {
   }
 
   getDish(callback: (res: any) => void): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.moderatorService.get_dish(id, +this.authService.getUserId())
+
+    this.moderatorService.get_dish(this.id, +this.authService.getUserId())
       .subscribe((res: any) => callback(res));
   }
 

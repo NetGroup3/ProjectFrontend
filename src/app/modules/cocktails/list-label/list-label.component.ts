@@ -30,13 +30,19 @@ export class ListLabelComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.getLabels((all: any) => {
-      this.getDish((res: any) =>
-      {
-        this.initList(all, res.ingredients)
+    if(!isNaN(Number(this.route.snapshot.paramMap.get('id')))) {
+      this.getLabels((all: any) => {
+        this.getDish((res: any) => {
+          console.log(res.labels)
+          this.initList(all, res.labels)
+        })
       })
-    })
+    }
+    else {
+      this.getLabels((all: any) => {
+        this.initList(all, [])
+      })
+    }
 
   }
 
@@ -53,7 +59,12 @@ export class ListLabelComponent implements OnInit {
         checked: false
       });
     }
-    right.forEach(i => this.list[i.id].direction = 'right')
+
+    right.forEach(i => {
+      console.log(i)
+      console.log(this.list[i.id])
+      this.list[i.id].direction = 'right'
+    })
   }
 
   getLabels(callback: (res: any) => void): void {
