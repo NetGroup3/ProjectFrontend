@@ -18,7 +18,7 @@ export class PersonalStockComponent implements OnInit {
   public showAddStock: boolean = false;
   public subscription!: Subscription;
 
-  private limit: number = 10;
+  private limit: number = 11;
   private page: number = 0;
   private pages: number = 0;
   private searchText: string = "";
@@ -45,6 +45,26 @@ export class PersonalStockComponent implements OnInit {
     this.getPages();
   }
 
+  sortedByTitle(){
+    this.sortedBy = "title";
+    this.upSearch("")
+  }
+
+  sortedByDescription() {
+    this.sortedBy = "description";
+    this.upSearch("")
+  }
+
+  sortedByCategory() {
+    this.sortedBy = "category";
+    this.upSearch("")
+  }
+
+  sortedByAmount() {
+    this.sortedBy = "amount";
+    this.upSearch("")
+  }
+
   getPages(): void {
     this.stockService.getPages(this.limit).subscribe( (pages: number) => {
       this.pages = pages;
@@ -56,9 +76,13 @@ export class PersonalStockComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    this.stockService
-      .getStocks(this.limit, this.page)
-      .subscribe((stocks: Stock[]) => {
+    this.stockService.search(
+      this.limit,
+      this.page,
+      this.searchText,
+      this.category,
+      this.sortedBy
+    ).subscribe((stocks: Stock[]) => {
         this.stocks = stocks;
         this.isLoading = false;
         this.page++;
@@ -70,10 +94,35 @@ export class PersonalStockComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    this.stockService.getStocks(this.limit, this.page)
-      .subscribe(data => {
+    this.stockService.search(
+      this.limit,
+      this.page,
+      this.searchText,
+      this.category,
+      this.sortedBy
+    ).subscribe((stocks: Stock[]) => {
       this.isLoading = false;
-      this.stocks = [...this.stocks, ...data];
+      this.stocks = [...this.stocks, ...stocks];
+      this.page++;
+    });
+  }
+
+  upSearch(value: string) {
+    this.searchText = value
+    if(this.isLoading){
+      return;
+    }
+    this.isLoading = true;
+    this.page = 0;
+    this.stockService.search(
+      this.limit,
+      this.page,
+      this.searchText,
+      this.category,
+      this.sortedBy
+    ).subscribe((stocks: Stock[])=> {
+      this.isLoading = false;
+      this.stocks = stocks;
       this.page++;
     });
   }
@@ -98,25 +147,6 @@ export class PersonalStockComponent implements OnInit {
 
   toggleAddStock() {
     this.uiService.toggleAddStock();
-  }
-
-  upSearch(value: string) {
-    this.searchText = value
-    if(this.isLoading){
-      return;
-    }
-    this.isLoading = true;
-    this.page = 0;
-    this.stockService.search(
-      this.limit,
-      this.page,
-      this.searchText,
-      this.category,
-      this.sortedBy
-    ).subscribe((res: Stock[])=> {
-      this.isLoading = false;
-      this.stocks = res;
-    });
   }
 
   @HostListener('window:scroll', ['$event'])

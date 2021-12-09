@@ -4,15 +4,16 @@
   nzTooltipTitle="prompt text"
   nzTooltipPlacement="top"
 >
-  <h3>
+  <h3 class="title_item">
     {{stock.ingredient.title}}
-    <fa-icon
-      (click)="onDelete(stock)"
-      [ngStyle]="{'color':'red'}"
-      [icon]="faTimes" >
-    </fa-icon>
   </h3>
+  <div class = "category_item">
+    <p>{{stock.ingredient.category}}</p>
+  </div>
+  <div class = "description_item">
   <p>{{stock.ingredient.description}}</p>
+  </div>
+  <div class="amount_item">
   <h1 *ngIf="selected; then ifBlock else elseBlock"></h1>
   <ng-template #ifBlock>
     {{stock.amount}}
@@ -27,4 +28,10 @@
     </nz-input-number>
   </ng-template>
   {{stock.ingredient.measurement}}
+  </div>
+  <fa-icon
+    (click)="onDelete(stock)"
+    [ngStyle]="{'color':'red'}"
+    [icon]="faTimes" >
+  </fa-icon>
 </div>

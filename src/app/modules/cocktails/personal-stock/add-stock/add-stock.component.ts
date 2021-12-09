@@ -39,7 +39,6 @@ export class AddStockComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.getIngredients((res: any) => {
-      console.log(res)
       this.ingredients = res;
     });
   }
