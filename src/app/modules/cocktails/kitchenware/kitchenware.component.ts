@@ -30,7 +30,7 @@ export class KitchenwareComponent implements OnInit {
   }
   toggle: boolean = true;
   ngOnInit(): void {
-    this.search()
+    this.search("")
   }
 
   getKitchenware(limit: number, page: number, key: string, category: string, sortedBy: string): void {
@@ -79,16 +79,7 @@ export class KitchenwareComponent implements OnInit {
     this.toggle = !this.toggle;
   }
 
-  search() {
-    if(this.id){
-      this.sortedBy = "id"
-    }
-    else if(this.title){
-      this.sortedBy = "title"
-    }
-    else if(this.category){
-      this.sortedBy = "category"
-    }
-    this.getKitchenware(this.limit, this.page, this.key, this.category, this.sortedBy);
+  search(sortedBy: string) {
+    this.getKitchenware(this.limit, this.page, this.key, this.category, sortedBy);
   }
 }
