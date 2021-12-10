@@ -28,6 +28,12 @@
     >
       Send list on email
     </button>
+    <p *ngIf="error">
+      <nz-alert nzType="error" nzMessage="{{message}}" nzShowIcon></nz-alert>
+    </p>
+    <p *ngIf="success">
+      <nz-alert nzType="success" nzMessage="{{message}}" nzShowIcon></nz-alert>
+    </p>
     <div class="recovery-page__link">
       <p>
         <a routerLink="/login">Return to Login</a>
