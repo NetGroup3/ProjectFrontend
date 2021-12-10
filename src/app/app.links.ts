@@ -35,6 +35,7 @@ export const appLinks={
   stockIngredients:`${environment.serverUrl}/user/stock/ingredients`,
   addDish: `${environment.serverUrl}/dish/full`,
   stockSearch:`${environment.serverUrl}/user/stock/search`,
+  stockPages:`${environment.serverUrl}/user/stock/pages`,
   userSearch: `${environment.serverUrl}/users/user-search`,
   userProfile: `${environment.serverUrl}/users/user-profile`,
 

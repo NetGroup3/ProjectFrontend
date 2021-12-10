@@ -4,6 +4,8 @@ import {Ingredient} from "../../core/models/ingredient";
 import {ModeratorService} from "../../core/services/moderator.service";
 import {Kitchenware} from "../../core/models/kitchenware";
 import {InitDishService} from "../../core/services/init-dish.service";
+import {ActivatedRoute} from "@angular/router";
+import {AuthService} from "../../auth/services/client/auth.service";
 
 @Component({
   selector: 'app-list-kitchenware',
@@ -23,28 +25,47 @@ export class ListKitchenwareComponent implements OnInit {
   page: number = 0;
 
   constructor(private moderatorService: ModeratorService,
-              private initDishService: InitDishService) {
+              private initDishService: InitDishService,
+              private route: ActivatedRoute,
+              private authService: AuthService,) {
   }
 
   ngOnInit(): void {
-
-    this.getKitchenware((res: any) => {
-      this.initList(res)
-    })
-
+    if(!isNaN(Number(this.route.snapshot.paramMap.get('id')))) {
+      this.getKitchenware((all: any) => {
+        this.getDish((res: any) => {
+          this.initList(all, res.kitchenware)
+        })
+      })
+    }
+    else {
+      this.getKitchenware((all: any) => {
+        this.initList(all, [])
+      })
+    }
   }
 
-  initList(array: any[]){
+  getDish(callback: (res: any) => void): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.moderatorService.get_dish(id, +this.authService.getUserId())
+      .subscribe((res: any) => callback(res));
+  }
+
+
+  initList(array: any[], right: any []){
+    array.forEach(el =>{
+      this.initDishService.kitchenware.push(el.id)
+    })
     this.list = []
     for (let i = 0; i < array.length; i++) {
       this.list.push({
         key: array[i].id.toString(),
         title: array[i].title,
         description: `description of content${i + 1}`,
-        //disabled: i % 4 === 0,
         checked: false
       });
     }
+    right.forEach(i => this.list[i.id].direction = 'right')
   }
   getKitchenware(callback: (res: any) => void): void {
     this.moderatorService.get_Kitchenware(this.limit, this.page, "", "", "")
