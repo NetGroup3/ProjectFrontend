@@ -20,7 +20,8 @@ import {ListKitchenwareComponent} from "./modules/cocktails/list-kitchenware/lis
 import {PageNotFoundComponent} from "./modules/core/page-not-found/page-not-found.component";
 import {FriendsComponent} from "./modules/friends/pages/friends/friends.component";
 import {RequestsComponent} from "./modules/friends/pages/friends-requests/requests.component";
-import {UserSearchComponent} from "./modules/user/pages/searchUser/user-search.component";
+import {UserSearchComponent} from "./modules/user/components/searchUser/user-search.component";
+import {UserProfileComponent} from "./modules/user/pages/profile/profile.component";
 
 
 
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'user/friends', component:FriendsComponent},
   { path: 'user/requests', component:RequestsComponent},
   { path: 'user/user-search', component:UserSearchComponent},
+  { path: 'user/user-profile/:id', component:UserProfileComponent},
   { path: 'moderator/ingredients', component:ModeratorIngredientsComponent},
   { path: 'moderator/ingredients/:id', component:AddEditIngredientComponent},
   { path: 'moderator/ingredients/add', component:AddEditIngredientComponent},

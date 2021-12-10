@@ -10,9 +10,9 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
   styleUrls: ['./friends.component.scss']
 })
 export class FriendsComponent implements OnInit {
+  friends: Friend[] = [];
   limit: number = 10;
   offset: number = 0;
-  friends: Friend[] = [];
   notifications = 0;
   toggle: boolean = true;
 
