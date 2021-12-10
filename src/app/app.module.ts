@@ -75,6 +75,10 @@ import {NzSpinModule} from "ng-zorro-antd/spin";
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import {NzSpaceModule} from "ng-zorro-antd/space";
 import {NzBadgeModule} from "ng-zorro-antd/badge";
+import {UserSearchComponent} from "./modules/user/components/searchUser/user-search.component";
+import {NzAutocompleteModule} from "ng-zorro-antd/auto-complete";
+import {UserProfileComponent} from "./modules/user/pages/profile/profile.component";
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 
 registerLocaleData(en);
 
@@ -119,7 +123,8 @@ registerLocaleData(en);
     RequestsComponent,
     FriendsComponent,
     PageNotFoundComponent,
-
+    UserSearchComponent,
+    UserProfileComponent,
   ],
 
   imports: [
@@ -154,6 +159,8 @@ registerLocaleData(en);
     NzSpaceModule,
     NzToolTipModule,
     NzBadgeModule,
+    NzAutocompleteModule,
+    NzDescriptionsModule,
   ],
 
   providers: [
