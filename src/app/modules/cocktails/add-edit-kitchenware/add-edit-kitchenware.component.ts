@@ -44,15 +44,17 @@ export class AddEditKitchenwareComponent implements OnInit {
     if(this.kitchenware.id === 0){
       this.moderatorService.add_kitchenware(this.kitchenware).subscribe((response:any)=>{
         console.log(response)
+        this.router.navigate(['/moderator/kitchenware'])
       });
     }
     else {
       this.moderatorService.edit_kitchenware(this.kitchenware).subscribe((response:any)=>{
         console.log(response)
+        this.router.navigate(['/moderator/kitchenware'])
       });
     }
     console.log(this.kitchenware)
-    this.router.navigate(['/moderator/kitchenware'])
+
   }
 
   getKitchenware(): void {
