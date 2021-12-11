@@ -1,5 +1,6 @@
 <app-user-sceleton></app-user-sceleton>
   <div class="insert_area">
+    <div class="scrollable">
     <header>
       <h1>Personal stock</h1>
       <input type="text" placeholder="search" #search (keyup)="upSearch(search.value)" >
@@ -23,12 +24,12 @@
       [ingredient]="ingredient"
     >
     </app-add-stock>
-    <div class="header_table">
-      <button class="title" nz-button (click)="sortedByTitle()">Title</button>
-      <button class="category" nz-button (click)="sortedByCategory()">Category</button>
-      <button class="description" nz-button (click)="sortedByDescription()">Description</button>
-      <button class="amount" nz-button (click)="sortedByAmount()">Amount</button>
-    </div>
+      <div class="header_table">
+        <button class="title" nzTooltipTitle="Sort stock by title" nz-tooltip nzTooltipPlacement="top" nz-button (click)="sortedByTitle()">Title</button>
+        <button class="category" nzTooltipTitle="Sort stock by category" nz-tooltip nzTooltipPlacement="top" nz-button (click)="sortedByCategory()">Category</button>
+        <button class="description" nzTooltipTitle="Sort stock by description" nz-tooltip nzTooltipPlacement="top" nz-button (click)="sortedByDescription()">Description</button>
+        <button class="amount" nzTooltipTitle="Sort stock by amount" nz-tooltip nzTooltipPlacement="top" nz-button (click)="sortedByAmount()">Amount</button>
+      </div>
     <app-stock-item
       *ngFor="let stock of stocks"
       [stock]="stock"
@@ -37,4 +38,5 @@
     >
     </app-stock-item>
     <nz-spin *ngIf="isLoading" nzSimple [nzSize]="'large'"></nz-spin>
+    </div>
 </div>
