@@ -7,6 +7,7 @@ import {InitDishService} from "../../core/services/init-dish.service";
 import {Dish} from "../../core/models/dish";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../auth/services/client/auth.service";
+import {compass} from "@cloudinary/url-gen/qualifiers/gravity";
 
 @Component({
   selector: 'app-list',
@@ -22,7 +23,7 @@ export class ListComponent implements OnInit {
   disabled = false;
   showSearch = false;
   ingredients: Ingredient [] = [];
-  limit: number = 10;
+  limit: number = 100;
   page: number = 0;
   ingredientsDish: Ingredient [] = []
 
@@ -63,7 +64,17 @@ export class ListComponent implements OnInit {
         checked: false
       });
     }
-  right.forEach(i => this.list[i.id].direction = 'right')
+    for (let i = 0; i < right.length; i++) {
+      this.list.forEach(el => {
+        if(el.key == right[i].id){
+          el.direction = 'right'
+        }
+      })
+    }
+    this.initDishService.listIngredients = this.list
+  // right.forEach(i => {
+  //   this.list[i.id].direction = 'right'
+  // })
   }
 
   getIngredients(callback: (res: any) => void): void {
@@ -83,6 +94,9 @@ export class ListComponent implements OnInit {
 
 
   change(ret: TransferChange): void {
+    ret.list.forEach(el => {
+      this.initDishService.changedIngredients.push(el)
+    })
     console.log('nzChange', ret);
     const listKeys = ret.list.map(l => l.key);
     const hasOwnKey = (e: TransferItem): boolean => e.hasOwnProperty('key');
@@ -96,5 +110,6 @@ export class ListComponent implements OnInit {
       }
       return e;
     });
+    this.initDishService.listIngredients = this.list
   }
 }

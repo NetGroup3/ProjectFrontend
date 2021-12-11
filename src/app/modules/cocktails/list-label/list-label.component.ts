@@ -5,6 +5,7 @@ import {ModeratorService} from "../../core/services/moderator.service";
 import {InitDishService} from "../../core/services/init-dish.service";
 import {ActivatedRoute} from "@angular/router";
 import {AuthService} from "../../auth/services/client/auth.service";
+import {Label} from "../../core/models/label";
 
 @Component({
   selector: 'app-list-label',
@@ -19,8 +20,8 @@ export class ListLabelComponent implements OnInit {
   $asTransferItems = (data: unknown): TransferItem[] => data as TransferItem[];
   disabled = false;
   showSearch = false;
-  kitchenware: Kitchenware [] = [];
-  limit: number = 10;
+  labels: Label [] = [];
+  limit: number = 100;
   page: number = 0;
 
   constructor(private moderatorService: ModeratorService,
@@ -48,7 +49,7 @@ export class ListLabelComponent implements OnInit {
 
   initList(array: any[], right: any []){
     array.forEach(el =>{
-      this.initDishService.ingredients.push(el.id)
+      this.initDishService.label.push(el.id)
     })
     this.list = []
     for (let i = 0; i < array.length; i++) {
@@ -60,11 +61,14 @@ export class ListLabelComponent implements OnInit {
       });
     }
 
-    right.forEach(i => {
-      console.log(i)
-      console.log(this.list[i.id])
-      this.list[i.id].direction = 'right'
-    })
+    for (let i = 0; i < right.length; i++) {
+      this.list.forEach(el => {
+        if(el.key == right[i].id){
+          el.direction = 'right'
+        }
+      })
+    }
+    this.initDishService.listLabels = this.list
   }
 
   getLabels(callback: (res: any) => void): void {
@@ -98,6 +102,7 @@ export class ListLabelComponent implements OnInit {
       }
       return e;
     });
+    this.initDishService.listLabels = this.list
   }
 
 
