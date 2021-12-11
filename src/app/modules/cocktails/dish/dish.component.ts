@@ -101,7 +101,6 @@ export class DishComponent implements OnInit {
     this.moderatorService.delete_dish(this.delDish.id).subscribe((response:any)=>{
       console.log(response)
     });
-    location.reload();
   }
 
   initImage(imageId: string): CloudinaryImage {

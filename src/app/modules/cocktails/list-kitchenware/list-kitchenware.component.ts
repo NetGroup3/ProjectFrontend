@@ -21,7 +21,7 @@ export class ListKitchenwareComponent implements OnInit {
   disabled = false;
   showSearch = false;
   kitchenware: Kitchenware [] = [];
-  limit: number = 10;
+  limit: number = 100;
   page: number = 0;
 
   constructor(private moderatorService: ModeratorService,
@@ -65,7 +65,14 @@ export class ListKitchenwareComponent implements OnInit {
         checked: false
       });
     }
-    right.forEach(i => this.list[i.id].direction = 'right')
+    for (let i = 0; i < right.length; i++) {
+      this.list.forEach(el => {
+        if(el.key == right[i].id){
+          el.direction = 'right'
+        }
+      })
+    }
+    this.initDishService.listKitchenware = this.list
   }
   getKitchenware(callback: (res: any) => void): void {
     this.moderatorService.get_Kitchenware(this.limit, this.page, "", "", "")
@@ -93,6 +100,7 @@ export class ListKitchenwareComponent implements OnInit {
       }
       return e;
     });
+    this.initDishService.listKitchenware = this.list
   }
 
 }

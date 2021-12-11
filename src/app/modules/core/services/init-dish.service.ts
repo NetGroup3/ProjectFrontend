@@ -8,6 +8,10 @@ import {TransferItem} from "ng-zorro-antd/transfer";
 })
 export class InitDishService {
 
+  public listIngredients: TransferItem[] = [];
+  public listKitchenware: TransferItem[] = [];
+  public listLabels: TransferItem[] = [];
+
   public ingredients: number [] = []
   public kitchenware: number [] = []
   public label: number [] = []

@@ -99,14 +99,14 @@ export class ModeratorService {
     return this.http.get(appLinks.dish, { params: new HttpParams().set('id', id).set('userId', userId)})
   }
 
-  public add_dish (body: DishWrapperDto){
-    console.log( this.http.post(appLinks.dish, body))
-    return this.http.post(appLinks.addDish, body);
+  public add_dish (dishWrapperDto: DishWrapperDto){
+    console.log( this.http.post(appLinks.addDish, dishWrapperDto))
+    return this.http.post(appLinks.addDish, dishWrapperDto);
   }
 
-  public edit_dish(body: Dish){
-    console.log( this.http.put(appLinks.dish, body))
-    return this.http.put(appLinks.dish, body);
+  public edit_dish(dishWrapperDto: DishWrapperDto){
+    console.log( this.http.put(appLinks.addDish, dishWrapperDto))
+    return this.http.put(appLinks.addDish, dishWrapperDto);
   }
   public get_dishes(limit: number, page: number, desc: boolean, key: string, category: string, sortedBy: string, userId: number) : Observable<any>{
     const params = new HttpParams()
