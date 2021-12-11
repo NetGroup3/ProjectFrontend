@@ -1,17 +1,33 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component, EventEmitter, Input, Output, SimpleChanges} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ModeratorModel} from "../admin-moderators/moderator.model";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {appLinks} from "../../../app.links";
 
 @Component({
   selector: 'app-add-edit-moderator',
-  templateUrl: './edit-moderator.component.html',
-  styleUrls: ['./edit-moderator.component.scss']
+  templateUrl: './add-edit-moderator.component.html',
+  styleUrls: ['./add-edit-moderator.component.scss']
 })
-export class EditModeratorComponent implements OnInit {
+export class AddEditModeratorComponent {
 
+  buttonDisabled = false;
   moderInfoForm: FormGroup;
+
+  moderData: ModeratorModel = {
+    id: -1,
+    email: '',
+    firstname: '',
+    lastname: '',
+    timestamp: '',
+    imageId: "",
+    status: ''
+  };
+
+  @Input() public inputModerData: ModeratorModel | undefined;
+
+  @Output() closeEmit = new EventEmitter<boolean>();
+  @Output() updateEmit = new EventEmitter<void>();
 
   constructor(private http: HttpClient, private fb: FormBuilder) {
     this.moderInfoForm = this.fb.group({
@@ -21,22 +37,10 @@ export class EditModeratorComponent implements OnInit {
     });
   }
 
-  moderData: ModeratorModel = {
-    id: -1,
-    email: 'j.d@gmail.com',
-    firstname: 'John',
-    lastname: 'Doe',
-    timestamp: {},
-    imageId: '',
-    status: ''
-  };
-
-  @Input() inputModerData: ModeratorModel | undefined;
-  @Input() type: String = "";
-
   ngOnChanges(changes: SimpleChanges) {
     if (changes['inputModerData'].currentValue !== undefined) {
-      this.moderData = changes['inputModerData'].currentValue;
+      this.moderData = Object.assign({}, changes['inputModerData'].currentValue);
+      //this.moderData.timestamp = {};
     }
     else {
       this.moderData = {
@@ -44,33 +48,30 @@ export class EditModeratorComponent implements OnInit {
         email: 'j.d@gmail.com',
         firstname: 'John',
         lastname: 'Doe',
-        timestamp: {},
+        timestamp: "",
         imageId: '',
         status: ''
       };
     }
   }
 
-  @Output() closeEmit = new EventEmitter<boolean>();
-  @Output() updateEmit = new EventEmitter<void>();
-
-  ngOnInit(): void {}
-
   onSubmit() {
     if (this.moderInfoForm.valid) {
+      this.buttonDisabled = true;
       let obj = this.moderInfoForm.value;
-      if (this.type === "Edit") {
+      if (this.inputModerData !== undefined) {
         this.moderData.firstname = obj.firstname;
         this.moderData.lastname = obj.lastname;
         this.moderData.email = obj.email;
+
+        console.log(this.moderData);
 
         this.http.put<void>(appLinks.moderator, this.moderData).subscribe(() => {
           this.close();
           this.updateEmit.emit();
         });
-      } else if (this.type === "Add") {
+      } else {
         this.http.post<void>(appLinks.moderator, obj).subscribe((res:any) => {
-          console.log(res)
           this.close();
           this.updateEmit.emit();
         });

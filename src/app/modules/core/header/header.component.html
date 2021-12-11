@@ -1,10 +1,20 @@
 <div class="header">
-  <app-user-search></app-user-search>
+  <!--<app-user-search></app-user-search>-->
 
-  <button id="buttonLogout" (click)="logOut()" class="top-bar-element">
-    Log out
-    <i id="logOutIcon" nz-icon nzType="logout" nzTheme="outline"></i>
-  </button>
-  <i id="name" class="top-bar-element">{{this.lastname}}<br>{{this.firstname}}</i>
-  <advanced-image id="avatar" [cldImg]="img" class="top-bar-element"></advanced-image>
+
+  <div class="align floatLeft">
+    <span class="brandName">Beaver Bar</span>
+  </div>
+
+  <div class="align floatRight">
+    <i class="name">{{this.firstname}}<br>{{this.lastname}}</i>
+
+    <advanced-image class="avatar" [cldImg]="img"></advanced-image>
+
+    <button class="buttonLogout" (click)="logOut()">
+      Logout
+      <i class="logOutIcon" nz-icon nzType="logout" nzTheme="outline"></i>
+    </button>
+  </div>
+
 </div>
