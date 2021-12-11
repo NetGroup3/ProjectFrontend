@@ -114,14 +114,16 @@ export class AddEditDishComponent implements OnInit {
     if (this.dish.id === 0) {
       this.moderatorService.add_dish(this.dishWrapperDto).subscribe((response: any) => {
         console.log(response)
+        this.router.navigate(['moderator/cocktails'])
       });
     } else {
 
       this.moderatorService.edit_dish(this.dishWrapperDto).subscribe((response: any) => {
         console.log(response)
+        this.router.navigate(['moderator/cocktails'])
       });
     }
-    this.router.navigate(['moderator/cocktails'])
+
   }
 
   getDish(): void {
