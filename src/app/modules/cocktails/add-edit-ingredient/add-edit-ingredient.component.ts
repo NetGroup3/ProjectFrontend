@@ -48,18 +48,15 @@ export class AddEditIngredientComponent implements OnInit {
     console.log(this.ingridient)
     if(this.ingridient.id === 0){
       this.moderatorService.add_ingredient(this.ingridient).subscribe((response:any)=>{
-        console.log(this.ingridient.imageId)
-      console.log(response)
+        this.router.navigate(['/moderator/ingredients'])
       });
     }
     else {
       console.log(this.ingridient.imageId)
       this.moderatorService.edit_ingredient(this.ingridient).subscribe((response:any)=>{
-        console.log(response)
+        this.router.navigate(['/moderator/ingredients'])
       });
     }
-    console.log(this.ingridient)
-    this.router.navigate(['/moderator/ingredients'])
 
   }
 

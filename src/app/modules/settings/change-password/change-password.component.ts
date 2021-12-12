@@ -4,7 +4,7 @@ import {PasswordMatch} from "../../auth/services/client/password-validator";
 import {AuthService} from "../../auth/services/client/auth.service";
 import {UserRestService} from "../../auth/services/rest/user-rest.service";
 import {NzNotificationService} from "ng-zorro-antd/notification";
-import {of} from "rxjs";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-change-password',
@@ -29,10 +29,9 @@ export class ChangePasswordComponent implements OnInit {
       }
 
     this.passwordForm = this.fbPassword.group({
-        // userId: this.authService.getUserId(),
         oldPassword: ['', [Validators.required]],
         password: ['', [Validators.required, Validators.maxLength(128), Validators.minLength(8)]],
-        confirmPassword: ['', [Validators.required, Validators.maxLength(128), Validators.minLength(8)]]  ///вынести
+        confirmPassword: ['', [Validators.required, Validators.maxLength(128), Validators.minLength(8)]]
       }, options
     );
   }
@@ -43,8 +42,8 @@ export class ChangePasswordComponent implements OnInit {
         next: (): void => {
           this.notification.blank('Password changed', '', {});
         },
-        error: (): void => {
-          this.notification.blank('Incorrect password', '', {});
+        error: (error: HttpErrorResponse): void => {
+          this.notification.blank(error.error, '', {});
         }
       });
     } else {

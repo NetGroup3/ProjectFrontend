@@ -17,6 +17,9 @@ import {AuthService} from "../../auth/services/client/auth.service";
 import {InitDishService} from "../../core/services/init-dish.service";
 import {DishWrapperDto} from "../../core/models/dishWrapperDto";
 import {DishIngredientDto} from "../../core/models/dishIngredientDto";
+import {DishKitchenwareDto} from "../../core/models/DishKitchenwareDto";
+import {DishLabelDto} from "../../core/models/DishLabelDto";
+import {Label} from "../../core/models/label";
 
 @Component({
   selector: 'app-add-edit-dish',
@@ -26,13 +29,13 @@ import {DishIngredientDto} from "../../core/models/dishIngredientDto";
 })
 export class AddEditDishComponent implements OnInit {
 
-  changesIngredient: any [] = []
+  dishIngredients: Ingredient [] = []
+  dishKitchenware: Kitchenware [] = []
+  dishLabels: Label [] = []
 
   limit: number = 20
   page: number = 0
 
-  list: TransferItem[] = [];
-  list1: TransferItem[] = [];
   disabled = false;
 
   description: string = ""
@@ -49,13 +52,10 @@ export class AddEditDishComponent implements OnInit {
   }
   public img: any;
 
-  dishIngredientDto: DishIngredientDto = {
-    ingredient: 0,
-    amount: 0
-  }
-  kitchenware: number [] = [];
-  labels: number [] = [];
+  kitchenware: DishKitchenwareDto [] = [];
+  labels: DishLabelDto [] = [];
   ingredients: DishIngredientDto [] = []
+
 
   dish_ingredient: Dish_ingredients [] = []
   dish_kitchenware: Dish_kitchenware [] = []
@@ -64,7 +64,7 @@ export class AddEditDishComponent implements OnInit {
     dish: this.dish,
     ingredients: this.ingredients,
     kitchenware: this.kitchenware,
-    lable: this.labels,
+    label: this.labels,
   }
 
   constructor(
@@ -86,23 +86,44 @@ export class AddEditDishComponent implements OnInit {
   }
 
   onAddClick(): void {
-    this.initDishService.changedIngredients.forEach(item => {
-      this.dishIngredientDto.ingredient = +item.key
-      this.dishIngredientDto.amount = 0
-      this.ingredients.push(this.dishIngredientDto)
+    console.log(this.initDishService.listIngredients)
+    this.initDishService.listIngredients.forEach(item => {
+      if (item.direction == "right") {
+        this.ingredients.push({
+          id: 0,
+          dish: 0,
+          amount: +item.amount,
+          ingredient: +item.key
+        })
+      }
     })
-    this.initDishService.changedKitchenware.forEach(item => this.kitchenware.push(+item.key))
-    this.initDishService.changedLabel.forEach(item => this.labels.push(+item.key))
+    this.initDishService.listKitchenware.forEach(item => {
+      if (item.direction == "right") {
+        this.kitchenware.push({id: 0, dish: 0, kitchenware: +item.key})
+      }
+    })
+    this.initDishService.listLabels.forEach(item => {
+      if (item.direction == "right") {
+        this.labels.push({id: 0, dish: 0, label: +item.key})
+      }
+    })
+    this.dishWrapperDto.dish = this.dish
+    this.dishWrapperDto.ingredients = this.ingredients
+    this.dishWrapperDto.kitchenware = this.kitchenware
+    this.dishWrapperDto.label = this.labels
     if (this.dish.id === 0) {
       this.moderatorService.add_dish(this.dishWrapperDto).subscribe((response: any) => {
         console.log(response)
+        this.router.navigate(['moderator/cocktails'])
       });
     } else {
-      this.moderatorService.edit_dish(this.dish).subscribe((response: any) => {
+
+      this.moderatorService.edit_dish(this.dishWrapperDto).subscribe((response: any) => {
         console.log(response)
+        this.router.navigate(['moderator/cocktails'])
       });
     }
-    this.router.navigate(['moderator/cocktails'])
+
   }
 
   getDish(): void {
@@ -110,8 +131,17 @@ export class AddEditDishComponent implements OnInit {
     this.moderatorService.get_dish(id, +this.authService.getUserId())
       .subscribe((response: any) => {
         console.log(response)
-        this.dish = response.dish
+        this.dish.id = response.dish.id
+        this.dish.title = response.dish.title
+        this.dish.imageId = response.dish.imageId
+        this.dish.active = response.dish.active
+        this.dish.description = response.dish.description
+        this.dish.receipt = response.dish.receipt
+        this.dish.category = response.dish.category
         this.img = this.uploadService.initImage(this.dish.imageId);
+        this.dishIngredients = response.ingredients
+        this.dishKitchenware = response.kitchenware
+        this.dishLabels = response.labels
       });
   }
 

@@ -3,6 +3,8 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {appLinks} from "../../../app.links";
 import {ModeratorModel} from "./moderator.model";
+import {PagResModel} from "./pag-res.model";
+import {toBoolean} from "ng-zorro-antd/core/util";
 
 @Component({
   selector: 'app-admin-moderators',
@@ -13,123 +15,157 @@ export class AdminModeratorsComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private http: HttpClient) {}
 
-  toggle: boolean = true;
-
-  change() {
-    this.toggle = !this.toggle;
-    this.buttonDisabled = !this.buttonDisabled;
-  }
-
   moderatorList: ModeratorModel[] = [];
+  pageNo: number = 1;
+  pagesTotal: number = 1;
 
   formValue = {
     searchFirstname: "",
     searchLastname: "",
     searchEmail: "",
-    pageNo: 1
+    sortProps: [],
+    pageNo: 1,
+    perPage: 20
   };
 
   showInjected: boolean = false;
+  showConfirm: boolean = true;
   emptyList: boolean = true;
   buttonDisabled: boolean = false;
   idToDelete: number = -1;
 
   buttonB: boolean = false;
-  buttonF: boolean = true;
+  buttonF: boolean = false;
 
   inputData: ModeratorModel | undefined;
-  type: string = "";
-
 
   settingsForm = new FormGroup({
-    searchFirstname: new FormControl(''),
-    searchLastname: new FormControl(''),
-    searchEmail: new FormControl('')
+    search: new FormControl(''),
+    searchInput: new FormControl(''),
+    sort: new FormControl(''),
+    sortType: new FormControl('')
   });
 
   ngOnInit(): void {
-    this.loadList({});
+    this.loadList({sortProps: [{
+      column: "timestamp",
+      asc: false
+    }]});
+  }
+
+  changeElementsState() {
+    this.showConfirm = !this.showConfirm;
+    this.buttonDisabled = !this.buttonDisabled;
+  }
+
+  clearFormValue() {
+    this.formValue.searchFirstname = "";
+    this.formValue.searchLastname = "";
+    this.formValue.searchEmail = "";
+    this.formValue.sortProps = [];
+    this.formValue.pageNo = 1;
+    this.formValue.perPage = 20;
   }
 
   onSubmit() {
-    this.buttonF = true;
-    this.buttonB = false;
-    let obj = this.settingsForm.value;
-    obj.pageNo = 1;
-    this.formValue = obj;
+    const obj = this.settingsForm.value;
+    this.clearFormValue();
+    if (obj.searchInput !== "") {
+      if (obj.search === "firstname") {
+        this.formValue.searchFirstname = obj.searchInput;
+      }
+      else if (obj.search === "lastname") {
+        this.formValue.searchLastname = obj.searchInput;
+      }
+      else if (obj.search === "email") {
+        this.formValue.searchEmail = obj.searchInput;
+      }
+    }
+    // @ts-ignore
+    this.formValue.sortProps.push({column: obj.sort, asc: toBoolean(obj.sortType)});
     this.loadList(this.formValue);
   }
 
   onForward() {
-    if (this.emptyList) {
-      this.buttonF = false;
-    }
-    else {
-      this.formValue.pageNo++;
-      this.loadList(this.formValue);
-    }
-    this.buttonB = true;
+    this.formValue.pageNo++;
+    this.loadList(this.formValue);
   }
 
   onBackward() {
-    if (this.formValue.pageNo != 1) {
-      this.buttonF = true;
-      this.formValue.pageNo --;
-      this.loadList(this.formValue);
-      if (this.formValue.pageNo === 1) {
-        this.buttonB = false;
-      }
-    }
-    else {
-      this.buttonB = false;
-    }
+    this.formValue.pageNo --;
+    this.loadList(this.formValue);
   }
 
   setShowInjected(value: boolean) {
     this.buttonDisabled = value;
     this.showInjected = value;
     if (value) {
-      this.settingsForm.controls['searchFirstname'].disable();
-      this.settingsForm.controls['searchLastname'].disable();
-      this.settingsForm.controls['searchEmail'].disable();
+      this.settingsForm.controls['searchInput'].disable();
+      this.settingsForm.controls['search'].disable();
+      this.settingsForm.controls['sortType'].disable();
+      this.settingsForm.controls['sort'].disable();
     }
     else {
-      this.settingsForm.controls['searchFirstname'].enable();
-      this.settingsForm.controls['searchLastname'].enable();
-      this.settingsForm.controls['searchEmail'].enable();
+      this.settingsForm.controls['searchInput'].enable();
+      this.settingsForm.controls['search'].enable();
+      this.settingsForm.controls['sortType'].enable();
+      this.settingsForm.controls['sort'].enable();
     }
   }
 
   onAddEditClicked(moder: ModeratorModel | undefined) {
     this.inputData = moder;
-    if (moder === undefined) {
-      this.type = "Add";
-    }
-    else {
-      this.type = "Edit";
-    }
     this.setShowInjected(true);
   }
 
   onDeleteConfirm(id: number) {
     this.idToDelete = id;
-    this.change();
+    this.changeElementsState();
   }
 
   deleteModer() {
-    this.change();
+    this.changeElementsState();
     this.http.delete(appLinks.moderator + "/" + this.idToDelete)
       .subscribe(() => {
         this.loadList(this.formValue);
     });
   }
 
+  setNavButtons() {
+    if (this.moderatorList === null) {
+      this.buttonB = false;
+      this.buttonF = false;
+    }
+    else {
+      if (this.pageNo === 1) {
+        this.buttonB = false;
+      } else {
+        this.buttonB = true;
+      }
+      if (this.pageNo === this.pagesTotal) {
+        this.buttonF = false;
+      } else {
+        this.buttonF = true;
+      }
+    }
+  }
+
   loadList (obj: Object) {
-    this.http.post<any>(appLinks.moderatorList, obj).subscribe(
+    this.http.post<PagResModel>(appLinks.moderatorList, obj).subscribe(
     (res) => {
       this.moderatorList = res.list;
-      console.log(this.moderatorList)
-      this.emptyList = false;
+      this.pageNo = res.pageNo;
+      this.pagesTotal = res.pagesTotal;
+      if (res.list === null) {
+        this.emptyList = true;
+      }
+      else {
+        for (const moder of this.moderatorList) {
+          moder.timestamp = (new Date(moder.timestamp.toString())).toLocaleString();
+        }
+        this.emptyList = false;
+      }
+      this.setNavButtons();
     },
     (err) => {
       this.emptyList = true;

@@ -31,8 +31,14 @@ export const appLinks={
   requests: `${environment.serverUrl}/friend/requests`,
   declineInvite: `${environment.serverUrl}/friend/decline-invite`,
   acceptInvite: `${environment.serverUrl}/friend/accept-invite`,
+  addFriend: `${environment.serverUrl}/friend/send-invite`,
   stockIngredients:`${environment.serverUrl}/user/stock/ingredients`,
+  comment: `${environment.serverUrl}/dish/comment`,
+  commentList: `${environment.serverUrl}/dish/comments`,
   addDish: `${environment.serverUrl}/dish/full`,
   stockSearch:`${environment.serverUrl}/user/stock/search`,
   stockPages:`${environment.serverUrl}/user/stock/pages`,
+  userSearch: `${environment.serverUrl}/users/user-search`,
+  userProfile: `${environment.serverUrl}/users/user-profile`,
+
 }

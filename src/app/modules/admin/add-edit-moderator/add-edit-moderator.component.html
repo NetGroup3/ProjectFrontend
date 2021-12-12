@@ -1,11 +1,12 @@
 <div id="main">
 
-  <h2>{{type}} moderator</h2>
+  <h2 *ngIf="inputModerData !== undefined">Edit moderator</h2>
+  <h2 *ngIf="inputModerData === undefined">Add moderator</h2>
 
   <form [formGroup]="moderInfoForm" novalidate>
 
     <label for="firstname">Name:<br>
-      <input id="firstname" type="text" class="form-control" required minlength="4" formControlName="firstname">
+      <input id="firstname" type="text" [(ngModel)]="moderData.firstname" class="form-control" required minlength="4" formControlName="firstname">
     </label><br>
 
     <div *ngIf="moderInfoForm.controls['firstname'].invalid && (moderInfoForm.controls['firstname'].dirty || moderInfoForm.controls['firstname'].touched)" class="alert alert-danger">
@@ -16,7 +17,7 @@
     <br>
 
     <label for="lastname">Surname:<br>
-      <input id="lastname" type="text" class="form-control" formControlName="lastname">
+      <input id="lastname" type="text" [(ngModel)]="moderData.lastname" class="form-control" formControlName="lastname">
     </label><br>
 
     <div *ngIf="moderInfoForm.controls['lastname'].invalid && (moderInfoForm.controls['lastname'].dirty || moderInfoForm.controls['lastname'].touched)" class="alert alert-danger">
@@ -27,7 +28,7 @@
     <br>
 
     <label for="email">Email:<br>
-      <input id="email" type="text" class="form-control" formControlName="email">
+      <input id="email" type="text" [(ngModel)]="moderData.email" class="form-control" formControlName="email">
     </label><br>
 
     <div *ngIf="moderInfoForm.controls['email'].invalid && (moderInfoForm.controls['email'].dirty || moderInfoForm.controls['email'].touched)" class="alert alert-danger">
@@ -39,11 +40,11 @@
 
     <br>
 
-    <button class="button" (click)="close()">
+    <button class="button" [disabled]="buttonDisabled" (click)="close()">
       Cancel
     </button>
 
-    <button class="button" (click)="onSubmit()">
+    <button class="button" [disabled]="buttonDisabled" (click)="onSubmit()">
       Submit
     </button>
   </form>

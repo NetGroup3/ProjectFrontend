@@ -13,7 +13,6 @@ export class RequestsComponent implements OnInit {
   limit: number = 10;
   offset: number = 0;
   friendRequests: FriendRequest[] = [];
-
   toggle: boolean = true;
 
   constructor(private friendService: FriendService,
@@ -27,36 +26,35 @@ export class RequestsComponent implements OnInit {
   getFRequests(limit: number, offset: number): void {
     this.friendService.getRequests(limit, offset)
       .subscribe((response) => {
-        console.log('test', response)
         this.friendRequests = response
       });
   }
 
-  fRequest: FriendRequest = {
+  friendRequest: FriendRequest = {
     id: 0,
     firstName: "",
     imageId: ""
   }
 
-  accept(fRequest: FriendRequest) {
-    this.fRequest = fRequest;
-    this.friendService.acceptInvite(this.fRequest.id).subscribe({
+  accept(friendRequest: FriendRequest) {
+    this.friendRequest = friendRequest;
+    this.friendService.acceptInvite(this.friendRequest.id).subscribe({
       next: (): void => {
-        this.friendRequests = this.friendRequests.filter((req) => req.id !== this.fRequest.id);
+        this.friendRequests = this.friendRequests.filter((req) => req.id !== this.friendRequest.id);
       }
     });
   }
 
-  decline(fRequest: FriendRequest) {
-    this.fRequest = fRequest;
+  decline(friendRequest: FriendRequest) {
+    this.friendRequest = friendRequest;
     this.toggle = !this.toggle;
   }
 
   ok() {
     this.toggle = !this.toggle;
-    this.friendService.declineInvite(this.fRequest.id).subscribe({
+    this.friendService.declineInvite(this.friendRequest.id).subscribe({
       next: (): void => {
-        this.friendRequests = this.friendRequests.filter((req) => req.id !== this.fRequest.id);
+        this.friendRequests = this.friendRequests.filter((req) => req.id !== this.friendRequest.id);
         this.notification.blank('Invite declined', '', {});
       }
     });

@@ -1,50 +1,50 @@
 <div class="main">
-<div class="ingridients">
-  <h2>Ingredients</h2>
-  <div class="add_ingridient">
-    <div class="wrapper">
-      <input (keydown.enter)='search()' class="search" type="text" placeholder="Search by name" [(ngModel)]="key">
-      <input type="radio" name="select" id="option-2" [checked]="title" (click)="title = !title">
-      <input type="radio" name="select" id="option-3" [checked]="Category" (click)="Category = !Category">
-      <label for="option-2" class="option option-2">
-        <div class="dot"></div>
-        <span>Title</span>
-      </label>
-      <label for="option-3" class="option option-3">
-        <div class="dot"></div>
-        <span>Category</span>
-      </label>
-      <input (keydown.enter)='search()' class="search" type="text" placeholder="Search by category" [(ngModel)]="category">
-      <button (click)="search()">Ok</button>
-    </div>
+  <div class="ingridients">
+    <h2>Ingredients</h2>
+    <div class="add_ingridient">
+      <div class="wrapper">
+        <input (keyup) ='search("")' class="search" type="text" placeholder="Search by name" [(ngModel)]="key">
+        <input (keyup)='search("")' class="search" type="text" placeholder="Search by category" [(ngModel)]="category">
+        <input type="radio" name="select" id="option-2" [checked]="title" (click)="search('title')">
+        <input type="radio" name="select" id="option-3" [checked]="Category" (click)="search('category')">
+        <label for="option-2" class="option option-2">
+          <div class="dot"></div>
+          <span>Title</span>
+        </label>
+        <label for="option-3" class="option option-3">
+          <div class="dot"></div>
+          <span>Category</span>
+        </label>
+      </div>
 
-    <a routerLink="/moderator/ingredients/add">
-      <button> Add ingredient</button></a>
-  </div>
-<!--  [ngClass]="{'fixed-overlay': toggle, 'fixed': !toggle}-->
-  <div class="ingridient" *ngFor="let ingridient of Ingridients">
-    <div class="buttons">
-      <i routerLink="/moderator/ingredients/{{ingridient.id}}" class="edit" nz-icon nzType="edit" nzTheme="outline"> </i>
-      <i (click)="delete(ingridient)" nz-icon nzType="delete" id="delete" nzTheme="outline"></i>
-      <div [hidden]="toggle" class="fixed-overlay">
-      <div class="modal">
-        <div class="popup">
-          <div class="field"></div>
-          <span>Delete this ingredient?</span>
-          <div class="field"></div>
-          <button (click)="ok()" class="delete-ok">OK</button>
-          <button (click)="change()" class="delete-cancel">Cancel</button>
+      <a routerLink="/moderator/ingredients/add">
+        <button> Add ingredient</button>
+      </a>
+    </div>
+    <!--  [ngClass]="{'fixed-overlay': toggle, 'fixed': !toggle}-->
+      <div class="ingridient" *ngFor="let ingridient of Ingridients">
+        <div class="buttons">
+          <i routerLink="/moderator/ingredients/{{ingridient.id}}" class="edit" nz-icon nzType="edit" nzTheme="outline"> </i>
+          <i (click)="delete(ingridient)" nz-icon nzType="delete" id="delete" nzTheme="outline"></i>
+          <div [hidden]="toggle" class="fixed-overlay">
+          <div class="modal">
+            <div class="popup">
+              <div class="field"></div>
+              <span>Delete this ingredient?</span>
+              <div class="field"></div>
+              <button (click)="ok()" class="delete-ok">OK</button>
+              <button (click)="change()" class="delete-cancel">Cancel</button>
+            </div>
+          </div>
         </div>
+        </div>
+          <p class="title">{{ingridient.title}}</p>
+        <advanced-image [cldImg]="ingridient.imageId | getPicture"></advanced-image>
+          <p class="bottom" >Ingredient</p>
       </div>
     </div>
+    <div class="button">
+      <button (click)="prev()" class="next"><</button>
+      <button (click)="next()" class="next">></button>
     </div>
-      <p class="title">{{ingridient.title}}</p>
-    <advanced-image [cldImg]="ingridient.imageId | getPicture"></advanced-image>
-      <p class="bottom" >Ingredient</p>
-  </div>
-</div>
-  <div class="button">
-  <button (click)="prev()" class="next"><</button>
-  <button (click)="next()" class="next">></button>
-  </div>
 </div>

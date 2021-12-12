@@ -1,0 +1,24 @@
+.scrollable-container {
+  height: 60%;
+  overflow-y: scroll;
+}
+
+.writeCommentDiv {
+  height: 25%;
+}
+
+#textInput {
+  width: 100%;
+  height: 60%;
+  resize: none;
+}
+
+#post {
+  float: right;
+  margin-top: 1%;
+}
+
+.commentDiv {
+  height: 90%;
+  width: 60%;
+}
