@@ -5,6 +5,7 @@ import {Stock} from "../../core/models/stock";
 import {Ingredient} from "../../core/models/ingredient";
 import {StockAddDto} from "../../core/models/StockAddDto";
 import {UiService} from "../../core/services/ui.service";
+import {NzNotificationService} from "ng-zorro-antd/notification";
 
 @Component({
   selector: 'app-personal-stock',
@@ -34,6 +35,7 @@ export class PersonalStockComponent implements OnInit {
   constructor(
     private stockService: StockService,
     private uiService: UiService,
+    private notification: NzNotificationService,
   ) {
     this.subscription = this.uiService
       .onToggle()
@@ -131,17 +133,21 @@ export class PersonalStockComponent implements OnInit {
     const id: number = stock.id
     this.stockService.delete(stock.ingredient.id).subscribe(()=> {
       this.stocks = this.stocks.filter(stock=>stock.id!==id);
+      this.notification.blank(stock.ingredient.title + " successfully removed from your stock", "")
       this.ingredient = stock.ingredient;
     });
   }
 
   change(stock: Stock) {
-    this.stockService.update(stock.ingredient.id, stock.amount).subscribe();
+    this.stockService.update(stock.ingredient.id, stock.amount).subscribe(()=>{
+      this.notification.blank("Stock  " + stock.ingredient.title + " changed", "")
+    });
   }
 
   addStock(stockAdd: StockAddDto): void {
     this.stockService.create(stockAdd).subscribe((res: Stock)=> {
       this.stocks.push(res);
+      this.notification.blank("You successfully added ingredient to your stock", "")
     });
   }
 
