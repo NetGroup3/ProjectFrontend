@@ -3,10 +3,13 @@
 <div class="main">
   <div class="title">
     <h2>My Friends</h2>
-    <div class="title-request">
-      <a href="#" routerLink="/user/requests">
-        <span class="title-request">Requests</span>
-      </a>
+
+    <div class="title-request-block">
+        <a routerLink="/user/requests">
+          <div class="title-request">
+            Requests
+          </div>
+        </a>
     </div>
   </div>
   <div class="friends">
@@ -28,13 +31,14 @@
             </div>
           </div>
         </div>
-
         <advanced-image class="friend-image" [cldImg]="friend.imageId | getPicture"></advanced-image>
       </div>
     </div>
   </div>
   <div class="button">
     <button nz-button nzShape="circle" (click)="prev()" [disabled]="offset === 0" class="next"><</button>
-    <button nz-button nzShape="circle" (click)="next()" [disabled]="friends.length === 0 || friends.length < 10" class="next">></button>
+    <button nz-button nzShape="circle" (click)="next()" [disabled]="friends.length === 0 || friends.length < 10"
+            class="next">>
+    </button>
   </div>
 </div>

@@ -1,13 +1,10 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {MessageService} from "../../core/services/message.service";
+import {Component, OnInit, HostListener} from '@angular/core';
 import {StockService} from "../../core/services/stock.service";
-import {catchError} from "rxjs/operators";
-import {Observable, of} from "rxjs";
-import {StockModel} from "../../core/models/stock.model";
+import {Subscription} from "rxjs";
+import {Stock} from "../../core/models/stock";
 import {Ingredient} from "../../core/models/ingredient";
 import {StockAddDto} from "../../core/models/StockAddDto";
 import {UiService} from "../../core/services/ui.service";
-import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-personal-stock',
@@ -16,27 +13,26 @@ import {Subscription} from "rxjs";
 })
 export class PersonalStockComponent implements OnInit {
 
-  ingredient!: Ingredient;
+  public ingredient!: Ingredient;
 
-  showAddStock: boolean = false;
-  subscription!: Subscription;
+  public showAddStock: boolean = false;
+  public subscription!: Subscription;
 
-  limit: number = 20;
-  page: number = 0;
+  private limit: number = 11;
+  private page: number = 0;
+  private pages: number = 0;
+  private searchText: string = "";
+  public category: string = "";
+  public sortedBy: string = "";
 
-  initLoading = true; // bug
-  loadingMore = false;
-  stocks: StockModel[] = [];
-  show: boolean = true;
-/*  ingredients: Ingredient[] = [];*/
-  isLoading = false;
-  selectedIngredientId: number = 0;
-  amount: number = 0;
+  public isLoading = false;
 
+  public stocks: Stock[] = [];
+  public selectedIngredientId: number = 0;
+  public amount: number = 0;
 
   constructor(
     private stockService: StockService,
-    private msg: MessageService,
     private uiService: UiService,
   ) {
     this.subscription = this.uiService
@@ -45,48 +41,120 @@ export class PersonalStockComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getData((res: any) => {
-      this.stocks = res;
-      this.initLoading = false;
+    this.getData();
+    this.getPages();
+  }
+
+  sortedByTitle(){
+    this.sortedBy = "title";
+    this.upSearch("")
+  }
+
+  sortedByDescription() {
+    this.sortedBy = "description";
+    this.upSearch("")
+  }
+
+  sortedByCategory() {
+    this.sortedBy = "category";
+    this.upSearch("")
+  }
+
+  sortedByAmount() {
+    this.sortedBy = "amount";
+    this.upSearch("")
+  }
+
+  getPages(): void {
+    this.stockService.getPages(this.limit).subscribe( (pages: number) => {
+      this.pages = pages;
     });
   }
 
-  getData(callback: (res: any) => void): void {
-    this.stockService
-      .getStocks(this.limit, this.page)
-      .pipe(catchError(() => of({ results: [] })))
-      .subscribe((res: any) => callback(res));
+  getData(): void {
+    if (this.isLoading){
+      return;
+    }
+    this.isLoading = true;
+    this.stockService.search(
+      this.limit,
+      this.page,
+      this.searchText,
+      this.category,
+      this.sortedBy
+    ).subscribe((stocks: Stock[]) => {
+        this.stocks = stocks;
+        this.isLoading = false;
+        this.page++;
+      });
   }
 
   onLoadMore(): void {
-    console.log("load more stock");
+    if (this.isLoading || this.page===this.pages){
+      return;
+    }
+    this.isLoading = true;
+    this.stockService.search(
+      this.limit,
+      this.page,
+      this.searchText,
+      this.category,
+      this.sortedBy
+    ).subscribe((stocks: Stock[]) => {
+      this.isLoading = false;
+      this.stocks = [...this.stocks, ...stocks];
+      this.page++;
+    });
   }
 
-  edit(item: any): void {
-    this.msg.success(item.title);
-    this.show = !this.show;
+  upSearch(value: string) {
+    this.searchText = value
+    if(this.isLoading){
+      return;
+    }
+    this.isLoading = true;
+    this.page = 0;
+    this.stockService.search(
+      this.limit,
+      this.page,
+      this.searchText,
+      this.category,
+      this.sortedBy
+    ).subscribe((stocks: Stock[])=> {
+      this.isLoading = false;
+      this.stocks = stocks;
+      this.page++;
+    });
   }
 
-  delete(stock: StockModel) {
+  delete(stock: Stock) {
     const id: number = stock.id
-    this.stockService.delete(stock.ingredient.id).subscribe((res: any)=> {
+    this.stockService.delete(stock.ingredient.id).subscribe(()=> {
       this.stocks = this.stocks.filter(stock=>stock.id!==id);
       this.ingredient = stock.ingredient;
     });
   }
 
-  change(stock: StockModel) {
+  change(stock: Stock) {
     this.stockService.update(stock.ingredient.id, stock.amount).subscribe();
   }
 
   addStock(stockAdd: StockAddDto): void {
-    this.stockService.create(stockAdd).subscribe((res: StockModel)=> {
+    this.stockService.create(stockAdd).subscribe((res: Stock)=> {
       this.stocks.push(res);
     });
   }
 
   toggleAddStock() {
     this.uiService.toggleAddStock();
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+    let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
+    if(pos == document.documentElement.scrollHeight )   {
+      this.onLoadMore();
+    }
   }
 
 }

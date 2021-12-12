@@ -22,6 +22,8 @@ export class DishComponent implements OnInit {
   sortedBy: string = ""
   desc: boolean = false
 
+  role: string | null = localStorage.getItem("USER_ROLE");
+
   delDish: Dish = {
     id: 0,
     title: "",
