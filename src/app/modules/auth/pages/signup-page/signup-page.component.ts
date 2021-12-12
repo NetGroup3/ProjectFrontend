@@ -7,6 +7,7 @@ import {
 } from "@angular/forms";
 import {PasswordMatch} from "../../services/client/password-validator";
 import {AuthRestService} from "../../services/rest/auth-rest.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-signup-page',
@@ -15,6 +16,10 @@ import {AuthRestService} from "../../services/rest/auth-rest.service";
 })
 export class SignupPageComponent implements OnInit {
 
+  toggle: boolean = true;
+  error: boolean = false;
+  message: string = "";
+
   constructor(
     private fb: FormBuilder,
     private authRestService: AuthRestService
@@ -22,7 +27,6 @@ export class SignupPageComponent implements OnInit {
   }
 
   public form!: FormGroup;
-  toggle: boolean = true;
 
   ngOnInit(): void {
     const options: AbstractControlOptions = {
@@ -42,16 +46,29 @@ export class SignupPageComponent implements OnInit {
   }
 
   public onLoginClick(): void {
+    this.resetMessage();
     if (this.form.valid) {
-      this.authRestService.signUp(this.form.value).subscribe((response: any) => {
-        console.log(response)
-      })
-      this.toggle = !this.toggle;
+      this.authRestService.signUp(this.form.value).subscribe({
+        error: (error:HttpErrorResponse): void => {this.messageError(error.error)},
+        next: (response:any): void => {
+          console.log(response)
+          this.toggle = false;
+        },
+      });
     } else {
-      alert("Fill in all the fields")
+      this.messageError("Fill in all the fields");
       this.form.markAllAsTouched();
     }
 
+  }
+
+  private resetMessage(): void {
+    this.error = false;
+  }
+
+  private messageError(message : string) :void {
+    this.message = message;
+    this.error = true;
   }
 
 }

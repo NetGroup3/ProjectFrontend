@@ -1,0 +1,19 @@
+<div class="input-container">
+  <nz-select
+    nzPlaceHolder="Search"
+    nzAllowClear
+    nzShowSearch
+    nzServerSearch
+    [(ngModel)]="selectedUser"
+    (ngModelChange)="onUserSelected($event)"
+    (nzOnSearch)="onSearch($event)"
+  >
+    <ng-container *ngFor="let user of userList">
+      <nz-option *ngIf="!isLoading" [nzValue]="user.id" [nzLabel]="user.fullName"></nz-option>
+    </ng-container>
+    <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+      <i nz-icon nzType="loading" class="loading-icon"></i>
+      Loading Data...
+    </nz-option>
+  </nz-select>
+</div>

@@ -1,0 +1,37 @@
+<div
+  class="stock"
+  (dblclick)="onChange(stock)"
+  nzTooltipTitle="prompt text"
+  nzTooltipPlacement="top"
+>
+  <h3 class="title_item">
+    {{stock.ingredient.title}}
+  </h3>
+  <div class = "category_item">
+    <p>{{stock.ingredient.category}}</p>
+  </div>
+  <div class = "description_item">
+  <p>{{stock.ingredient.description}}</p>
+  </div>
+  <div class="amount_item">
+  <h1 *ngIf="selected; then ifBlock else elseBlock"></h1>
+  <ng-template #ifBlock>
+    {{stock.amount}}
+  </ng-template>
+  <ng-template #elseBlock>
+    <nz-input-number
+      [(ngModel)]="stock.amount"
+      [nzMin]="0.1"
+      [nzStep]="0.1"
+      [nzPlaceHolder]="'Digital'"
+    >
+    </nz-input-number>
+  </ng-template>
+  {{stock.ingredient.measurement}}
+  </div>
+  <fa-icon
+    (click)="onDelete(stock)"
+    [ngStyle]="{'color':'red'}"
+    [icon]="faTimes" >
+  </fa-icon>
+</div>

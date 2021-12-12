@@ -1,0 +1,21 @@
+.stock {
+  background-color: #f4f4f4;
+  margin: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.title_item{
+  width: 12%;
+}
+.category_item{
+  width: 12%;
+}
+.description_item{
+  width: 63%;
+}
+.amount_item {
+  width: 9%;
+}

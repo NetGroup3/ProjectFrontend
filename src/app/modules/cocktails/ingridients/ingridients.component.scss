@@ -1,0 +1,260 @@
+h2{
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 60px;
+  color: #495464;
+  margin-left: 2%;
+}
+.add_ingridient{
+  width: 100%;
+  height: 100px;
+  margin-bottom: 50px;
+}
+.ingridients{
+  background: #F9FAFB;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ingridient{
+  text-align: center;
+
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-bottom: 3%;
+  width: 18%;
+  float: left;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+}
+.title{
+  margin-top: 15%;
+  color: #495464;
+}
+.bottom{
+  margin-top: 5%;
+  color: #BBBFCA;
+}
+.buttons{
+  float: right;
+  margin-top: 2%;
+  margin-right: 10%;
+}
+.buttons i:hover{
+  cursor: pointer;
+}
+.add_ingridient button{
+  background: #9921E8;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 24px rgba(153, 33, 232, 0.5);
+  border-radius: 50px;
+  float: right;
+  margin-right: 4%;
+  width: 350px;
+  height: 50px;
+  color: white;
+  font-weight: bold;
+  border: none;
+}
+.add_ingridient button:hover {
+  cursor: pointer;
+  width: 360px;
+  height: 53px;
+}
+.options{
+  margin-right: 4%;
+  width: 160px;
+  border: none;
+  background: #fff;
+  height: 85%;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 2px solid lightgrey;
+  transition: all 0.3s ease;
+}
+img{
+  width: 15px;
+  height: 18px;
+  margin-right: 10px;
+}
+.button{
+  margin-left: 44%;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+.next{
+  width: 50px;
+  float: left;
+  margin-left: 10px;
+}
+.fixed-overlay {
+  position: fixed;
+  overflow: auto;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+}
+.fixed{
+  position: fixed;
+  overflow: auto;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+}
+.modal {
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -20%;
+  margin-top: -75px;
+}
+.popup{
+
+  margin-left: auto;
+  margin-right: auto;
+  width: 600px;
+  height: 300px;
+  background-color:white;
+  box-shadow:0 0 10px 4px rgba(165, 97, 231, 0.18);
+  border-radius:10px;
+  text-align: center;
+  font-size: 30px
+}
+.delete-ok{
+  font-weight: normal;
+  height: 60px;
+  width: 100px;
+}
+.delete-cancel{
+  margin-left: 20px;
+  font-weight: normal;
+  height: 60px;
+  width: 200px;
+}
+.field{
+  height: 40px;
+}
+i{
+color: #495464;
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Lato:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+}
+html,body{
+  display: grid;
+  height: 100%;
+  place-items: center;
+  background: #a561e7;
+  font-family: 'Lato', sans-serif;
+}
+.wrapper{
+  margin-left: 1%;
+  display: inline-flex;
+  background: #fff;
+  height: 60px;
+  width: 800px;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 5px;
+  padding: 10px 5px;
+}
+.wrapper button{
+  width: 60px;
+  height: 100%;
+}
+.wrapper button:hover{
+  width: 60px;
+  height: 100%;
+  cursor: pointer;
+}
+.wrapper .option{
+  background: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0 10px;
+  border: 2px solid lightgrey;
+  transition: all 0.3s ease;
+}
+.wrapper .option .dot{
+  height: 20px;
+  width: 20px;
+  background: #d9d9d9;
+  border-radius: 50%;
+  position: relative;
+}
+.wrapper .option .dot::before{
+  position: absolute;
+  content: "";
+  top: 4px;
+  left: 4px;
+  width: 12px;
+  height: 12px;
+  background: #a561e7;
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(1.5);
+  transition: all 0.3s ease;
+}
+input[type="radio"]{
+  display: none;
+}
+#option-1:checked:checked ~ .option-1,
+#option-2:checked:checked ~ .option-2,
+#option-3:checked:checked ~ .option-3{
+  border-color: #a561e7;
+  background: #a561e7;
+}
+#option-1:checked:checked ~ .option-1 .dot,
+#option-2:checked:checked ~ .option-2 .dot,
+#option-3:checked:checked ~ .option-3 .dot{
+  background: #fff;
+}
+#option-1:checked:checked ~ .option-1 .dot::before,
+#option-2:checked:checked ~ .option-2 .dot::before,
+#option-3:checked:checked ~ .option-3 .dot::before{
+  opacity: 1;
+  transform: scale(1);
+}
+.wrapper .option span{
+  font-size: 20px;
+  color: #808080;
+}
+#option-1:checked:checked ~ .option-1 span,
+#option-2:checked:checked ~ .option-2 span,
+#option-3:checked:checked ~ .option-3 span{
+  color: #fff;
+}
+.search{
+  border: none;
+  background: #fff;
+  height: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0 10px;
+  border: 2px solid lightgrey;
+  transition: all 0.3s ease;
+}

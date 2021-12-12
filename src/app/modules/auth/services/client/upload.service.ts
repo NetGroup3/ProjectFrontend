@@ -11,23 +11,32 @@ import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
 })
 export class UploadService {
 
+  private upload_preset: string = "ku2dutrm";
+  private cloud_name: string = "djcak19nu";
+
+
   constructor( private http: HttpClient) {}
 
   public onUpLoad(file: File): Observable<any> {
-    console.log("add file data")
     const file_data = file;
     const data = new FormData();
     data.append('file', file_data);
-    data.append('upload_preset', 'ku2dutrm');
-    data.append('cloud_name', 'djcak19nu');
+    data.append('upload_preset', this.upload_preset);
+    data.append('cloud_name', this.cloud_name);
    return this.http.post(appLinks.uploadImage, data);
-  // return this.http.post("https://api.cloudinary.com/v1_1/djcak19nu/image/upload", data);
   }
 
   initImage(imageId: string): CloudinaryImage {
-    const cld = new Cloudinary({cloud: {cloudName: 'djcak19nu'}});
+    const cld = new Cloudinary({cloud: {cloudName: this.cloud_name}});
     return cld.image(imageId)
       .resize(thumbnail().width(200).height(200))
+      .roundCorners(byRadius(20));
+  }
+
+  initImageWithSize(imageId: string, width: number, height: number): CloudinaryImage {
+    const cld = new Cloudinary({cloud: {cloudName: this.cloud_name}});
+    return cld.image(imageId)
+      .resize(thumbnail().width(width).height(height))
       .roundCorners(byRadius(20));
   }
 

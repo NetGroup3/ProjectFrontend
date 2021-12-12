@@ -14,51 +14,79 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IconsProviderModule } from './icons-provider.module';
+import { IconsProviderModule } from './modules/core/icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import {NzFormModule} from "ng-zorro-antd/form";
 import {RestapiService} from "./modules/auth/services/rest/restapi.service";
-import { HomeComponent } from './home/home.component';
-import { UserSceletonComponent } from './sceletons/user-sceleton/user-sceleton.component';
+import { HomeComponent } from './modules/cocktails/home/home.component';
+import { UserSceletonComponent } from './modules/core/user-sceleton/user-sceleton.component';
 import {NzSelectModule} from "ng-zorro-antd/select";
-import { AuthUserFavouriteComponent } from './auth-user/auth-user-favourite/auth-user-favourite.component';
-import { AuthUserCatalogueComponent } from './auth-user/auth-user-catalogue/auth-user-catalogue.component';
-import { AuthUserCalendarComponent } from './auth-user/auth-user-calendar/auth-user-calendar.component';
-import { AuthUserEventsComponent } from './auth-user/auth-user-events/auth-user-events.component';
-import { AuthUserSettingsComponent } from './auth-user/auth-user-settings/auth-user-settings.component';
-import { AuthUserFriendsComponent } from './auth-user/auth-user-friends/auth-user-friends.component';
-import { AuthUserBlogComponent } from './auth-user/auth-user-blog/auth-user-blog.component';
-import {AuthInterceptor} from "./http-interceptors/auth-interceptor";
-import { IngridientsComponent } from './ingridients/ingridients.component';
-import { AddEditIngredientComponent } from './add-edit-ingredient/add-edit-ingredient.component';
+import { AuthUserSettingsComponent } from './modules/settings/auth-user-settings.component';
+import {AuthInterceptor} from "./modules/core/common/interceptors/http-interceptors/auth-interceptor";
+import { IngridientsComponent } from './modules/cocktails/ingridients/ingridients.component';
+import { AddEditIngredientComponent } from './modules/cocktails/add-edit-ingredient/add-edit-ingredient.component';
 
 import {CloudinaryModule} from '@cloudinary/angular';
-
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import {NgxDropzoneModule} from "ngx-dropzone";
 
-import {ModeratorSceletonComponent} from "./sceletons/moderator-sceleton/moderator-sceleton.component";
-import {ModeratorCocktailsComponent} from "./moderator/moderator-cocktails/moderator-cocktails.component";
-import {ModeratorIngredientsComponent} from "./moderator/moderator-ingredients/moderator-ingredients.component";
-import {ModeratorKitchenwareComponent} from "./moderator/moderator-kitchenware/moderator-kitchenware.component";
-import {ModeratorSettingsComponent} from "./moderator/moderator-settings/moderator-settings.component";
-import {AdminModeratorsComponent} from "./admin/admin-moderators/admin-moderators.component";
-import {AdminSceletonComponent} from "./sceletons/admin-sceleton/admin-sceleton.component";
-import {EditModeratorComponent} from "./admin/edit-moderator/edit-moderator.component";
-import {KitchenwareComponent} from './kitchenware/kitchenware.component';
-import {AddEditKitchenwareComponent} from './add-edit-kitchenware/add-edit-kitchenware.component';
-import {UploadImageComponent} from "./auth-user/auth-user-settings/upload-image/upload-image.component";
-import {PersonalInformationComponent} from "./auth-user/auth-user-settings/personal-information/personal-information.component";
-import {ChangePasswordComponent} from "./auth-user/auth-user-settings/change-password/change-password.component";
-import {PicturePipe} from "./picture.pipe";
-import { DishComponent } from './dish/dish.component';
-import { AddEditDishComponent } from './add-edit-dish/add-edit-dish.component';
-import {PersonalStockComponent} from "./personal-stock/personal-stock.component";
-import {FooterComponent} from "./modules/footer/footer.component";
-import {AuthUserRequestsComponent} from "./auth-user/auth-user-friends/auth-user-requests/auth-user-requests.component";
+import {ModeratorCocktailsComponent} from "./modules/moderator/moderator-cocktails/moderator-cocktails.component";
+import {ModeratorIngredientsComponent} from "./modules/moderator/moderator-ingredients/moderator-ingredients.component";
+import {ModeratorKitchenwareComponent} from "./modules/moderator/moderator-kitchenware/moderator-kitchenware.component";
+import {AdminModeratorsComponent} from "./modules/admin/admin-moderators/admin-moderators.component";
+import {AddEditModeratorComponent} from "./modules/admin/add-edit-moderator/add-edit-moderator.component";
+import {KitchenwareComponent} from './modules/cocktails/kitchenware/kitchenware.component';
+import {AddEditKitchenwareComponent} from './modules/cocktails/add-edit-kitchenware/add-edit-kitchenware.component';
+import {UploadImageComponent} from "./modules/settings/upload-image/upload-image.component";
+import {PersonalInformationComponent} from "./modules/settings/personal-information/personal-information.component";
+import {ChangePasswordComponent} from "./modules/settings/change-password/change-password.component";
+import {PicturePipe} from "./modules/core/picture.pipe";
+import { DishComponent } from './modules/cocktails/dish/dish.component';
+import { AddEditDishComponent } from './modules/cocktails/add-edit-dish/add-edit-dish.component';
+import {PersonalStockComponent} from "./modules/cocktails/personal-stock/personal-stock.component";
+import {FooterComponent} from "./modules/core/footer/footer.component";
+import {SidebarComponent} from "./modules/core/sidebar/sidebar.component";
+import {HeaderComponent} from "./modules/core/header/header.component";
+import {NzSkeletonModule} from "ng-zorro-antd/skeleton";
+import {NzListModule} from "ng-zorro-antd/list";
+import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
+import { UserDishComponent } from './modules/cocktails/dish/user-dish/user-dish.component';
+import { ButtonComponent } from './components/button/button.component';
+import {NzInputNumberModule} from "ng-zorro-antd/input-number";
+import {AddStockComponent} from "./modules/cocktails/personal-stock/add-stock/add-stock.component";
+import { StockItemComponent } from './modules/cocktails/personal-stock/stock-item/stock-item.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {NzCommentModule} from "ng-zorro-antd/comment";
+import {NzAvatarModule} from "ng-zorro-antd/avatar";
+import {NzToolTipModule} from "ng-zorro-antd/tooltip";
 
+import {NzTransferModule} from "ng-zorro-antd/transfer";
+import {NzSwitchModule} from "ng-zorro-antd/switch";
+import { ListComponent } from './modules/cocktails/list/list.component';
+import {NzTableModule} from "ng-zorro-antd/table";
+import {NzTagModule} from "ng-zorro-antd/tag";
+import { ListKitchenwareComponent } from './modules/cocktails/list-kitchenware/list-kitchenware.component';
+import { ListLabelComponent } from './modules/cocktails/list-label/list-label.component';
+import {RequestsComponent} from "./modules/friends/pages/friends-requests/requests.component";
+import {FriendsComponent} from "./modules/friends/pages/friends/friends.component";
+import {PageNotFoundComponent} from "./modules/core/page-not-found/page-not-found.component";
+import {NzResultModule} from "ng-zorro-antd/result";
+import {NzPaginationModule} from "ng-zorro-antd/pagination";
+import {NzSpinModule} from "ng-zorro-antd/spin";
+import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
+import {NzSpaceModule} from "ng-zorro-antd/space";
+import {NzBadgeModule} from "ng-zorro-antd/badge";
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { CommentsComponent } from './modules/cocktails/dish/comments/comments.component';
+import {ScrollingModule} from "@angular/cdk/scrolling";
+import {UserSearchComponent} from "./modules/user/components/searchUser/user-search.component";
+import {NzAutocompleteModule} from "ng-zorro-antd/auto-complete";
+import {UserProfileComponent} from "./modules/user/pages/profile/profile.component";
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import {NzAlertModule} from "ng-zorro-antd/alert";
 registerLocaleData(en);
 
 @NgModule({
@@ -70,23 +98,13 @@ registerLocaleData(en);
     RecoveryPageComponent,
     HomeComponent,
     UserSceletonComponent,
-    AuthUserFavouriteComponent,
-    AuthUserCatalogueComponent,
-    AuthUserCalendarComponent,
-    AuthUserEventsComponent,
     AuthUserSettingsComponent,
-    AuthUserFriendsComponent,
-    AuthUserRequestsComponent,
-    AuthUserBlogComponent,
     IngridientsComponent,
     AddEditIngredientComponent,
-    ModeratorSceletonComponent,
-    ModeratorSettingsComponent,
     ModeratorIngredientsComponent,
     ModeratorKitchenwareComponent,
     ModeratorCocktailsComponent,
     AdminModeratorsComponent,
-    AdminSceletonComponent,
     KitchenwareComponent,
     AddEditKitchenwareComponent,
     UploadImageComponent,
@@ -95,33 +113,75 @@ registerLocaleData(en);
     PicturePipe,
     DishComponent,
     AddEditDishComponent,
-    EditModeratorComponent,
+    AddEditModeratorComponent,
     PersonalStockComponent,
     FooterComponent,
+    SidebarComponent,
+    HeaderComponent,
+    ListComponent,
+    ListKitchenwareComponent,
+    ListLabelComponent,
+    ListComponent,
+    ListKitchenwareComponent,
+    ListLabelComponent,
+    StockItemComponent,
+    UserDishComponent,
+    AddStockComponent,
+    ButtonComponent,
+    RequestsComponent,
+    FriendsComponent,
+    PageNotFoundComponent,
+    CommentsComponent,
+    UserSearchComponent,
+    UserProfileComponent,
+  ],
+  imports: [
+      BrowserModule,
+      AppRoutingModule,
+      FormsModule,
+      ReactiveFormsModule,
+      BrowserAnimationsModule,
+      IconsProviderModule,
+      NzLayoutModule,
+      NzMenuModule,
+      NzButtonModule,
+      NzInputModule,
+      NzFormModule,
+      NzSelectModule,
+      HttpClientModule,
+      CloudinaryModule,
+      NgxDropzoneModule,
+      NzSkeletonModule,
+      NzListModule,
+      NzPopconfirmModule,
+      NzInputNumberModule,
+      FontAwesomeModule,
+      NzCommentModule,
+      NzAvatarModule,
+      NzTransferModule,
+      NzSwitchModule,
+      NzTableModule,
+      NzTagModule,
+      NzResultModule,
+      InfiniteScrollModule,
+      ScrollingModule,
+      NzNotificationModule,
+      NzSpinModule,
+      NzDatePickerModule,
+      NzSpaceModule,
+      NzToolTipModule,
+      NzBadgeModule,
+      NzAutocompleteModule,
+      NzDescriptionsModule,
+      NzAlertModule,
+      NzPaginationModule,
   ],
 
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    IconsProviderModule,
-    NzLayoutModule,
-    NzMenuModule,
-    NzButtonModule,
-    NzInputModule,
-    NzFormModule,
-    NzSelectModule,
-    HttpClientModule,
-    CloudinaryModule,
-    NgxDropzoneModule,
-  ],
   providers: [
     {
-      provide : HTTP_INTERCEPTORS,
+      provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi   : true,
+      multi: true,
     },
     {
       provide: NZ_I18N,

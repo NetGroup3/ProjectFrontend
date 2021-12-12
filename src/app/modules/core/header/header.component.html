@@ -1,0 +1,20 @@
+<div class="header">
+  <!--<app-user-search></app-user-search>-->
+
+
+  <div class="align floatLeft">
+    <span class="brandName">Beaver Bar</span>
+  </div>
+
+  <div class="align floatRight">
+    <i class="name">{{this.firstname}}<br>{{this.lastname}}</i>
+
+    <advanced-image class="avatar" [cldImg]="img"></advanced-image>
+
+    <button class="buttonLogout" (click)="logOut()">
+      Logout
+      <i class="logOutIcon" nz-icon nzType="logout" nzTheme="outline"></i>
+    </button>
+  </div>
+
+</div>

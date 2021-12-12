@@ -1,3 +1,52 @@
+.insert-area {
+  position: fixed;
+  width: 85%;
+  height: 82%;
+  padding: 4% 1% 1%;
+  top: 10%;
+  right: 0%;
+  background-color: #ece0fa;
+}
+
+.scrollable {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  overflow-y: scroll;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollable::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
+.ia-title {
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 2em;
+  color: rgba(72, 70, 67, 0.89);
+
+  position: absolute;
+  top: 2%;
+  left: 2%;
+}
+
+.ia-subtitle {
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 1.5em;
+  color: rgba(72, 70, 67, 0.89);
+}
+
+.absolute-right-button {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+}
+
+/* ! ! ! ! ! */
+
 button{
   background: #9921E8;
   border-radius: 50px;
@@ -22,4 +71,16 @@ button:hover{
   background-color: #f5f5f5 !important;
   color: #313131 !important;
   border: 1px solid #d9d9d9 !important;
+}
+.ant-btn-primary {
+  color: #fff;
+  background: #9921E8;
+  border-color: #9921E8;
+  text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+}
+.ant-btn-primary:hover{
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 24px rgba(153, 33, 232, 0.5);
 }

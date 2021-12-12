@@ -1,0 +1,68 @@
+td, th {
+  width: 10%;
+  text-align: center;
+}
+
+.nav-button-div, .not-found-div{
+  margin: 0 auto;
+  width: fit-content;
+  padding-top: 1%;
+}
+
+.toolbox-div, .name-div {
+  display: inline-block;
+}
+
+.name-div {
+  margin-right: 1%;
+}
+
+.search-div {
+  margin-bottom: 1%;
+}
+
+.toolbox-div {
+  width: 60%;
+}
+
+label, select, input {
+  margin-right: 1%;
+}
+
+/* ! ! ! ! ! */
+
+.round-button {
+  height: 35px;
+  width: 35px;
+}
+
+.align {
+  margin: 0 auto;
+  width: fit-content;
+  padding-top: 1%;
+}
+
+#d3 {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.fixed-overlay {
+  position: fixed;
+  top: 20%;
+  left: 45%;
+  width: 20%;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 1%;
+  padding-bottom: 1%;
+
+  background-color: white;
+  border-radius: 15px;
+}
+
+.button {
+  margin-left: 1%;
+  margin-right: 1%;
+  width: 30%;
+}

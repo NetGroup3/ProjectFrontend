@@ -74,6 +74,9 @@
     >
       Sign up
     </button>
+    <p *ngIf="error">
+      <nz-alert nzType="error" nzMessage="{{message}}" nzShowIcon></nz-alert>
+    </p>
     <div class="signup-page__link">
       <p>Already have an account?
         <a routerLink="/login">Login here</a>

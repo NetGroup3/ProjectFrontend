@@ -1,0 +1,26 @@
+<app-user-sceleton></app-user-sceleton>
+
+<div class="insert-area">
+  <div class="scrollable">
+    <div *ngIf="ingridient">
+      <div class="add_edit">
+        <h2>Add/edit ingredient</h2>
+        <div class="description_picture">
+          <div class="picture">
+            <advanced-image [cldImg]="img"></advanced-image><br>
+            <input type="file" (change)="onFileSelect($event)" class="dn" #uploadFile>
+            <button class="upload" (click)="uploadFile.click()">Upload photo</button>
+          </div>
+          <textarea required [(ngModel)]="ingridient.description"></textarea>
+        </div>
+        <div class="title">
+          <p>Title</p>
+          <input required [(ngModel)]="ingridient.title" placeholder="Text"/>
+          <p>Category</p>
+          <input class="description" [(ngModel)]="ingridient.category" placeholder="Text">
+        </div>
+        <button class="ok"  (click)="onAddClick()">Ok!</button>
+      </div>
+    </div>
+  </div>
+</div>

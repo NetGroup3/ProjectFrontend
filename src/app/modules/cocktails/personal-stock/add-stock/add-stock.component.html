@@ -1,0 +1,29 @@
+<form
+  *ngIf="showAddStock"
+  class=" add-form"
+  (ngSubmit)="onSubmit()"
+>
+  <nz-select
+    [(ngModel)]="selectedIngredientId"
+    nzPlaceHolder="Select a ingredient"
+    (nzScrollToBottom)="loadMore()"
+    nzAllowClear
+    nzShowSearch
+  >
+    <nz-option
+      *ngFor="let ingredient of ingredients"
+      [nzValue]="ingredient.id"
+      [nzLabel]="ingredient.title"
+    >
+    </nz-option>
+  </nz-select>
+
+  <nz-input-number
+    [(ngModel)]="amount"
+    [nzMin]="0.1"
+    [nzStep]="0.1"
+    [nzPlaceHolder]="'Digital'"
+  >
+  </nz-input-number>
+  <button>Save Stock</button>
+</form>

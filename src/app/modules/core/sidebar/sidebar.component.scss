@@ -1,0 +1,36 @@
+.navigation {
+  position: fixed;
+  height: 82%;
+  width: 15%;
+  left: 0%;
+  top: 10%;
+  background: linear-gradient(90deg, #a6b4ec 0%, #ece0fa 100%);
+  //border-right: 3px solid #a6b4ec;
+}
+
+ul {
+  margin-top: 10%;
+}
+
+li {
+  font-family: Montserrat;
+  font-weight: normal;
+  font-style: normal;
+  list-style: none;
+  font-size: 1.4em;
+  color: rgba(72, 70, 67, 0.89);
+}
+
+.nameSpan {
+  font-size: 1.5em;
+}
+
+.title {
+  padding-left: 3%;
+  padding-bottom: 5%;
+  color: rgba(72, 70, 67, 0.89);
+}
+
+.icon {
+  color: rgba(72, 70, 67, 0.89);
+}
