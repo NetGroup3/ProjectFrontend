@@ -4,6 +4,7 @@ import {PasswordMatch} from "../../auth/services/client/password-validator";
 import {AuthService} from "../../auth/services/client/auth.service";
 import {UserRestService} from "../../auth/services/rest/user-rest.service";
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-change-password',
@@ -41,8 +42,8 @@ export class ChangePasswordComponent implements OnInit {
         next: (): void => {
           this.notification.blank('Password changed', '', {});
         },
-        error: (): void => {
-          this.notification.blank('Incorrect password', '', {});
+        error: (error: HttpErrorResponse): void => {
+          this.notification.blank(error.error, '', {});
         }
       });
     } else {
