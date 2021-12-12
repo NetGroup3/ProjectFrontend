@@ -145,4 +145,13 @@ export class ModeratorService {
   public like(dish: number){
     return this.http.post(appLinks.dishLike, dish);
   }
+
+  public searchByIngredients (values: number[], limit: number, page: number){
+    const params = new HttpParams()
+      .set('values', values.toString())
+      .set('limit', limit.toString())
+      .set('page', page.toString())
+    ;
+    return this.http.get(appLinks.searchByIngredients, {params});
+  }
 }

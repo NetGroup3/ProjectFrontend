@@ -13,7 +13,14 @@ import {AuthService} from "../../auth/services/client/auth.service";
   styleUrls: ['./dish.component.scss']
 })
 export class DishComponent implements OnInit {
+  listOfOption: Array<{ value: string; label: string; id: number;}> = [];
+  ingredients: Ingredient[] = [];
+  list: string [] = []
+  value: number [] = [];
+  listOfSelectedValue = [];
+ // defaultOption = [...this.listOfSelectedValue];
 
+  selectedValue = 'Default';
   limit: number = 10;
   page: number = 0;
   Dishes: Dish[] = [];
@@ -61,6 +68,12 @@ export class DishComponent implements OnInit {
       this.favourite = true
     }
     this.search("")
+    this.getIngredients();
+  }
+
+  isNotSelected(value: any): boolean {
+    console.log(value)
+    return this.listOfOption.indexOf(value) === -1;
   }
 
   getDishes(limit: number, page: number, desc: boolean, key: string, category: string, sortedBy: string, userId: number): void {
@@ -69,6 +82,21 @@ export class DishComponent implements OnInit {
       .subscribe((response:any)=>{
         console.log(response)
         this.Dishes = response
+      });
+  }
+
+  getIngredients(){
+    this.moderatorService.get_ingridients(100, 0, "", "", "")
+      .subscribe((response:any)=>{
+        console.log(response)
+        this.ingredients = response
+        // this.ingredients.forEach(ingredient => this.list.push(ingredient.title))
+        // console.log(this.list)
+        this.listOfOption = this.ingredients.map(item => ({
+          value: item.title,
+          label: item.title,
+          id: item.id
+        }));
       });
   }
 
@@ -125,6 +153,16 @@ export class DishComponent implements OnInit {
     if(this.liked){
       this.moderatorService.like(id).subscribe((response:any) => {
         console.log(response)
+      })
+    }
+  }
+
+  searchIngredients() {
+    console.log(this.listOfSelectedValue)
+    if(this.listOfSelectedValue.length != 0) {
+      this.moderatorService.searchByIngredients(this.listOfSelectedValue, this.limit, this.page).subscribe((response: any) => {
+        console.log(response)
+        this.Dishes = response
       })
     }
   }
