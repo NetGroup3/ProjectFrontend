@@ -135,37 +135,6 @@ registerLocaleData(en);
     UserSearchComponent,
     UserProfileComponent,
   ],
-
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        IconsProviderModule,
-        NzLayoutModule,
-        NzMenuModule,
-        NzButtonModule,
-        NzInputModule,
-        NzFormModule,
-        NzSelectModule,
-        HttpClientModule,
-        CloudinaryModule,
-        NgxDropzoneModule,
-        NzSkeletonModule,
-        NzListModule,
-        NzPopconfirmModule,
-        NzTransferModule,
-        NzSwitchModule,
-        NzNotificationModule,
-        NzTableModule,
-        NzTagModule,
-        NzInputNumberModule,
-        FontAwesomeModule,
-        NzResultModule,
-        NzPaginationModule
-
-    ],
   imports: [
       BrowserModule,
       AppRoutingModule,
@@ -205,6 +174,7 @@ registerLocaleData(en);
       NzAutocompleteModule,
       NzDescriptionsModule,
       NzAlertModule,
+      NzPaginationModule,
   ],
 
   providers: [
