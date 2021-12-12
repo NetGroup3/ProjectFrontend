@@ -70,6 +70,7 @@ import {AuthUserRequestsComponent} from "./modules/friends/auth-user-requests/au
 import {AuthUserFriendsComponent} from "./modules/friends/auth-user-friends.component";
 import {PageNotFoundComponent} from "./modules/core/page-not-found/page-not-found.component";
 import {NzResultModule} from "ng-zorro-antd/result";
+import {NzPaginationModule} from "ng-zorro-antd/pagination";
 
 
 registerLocaleData(en);
@@ -118,35 +119,36 @@ registerLocaleData(en);
 
   ],
 
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    IconsProviderModule,
-    NzLayoutModule,
-    NzMenuModule,
-    NzButtonModule,
-    NzInputModule,
-    NzFormModule,
-    NzSelectModule,
-    HttpClientModule,
-    CloudinaryModule,
-    NgxDropzoneModule,
-    NzSkeletonModule,
-    NzListModule,
-    NzPopconfirmModule,
-    NzTransferModule,
-    NzSwitchModule,
-    NzNotificationModule,
-    NzTableModule,
-    NzTagModule,
-    NzInputNumberModule,
-    FontAwesomeModule,
-    NzResultModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        IconsProviderModule,
+        NzLayoutModule,
+        NzMenuModule,
+        NzButtonModule,
+        NzInputModule,
+        NzFormModule,
+        NzSelectModule,
+        HttpClientModule,
+        CloudinaryModule,
+        NgxDropzoneModule,
+        NzSkeletonModule,
+        NzListModule,
+        NzPopconfirmModule,
+        NzTransferModule,
+        NzSwitchModule,
+        NzNotificationModule,
+        NzTableModule,
+        NzTagModule,
+        NzInputNumberModule,
+        FontAwesomeModule,
+        NzResultModule,
+        NzPaginationModule
 
-  ],
+    ],
   providers: [
     {
       provide : HTTP_INTERCEPTORS,

@@ -21,8 +21,6 @@ export class ListKitchenwareComponent implements OnInit {
   disabled = false;
   showSearch = false;
   kitchenware: Kitchenware [] = [];
-  limit: number = 100;
-  page: number = 0;
 
   constructor(private moderatorService: ModeratorService,
               private initDishService: InitDishService,
@@ -75,7 +73,7 @@ export class ListKitchenwareComponent implements OnInit {
     this.initDishService.listKitchenware = this.list
   }
   getKitchenware(callback: (res: any) => void): void {
-    this.moderatorService.get_Kitchenware(this.limit, this.page, "", "", "")
+    this.moderatorService.get_Kitchenware(200, 0, "", "", "")
       .subscribe((res: any) => callback(res));
   }
 

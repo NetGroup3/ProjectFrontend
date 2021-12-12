@@ -21,8 +21,6 @@ export class ListLabelComponent implements OnInit {
   disabled = false;
   showSearch = false;
   labels: Label [] = [];
-  limit: number = 100;
-  page: number = 0;
 
   constructor(private moderatorService: ModeratorService,
               private initDishService: InitDishService,
@@ -72,7 +70,7 @@ export class ListLabelComponent implements OnInit {
   }
 
   getLabels(callback: (res: any) => void): void {
-    this.moderatorService.getLabels(this.limit, this.page)
+    this.moderatorService.getLabels(200, 0)
       .subscribe((res: any) => callback(res));
   }
 
