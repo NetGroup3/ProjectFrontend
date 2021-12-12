@@ -74,6 +74,7 @@ import {RequestsComponent} from "./modules/friends/pages/friends-requests/reques
 import {FriendsComponent} from "./modules/friends/pages/friends/friends.component";
 import {PageNotFoundComponent} from "./modules/core/page-not-found/page-not-found.component";
 import {NzResultModule} from "ng-zorro-antd/result";
+import {NzPaginationModule} from "ng-zorro-antd/pagination";
 import {NzSpinModule} from "ng-zorro-antd/spin";
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import {NzSpaceModule} from "ng-zorro-antd/space";
@@ -86,7 +87,6 @@ import {NzAutocompleteModule} from "ng-zorro-antd/auto-complete";
 import {UserProfileComponent} from "./modules/user/pages/profile/profile.component";
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import {NzAlertModule} from "ng-zorro-antd/alert";
-
 registerLocaleData(en);
 
 @NgModule({
@@ -136,6 +136,36 @@ registerLocaleData(en);
     UserProfileComponent,
   ],
 
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        IconsProviderModule,
+        NzLayoutModule,
+        NzMenuModule,
+        NzButtonModule,
+        NzInputModule,
+        NzFormModule,
+        NzSelectModule,
+        HttpClientModule,
+        CloudinaryModule,
+        NgxDropzoneModule,
+        NzSkeletonModule,
+        NzListModule,
+        NzPopconfirmModule,
+        NzTransferModule,
+        NzSwitchModule,
+        NzNotificationModule,
+        NzTableModule,
+        NzTagModule,
+        NzInputNumberModule,
+        FontAwesomeModule,
+        NzResultModule,
+        NzPaginationModule
+
+    ],
   imports: [
       BrowserModule,
       AppRoutingModule,

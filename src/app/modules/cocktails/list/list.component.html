@@ -1,7 +1,6 @@
 <nz-transfer
   [nzDataSource]="list"
   [nzDisabled]="disabled"
-  [nzShowSearch]="showSearch"
   [nzShowSelectAll]="false"
   [nzRenderList]="[renderList, renderList]"
   (nzSelectChange)="select($event)"
@@ -26,7 +25,8 @@
           (nzCheckedChange)="onItemSelectAll($event)"
         ></th>
         <th>Name</th>
-<!--        <th>Name</th>-->
+        <th>Amount</th>
+        <th>Measurment</th>
       </tr>
       </thead>
       <tbody>
@@ -37,15 +37,12 @@
           (nzCheckedChange)="onItemSelect(data)"
         ></td>
         <td>{{ data.title }}</td>
-<!--        <td>-->
-<!--        <input type="text">-->
-<!--      </td>-->
+        <td>
+          <input type="number" [(ngModel)]="data.amount">
+        </td>
+        <td>{{data.measurement}}</td>
       </tr>
       </tbody>
     </nz-table>
   </ng-template>
 </nz-transfer>
-<div style="margin-top: 8px;">
-  <nz-switch [(ngModel)]="showSearch" nzCheckedChildren="showSearch" nzUnCheckedChildren="showSearch"></nz-switch>
-</div>
-`

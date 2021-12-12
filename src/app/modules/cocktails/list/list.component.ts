@@ -23,8 +23,6 @@ export class ListComponent implements OnInit {
   disabled = false;
   showSearch = false;
   ingredients: Ingredient [] = [];
-  limit: number = 100;
-  page: number = 0;
   ingredientsDish: Ingredient [] = []
 
   constructor(private moderatorService: ModeratorService,
@@ -60,7 +58,8 @@ export class ListComponent implements OnInit {
       this.list.push({
         key: array[i].id.toString(),
         title: array[i].title,
-        description: `description of content${i + 1}`,
+        measurement: array[i].measurement,
+        amount: '',
         checked: false
       });
     }
@@ -72,13 +71,10 @@ export class ListComponent implements OnInit {
       })
     }
     this.initDishService.listIngredients = this.list
-  // right.forEach(i => {
-  //   this.list[i.id].direction = 'right'
-  // })
   }
 
   getIngredients(callback: (res: any) => void): void {
-    this.moderatorService.get_ingridients(this.limit, this.page, "", "", "")
+    this.moderatorService.get_ingridients(200, 0, "", "", "")
       .subscribe((res: any) => callback(res));
   }
 

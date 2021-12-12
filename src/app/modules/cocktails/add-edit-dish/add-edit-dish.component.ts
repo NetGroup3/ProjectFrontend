@@ -92,7 +92,7 @@ export class AddEditDishComponent implements OnInit {
         this.ingredients.push({
           id: 0,
           dish: 0,
-          amount: 0,
+          amount: +item.amount,
           ingredient: +item.key
         })
       }
@@ -131,7 +131,6 @@ export class AddEditDishComponent implements OnInit {
     this.moderatorService.get_dish(id, +this.authService.getUserId())
       .subscribe((response: any) => {
         console.log(response)
-        //this.dish = response.dish
         this.dish.id = response.dish.id
         this.dish.title = response.dish.title
         this.dish.imageId = response.dish.imageId
