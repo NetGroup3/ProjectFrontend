@@ -4,7 +4,6 @@ import {PasswordMatch} from "../../auth/services/client/password-validator";
 import {AuthService} from "../../auth/services/client/auth.service";
 import {UserRestService} from "../../auth/services/rest/user-rest.service";
 import {NzNotificationService} from "ng-zorro-antd/notification";
-import {of} from "rxjs";
 
 @Component({
   selector: 'app-change-password',

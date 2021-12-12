@@ -16,7 +16,7 @@ export class UserProfileComponent implements OnInit {
     firstName: "",
     lastName: "",
     imageId: "",
-    timestamp: ""
+    timestamp: {}
   };
 
   constructor(private userService: UserService,
@@ -26,9 +26,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (Number(this.route.snapshot.paramMap.get('id')) > 0) {
-      this.getUser();
-    }
+    this.getUser();
   }
 
   getUser(): void {
