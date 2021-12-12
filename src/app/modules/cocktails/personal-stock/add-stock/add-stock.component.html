@@ -4,14 +4,14 @@
   (ngSubmit)="onSubmit()"
 >
   <nz-select
-    [(ngModel)]="selectedIngredientId"
+    [(ngModel)]="selectedIngredient"
     nzPlaceHolder="Select a ingredient"
-    (nzScrollToBottom)="loadMore()"
+    (nzScrollToBottom)="this.stockStorageService.loadMoreIngredients()"
     nzAllowClear
     nzShowSearch
   >
     <nz-option
-      *ngFor="let ingredient of ingredients"
+      *ngFor="let ingredient of this.stockStorageService.ingredients"
       [nzValue]="ingredient.id"
       [nzLabel]="ingredient.title"
     >

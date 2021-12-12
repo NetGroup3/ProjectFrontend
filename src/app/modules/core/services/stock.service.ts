@@ -37,7 +37,11 @@ export class StockService {
     });
   }
 
-  create(stockAdd: StockAddDto): Observable<Stock>{
+  create(stock: Stock): Observable<Stock>{
+    const stockAdd: StockAddDto = {
+      amount: stock.amount,
+      ingredientId: stock.ingredient.id
+    }
     return this.http.post<Stock>(appLinks.stock, stockAdd);
   }
 

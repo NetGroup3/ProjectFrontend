@@ -6,6 +6,7 @@ import {Ingredient} from "../../core/models/ingredient";
 import {StockAddDto} from "../../core/models/StockAddDto";
 import {UiService} from "../../core/services/ui.service";
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import {StockStorageService} from "./stock-storage.service";
 
 @Component({
   selector: 'app-personal-stock',
@@ -36,6 +37,7 @@ export class PersonalStockComponent implements OnInit {
     private stockService: StockService,
     private uiService: UiService,
     private notification: NzNotificationService,
+    public stockStorageService: StockStorageService,
   ) {
     this.subscription = this.uiService
       .onToggle()
@@ -85,9 +87,13 @@ export class PersonalStockComponent implements OnInit {
       this.category,
       this.sortedBy
     ).subscribe((stocks: Stock[]) => {
-        this.stocks = stocks;
+     //   this.stocks = stocks;
+      this.stockStorageService.stocks = stocks;
         this.isLoading = false;
         this.page++;
+      },
+      () => {
+        this.notification.error("Failed to load data from server", "");
       });
   }
 
@@ -106,6 +112,9 @@ export class PersonalStockComponent implements OnInit {
       this.isLoading = false;
       this.stocks = [...this.stocks, ...stocks];
       this.page++;
+      },
+      () => {
+        this.notification.error("Failed to load data from server", "");
     });
   }
 
@@ -126,28 +135,41 @@ export class PersonalStockComponent implements OnInit {
       this.isLoading = false;
       this.stocks = stocks;
       this.page++;
+      },
+      () => {
+        this.notification.error("Failed to load data from server", "");
     });
   }
 
   delete(stock: Stock) {
-    const id: number = stock.id
-    this.stockService.delete(stock.ingredient.id).subscribe(()=> {
-      this.stocks = this.stocks.filter(stock=>stock.id!==id);
-      this.notification.blank(stock.ingredient.title + " successfully removed from your stock", "")
+    this.stockService.delete(stock.ingredient.id).subscribe(
+      ()=> {
+      this.stocks = this.stocks.filter(stock=>stock.id!==stock.id);
+      this.notification.blank(stock.ingredient.title + " successfully removed from your stock", "");
       this.ingredient = stock.ingredient;
-    });
+    },
+      error => {
+        this.notification.blank(stock.ingredient.title + " successfully removed from your stock", "");
+      });
   }
 
   change(stock: Stock) {
     this.stockService.update(stock.ingredient.id, stock.amount).subscribe(()=>{
-      this.notification.blank("Stock  " + stock.ingredient.title + " changed", "")
+      this.notification.blank("Stock  " + stock.ingredient.title + " changed", "");
+      },
+      () => {
+        this.notification.error("Failed to load data from server", "");
     });
   }
 
-  addStock(stockAdd: StockAddDto): void {
-    this.stockService.create(stockAdd).subscribe((res: Stock)=> {
-      this.stocks.push(res);
-      this.notification.blank("You successfully added ingredient to your stock", "")
+  addStock(stock: Stock): void {
+    this.stockService.create(stock).subscribe((stock: Stock)=> {
+      this.stockStorageService.stocks.push(stock);
+
+      this.notification.blank("You successfully added ingredient to your stock", "");
+      },
+      () => {
+        this.notification.error("Failed to load data from server", "");
     });
   }
 
