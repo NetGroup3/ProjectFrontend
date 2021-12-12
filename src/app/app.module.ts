@@ -37,7 +37,7 @@ import {ModeratorCocktailsComponent} from "./modules/moderator/moderator-cocktai
 import {ModeratorIngredientsComponent} from "./modules/moderator/moderator-ingredients/moderator-ingredients.component";
 import {ModeratorKitchenwareComponent} from "./modules/moderator/moderator-kitchenware/moderator-kitchenware.component";
 import {AdminModeratorsComponent} from "./modules/admin/admin-moderators/admin-moderators.component";
-import {EditModeratorComponent} from "./modules/admin/edit-moderator/edit-moderator.component";
+import {AddEditModeratorComponent} from "./modules/admin/add-edit-moderator/add-edit-moderator.component";
 import {KitchenwareComponent} from './modules/cocktails/kitchenware/kitchenware.component';
 import {AddEditKitchenwareComponent} from './modules/cocktails/add-edit-kitchenware/add-edit-kitchenware.component';
 import {UploadImageComponent} from "./modules/settings/upload-image/upload-image.component";
@@ -53,11 +53,14 @@ import {HeaderComponent} from "./modules/core/header/header.component";
 import {NzSkeletonModule} from "ng-zorro-antd/skeleton";
 import {NzListModule} from "ng-zorro-antd/list";
 import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
+import { UserDishComponent } from './modules/cocktails/dish/user-dish/user-dish.component';
 import { ButtonComponent } from './components/button/button.component';
 import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 import {AddStockComponent} from "./modules/cocktails/personal-stock/add-stock/add-stock.component";
 import { StockItemComponent } from './modules/cocktails/personal-stock/stock-item/stock-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {NzCommentModule} from "ng-zorro-antd/comment";
+import {NzAvatarModule} from "ng-zorro-antd/avatar";
 import {NzToolTipModule} from "ng-zorro-antd/tooltip";
 
 import {NzTransferModule} from "ng-zorro-antd/transfer";
@@ -71,11 +74,19 @@ import {RequestsComponent} from "./modules/friends/pages/friends-requests/reques
 import {FriendsComponent} from "./modules/friends/pages/friends/friends.component";
 import {PageNotFoundComponent} from "./modules/core/page-not-found/page-not-found.component";
 import {NzResultModule} from "ng-zorro-antd/result";
+import {NzPaginationModule} from "ng-zorro-antd/pagination";
 import {NzSpinModule} from "ng-zorro-antd/spin";
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import {NzSpaceModule} from "ng-zorro-antd/space";
 import {NzBadgeModule} from "ng-zorro-antd/badge";
-
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { CommentsComponent } from './modules/cocktails/dish/comments/comments.component';
+import {ScrollingModule} from "@angular/cdk/scrolling";
+import {UserSearchComponent} from "./modules/user/components/searchUser/user-search.component";
+import {NzAutocompleteModule} from "ng-zorro-antd/auto-complete";
+import {UserProfileComponent} from "./modules/user/pages/profile/profile.component";
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import {NzAlertModule} from "ng-zorro-antd/alert";
 registerLocaleData(en);
 
 @NgModule({
@@ -102,7 +113,7 @@ registerLocaleData(en);
     PicturePipe,
     DishComponent,
     AddEditDishComponent,
-    EditModeratorComponent,
+    AddEditModeratorComponent,
     PersonalStockComponent,
     FooterComponent,
     SidebarComponent,
@@ -114,46 +125,86 @@ registerLocaleData(en);
     ListKitchenwareComponent,
     ListLabelComponent,
     StockItemComponent,
+    UserDishComponent,
     AddStockComponent,
     ButtonComponent,
     RequestsComponent,
     FriendsComponent,
     PageNotFoundComponent,
-
+    CommentsComponent,
+    UserSearchComponent,
+    UserProfileComponent,
   ],
 
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        IconsProviderModule,
+        NzLayoutModule,
+        NzMenuModule,
+        NzButtonModule,
+        NzInputModule,
+        NzFormModule,
+        NzSelectModule,
+        HttpClientModule,
+        CloudinaryModule,
+        NgxDropzoneModule,
+        NzSkeletonModule,
+        NzListModule,
+        NzPopconfirmModule,
+        NzTransferModule,
+        NzSwitchModule,
+        NzNotificationModule,
+        NzTableModule,
+        NzTagModule,
+        NzInputNumberModule,
+        FontAwesomeModule,
+        NzResultModule,
+        NzPaginationModule
+
+    ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    IconsProviderModule,
-    NzLayoutModule,
-    NzMenuModule,
-    NzButtonModule,
-    NzInputModule,
-    NzFormModule,
-    NzSelectModule,
-    HttpClientModule,
-    CloudinaryModule,
-    NgxDropzoneModule,
-    NzSkeletonModule,
-    NzListModule,
-    NzPopconfirmModule,
-    NzTransferModule,
-    NzSwitchModule,
-    NzNotificationModule,
-    NzTableModule,
-    NzTagModule,
-    NzInputNumberModule,
-    FontAwesomeModule,
-    NzResultModule,
-    NzSpinModule,
-    NzDatePickerModule,
-    NzSpaceModule,
-    NzToolTipModule,
-    NzBadgeModule,
+      BrowserModule,
+      AppRoutingModule,
+      FormsModule,
+      ReactiveFormsModule,
+      BrowserAnimationsModule,
+      IconsProviderModule,
+      NzLayoutModule,
+      NzMenuModule,
+      NzButtonModule,
+      NzInputModule,
+      NzFormModule,
+      NzSelectModule,
+      HttpClientModule,
+      CloudinaryModule,
+      NgxDropzoneModule,
+      NzSkeletonModule,
+      NzListModule,
+      NzPopconfirmModule,
+      NzInputNumberModule,
+      FontAwesomeModule,
+      NzCommentModule,
+      NzAvatarModule,
+      NzTransferModule,
+      NzSwitchModule,
+      NzTableModule,
+      NzTagModule,
+      NzResultModule,
+      InfiniteScrollModule,
+      ScrollingModule,
+      NzNotificationModule,
+      NzSpinModule,
+      NzDatePickerModule,
+      NzSpaceModule,
+      NzToolTipModule,
+      NzBadgeModule,
+      NzAutocompleteModule,
+      NzDescriptionsModule,
+      NzAlertModule,
   ],
 
   providers: [
@@ -169,5 +220,4 @@ registerLocaleData(en);
     RestapiService],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }

@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Friend} from "../../models/friend";
 import {FriendService} from "../../services/friend.service";
 import {NzNotificationService} from "ng-zorro-antd/notification";
-import {FriendRequest} from "../../models/friendRequest";
 
 
 @Component({
@@ -11,9 +10,9 @@ import {FriendRequest} from "../../models/friendRequest";
   styleUrls: ['./friends.component.scss']
 })
 export class FriendsComponent implements OnInit {
+  friends: Friend[] = [];
   limit: number = 10;
   offset: number = 0;
-  friends: Friend[] = [];
   notifications = 0;
   toggle: boolean = true;
 

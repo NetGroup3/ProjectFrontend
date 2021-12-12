@@ -22,6 +22,8 @@ export class DishComponent implements OnInit {
   sortedBy: string = ""
   desc: boolean = false
 
+  role: string | null = localStorage.getItem("USER_ROLE");
+
   delDish: Dish = {
     id: 0,
     title: "",
@@ -60,7 +62,7 @@ export class DishComponent implements OnInit {
       this.like = false
       this.favourite = true
     }
-    this.search()
+    this.search("")
   }
 
   getDishes(limit: number, page: number, desc: boolean, key: string, category: string, sortedBy: string, userId: number): void {
@@ -101,7 +103,6 @@ export class DishComponent implements OnInit {
     this.moderatorService.delete_dish(this.delDish.id).subscribe((response:any)=>{
       console.log(response)
     });
-    location.reload();
   }
 
   initImage(imageId: string): CloudinaryImage {
@@ -117,17 +118,8 @@ export class DishComponent implements OnInit {
 
   }
 
-  search() {
-    if(this.id){
-      this.sortedBy = "id"
-    }
-    else if(this.title){
-      this.sortedBy = "title"
-    }
-    else if(this.category){
-      this.sortedBy = "category"
-    }
-    this.getDishes(this.limit, this.page, this.desc, this.key, this.category, this.sortedBy, +this.authService.getUserId());
+  search(sortedBy: string) {
+    this.getDishes(this.limit, this.page, this.desc, this.key, this.category, sortedBy, +this.authService.getUserId());
   }
 
   likes(id: number) {

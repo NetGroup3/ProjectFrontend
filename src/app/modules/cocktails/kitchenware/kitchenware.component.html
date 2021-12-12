@@ -1,13 +1,16 @@
-<div class="main">
+<app-user-sceleton></app-user-sceleton>
 
-  <div class="Kitchenware">
+<div class="insert-area">
+  <div class="scrollable">
+
+      <div class="Kitchenware">
 
     <h2>Kitchenware</h2>
     <div class="add_kitchenware">
       <div class="wrapper">
-        <input (keydown.enter)='search()' class="search" type="text" placeholder="Search by name" [(ngModel)]="key">
-        <input type="radio" name="select" id="option-2" [checked]="title" (click)="title = !title">
-        <input type="radio" name="select" id="option-3" [checked]="Category" (click)="Category = !Category">
+        <input (keyup) ='search("")' class="search" type="text" placeholder="Search by name" [(ngModel)]="key">
+        <input type="radio" name="select" id="option-2" [checked]="title" (click)= 'search("title")'>
+        <input type="radio" name="select" id="option-3" [checked]="Category" (click)= 'search("category")'>
         <label for="option-2" class="option option-2">
           <div class="dot"></div>
           <span>Title</span>
@@ -16,39 +19,39 @@
           <div class="dot"></div>
           <span>Category</span>
         </label>
-        <input (keydown.enter)='search()' class="search" type="text" placeholder="Search by category" [(ngModel)]="category">
-        <button (click)="search()">Ok</button>
+        <input (keyup) ='search("")' class="search" type="text" placeholder="Search by category" [(ngModel)]="category">
       </div>
 
-      <a routerLink="/moderator/kitchenware/add">
-        <button> Add kitchenware</button></a>
-    </div>
+        <a routerLink="/moderator/kitchenware/add">
+          <button> Add kitchenware</button></a>
+      </div>
 
-    <div class="kitchenware" *ngFor="let kitchenware of Kitchenware">
-      <div class="buttons">
-        <i routerLink="/moderator/kitchenware/{{kitchenware.id}}" class="edit" nz-icon nzType="edit" nzTheme="outline"> </i>
-        <i (click)="delete(kitchenware)" nz-icon nzType="delete" id="delete" nzTheme="outline"></i>
-        <div [hidden]="toggle" class="fixed-overlay">
-          <div class="modal">
-            <div class="popup">
-              <div class="field"></div>
-              <span>Delete this kitchenware?</span>
-              <div class="field"></div>
-              <button (click)="ok()" class="delete-ok">OK</button>
-              <button (click)="change()" class="delete-cancel">Cancel</button>
+        <div class="kitchenware" *ngFor="let kitchenware of Kitchenware">
+          <div class="buttons">
+            <i routerLink="/moderator/kitchenware/{{kitchenware.id}}" class="edit" nz-icon nzType="edit" nzTheme="outline"> </i>
+            <i (click)="delete(kitchenware)" nz-icon nzType="delete" id="delete" nzTheme="outline"></i>
+            <div [hidden]="toggle" class="fixed-overlay">
+              <div class="modal">
+                <div class="popup">
+                  <div class="field"></div>
+                  <span>Delete this kitchenware?</span>
+                  <div class="field"></div>
+                  <button (click)="ok()" class="delete-ok">OK</button>
+                  <button (click)="change()" class="delete-cancel">Cancel</button>
+                </div>
+              </div>
             </div>
           </div>
+          <p class="title">{{kitchenware.title}}</p>
+          <advanced-image [cldImg]="kitchenware.imageId | getPicture"></advanced-image>
+          <p class="bottom" >Kitchenware</p>
         </div>
-      </div>
-      <p class="title">{{kitchenware.title}}</p>
-      <advanced-image [cldImg]="kitchenware.imageId | getPicture"></advanced-image>
-      <p class="bottom" >Kitchenware</p>
+
     </div>
 
-  </div>
-
-  <div class="button">
-    <button (click)="prev()" class="next"><</button>
-    <button (click)="next()" class="next">></button>
+    <div class="button">
+      <button (click)="prev()" class="next"><</button>
+      <button (click)="next()" class="next">></button>
+    </div>
   </div>
 </div>
