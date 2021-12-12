@@ -18,6 +18,7 @@ export class PersonalStockComponent implements OnInit {
   public ingredient!: Ingredient;
 
   public showAddStock: boolean = false;
+  public showRecommendDish: boolean = false;
   public subscription!: Subscription;
 
   private limit: number = 20;
@@ -32,6 +33,7 @@ export class PersonalStockComponent implements OnInit {
   public selectedIngredientId: number = 0;
   public amount: number = 1;
 
+
   constructor(
     private stockService: StockService,
     private uiService: UiService,
@@ -39,8 +41,11 @@ export class PersonalStockComponent implements OnInit {
     public storeStockService: StoreStockService
   ) {
     this.subscription = this.uiService
-      .onToggle()
+      .onShowAddStock()
       .subscribe(value => (this.showAddStock = value));
+/*    this.subscription = this.uiService
+      .onRecommendDish()
+      .subscribe(value => {this.showRecommendDish = value})*/
   }
 
   ngOnInit(): void {
@@ -165,6 +170,10 @@ export class PersonalStockComponent implements OnInit {
 
   toggleAddStock() {
     this.uiService.toggleAddStock();
+  }
+
+  toggleRecommendDish() {
+    this.showRecommendDish=!this.showRecommendDish;
   }
 
   @HostListener('window:scroll', ['$event'])

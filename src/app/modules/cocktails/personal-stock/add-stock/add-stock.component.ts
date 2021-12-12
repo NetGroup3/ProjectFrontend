@@ -34,7 +34,7 @@ export class AddStockComponent implements OnInit, OnChanges {
     public storeStockService: StoreStockService
   ) {
     this.subscription = this.uiService
-      .onToggle()
+      .onShowAddStock()
       .subscribe(value => (this.showAddStock = value));
   }
 
@@ -47,8 +47,6 @@ export class AddStockComponent implements OnInit, OnChanges {
       .getIngredients(this.limit, this.page)
       .subscribe((ingredients: Ingredient[])=>{
         this.storeStockService.ingredients = ingredients;
-    },()=>{
-        this.notification.error("Failed to load ingredients from server", "");
         });
   }
 

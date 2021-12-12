@@ -87,6 +87,7 @@ import {NzAutocompleteModule} from "ng-zorro-antd/auto-complete";
 import {UserProfileComponent} from "./modules/user/pages/profile/profile.component";
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import {NzAlertModule} from "ng-zorro-antd/alert";
+import { RecommendDishComponent } from './modules/cocktails/personal-stock/recommend-dish/recommend-dish.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -134,6 +135,7 @@ registerLocaleData(en);
     CommentsComponent,
     UserSearchComponent,
     UserProfileComponent,
+    RecommendDishComponent,
   ],
   imports: [
       BrowserModule,

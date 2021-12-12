@@ -1,10 +1,11 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {appLinks} from "../../../app.links";
 import {Stock} from "../models/stock";
 import {StockAddDto} from "../models/StockAddDto";
 import {Ingredient} from "../models/ingredient";
+import {Dish} from "../models/dish";
 
 @Injectable({
   providedIn: 'root'
@@ -58,6 +59,12 @@ export class StockService {
   getPages(limit: number): Observable<number> {
     return this.http.get<number>(appLinks.stockPages, {
       params: new HttpParams().set('limit', limit)
+    });
+  }
+
+  getRecommendDishes(limit: number, page: number): Observable<Dish[]>{
+    return this.http.get<Dish[]>(appLinks.recommendDish, {
+      params: new HttpParams().set('limit', limit).set('page', page)
     });
   }
 }

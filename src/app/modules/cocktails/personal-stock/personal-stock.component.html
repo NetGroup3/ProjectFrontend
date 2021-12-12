@@ -12,13 +12,24 @@
           <nz-option nzValue="category" nzLabel="Category"></nz-option>
         </nz-select>
       </nz-space>-->
-      <app-button
-        color = "{{showAddStock? '#495464' : '#9921E8' }}"
-        text = "{{showAddStock? 'Close Add' : 'Add Stock' }}"
-        (btnClick)="toggleAddStock()"
-      >
-      </app-button>
+      <div>
+        <app-button
+          color = "{{showRecommendDish? '#495464' : '#9921E8' }}"
+          text = "{{showRecommendDish? 'Close recommend dish' : 'Show recommend dish' }}"
+          (btnClick)="toggleRecommendDish()"
+        >
+        </app-button>
+        <app-button
+          color = "{{showAddStock? '#495464' : '#9921E8' }}"
+          text = "{{showAddStock? 'Close Add' : 'Add Stock' }}"
+          (btnClick)="toggleAddStock()"
+        >
+        </app-button>
+      </div>
     </header>
+    <app-recommend-dish   *ngIf="showRecommendDish">
+
+    </app-recommend-dish>
     <app-add-stock
       (onAddStock)="addStock($event)"
       [ingredient]="ingredient"

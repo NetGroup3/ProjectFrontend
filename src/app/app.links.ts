@@ -40,5 +40,6 @@ export const appLinks={
   stockPages:`${environment.serverUrl}/user/stock/pages`,
   userSearch: `${environment.serverUrl}/users/user-search`,
   userProfile: `${environment.serverUrl}/users/user-profile`,
+  recommendDish: `${environment.serverUrl}/dish/recommend`,
 
 }
