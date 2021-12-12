@@ -30,7 +30,7 @@
         <button class="amount" nzTooltipTitle="Sort stock by amount" nz-tooltip nzTooltipPlacement="top" nz-button (click)="sortedByAmount()">Amount</button>
       </div>
     <app-stock-item
-      *ngFor="let stock of stocks"
+      *ngFor="let stock of storeStockService.stocks"
       [stock]="stock"
       (onDeleteStock)="delete(stock)"
       (onChangeStock)="change(stock)"
