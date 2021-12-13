@@ -1,0 +1,19 @@
+<app-user-sceleton></app-user-sceleton>
+
+<div class="main">
+  <div class="title">
+    <h2>Profile</h2>
+  </div>
+  <div>
+    <div class="picture">
+      <advanced-image [cldImg]="user.imageId | getPicture"></advanced-image>
+    </div>
+    <div class="container">
+      <div class="personal-information">
+        <p>{{user.firstName}}</p>
+        <p>{{user.lastName}}</p>
+      </div>
+      <button (click)="addFriend(user)" class="but-invite">Add friend</button>
+    </div>
+  </div>
+</div>

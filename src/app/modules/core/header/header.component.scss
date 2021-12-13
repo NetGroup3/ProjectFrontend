@@ -1,51 +1,49 @@
 .header {
   position: fixed;
-  display: flex;
-  z-index: 1;
-  width: 86%;
+  width: 100%;
   height: 10%;
-  right: 0px;
-  top: 0px;
-  display:block;
-  background-color: #fdfbf8;
+  right: 0%;
+  top: 0%;
 }
 
-
-#buttonSearch {
-  background-color: rgba(72, 70, 67, 0.89);
+.align {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
-#buttonLogout {
-  border-radius: 2px;
-  width: 120px;
-  height: 40px;
-  background-color: #9921E8;
-  color: white;
-  font-size: 12pt;
-  position: relative;
+.floatLeft {
+  z-index: 10;
+  float: left;
+  justify-content: flex-start;
+  margin-left: 2%;
+}
+
+.floatRight {
   float: right;
-  display:block;
+  justify-content: flex-end;
 }
 
-#logOutIcon {
-  margin-left: 5px;
+.brandName {
+  font-weight: 700;
+  font-size: 3em;
+  color: rgba(72, 70, 67, 0.89);
 }
 
-#avatar {
-  float: right;
-  display:block;
-  position: relative;
-  margin-right: 6px;
+.buttonLogout {
+  margin-right: 7%;
+  width: 175px;
 }
 
-#name {
-  float: right;
-  display:block;
-  position: relative;
-
+.logOutIcon {
+  margin-left: 5%;
 }
 
-.top-bar-element{
-  margin: 12px 20px 20px 5px;
+.avatar {
+  margin-right: 7%;
 }
 
+.name {
+  text-align: right;
+  margin-right: 7%;
+}

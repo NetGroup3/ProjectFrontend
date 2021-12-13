@@ -3,10 +3,19 @@
   margin: 8px;
   padding: 10px 20px;
   cursor: pointer;
-}
-
-.stock h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.title_item{
+  width: 10%;
+}
+.category_item{
+  width: 11%;
+}
+.description_item{
+  width: 65%;
+}
+.amount_item {
+  width: 7%;
 }

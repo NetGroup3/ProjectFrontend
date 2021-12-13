@@ -1,13 +1,12 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {MessageService} from "../../core/services/message.service";
+import {Component, OnInit, HostListener} from '@angular/core';
 import {StockService} from "../../core/services/stock.service";
-import {catchError} from "rxjs/operators";
-import {Observable, of} from "rxjs";
-import {StockModel} from "../../core/models/stock.model";
+import {Subscription} from "rxjs";
+import {Stock} from "../../core/models/stock";
 import {Ingredient} from "../../core/models/ingredient";
 import {StockAddDto} from "../../core/models/StockAddDto";
 import {UiService} from "../../core/services/ui.service";
-import {Subscription} from "rxjs";
+import {NzNotificationService} from "ng-zorro-antd/notification";
+import {StoreStockService} from "./store-stock.service";
 
 @Component({
   selector: 'app-personal-stock',
@@ -16,77 +15,173 @@ import {Subscription} from "rxjs";
 })
 export class PersonalStockComponent implements OnInit {
 
-  ingredient!: Ingredient;
+  public ingredient!: Ingredient;
 
-  showAddStock: boolean = false;
-  subscription!: Subscription;
+  public showAddStock: boolean = false;
+  public showRecommendDish: boolean = false;
+  public subscription!: Subscription;
 
-  limit: number = 20;
-  page: number = 0;
+  private limit: number = 20;
+  private page: number = 0;
+  private pages: number = 0;
+  private searchText: string = "";
+  public category: string = "";
+  public sortedBy: string = "";
 
-  initLoading = true; // bug
-  loadingMore = false;
-  stocks: StockModel[] = [];
-  show: boolean = true;
-/*  ingredients: Ingredient[] = [];*/
-  isLoading = false;
-  selectedIngredientId: number = 0;
-  amount: number = 0;
+  public isLoading = false;
+
+  public selectedIngredientId: number = 0;
+  public amount: number = 1;
 
 
   constructor(
     private stockService: StockService,
-    private msg: MessageService,
     private uiService: UiService,
+    private notification: NzNotificationService,
+    public storeStockService: StoreStockService
   ) {
     this.subscription = this.uiService
-      .onToggle()
+      .onShowAddStock()
       .subscribe(value => (this.showAddStock = value));
+/*    this.subscription = this.uiService
+      .onRecommendDish()
+      .subscribe(value => {this.showRecommendDish = value})*/
   }
 
   ngOnInit(): void {
-    this.getData((res: any) => {
-      this.stocks = res;
-      this.initLoading = false;
+    this.getStock();
+    this.getPages();
+  }
+
+  sortedByTitle(){
+    this.sortedBy = "title";
+    this.upSearch("")
+  }
+
+  sortedByDescription() {
+    this.sortedBy = "description";
+    this.upSearch("")
+  }
+
+  sortedByCategory() {
+    this.sortedBy = "category";
+    this.upSearch("")
+  }
+
+  sortedByAmount() {
+    this.sortedBy = "amount";
+    this.upSearch("")
+  }
+
+  getPages(): void {
+    this.stockService.getPages(this.limit).subscribe( (pages: number) => {
+      this.pages = pages;
     });
   }
 
-  getData(callback: (res: any) => void): void {
-    this.stockService
-      .getStocks(this.limit, this.page)
-      .pipe(catchError(() => of({ results: [] })))
-      .subscribe((res: any) => callback(res));
+  getStock(): void {
+    if (this.isLoading){
+      return;
+    }
+    this.isLoading = true;
+    this.stockService.search(
+      this.limit,
+      this.page,
+      this.searchText,
+      this.category,
+      this.sortedBy
+    ).subscribe((stocks: Stock[]) => {
+        this.storeStockService.stocks = stocks;
+        this.isLoading = false;
+        this.page++;
+      });
   }
 
   onLoadMore(): void {
-    console.log("load more stock");
-  }
-
-  edit(item: any): void {
-    this.msg.success(item.title);
-    this.show = !this.show;
-  }
-
-  delete(stock: StockModel) {
-    const id: number = stock.id
-    this.stockService.delete(stock.ingredient.id).subscribe((res: any)=> {
-      this.stocks = this.stocks.filter(stock=>stock.id!==id);
-      this.ingredient = stock.ingredient;
+    if (this.isLoading || this.page===this.pages){
+      return;
+    }
+    this.isLoading = true;
+    this.stockService.search(
+      this.limit,
+      this.page,
+      this.searchText,
+      this.category,
+      this.sortedBy
+    ).subscribe((stocks: Stock[]) => {
+      this.isLoading = false;
+      this.storeStockService.stocks = [...this.storeStockService.stocks, ...stocks];
+      this.page++;
     });
   }
 
-  change(stock: StockModel) {
-    this.stockService.update(stock.ingredient.id, stock.amount).subscribe();
+  upSearch(value: string) {
+    this.searchText = value
+    if(this.isLoading){
+      return;
+    }
+    this.isLoading = true;
+    this.page = 0;
+    this.stockService.search(
+      this.limit,
+      this.page,
+      this.searchText,
+      this.category,
+      this.sortedBy
+    ).subscribe((stocks: Stock[])=> {
+      this.isLoading = false;
+      this.storeStockService.stocks = stocks;
+      this.page++;
+    });
+  }
+
+  delete(stock: Stock) {
+    const id: number = stock.id
+    this.stockService.delete(stock.ingredient.id).subscribe(() => {
+      this.storeStockService.stocks = this.storeStockService.stocks.filter(stock=>stock.id!==id);
+      this.notification.success(stock.ingredient.title + " successfully removed from your stock", "")
+      this.ingredient = stock.ingredient;
+      },
+      () => {
+        this.notification.error("Failed to delete " + stock.ingredient.title, "");
+    });
+  }
+
+  change(stock: Stock) {
+    this.stockService.update(stock.ingredient.id, stock.amount).subscribe(()=>{
+      this.notification.success("Stock  " + stock.ingredient.title + " changed", "")
+      },
+      () => {
+        this.notification.error("Failed to change stock", "");
+    });
   }
 
   addStock(stockAdd: StockAddDto): void {
-    this.stockService.create(stockAdd).subscribe((res: StockModel)=> {
-      this.stocks.push(res);
+    this.stockService.create(stockAdd).subscribe((stock: Stock)=> {
+      this.storeStockService.stocks.push(stock);
+      this.storeStockService.ingredients = this.storeStockService.ingredients.filter(
+        ingredient=>ingredient.id!==stockAdd.ingredientId);
+      this.notification.success("You successfully added ingredient to your stock", "")
+      },
+      () => {
+        this.notification.error("Failed to add ingredient to your stock", "");
     });
   }
 
   toggleAddStock() {
     this.uiService.toggleAddStock();
+  }
+
+  toggleRecommendDish() {
+    this.showRecommendDish=!this.showRecommendDish;
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+    let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
+    if(pos == document.documentElement.scrollHeight )   {
+      this.onLoadMore();
+    }
   }
 
 }

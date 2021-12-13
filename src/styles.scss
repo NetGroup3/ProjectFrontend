@@ -1,3 +1,52 @@
+.insert-area {
+  position: fixed;
+  width: 85%;
+  height: 82%;
+  padding: 4% 1% 1%;
+  top: 10%;
+  right: 0%;
+  background-color: #ece0fa;
+}
+
+.scrollable {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  overflow-y: scroll;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollable::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
+.ia-title {
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 2em;
+  color: rgba(72, 70, 67, 0.89);
+
+  position: absolute;
+  top: 2%;
+  left: 2%;
+}
+
+.ia-subtitle {
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 1.5em;
+  color: rgba(72, 70, 67, 0.89);
+}
+
+.absolute-right-button {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+}
+
+/* ! ! ! ! ! */
+
 button{
   background: #9921E8;
   border-radius: 50px;
