@@ -4,7 +4,7 @@ export interface Dish {
   description: string;
   favourite: boolean;
   id: number;
-  imageId: string | null;
+  imageId: string;
   likes: number;
   receipt: string;
   title: string;
