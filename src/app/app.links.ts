@@ -20,7 +20,8 @@ export const appLinks={
   uploadImage:`https://api.cloudinary.com/v1_1/djcak19nu/image/upload`,
   dishes:`${environment.serverUrl}/dish/list`,
   stock:`${environment.serverUrl}/user/stock`,
-  dish:`${environment.serverUrl}/dish/`,
+  dish:`${environment.serverUrl}/dish`,
+  delete:`${environment.serverUrl}/dish`,
   label: `${environment.serverUrl}/dish/label/edit`,
   dishIngredient:`${environment.serverUrl}/dish/ingredient`,
   dishKitchenware:`${environment.serverUrl}/dish/kitchenware`,
@@ -36,9 +37,11 @@ export const appLinks={
   comment: `${environment.serverUrl}/dish/comment`,
   commentList: `${environment.serverUrl}/dish/comments`,
   addDish: `${environment.serverUrl}/dish/full`,
+  searchByIngredients:  `${environment.serverUrl}/dish/ingredients`,
   stockSearch:`${environment.serverUrl}/user/stock/search`,
   stockPages:`${environment.serverUrl}/user/stock/pages`,
   userSearch: `${environment.serverUrl}/users/user-search`,
   userProfile: `${environment.serverUrl}/users/user-profile`,
+  recommendDish: `${environment.serverUrl}/dish/recommend`,
 
 }

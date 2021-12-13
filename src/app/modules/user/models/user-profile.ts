@@ -3,5 +3,5 @@ export interface UserProfile{
   firstName: string;
   lastName: string;
   imageId: string;
-  timestamp: any;
+  timestamp: object;
 }

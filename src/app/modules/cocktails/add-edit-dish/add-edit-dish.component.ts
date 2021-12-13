@@ -111,6 +111,7 @@ export class AddEditDishComponent implements OnInit {
     this.dishWrapperDto.ingredients = this.ingredients
     this.dishWrapperDto.kitchenware = this.kitchenware
     this.dishWrapperDto.label = this.labels
+    this.dish.active = true
     if (this.dish.id === 0) {
       this.moderatorService.add_dish(this.dishWrapperDto).subscribe((response: any) => {
         console.log(response)

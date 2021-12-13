@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Friend} from "../../models/friend";
 import {FriendService} from "../../services/friend.service";
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -22,7 +23,8 @@ export class FriendsComponent implements OnInit {
     imageId: ""
   }
 
-  constructor(private friendService: FriendService,
+  constructor(private router: Router,
+              private friendService: FriendService,
               private notification: NzNotificationService) {
   }
 
@@ -70,6 +72,10 @@ export class FriendsComponent implements OnInit {
       this.offset = this.offset - 10;
       this.getFriends(this.limit, this.offset);
     }
+  }
+
+  goToRequests() {
+    this.router.navigate(["/user/requests"]);
   }
 
 }

@@ -36,13 +36,8 @@ export class HeaderComponent implements OnInit {
 
 
   logOut() {
-    localStorage.setItem(this.TOKEN_KEY, "");
-    localStorage.setItem(this.USER_ID, "");
-    localStorage.setItem(this.USER_FIRSTNAME, "");
-    localStorage.setItem(this.USER_LASTNAME, "");
-    localStorage.setItem(this.USER_ROLE, "");
-    localStorage.setItem(this.USER_IMAGE_ID, "");
-    this.router.navigate(['/login']);
+    localStorage.clear();
+    this.goToLogIn();
   }
 
   ngOnInit(): void {
@@ -50,28 +45,25 @@ export class HeaderComponent implements OnInit {
     this.img = this.initImage();
     this.firstname = this.authService.getUserFirstname();
     this.lastname = this.authService.getUserLastname();
+    console.log(this.userType);
   }
 
   initImage(): CloudinaryImage {
     const cld = new Cloudinary({cloud: {cloudName: 'djcak19nu'}});
     return cld.image(this.imageId)
-      .resize(thumbnail().width(40).height(40))
-      .roundCorners(byRadius(20));
+      .resize(thumbnail().width(50).height(50))
+      .roundCorners(byRadius(25));
   }
 
-
-  saveImageId(): void {
-    this.userRestService.updateImage(this.imageForm().value).subscribe((response: any) => {
-      this.authService.setImageId(this.imageId);
-    })
+  get userType() {
+    return this.authService.getUserRole();
   }
 
-  /** form for send image Id to backend server*/
-  private imageForm(): FormGroup {
-    return this.fb.group({
-      id: this.authService.getUserId(),
-      imageId: this.imageId
-    });
+  goToLogIn() {
+    this.router.navigate(['/login']);
   }
 
+  goToSignUp() {
+    this.router.navigate(['/signup']);
+  }
 }

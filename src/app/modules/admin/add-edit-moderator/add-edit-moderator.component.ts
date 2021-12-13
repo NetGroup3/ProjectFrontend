@@ -14,15 +14,7 @@ export class AddEditModeratorComponent {
   buttonDisabled = false;
   moderInfoForm: FormGroup;
 
-  moderData: ModeratorModel = {
-    id: -1,
-    email: '',
-    firstname: '',
-    lastname: '',
-    timestamp: '',
-    imageId: "",
-    status: ''
-  };
+  moderData!: ModeratorModel;
 
   @Input() public inputModerData: ModeratorModel | undefined;
 
@@ -58,20 +50,24 @@ export class AddEditModeratorComponent {
   onSubmit() {
     if (this.moderInfoForm.valid) {
       this.buttonDisabled = true;
-      let obj = this.moderInfoForm.value;
+      let formData = this.moderInfoForm.value;
       if (this.inputModerData !== undefined) {
-        this.moderData.firstname = obj.firstname;
-        this.moderData.lastname = obj.lastname;
-        this.moderData.email = obj.email;
+        this.moderData.firstname = formData.firstname;
+        this.moderData.lastname = formData.lastname;
+        this.moderData.email = formData.email;
 
         console.log(this.moderData);
+        let moderInfo = Object.assign({}, this.moderData);
+        // @ts-ignore
+        delete moderInfo.timestamp;
+        console.log(moderInfo);
 
-        this.http.put<void>(appLinks.moderator, this.moderData).subscribe(() => {
+        this.http.put<void>(appLinks.moderator, moderInfo).subscribe(() => {
           this.close();
           this.updateEmit.emit();
         });
       } else {
-        this.http.post<void>(appLinks.moderator, obj).subscribe((res:any) => {
+        this.http.post<void>(appLinks.moderator, formData).subscribe((res:any) => {
           this.close();
           this.updateEmit.emit();
         });

@@ -15,7 +15,7 @@ export class AdminModeratorsComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private http: HttpClient) {}
 
-  moderatorList: ModeratorModel[] = [];
+  moderatorList!: ModeratorModel[];
   pageNo: number = 1;
   pagesTotal: number = 1;
 
@@ -25,7 +25,7 @@ export class AdminModeratorsComponent implements OnInit {
     searchEmail: "",
     sortProps: [],
     pageNo: 1,
-    perPage: 20
+    perPage: 10
   };
 
   showInjected: boolean = false;
@@ -64,7 +64,7 @@ export class AdminModeratorsComponent implements OnInit {
     this.formValue.searchEmail = "";
     this.formValue.sortProps = [];
     this.formValue.pageNo = 1;
-    this.formValue.perPage = 20;
+    this.formValue.perPage = 10;
   }
 
   onSubmit() {

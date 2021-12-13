@@ -3,6 +3,7 @@ import {UserService} from "../../services/user.service";
 import {UserProfile} from "../../models/user-profile";
 import {ActivatedRoute} from "@angular/router";
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-profile',
@@ -16,7 +17,7 @@ export class UserProfileComponent implements OnInit {
     firstName: "",
     lastName: "",
     imageId: "",
-    timestamp: ""
+    timestamp: {}
   };
 
   constructor(private userService: UserService,
@@ -26,9 +27,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (Number(this.route.snapshot.paramMap.get('id')) > 0) {
-      this.getUser();
-    }
+    this.getUser();
   }
 
   getUser(): void {
@@ -45,8 +44,8 @@ export class UserProfileComponent implements OnInit {
       next: (): void => {
         this.notification.blank('Friend added', '', {});
       },
-      error: (): void => {
-        this.notification.blank('Friend already added', '', {});
+      error: (error: HttpErrorResponse): void => {
+        this.notification.blank(error.error, '', {});
       }
     })
   }
