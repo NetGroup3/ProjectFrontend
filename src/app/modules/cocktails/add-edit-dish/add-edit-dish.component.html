@@ -1,43 +1,43 @@
 <app-user-sceleton></app-user-sceleton>
-<div class="insert-area">
-  <div class="scrollable">
-    <div *ngIf="dish">
-      <div class="add_edit">
-        <h2>Add/edit dish</h2>
-        <div class="picture">
-          <advanced-image [cldImg]="img"></advanced-image><br>
-          <input type="file" (change)="onFileSelect($event)" class="dn" #uploadFile>
-          <button class="upload" (click)="uploadFile.click()">Upload photo</button>
-        </div>
-        <div class="title">
-          <div class="title_description">
-            <p>Title</p>
-            <input class="title_input" [(ngModel)]="dish.title" placeholder="Text">
-            <p>Category</p>
-            <input class="description" [(ngModel)]="dish.category" placeholder="Text">
-          </div>
-          <p>Receipt</p>
-          <textarea class="receipt" required [(ngModel)]="dish.receipt" placeholder="Text"></textarea>
-          <p>Description</p>
-          <textarea  class="receipt" [(ngModel)]="dish.description" placeholder="Text"></textarea>
-
-        </div>
-        <div class="description_picture">
-
-          <div class="ingridients-kitchenware">
-            <div>
-              <app-list></app-list>
-            </div>
-            <div>
-              <app-list-kitchenware></app-list-kitchenware>
-            </div>
-            <div>
-              <app-list-label></app-list-label>
-            </div>
-          </div>
-        </div>
-        <button class="ok" (click)="onAddClick()">Ok!</button>
+<div class="insert_area">
+  <div *ngIf="dish">
+    <div class="add_edit">
+      <h2>Add/edit dish</h2>
+      <div class="picture">
+        <advanced-image [cldImg]="img"></advanced-image><br>
+        <input type="file" (change)="onFileSelect($event)" class="dn" #uploadFile>
+        <button class="upload" (click)="uploadFile.click()">Upload photo</button>
       </div>
+      <form ngNativeValidate (submit)="onAddClick()">
+      <div class="title">
+        <div class="title_description">
+          <p>Title</p>
+          <input class="title_input" required [(ngModel)]="dish.title" placeholder="Text">
+          <p>Category</p>
+          <input class="description" required [(ngModel)]="dish.category" placeholder="Text">
+        </div>
+        <p>Receipt</p>
+        <textarea class="receipt" required [(ngModel)]="dish.receipt" placeholder="Text"></textarea>
+        <p>Description</p>
+        <textarea  class="receipt" [(ngModel)]="dish.description" placeholder="Text"></textarea>
+      </div>
+
+      <div class="description_picture">
+
+        <div class="ingridients-kitchenware">
+          <div>
+            <app-list></app-list>
+          </div>
+          <div>
+            <app-list-kitchenware></app-list-kitchenware>
+          </div>
+          <div>
+            <app-list-label></app-list-label>
+          </div>
+        </div>
+      </div>
+      <button class="ok">Ok!</button>
+      </form>
     </div>
   </div>
 </div>
