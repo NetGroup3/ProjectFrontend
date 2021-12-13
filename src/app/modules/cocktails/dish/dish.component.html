@@ -36,7 +36,6 @@
       <div class="buttons">
         <i [hidden]="edit_delete" routerLink="/moderator/dish/{{dish.id}}" class="edit" nz-icon nzType="edit" nzTheme="outline"> </i>
         <i [hidden]="edit_delete" (click)="delete(dish)" nz-icon nzType="delete" id="delete" nzTheme="outline"></i>
-<!--        [ngClass]="{'like': !liked, 'liked': liked}" (click)="likes()"-->
         <i [hidden]="like"  nz-icon class="like" (click)="likes(dish.id)">
           <svg>
             <path
