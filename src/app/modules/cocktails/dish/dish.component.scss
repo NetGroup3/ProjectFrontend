@@ -1,3 +1,9 @@
+nz-select{
+  width: 25%;
+}
+.searchIngredients{
+  width: 50px;
+}
 .large ::ng-deep .ant-rate-star {
   font-size: 36px;
 }
@@ -169,7 +175,7 @@ html,body{
   display: inline-flex;
   background: #fff;
   height: 60px;
-  width: 800px;
+  width: 65%;
   align-items: center;
   justify-content: space-evenly;
   border-radius: 5px;

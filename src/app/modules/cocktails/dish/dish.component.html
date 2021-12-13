@@ -19,6 +19,15 @@
           <div class="dot"></div>
           <span>Category</span>
         </label>
+        <nz-select nzMode="multiple" nzPlaceHolder="Inserted are removed" [(ngModel)]="listOfSelectedValue">
+          <nz-option
+            *ngFor="let option of listOfOption"
+            [nzLabel]="option.label"
+            [nzValue]="option.id"
+          ></nz-option>
+        </nz-select>
+        <button class="searchIngredients" (click)="searchIngredients()">Ok</button>
+
       </div>
 
         <div *ngIf="role === 'MODERATOR'">

@@ -36,6 +36,7 @@ export const appLinks={
   comment: `${environment.serverUrl}/dish/comment`,
   commentList: `${environment.serverUrl}/dish/comments`,
   addDish: `${environment.serverUrl}/dish/full`,
+  searchByIngredients:  `${environment.serverUrl}/dish/ingredients`,
   stockSearch:`${environment.serverUrl}/user/stock/search`,
   stockPages:`${environment.serverUrl}/user/stock/pages`,
   userSearch: `${environment.serverUrl}/users/user-search`,
