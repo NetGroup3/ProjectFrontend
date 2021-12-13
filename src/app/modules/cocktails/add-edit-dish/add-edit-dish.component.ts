@@ -40,7 +40,16 @@ export class AddEditDishComponent implements OnInit {
 
   description: string = ""
   title: string = ""
-  dish!: Dish
+  dish: Dish = {
+    id: 0,
+    title: "",
+    description: "",
+    category: "",
+    receipt: "",
+    imageId: "",
+    active: false,
+    likes: 0
+  }
   public img: any;
 
   kitchenware: DishKitchenwareDto [] = [];
