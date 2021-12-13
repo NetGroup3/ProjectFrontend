@@ -78,11 +78,9 @@ export class IngridientsComponent implements OnInit {
 
   ok() {
     this.toggle = !this.toggle;
-    console.log(this.delIngredient)
     this.moderatorService.delete_ingredient(this.delIngredient.id).subscribe((response:any)=>{
-      console.log(response)
+      this.ngOnInit()
     });
-    location.reload();
   }
 
   delete(ingridient: Ingredient) {

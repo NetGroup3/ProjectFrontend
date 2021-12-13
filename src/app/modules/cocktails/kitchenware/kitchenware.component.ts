@@ -70,9 +70,8 @@ export class KitchenwareComponent implements OnInit {
     this.toggle = !this.toggle;
     console.log(this.kitchenware)
     this.moderatorService.delete_kitchenware(this.kitchenware.id).subscribe((response:any)=>{
-      console.log(response)
+      this.ngOnInit()
     });
-    location.reload();
   }
   delete(kitchenware: Kitchenware) {
     this.kitchenware = kitchenware;

@@ -4,21 +4,29 @@
   <div *ngIf="ingridient">
     <div class="add_edit">
       <h2>Add/edit ingredient</h2>
-      <div class="description_picture">
-        <div class="picture">
-          <advanced-image [cldImg]="img"></advanced-image><br>
-          <input type="file" (change)="onFileSelect($event)" class="dn" #uploadFile>
-          <button class="upload" (click)="uploadFile.click()">Upload photo</button>
+      <form ngNativeValidate (submit)="onAddClick()">
+        <div class="description_picture">
+          <div class="picture">
+            <advanced-image [cldImg]="img"></advanced-image>
+            <br>
+            <input type="file" (change)="onFileSelect($event)" class="dn" #uploadFile>
+            <button class="upload" (click)="uploadFile.click()">Upload photo</button>
+          </div>
+          <div class="title">
+            <p>Title</p>
+            <input required [(ngModel)]="ingridient.title" name="title" type="text">
+            <p>Category</p>
+            <input required class="description" [(ngModel)]="ingridient.category" name="description" type="text">
+            <p>Measurement</p>
+            <input required [(ngModel)]="ingridient.measurement" name="measurement" type="text">
+          </div>
         </div>
-        <textarea required [(ngModel)]="ingridient.description"></textarea>
-      </div>
-      <div class="title">
-        <p>Title</p>
-        <input required [(ngModel)]="ingridient.title" placeholder="Text"/>
-        <p>Category</p>
-        <input class="description" [(ngModel)]="ingridient.category" placeholder="Text">
-      </div>
-      <button class="ok"  (click)="onAddClick()">Ok!</button>
+        <div class="textarea">
+          <p>Description</p>
+          <textarea required [(ngModel)]="ingridient.description"></textarea>
+        </div>
+        <button class="ok">Ok!</button>
+      </form>
     </div>
   </div>
 </div>

@@ -20,6 +20,7 @@ export const appLinks={
   dishes:`${environment.serverUrl}/dish/list`,
   stock:`${environment.serverUrl}/user/stock`,
   dish:`${environment.serverUrl}/dish/`,
+  delete:`${environment.serverUrl}/dish`,
   label: `${environment.serverUrl}/dish/label/edit`,
   dishIngredient:`${environment.serverUrl}/dish/ingredient`,
   dishKitchenware:`${environment.serverUrl}/dish/kitchenware`,

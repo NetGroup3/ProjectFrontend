@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ModeratorService} from "../../core/services/moderator.service";
 import {Dish} from "../../core/models/dish";
 import {Ingredient} from "../../core/models/ingredient";
@@ -13,12 +13,12 @@ import {AuthService} from "../../auth/services/client/auth.service";
   styleUrls: ['./dish.component.scss']
 })
 export class DishComponent implements OnInit {
-  listOfOption: Array<{ value: string; label: string; id: number;}> = [];
+  listOfOption: Array<{ value: string; label: string; id: number; }> = [];
   ingredients: Ingredient[] = [];
   list: string [] = []
   value: number [] = [];
   listOfSelectedValue = [];
- // defaultOption = [...this.listOfSelectedValue];
+  // defaultOption = [...this.listOfSelectedValue];
 
   selectedValue = 'Default';
   limit: number = 10;
@@ -43,6 +43,7 @@ export class DishComponent implements OnInit {
   constructor(private moderatorService: ModeratorService,
               private authService: AuthService) {
   }
+
   toggle: boolean = true;
   id: boolean = false;
   title: boolean = false;
@@ -54,15 +55,13 @@ export class DishComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if(this.authService.getUserRole() == "MODERATOR"){
+    if (this.authService.getUserRole() == "MODERATOR") {
       this.edit_delete = false
-    }
-    else if(this.authService.getUserRole() == "USER"){
+    } else if (this.authService.getUserRole() == "USER") {
       this.edit_delete = true
       this.like = false
       this.favourite = false
-    }
-    else {
+    } else {
       this.edit_delete = true
       this.like = false
       this.favourite = true
@@ -77,21 +76,20 @@ export class DishComponent implements OnInit {
   }
 
   getDishes(limit: number, page: number, desc: boolean, key: string, category: string, sortedBy: string, userId: number): void {
-    console.log(key)
     this.moderatorService.get_dishes(limit, page, desc, key, category, sortedBy, userId)
-      .subscribe((response:any)=>{
-        console.log(response)
-        this.Dishes = response
-      });
+      .subscribe((response: any) => {
+          console.log(response)
+          this.Dishes = response
+        }
+      )
+    ;
   }
 
-  getIngredients(){
+  getIngredients() {
     this.moderatorService.get_ingridients(100, 0, "", "", "")
-      .subscribe((response:any)=>{
+      .subscribe((response: any) => {
         console.log(response)
         this.ingredients = response
-        // this.ingredients.forEach(ingredient => this.list.push(ingredient.title))
-        // console.log(this.list)
         this.listOfOption = this.ingredients.map(item => ({
           value: item.title,
           label: item.title,
@@ -101,19 +99,13 @@ export class DishComponent implements OnInit {
   }
 
   next() {
-    if(this.Dishes.length === 0 || this.Dishes.length < 10){
-      this.page = 0;
-      this.ngOnInit();
-    }
-    else{
-      this.page = this.page + 1;
-      this.ngOnInit();
-    }
+    this.page = this.page + 1;
+    this.ngOnInit()
 
   }
 
   prev() {
-    if(this.page > 0) {
+    if (this.page > 0) {
       this.page = this.page - 1;
       this.ngOnInit();
     }
@@ -126,12 +118,17 @@ export class DishComponent implements OnInit {
   ok() {
     this.toggle = !this.toggle;
     console.log(this.delDish)
-    this.moderatorService.delete_dish(this.delDish.id).subscribe((response:any)=>{
+    this.moderatorService.delete_dish(this.delDish.id).subscribe((response: any) => {
       console.log(response)
+      this.ngOnInit()
     });
   }
 
-  initImage(imageId: string): CloudinaryImage {
+  initImage(imageId
+              :
+              string
+  ):
+    CloudinaryImage {
     const cld = new Cloudinary({cloud: {cloudName: 'djcak19nu'}});
     return cld.image(imageId)
       .resize(thumbnail().width(50).height(50))
@@ -150,8 +147,8 @@ export class DishComponent implements OnInit {
 
   likes(id: number) {
     this.liked = !this.liked;
-    if(this.liked){
-      this.moderatorService.like(id).subscribe((response:any) => {
+    if (this.liked) {
+      this.moderatorService.like(id).subscribe((response: any) => {
         console.log(response)
       })
     }
@@ -159,7 +156,7 @@ export class DishComponent implements OnInit {
 
   searchIngredients() {
     console.log(this.listOfSelectedValue)
-    if(this.listOfSelectedValue.length != 0) {
+    if (this.listOfSelectedValue.length != 0) {
       this.moderatorService.searchByIngredients(this.listOfSelectedValue, this.limit, this.page).subscribe((response: any) => {
         console.log(response)
         this.Dishes = response
