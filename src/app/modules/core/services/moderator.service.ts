@@ -127,7 +127,7 @@ export class ModeratorService {
     return this.http.get(appLinks.label, {params});
   }
   public delete_dish(id: number) {
-    return this.http.delete(appLinks.dish, {
+    return this.http.delete(appLinks.delete, {
       params: new HttpParams().set('id', id)
     });
   }

@@ -176,6 +176,7 @@ export class PersonalStockComponent implements OnInit {
     this.showRecommendDish=!this.showRecommendDish;
   }
 
+
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
     let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
@@ -183,5 +184,10 @@ export class PersonalStockComponent implements OnInit {
       this.onLoadMore();
     }
   }
-
+/*
+  onScroll() {
+    console.log("scrolled to bottom");
+    //onLoadList();
+  }
+*/
 }

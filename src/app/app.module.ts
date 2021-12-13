@@ -87,6 +87,7 @@ import {NzAutocompleteModule} from "ng-zorro-antd/auto-complete";
 import {UserProfileComponent} from "./modules/user/pages/profile/profile.component";
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import {NzAlertModule} from "ng-zorro-antd/alert";
+import { UserCocktailsComponent } from './modules/user/pages/user-cocktails/user-cocktails.component';
 import { RecommendDishComponent } from './modules/cocktails/personal-stock/recommend-dish/recommend-dish.component';
 import { DishItemComponent } from './modules/cocktails/personal-stock/recommend-dish/dish-item/dish-item.component';
 registerLocaleData(en);
@@ -138,6 +139,7 @@ import {MatButtonModule} from "@angular/material/button";
     CommentsComponent,
     UserSearchComponent,
     UserProfileComponent,
+    UserCocktailsComponent,
     RecommendDishComponent,
     DishItemComponent,
   ],
@@ -184,6 +186,7 @@ import {MatButtonModule} from "@angular/material/button";
     MatCardModule,
     MatButtonModule,
   ],
+
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
