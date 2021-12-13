@@ -1,8 +1,7 @@
-<div class="main">
+<div class="flex-wrap">
 
-  <div class="Kitchenware">
+    <p class="ia-title">Kitchenware</p>
 
-    <h2>Kitchenware</h2>
     <div class="add_kitchenware">
       <div class="wrapper">
         <input (keyup) ='search("")' class="search" type="text" placeholder="Search by name" [(ngModel)]="key">
@@ -20,7 +19,10 @@
       </div>
 
       <a routerLink="/moderator/kitchenware/add">
-        <button> Add kitchenware</button></a>
+        <button class="absolute-right-button">
+          Add kitchenware
+        </button>
+      </a>
     </div>
 
     <div class="kitchenware" *ngFor="let kitchenware of Kitchenware">
@@ -44,10 +46,9 @@
       <p class="bottom" >Kitchenware</p>
     </div>
 
-  </div>
+</div>
 
-  <div class="button">
-    <button (click)="prev()" class="next"><</button>
-    <button (click)="next()" class="next">></button>
-  </div>
+<div class="button">
+  <button (click)="prev()" class="next"><</button>
+  <button (click)="next()" class="next">></button>
 </div>

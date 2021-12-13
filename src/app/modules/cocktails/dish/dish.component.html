@@ -1,7 +1,7 @@
-<div class="main">
-  <div class="ingridients">
-    <h2>Dishes</h2>
-    <div class="add_ingridient">
+<div class="flex-wrap">
+  <p class="ia-title">Cocktails</p>
+
+  <div class="add_ingridient">
 
 
       <div class="wrapper">
@@ -28,13 +28,18 @@
 
       </div>
 
-      <a routerLink="/moderator/dish/add">
-        <button> Add dish</button>
-      </a>
+      <div *ngIf="role === 'MODERATOR'">
+        <a routerLink="/moderator/dish/add">
+          <button class="absolute-right-button">
+            Add cocktail
+          </button>
+        </a>
+      </div>
     </div>
+
     <div class="ingridient" *ngFor="let dish of Dishes">
       <div class="buttons">
-        <i [hidden]="edit_delete" routerLink="/moderator/dish/{{dish.id}}" class="edit" nz-icon nzType="edit" nzTheme="outline"> </i>
+        <!--<i [hidden]="edit_delete" routerLink="/moderator/dish/{{dish.id}}" class="edit" nz-icon nzType="edit" nzTheme="outline"> </i>
         <i [hidden]="edit_delete" (click)="delete(dish)" nz-icon nzType="delete" id="delete" nzTheme="outline"></i>
         <i [hidden]="like"  nz-icon class="like" (click)="likes(dish.id)">
           <svg>
@@ -44,28 +49,32 @@
           </svg>
         </i>
         <i [hidden]="favourite"  nz-icon nzType="rest" nzTheme="outline"></i>
-        <div [hidden]="toggle" class="fixed-overlay">
-          <div class="modal">
-            <div class="popup">
-              <div class="field"></div>
-              <span>Delete this dish?</span>
-              <div class="field"></div>
-              <button (click)="ok()" class="delete-ok">OK</button>
-              <button (click)="change()" class="delete-cancel">Cancel</button>
+        <div class="buttons" *ngIf="role === 'MODERATOR'">
+          <i routerLink="/moderator/dish/{{dish.id}}" class="edit" nz-icon nzType="edit" nzTheme="outline"> </i>
+          <i (click)="delete(dish)" nz-icon nzType="delete" id="delete" nzTheme="outline"></i>
+          <div [hidden]="toggle" class="fixed-overlay">
+            <div class="modal">
+              <div class="popup">
+                <div class="field"></div>
+                <span>Delete this dish?</span>
+                <div class="field"></div>
+                <button (click)="ok()" class="delete-ok">OK</button>
+                <button (click)="change()" class="delete-cancel">Cancel</button>
+              </div>
             </div>
           </div>
         </div>
+
+        <div routerLink="/user/dish/{{dish.id}}">
+          <p class="title">{{dish.title}}</p>
+          <advanced-image [cldImg]="dish.imageId | getPicture"></advanced-image>
+          <p class="bottom">Cocktail</p>
+        </div>
       </div>
-      <p class="title">{{dish.title}}</p>
-      <advanced-image [cldImg]="dish.imageId | getPicture"></advanced-image>
-      <p class="bottom">Dish</p>
-
-
-    </div>
   </div>
-  <div class="button">
-<!--    <nz-pagination [nzPageIndex]="1" [nzTotal]="100" nzShowQuickJumper></nz-pagination>-->
-    <button (click)="prev()" class="next"><</button>
-    <button (click)="next()" class="next">></button>
-  </div>
+</div>
+
+<div class="button">
+  <button (click)="prev()" class="next"><</button>
+  <button (click)="next()" class="next">></button>
 </div>

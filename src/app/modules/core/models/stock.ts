@@ -1,6 +1,6 @@
 import {Ingredient} from "./ingredient";
 
-export interface StockModel {
+export interface Stock {
   id: number;
   userId: number;
   amount: number;

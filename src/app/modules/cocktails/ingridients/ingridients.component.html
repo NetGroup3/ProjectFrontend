@@ -1,9 +1,7 @@
-<div class="main">
-<div class="ingridients">
-  <h2>Ingredients</h2>
+<div class="flex-wrap">
+  <p class="ia-title">Ingredients</p>
+
   <div class="add_ingridient">
-
-
     <div class="wrapper">
       <input (keyup) ='search("")' class="search" type="text" placeholder="Search by name" [(ngModel)]="key">
       <input (keyup)='search("")' class="search" type="text" placeholder="Search by category" [(ngModel)]="category">
@@ -20,9 +18,12 @@
     </div>
 
     <a routerLink="/moderator/ingredients/add">
-      <button> Add ingredient</button></a>
+      <button class="absolute-right-button">
+        Add ingredient
+      </button>
+    </a>
   </div>
-<!--  [ngClass]="{'fixed-overlay': toggle, 'fixed': !toggle}-->
+  <!--  [ngClass]="{'fixed-overlay': toggle, 'fixed': !toggle}-->
   <div class="ingridient" *ngFor="let ingridient of Ingridients">
     <div class="buttons">
       <i routerLink="/moderator/ingredients/{{ingridient.id}}" class="edit" nz-icon nzType="edit" nzTheme="outline"> </i>
@@ -42,12 +43,10 @@
       <p class="title">{{ingridient.title}}</p>
     <advanced-image [cldImg]="ingridient.imageId | getPicture"></advanced-image>
       <p class="bottom" >Ingredient</p>
-
-
+  </div>
 </div>
-</div>
-  <div class="button">
+
+<div class="button">
   <button (click)="prev()" class="next"><</button>
   <button (click)="next()" class="next">></button>
-  </div>
 </div>

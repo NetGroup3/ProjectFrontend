@@ -1,25 +1,7 @@
 .dn{
   display: none;
 }
-.add_edit{
-  background: #F9FAFB;
-  height: 120vh;
-}
-.insert_area {
-  position: absolute;
-  top: 10%;
-  width: 86%;
-  right: 0px;
-  background-color: #F9FAFB;
-}
-h2 {
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 55px;
-  color: #495464;
-  margin-left: 2%;
-}
+
 .upload{
   background: #9921E8;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 24px rgba(153, 33, 232, 0.5);
@@ -54,15 +36,30 @@ h2 {
   width: 50%;
   margin-right: 2%;
 }
+
+.picture {
+  float: left;
+  margin-left: 3%;
+  background-color: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 20%;
+  height: 45%;
+  border-radius: 3vmin;
+  text-align: center;
+  padding-bottom: 1.5%;
+  padding-top: 1.5%;
+}
+
 .title{
-  width: 75%;
-  height: 300px;
+  width: 70%;
+  height: 45%;
   background: #FFFFFF;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 25px;
   margin-bottom: 2%;
   margin-right: 3%;
   float: right;
+  padding-bottom: 1%;
 }
 .title p{
   font-family: Montserrat;
@@ -156,11 +153,7 @@ select{
 button:hover{
   cursor: pointer;
 }
-.picture{
-  float: left;
-  margin-left: 5%;
-  margin-top: 2%;
-}
+
 img{
   width: 190px;
   height: 190px;

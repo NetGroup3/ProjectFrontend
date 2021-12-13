@@ -1,5 +1,5 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import {StockModel} from "../../../core/models/stock.model";
+import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Stock} from "../../../core/models/stock";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
@@ -7,23 +7,19 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
   templateUrl: './stock-item.component.html',
   styleUrls: ['./stock-item.component.scss']
 })
-export class StockItemComponent implements OnInit {
+export class StockItemComponent {
   selected: boolean = true;
 
-  @Input() stock!: StockModel;
-  @Output() onDeleteStock: EventEmitter<StockModel> = new EventEmitter<StockModel>()
-  @Output() onChangeStock: EventEmitter<StockModel> = new EventEmitter<StockModel>()
+  @Input() stock!: Stock;
+  @Output() onDeleteStock: EventEmitter<Stock> = new EventEmitter<Stock>()
+  @Output() onChangeStock: EventEmitter<Stock> = new EventEmitter<Stock>()
   faTimes = faTimes;
-  constructor() { }
 
-  ngOnInit(): void {
-  }
-
-  onDelete(stock: StockModel) {
+  onDelete(stock: Stock) {
     this.onDeleteStock.emit(stock);
   }
 
-  onChange(stock: StockModel) {
+  onChange(stock: Stock) {
     this.selected = !this.selected
     if(!this.selected){
       return;
