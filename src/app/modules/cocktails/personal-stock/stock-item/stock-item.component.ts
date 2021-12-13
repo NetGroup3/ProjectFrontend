@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {Stock} from "../../../core/models/stock";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 

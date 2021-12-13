@@ -48,20 +48,18 @@ export class IngridientsComponent implements OnInit {
       .subscribe((response:any)=>{
         console.log(response)
         this.Ingridients = response
+        if (this.Ingridients.length === 0) {
+          this.page = -1
+          this.next()
+        }
       });
   }
 
 
 
   next() {
-    if(this.Ingridients.length === 0 || this.Ingridients.length < 10){
-      this.page = 0;
-      this.ngOnInit();
-    }
-    else{
       this.page = this.page + 1;
       this.ngOnInit();
-    }
 
   }
 
@@ -78,11 +76,9 @@ export class IngridientsComponent implements OnInit {
 
   ok() {
     this.toggle = !this.toggle;
-    console.log(this.delIngredient)
     this.moderatorService.delete_ingredient(this.delIngredient.id).subscribe((response:any)=>{
-      console.log(response)
+      this.ngOnInit()
     });
-    location.reload();
   }
 
   delete(ingridient: Ingredient) {

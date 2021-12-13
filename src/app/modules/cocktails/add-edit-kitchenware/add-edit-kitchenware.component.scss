@@ -1,18 +1,7 @@
 .dn{
   display: none;
 }
-.add_edit{
-  background: #F9FAFB;
-}
 
-h2 {
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 55px;
-  color: #495464;
-  margin-left: 2%;
-}
 .upload{
   background: #9921E8;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 24px rgba(153, 33, 232, 0.5);
@@ -25,17 +14,60 @@ h2 {
   border: none;
 
 }
-.picture{
-  width: 300px;
+.picture {
+  float: left;
+  margin-left: 3%;
+  background-color: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 20%;
+  height: 45%;
+  border-radius: 3vmin;
+  text-align: center;
+  padding-bottom: 1.5%;
+  padding-top: 1.5%;
 }
+
+.title{
+  width: 70%;
+  height: 45%;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+  margin-bottom: 2%;
+  margin-right: 3%;
+  float: right;
+  padding-bottom: 1%;
+}
+
 .description_picture{
   margin-left: 3%;
+  display: flex;
 }
 .description_picture img{
   margin-left: 3%;
 }
-.description_picture textarea{
-  width: 65%;
+textarea{
+  resize: none;
+  border: none;
+  background: #fff;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0 10px;
+  border: 2px solid lightgrey;
+  transition: all 0.3s ease;
+  margin-left: 2%;
+  margin-top: 10px;
+  width: 90%;
+}
+.textarea{
+  margin-left: 3%;
+  margin-top: 2%;
+  width: 97%;
   font-size: 20px;
   background: #FFFFFF;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -46,15 +78,6 @@ h2 {
   float: left;
 }
 
-.title{
-  width: 88%;
-  height: 250px;
-  background: #FFFFFF;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 25px;
-  margin-top: 25%;
-  margin-left: 3%;
-}
 .title p{
   font-family: Montserrat;
   font-style: normal;
@@ -112,10 +135,7 @@ h2 {
 button:hover{
   cursor: pointer;
 }
-.picture{
-  float: left;
-  margin-left: 20px;
-}
+
 img{
   width: 190px;
   height: 190px;

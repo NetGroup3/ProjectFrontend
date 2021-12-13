@@ -127,7 +127,7 @@ export class ModeratorService {
     return this.http.get(appLinks.label, {params});
   }
   public delete_dish(id: number) {
-    return this.http.delete(appLinks.dish, {
+    return this.http.delete(appLinks.delete, {
       params: new HttpParams().set('id', id)
     });
   }
@@ -144,5 +144,14 @@ export class ModeratorService {
 
   public like(dish: number){
     return this.http.post(appLinks.dishLike, dish);
+  }
+
+  public searchByIngredients (values: number[], limit: number, page: number){
+    const params = new HttpParams()
+      .set('values', values.toString())
+      .set('limit', limit.toString())
+      .set('page', page.toString())
+    ;
+    return this.http.get(appLinks.searchByIngredients, {params});
   }
 }

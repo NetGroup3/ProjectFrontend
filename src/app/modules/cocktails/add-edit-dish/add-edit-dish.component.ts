@@ -40,16 +40,7 @@ export class AddEditDishComponent implements OnInit {
 
   description: string = ""
   title: string = ""
-  dish: Dish = {
-    id: 0,
-    title: "",
-    description: "",
-    category: "",
-    receipt: "",
-    imageId: "",
-    active: false,
-    likes: 0
-  }
+  dish!: Dish
   public img: any;
 
   kitchenware: DishKitchenwareDto [] = [];
@@ -111,6 +102,7 @@ export class AddEditDishComponent implements OnInit {
     this.dishWrapperDto.ingredients = this.ingredients
     this.dishWrapperDto.kitchenware = this.kitchenware
     this.dishWrapperDto.label = this.labels
+    this.dish.active = true
     if (this.dish.id === 0) {
       this.moderatorService.add_dish(this.dishWrapperDto).subscribe((response: any) => {
         console.log(response)

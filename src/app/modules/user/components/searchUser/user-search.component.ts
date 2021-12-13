@@ -11,7 +11,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   templateUrl: './user-search.component.html',
   styleUrls: ['./user-search.component.scss']
 })
-export class UserSearchComponent implements OnInit{
+export class UserSearchComponent implements OnInit {
   public userList: UserSearch[] = [];
   public selectedUser?: number;
   public isLoading = false;
@@ -24,29 +24,25 @@ export class UserSearchComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.search$.pipe(debounceTime(300)).subscribe((searchTerm) => {
-      // if(searchTerm){
+    this.search$
+      .pipe(debounceTime(300))
+      .subscribe((searchTerm) => {
         this.getUsers(searchTerm);
-      // }
-    });
+      });
   }
 
   public onSearch(searchTerm: string): void {
     this.isLoading = true;
-      this.searchSubject.next(searchTerm);
+    this.searchSubject.next(searchTerm);
   }
-  public log = console.log;
 
   public onUserSelected(userId: number): void {
     this.router.navigate([`/user/user-profile/${userId}`]);
-    console.log('You select user with id: ', userId)
-
   }
 
   private getUsers(name: string): void {
     this.userService.getUsers(name)
       .subscribe((userList) => {
-        console.log('test', userList);
         this.userList = userList;
         this.isLoading = false;
       });
