@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {LoginForm} from "../../models/login-form.model";
 import {RecoveryForm} from "../../models/recovery-form.model";
 import {Observable} from "rxjs";
@@ -25,4 +25,11 @@ export class AuthRestService {
   public signUp(body: SignupForm) : Observable<any>{
     return this.http.post(appLinks.signup, body);
   }
+
+  public code (param: string):Observable<any>{
+    return this.http.get(appLinks.code, {
+      params: new HttpParams().set('param', param)
+    });
+  }
+
 }

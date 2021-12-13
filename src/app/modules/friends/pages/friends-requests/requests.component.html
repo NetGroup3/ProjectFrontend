@@ -5,7 +5,7 @@
     <h2>Requests</h2>
   </div>
   <div class="friends">
-    <div class="friend-container" *ngFor="let request of fRequests">
+    <div class="friend-container" *ngFor="let request of friendRequests">
       <div class="friend">
         <div class="btn-img">
           <div class="friend-header"><p class="title">{{request.firstName}}</p>
@@ -29,15 +29,17 @@
               <div class="ant-notification-notice-content">
                 <div class="ant-notification-notice-with-icon">
                   <span class="ant-notification-notice-icon">
-                    <i nz-icon nzType="smile" style="color: rgb(16, 142, 233);"></i>
+                    <i nz-icon nzType="smile" class="smile"></i>
                   </span>
                   <div class="ant-notification-notice-message">Friend added</div>
                 </div>
               </div>
             </ng-template>
-            <i nz-button (click)="createNotification(template)" (click)="accept(request)" nz-icon nzType="check"
-               nzTheme="outline"></i>
-            <i nz-button class="circle" (click)="decline(request)" nz-icon nzType="close" nzTheme="outline"></i>
+            <span nz-tooltip nzTooltipTitle="Accept invite"><i nz-button (click)="createNotification(template)"
+                                                               (click)="accept(request)" nz-icon nzType="check"
+                                                               nzTheme="outline"></i></span>
+            <span nz-tooltip nzTooltipTitle="Decline invite"><i nz-button class="circle" (click)="decline(request)"
+                                                                nz-icon nzType="close" nzTheme="outline"></i></span>
           </div>
         </div>
       </div>
@@ -45,7 +47,7 @@
   </div>
   <div class="button">
     <button nz-button nzShape="circle" (click)="prev()" [disabled]="offset === 0" class="next"><</button>
-    <button nz-button nzShape="circle" (click)="next()" [disabled]="fRequests.length === 0 || fRequests.length < 10"
+    <button nz-button nzShape="circle" (click)="next()" [disabled]="friendRequests.length === 0 || friendRequests.length < 10"
             class="next">>
     </button>
   </div>

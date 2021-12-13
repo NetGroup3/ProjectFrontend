@@ -48,9 +48,14 @@
         <p>Don’t have an account?
           <a routerLink="/signup">Sign Up </a>
         </p>
+        <p *ngIf="error">
+          <nz-alert nzType="error" nzMessage="{{message}}" nzShowIcon></nz-alert>
+        </p>
+        <p *ngIf="success">
+          <nz-alert nzType="success" nzMessage="{{message}}" nzShowIcon></nz-alert>
+        </p>
       </div>
     </div>
   </div>
-</div>
 
 

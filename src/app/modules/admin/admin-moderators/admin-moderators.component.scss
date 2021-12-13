@@ -1,65 +1,37 @@
-.insert_area {
-  position: absolute;
-  top: 10%;
-  width: 86%;
-  height: 90%;
-  right: 0px;
-  background-color: #f3f1ee;
-}
-
-.title {
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 48px;
-  line-height: 150%;
-  color: #495464;
-}
-
-#addButton {
-  position: absolute;
-  top: 0%;
-  right: 0%;
-  margin-right: 3%;
-  margin-top: 2%;
-}
-
-h2 {
-  margin-left: 3%;
-  margin-top: 2%;
-}
-
-#goButton {
-  height: 30px;
-  width: 60px;
-  margin-left: 0.5%;
-}
-
-#d1 {
-  width: 50%;
-  position: absolute;
-  top: 0px;
-  margin-right: 30%;
-  margin-left: 20%;
-  margin-top: 2.1%;
-}
-
-.input {
-  margin-right: 1%;
-  height: 35px;
-}
-
-#d2 {
-  margin-top: 2%;
-  width: 100%;
-}
-
 td, th {
-  width: 9%;
+  width: 10%;
   text-align: center;
 }
 
-.navBut {
+.nav-button-div, .not-found-div{
+  margin: 0 auto;
+  width: fit-content;
+  padding-top: 1%;
+}
+
+.toolbox-div, .name-div {
+  display: inline-block;
+}
+
+.name-div {
+  margin-right: 1%;
+}
+
+.search-div {
+  margin-bottom: 1%;
+}
+
+.toolbox-div {
+  width: 60%;
+}
+
+label, select, input {
+  margin-right: 1%;
+}
+
+/* ! ! ! ! ! */
+
+.round-button {
   height: 35px;
   width: 35px;
 }

@@ -4,6 +4,6 @@ export interface ModeratorModel {
   firstname: string;
   lastname: string;
   imageId: string;
-  timestamp: object;
+  timestamp: string;
   status: string;
 }

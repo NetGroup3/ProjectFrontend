@@ -6,7 +6,9 @@
   <nz-select
     [(ngModel)]="selectedIngredientId"
     nzPlaceHolder="Select a ingredient"
+    (nzScrollToBottom)="loadMore()"
     nzAllowClear
+    nzShowSearch
   >
     <nz-option
       *ngFor="let ingredient of ingredients"
