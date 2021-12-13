@@ -3,7 +3,24 @@ header {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  background-color: #ece0fa;
 }
+
+.temp-style {
+  width: 85%;
+  margin-top: 5%;
+  float: right;
+}
+
+.scrollable-container {
+  height: 70%;
+  overflow-y: scroll;
+
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+}
+
 .header_table{
   display: flex;
   justify-content: space-between;
@@ -22,15 +39,6 @@ header {
 }
 .amount {
   width: 12%;
-}
-
-.insert_area {
-  position: absolute;
-  top: 10%;
-  width: 86%;
-  right: 0px;
-  padding: 32px;
-//  background-color: #f3f1ee;
 }
 
 .demo-loadmore-list {
