@@ -93,8 +93,6 @@ import { UserCocktailsComponent } from './modules/user/pages/user-cocktails/user
 import { RecommendDishComponent } from './modules/cocktails/personal-stock/recommend-dish/recommend-dish.component';
 import { DishItemComponent } from './modules/cocktails/personal-stock/recommend-dish/dish-item/dish-item.component';
 registerLocaleData(en);
-import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
 
