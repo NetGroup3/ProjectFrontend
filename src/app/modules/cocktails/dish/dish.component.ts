@@ -80,6 +80,10 @@ export class DishComponent implements OnInit {
       .subscribe((response: any) => {
           console.log(response)
           this.Dishes = response
+          if (this.Dishes.length === 0) {
+            this.page = -1
+            this.next()
+          }
         }
       )
     ;

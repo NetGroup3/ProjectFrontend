@@ -38,18 +38,16 @@ export class KitchenwareComponent implements OnInit {
       .subscribe((response:any)=>{
         console.log(response)
         this.Kitchenware = response
+        if (this.Kitchenware.length === 0) {
+          this.page = -1
+          this.next()
+        }
       });
   }
 
   next() {
-    if(this.Kitchenware.length === 0 || this.Kitchenware.length < 10){
-      this.page = 0;
-      this.ngOnInit();
-    }
-    else{
       this.page = this.page + 1;
       this.ngOnInit();
-    }
   }
 
   prev() {

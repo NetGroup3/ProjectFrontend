@@ -48,20 +48,18 @@ export class IngridientsComponent implements OnInit {
       .subscribe((response:any)=>{
         console.log(response)
         this.Ingridients = response
+        if (this.Ingridients.length === 0) {
+          this.page = -1
+          this.next()
+        }
       });
   }
 
 
 
   next() {
-    if(this.Ingridients.length === 0 || this.Ingridients.length < 10){
-      this.page = 0;
-      this.ngOnInit();
-    }
-    else{
       this.page = this.page + 1;
       this.ngOnInit();
-    }
 
   }
 
