@@ -11,7 +11,7 @@
     nzShowSearch
   >
     <nz-option
-      *ngFor="let ingredient of ingredients"
+      *ngFor="let ingredient of storeStockService.ingredients"
       [nzValue]="ingredient.id"
       [nzLabel]="ingredient.title"
     >
@@ -20,8 +20,8 @@
 
   <nz-input-number
     [(ngModel)]="amount"
-    [nzMin]="0.1"
-    [nzStep]="0.1"
+    [nzMin]="1"
+    [nzStep]="1"
     [nzPlaceHolder]="'Digital'"
   >
   </nz-input-number>

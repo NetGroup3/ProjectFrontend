@@ -87,6 +87,7 @@ import {NzAutocompleteModule} from "ng-zorro-antd/auto-complete";
 import {UserProfileComponent} from "./modules/user/pages/profile/profile.component";
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import {NzAlertModule} from "ng-zorro-antd/alert";
+import { RecommendDishComponent } from './modules/cocktails/personal-stock/recommend-dish/recommend-dish.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -134,38 +135,8 @@ registerLocaleData(en);
     CommentsComponent,
     UserSearchComponent,
     UserProfileComponent,
+    RecommendDishComponent,
   ],
-
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        IconsProviderModule,
-        NzLayoutModule,
-        NzMenuModule,
-        NzButtonModule,
-        NzInputModule,
-        NzFormModule,
-        NzSelectModule,
-        HttpClientModule,
-        CloudinaryModule,
-        NgxDropzoneModule,
-        NzSkeletonModule,
-        NzListModule,
-        NzPopconfirmModule,
-        NzTransferModule,
-        NzSwitchModule,
-        NzNotificationModule,
-        NzTableModule,
-        NzTagModule,
-        NzInputNumberModule,
-        FontAwesomeModule,
-        NzResultModule,
-        NzPaginationModule
-
-    ],
   imports: [
       BrowserModule,
       AppRoutingModule,
@@ -205,8 +176,8 @@ registerLocaleData(en);
       NzAutocompleteModule,
       NzDescriptionsModule,
       NzAlertModule,
+      NzPaginationModule,
   ],
-
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
