@@ -50,8 +50,7 @@ export class SignupPageComponent implements OnInit {
     if (this.form.valid) {
       this.authRestService.signUp(this.form.value).subscribe({
         error: (error:HttpErrorResponse): void => {this.messageError(error.error)},
-        next: (response:any): void => {
-          console.log(response)
+        next: (): void => {
           this.toggle = false;
         },
       });
