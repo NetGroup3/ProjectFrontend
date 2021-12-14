@@ -6,19 +6,10 @@ header {
   background-color: #ece0fa;
 }
 
-.temp-style {
-  width: 85%;
-  margin-top: 5%;
-  float: right;
-}
-
-.scrollable-container {
-  height: 70%;
-  overflow-y: scroll;
-
-  border-color: black;
-  border-width: 1px;
-  border-style: solid;
+input {
+  height: 2.5em;
+  padding-left: 1%;
+  padding-right: 1%;
 }
 
 .header_table{

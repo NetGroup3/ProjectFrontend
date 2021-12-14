@@ -1,5 +1,7 @@
 <div class="main">
-  <advanced-image class="img" [cldImg]="img"></advanced-image>
+  <div class="img-holder">
+    <advanced-image class="img" [cldImg]="img"></advanced-image>
+  </div>
   <input type="file" (change)="onFileSelect($event)" class="dn" #uploadFile>
   <div (click)="uploadFile.click()" class="p-4">
     <button (click)="createBasicNotification()" type="button">Change photo</button>
