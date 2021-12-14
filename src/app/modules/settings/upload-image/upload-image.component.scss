@@ -3,7 +3,18 @@
 }
 
 .img {
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.img-holder {
+  width: fit-content;
+  margin: 5% auto 0;
+}
+
+.p-4 {
+  margin-top: 5%;
 }
 
 .main {
@@ -13,22 +24,6 @@
   background-color: white;
   padding: 3% 5%;
 }
-/*
-input {
-  border: 0.15em solid #BBBFCA;
-  box-sizing: border-box;
-  border-radius: 3vmin;
-  margin-bottom: 5%;
-  width: 100%;
-  color: #495464;
-}
-
-p{
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1.5em;
-  color: #495464;
-}*/
 
 button{
   margin:0 auto;

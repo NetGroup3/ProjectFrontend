@@ -68,21 +68,21 @@ export class AdminModeratorsComponent implements OnInit {
   }
 
   onSubmit() {
-    const obj = this.settingsForm.value;
+    const formData = this.settingsForm.value;
     this.clearFormValue();
-    if (obj.searchInput !== "") {
-      if (obj.search === "firstname") {
-        this.formValue.searchFirstname = obj.searchInput;
+    if (formData.searchInput !== "") {
+      if (formData.search === "firstname") {
+        this.formValue.searchFirstname = formData.searchInput;
       }
-      else if (obj.search === "lastname") {
-        this.formValue.searchLastname = obj.searchInput;
+      else if (formData.search === "lastname") {
+        this.formValue.searchLastname = formData.searchInput;
       }
-      else if (obj.search === "email") {
-        this.formValue.searchEmail = obj.searchInput;
+      else if (formData.search === "email") {
+        this.formValue.searchEmail = formData.searchInput;
       }
     }
     // @ts-ignore
-    this.formValue.sortProps.push({column: obj.sort, asc: toBoolean(obj.sortType)});
+    this.formValue.sortProps.push({column: formData.sort, asc: toBoolean(formData.sortType)});
     this.loadList(this.formValue);
   }
 
