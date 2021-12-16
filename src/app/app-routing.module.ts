@@ -23,6 +23,7 @@ import {RequestsComponent} from "./modules/friends/pages/friends-requests/reques
 import {UserSearchComponent} from "./modules/user/components/searchUser/user-search.component";
 import {UserProfileComponent} from "./modules/user/pages/profile/profile.component";
 import {UserCocktailsComponent} from "./modules/user/pages/user-cocktails/user-cocktails.component";
+import {FavouriteComponent} from "./modules/cocktails/favourite/favourite.component";
 
 
 const routes: Routes = [
@@ -51,6 +52,7 @@ const routes: Routes = [
   { path: 'dishes', component: UserCocktailsComponent},
   { path: 'user/dish/:id', component: UserDishComponent},
   { path: 'list', component: ListKitchenwareComponent},
+  { path: 'user/favourite', component: FavouriteComponent},
   { path: "**", component: PageNotFoundComponent},
 ];
 

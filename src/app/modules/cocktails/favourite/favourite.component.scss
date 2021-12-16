@@ -1,0 +1,37 @@
+* {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently */
+}
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+.wrapper{
+  display: inline-flex;
+}
+.ingredient {
+  transition: all .2s ease-in-out;
+  width: 97%;
+  margin-bottom: 8px;
+  border-radius: 12px;
+}
+.ingredient:hover {
+  transform: scale(1.02);
+}
+.like{
+  transition: all .08s ease-in-out;
+  font-size: 20px;
+}
+.like:active{
+  transform: scale(1.22);
+  color: lime;
+}
+.dish-title {
+  font-size: 14px;
+}
+.like-active{
+  color: #9921E8;
+}
