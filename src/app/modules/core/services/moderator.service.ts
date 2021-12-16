@@ -8,6 +8,7 @@ import {Dish} from "../models/dish";
 import {Dish_ingredients} from "../models/dish_ingredients";
 import {Dish_kitchenware} from "../models/dish_kitchenware";
 import {DishWrapperDto} from "../models/dishWrapperDto";
+import {DishFavourite} from "../models/dishFavourite";
 
 @Injectable({
   providedIn: 'root'
@@ -154,4 +155,19 @@ export class ModeratorService {
     ;
     return this.http.get(appLinks.searchByIngredients, {params});
   }
+
+  public getFavourite() {
+    return this.http.get(appLinks.favourite);
+  }
+
+  public addFavourite(body : DishFavourite) {
+    return this.http.post(appLinks.favourite, body)
+  }
+
+  public removeFavourite(dish : number) {
+    return this.http.delete(appLinks.favourite, {
+      params: new HttpParams().set('dish', dish).set('userId', 23)
+    })
+  }
+
 }
