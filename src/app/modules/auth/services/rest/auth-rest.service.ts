@@ -5,6 +5,7 @@ import {RecoveryForm} from "../../models/recovery-form.model";
 import {Observable} from "rxjs";
 import {appLinks} from "../../../../app.links";
 import {SignupForm} from "../../models/signup-form.model";
+import {UserLoginModel} from "../../models/user-login.model";
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class AuthRestService {
   constructor(private http: HttpClient) { }
 
 
-  public login (body: LoginForm) : Observable<any>{
-    return this.http.post(appLinks.login, body);
+  public login (body: LoginForm) : Observable<UserLoginModel>{
+    return this.http.post<UserLoginModel>(appLinks.login, body);
   }
 
   public recover (body: RecoveryForm) : Observable<any>{
