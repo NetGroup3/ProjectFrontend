@@ -16,8 +16,7 @@ import {compass} from "@cloudinary/url-gen/qualifiers/gravity";
 })
 
 export class ListComponent implements OnInit {
-  //public
-  public id = Number(this.route.snapshot.paramMap.get('id'))
+  id = Number(this.route.snapshot.paramMap.get('id'))
   list: TransferItem[] = []
   changes: any [] = []
   $asTransferItems = (data: unknown): TransferItem[] => data as TransferItem[]
@@ -81,7 +80,7 @@ export class ListComponent implements OnInit {
 
   getDish(callback: (res: any) => void): void {
 
-    this.moderatorService.get_dish(this.id, +this.authService.getUserId())
+    this.moderatorService.getDish(this.id, +this.authService.getUserId())
       .subscribe((res: any) => callback(res));
   }
 

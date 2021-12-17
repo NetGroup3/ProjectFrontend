@@ -8,6 +8,8 @@ import {Dish} from "../models/dish";
 import {Dish_ingredients} from "../models/dish_ingredients";
 import {Dish_kitchenware} from "../models/dish_kitchenware";
 import {DishWrapperDto} from "../models/dishWrapperDto";
+import {DishAll} from "../models/dishAll";
+import {Label} from "../models/label";
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +21,11 @@ export class ModeratorService {
 
   }
 
-  public getLabels(limit: number, page: number) : Observable<any>{
+  public getLabels(limit: number, page: number) : Observable<Label[]>{
     const params = new HttpParams()
       .set('limit', limit.toString())
       .set('page', page.toString());
-    return this.http.get(appLinks.labels, {params})
+    return this.http.get<Label[]>(appLinks.labels, {params})
   }
 
    public getIngredient(id: number): Observable<Ingredient>{
@@ -83,8 +85,8 @@ export class ModeratorService {
       params: new HttpParams().set('id', id)
     });
   }
-  public get_dish(id: number, userId: number): Observable<Object>{
-    return this.http.get(appLinks.dish, { params: new HttpParams().set('id', id).set('userId', userId)})
+  public getDish(id: number, userId: number): Observable<DishAll>{
+    return this.http.get<DishAll>(appLinks.dish, { params: new HttpParams().set('id', id).set('userId', userId)})
   }
 
   public addDish (dishWrapperDto: DishWrapperDto): Observable<String>{

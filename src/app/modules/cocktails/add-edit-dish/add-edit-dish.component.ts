@@ -110,8 +110,8 @@ export class AddEditDishComponent implements OnInit {
 
   getDish(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.moderatorService.get_dish(id, +this.authService.getUserId())
-      .subscribe((response: any) => {
+    this.moderatorService.getDish(id, +this.authService.getUserId())
+      .subscribe((response) => {
         this.dish.id = response.dish.id
         this.dish.title = response.dish.title
         this.dish.imageId = response.dish.imageId
