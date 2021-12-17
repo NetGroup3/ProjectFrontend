@@ -11,11 +11,10 @@ import {Router} from "@angular/router";
   styleUrls: ['./friends.component.scss']
 })
 export class FriendsComponent implements OnInit {
-  friends: Friend[] = [];
-  limit: number = 10;
-  offset: number = 0;
-  notifications = 0;
-  toggle: boolean = true;
+  public friends: Friend[] = [];
+  private limit: number = 10;
+  public offset: number = 0;
+  public toggle: boolean = true;
 
   delFriend: Friend = {
     id: 0,
@@ -34,7 +33,7 @@ export class FriendsComponent implements OnInit {
 
   getFriends(limit: number, offset: number): void {
     this.friendService.getFriends(limit, offset)
-      .subscribe((response) => {
+      .subscribe((response: Friend[]) => {
         this.friends = response
       });
   }
@@ -49,7 +48,7 @@ export class FriendsComponent implements OnInit {
     this.toggle = !this.toggle;
     this.friendService.deleteFriend(this.delFriend.id).subscribe({
       next: (): void => {
-        this.friends = this.friends.filter((friend) => friend.id !== this.delFriend.id);
+        this.friends = this.friends.filter((friend: Friend) => friend.id !== this.delFriend.id);
         this.notification.blank('Friend removed', '', {});
       }
     });

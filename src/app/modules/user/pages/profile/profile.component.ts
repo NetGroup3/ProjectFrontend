@@ -17,7 +17,7 @@ export class UserProfileComponent implements OnInit {
     firstName: "",
     lastName: "",
     imageId: "",
-    timestamp: {}
+    checkUser: true
   };
 
   constructor(private userService: UserService,
@@ -33,7 +33,7 @@ export class UserProfileComponent implements OnInit {
   getUser(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.userService.getUser(id)
-      .subscribe((response) => {
+      .subscribe((response: UserProfile) => {
         this.user = response
       });
   }

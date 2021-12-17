@@ -15,7 +15,6 @@ export class ChangePasswordComponent implements OnInit {
 
   public passwordForm!: FormGroup;
 
-
   constructor(private authService: AuthService,
               private userRestService: UserRestService,
               private fbPassword: FormBuilder,
