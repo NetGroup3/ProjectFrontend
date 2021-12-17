@@ -42,13 +42,13 @@ export class AddEditKitchenwareComponent implements OnInit {
   onAddClick():void{
     console.log(this.kitchenware)
     if(this.kitchenware.id === 0){
-      this.moderatorService.add_kitchenware(this.kitchenware).subscribe((response:any)=>{
+      this.moderatorService.addKitchenware(this.kitchenware).subscribe((response:any)=>{
         console.log(response)
         this.router.navigate(['/moderator/kitchenware'])
       });
     }
     else {
-      this.moderatorService.edit_kitchenware(this.kitchenware).subscribe((response:any)=>{
+      this.moderatorService.editKitchenware(this.kitchenware).subscribe((response:any)=>{
         console.log(response)
         this.router.navigate(['/moderator/kitchenware'])
       });
@@ -59,7 +59,7 @@ export class AddEditKitchenwareComponent implements OnInit {
 
   getKitchenware(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.moderatorService.get_kitchenware(id)
+    this.moderatorService.getKitchenwareById(id)
       .subscribe((response:any)=>{
         console.log(response)
         this.kitchenware = response

@@ -4,14 +4,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ModeratorService} from "../../core/services/moderator.service";
 import {Location} from "@angular/common";
 import {UploadService} from "../../auth/services/client/upload.service";
-import {Cloudinary, CloudinaryImage} from "@cloudinary/url-gen";
-import {thumbnail} from "@cloudinary/url-gen/actions/resize";
-import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
 import {Dish} from "../../core/models/dish";
 import {Kitchenware} from "../../core/models/kitchenware";
-import {Dish_ingredients} from "../../core/models/dish_ingredients";
-import {Dish_kitchenware} from "../../core/models/dish_kitchenware";
-import {TransferItem} from "ng-zorro-antd/transfer";
 import {ListComponent} from "../list/list.component";
 import {AuthService} from "../../auth/services/client/auth.service";
 import {InitDishService} from "../../core/services/init-dish.service";
@@ -33,11 +27,7 @@ export class AddEditDishComponent implements OnInit {
   dishKitchenware: Kitchenware [] = []
   dishLabels: Label [] = []
 
-  limit: number = 20
-  page: number = 0
-
   disabled = false;
-
   description: string = ""
   title: string = ""
   dish: Dish = {
@@ -50,16 +40,10 @@ export class AddEditDishComponent implements OnInit {
     active: false,
     likes: 0
   }
-  public img: any;
-
-  kitchenware: DishKitchenwareDto [] = [];
-  labels: DishLabelDto [] = [];
+  img: any
+  kitchenware: DishKitchenwareDto [] = []
+  labels: DishLabelDto [] = []
   ingredients: DishIngredientDto [] = []
-
-
-  dish_ingredient: Dish_ingredients [] = []
-  dish_kitchenware: Dish_kitchenware [] = []
-
   dishWrapperDto: DishWrapperDto = {
     dish: this.dish,
     ingredients: this.ingredients,
@@ -86,7 +70,6 @@ export class AddEditDishComponent implements OnInit {
   }
 
   onAddClick(): void {
-    console.log(this.initDishService.listIngredients)
     this.initDishService.listIngredients.forEach(item => {
       if (item.direction == "right") {
         this.ingredients.push({
@@ -113,14 +96,12 @@ export class AddEditDishComponent implements OnInit {
     this.dishWrapperDto.label = this.labels
     this.dish.active = true
     if (this.dish.id === 0) {
-      this.moderatorService.add_dish(this.dishWrapperDto).subscribe((response: any) => {
-        console.log(response)
+      this.moderatorService.addDish(this.dishWrapperDto).subscribe(() => {
         this.router.navigate(['moderator/cocktails'])
       });
     } else {
 
-      this.moderatorService.edit_dish(this.dishWrapperDto).subscribe((response: any) => {
-        console.log(response)
+      this.moderatorService.editDish(this.dishWrapperDto).subscribe(() => {
         this.router.navigate(['moderator/cocktails'])
       });
     }
@@ -129,9 +110,8 @@ export class AddEditDishComponent implements OnInit {
 
   getDish(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.moderatorService.get_dish(id, +this.authService.getUserId())
-      .subscribe((response: any) => {
-        console.log(response)
+    this.moderatorService.getDish(id, +this.authService.getUserId())
+      .subscribe((response) => {
         this.dish.id = response.dish.id
         this.dish.title = response.dish.title
         this.dish.imageId = response.dish.imageId
@@ -152,7 +132,6 @@ export class AddEditDishComponent implements OnInit {
       this.dish.imageId = response.public_id;
       console.log(this.dish.imageId)
       this.img = this.uploadService.initImage(this.dish.imageId);
-      //this.onAddClick();
     });
   }
 }
