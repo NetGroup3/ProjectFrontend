@@ -6,7 +6,7 @@
 
   <div class="scrollable">
 
-  <div>
+  <div class="profile">
     <div class="picture">
       <advanced-image [cldImg]="user.imageId | getPicture"></advanced-image>
     </div>
@@ -14,8 +14,8 @@
       <div class="personal-information">
         <p>{{user.firstName}}</p>
         <p>{{user.lastName}}</p>
-      </div>
-      <button (click)="addFriend(user)" class="but-invite">Add friend</button>
+      </div >
+      <button *ngIf="user.checkUser" (click)="addFriend(user)" class="but-invite">Add friend</button>
     </div>
   </div>
   </div>
