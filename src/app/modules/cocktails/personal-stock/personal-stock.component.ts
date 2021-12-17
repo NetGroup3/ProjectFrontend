@@ -21,7 +21,7 @@ export class PersonalStockComponent implements OnInit {
   public showRecommendDish: boolean = false;
   public subscription!: Subscription;
 
-  private limit: number = 20;
+  private limit: number = 11;
   private page: number = 0;
   private pages: number = 0;
   private searchText: string = "";
@@ -177,6 +177,7 @@ export class PersonalStockComponent implements OnInit {
   onWindowScroll() {
     let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
     if(pos == document.documentElement.scrollHeight )   {
+      console.log("load more")
       this.onLoadMore();
     }
   }

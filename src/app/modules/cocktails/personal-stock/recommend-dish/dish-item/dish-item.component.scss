@@ -1,8 +1,8 @@
 .dish-card {
-  width: 280px;
-  height: 300px;
+  width: 300px;
+  height: 450px;
   float: left;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .friend-image {
@@ -11,4 +11,21 @@
   height: 100%;
   display: inline-block;
   text-align: center;
+}
+.like{
+  transition: all .08s ease-in-out;
+  font-size: 20px;
+}
+.like:active{
+  transform: scale(1.22);
+  color: lime;
+}
+.like-active{
+  color: #9921E8;
+}
+.ingredient {
+  transition: all .2s ease-in-out;
+}
+.ingredient:hover {
+  transform: scale(1.02);
 }

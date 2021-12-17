@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {Dish} from "../../../core/models/dish";
+import {Component, OnInit} from '@angular/core';
 import {StockService} from "../../../core/services/stock.service";
+import {DishFormat} from "../../../core/models/dishFormat";
 
 @Component({
   selector: 'app-recommend-dish',
@@ -9,7 +9,7 @@ import {StockService} from "../../../core/services/stock.service";
 })
 export class RecommendDishComponent implements OnInit {
 
-  dishes: Dish [] = [];
+  dishes: DishFormat [] = [];
 
   constructor(
     private stockService: StockService,
@@ -20,7 +20,7 @@ export class RecommendDishComponent implements OnInit {
   }
 
   getRecommendDishes() {
-    this.stockService.getRecommendDishes(5,0).subscribe(( dishes: Dish [])=>{
+    this.stockService.getRecommendDishes(5,0).subscribe(( dishes: DishFormat [])=>{
       this.dishes=dishes;
     });
   }

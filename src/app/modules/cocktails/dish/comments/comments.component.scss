@@ -22,3 +22,6 @@
   height: 90%;
   width: 60%;
 }
+.scrollable::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}

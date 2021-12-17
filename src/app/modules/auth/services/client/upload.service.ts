@@ -40,4 +40,11 @@ export class UploadService {
       .roundCorners(byRadius(20));
   }
 
+  initImageWithSizeAndRadius(imageId: string, width: number, height: number, radius: number): CloudinaryImage {
+    const cld = new Cloudinary({cloud: {cloudName: this.cloud_name}});
+    return cld.image(imageId)
+      .resize(thumbnail().width(width).height(height))
+      .roundCorners(byRadius(radius));
+  }
+
 }

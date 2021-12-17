@@ -1,11 +1,8 @@
 <app-user-sceleton></app-user-sceleton>
-
 <div class="insert-area">
-  <p class="ia-title">Stock</p>
-
-  <div class="scrollable">
-    <header>
-      <input type="text" placeholder="search" #search (keyup)="upSearch(search.value)" >
+    <header >
+      <p class="ia-title">Stock</p>
+      <input type="text" placeholder="search" #search (keyup)="upSearch(search.value)">
       <div>
         <app-button
           color = "{{showRecommendDish? '#495464' : '#9921E8' }}"
@@ -21,8 +18,14 @@
         </app-button>
       </div>
     </header>
-    <app-recommend-dish   *ngIf="showRecommendDish">
-
+  <div class="scrollable search-results"
+       infiniteScroll
+       [infiniteScrollDistance]="2"
+       [infiniteScrollThrottle]="50"
+       [scrollWindow]="false"
+       (scrolled)="onLoadMore()">
+    <app-recommend-dish
+      *ngIf="showRecommendDish">
     </app-recommend-dish>
     <app-add-stock
       (onAddStock)="addStock($event)"
@@ -43,5 +46,5 @@
     >
     </app-stock-item>
     <nz-spin *ngIf="isLoading" nzSimple [nzSize]="'large'"></nz-spin>
-</div>
+  </div>
 </div>
