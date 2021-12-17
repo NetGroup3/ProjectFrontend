@@ -170,4 +170,12 @@ export class DishComponent implements OnInit {
       })
     }
   }
+
+  favouriteToggle (favourite : boolean, dish : number) : boolean {
+    if (favourite) return this.moderatorService.removeFavourite(dish).subscribe().closed
+    return !this.moderatorService.addFavourite({
+      user: Number(this.authService.getUserId()),
+      dish: dish
+    }).subscribe().closed
+  }
 }
