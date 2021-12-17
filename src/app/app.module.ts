@@ -92,6 +92,8 @@ import {MatButtonModule} from "@angular/material/button";
 import { UserCocktailsComponent } from './modules/user/pages/user-cocktails/user-cocktails.component';
 import { RecommendDishComponent } from './modules/cocktails/personal-stock/recommend-dish/recommend-dish.component';
 import { DishItemComponent } from './modules/cocktails/personal-stock/recommend-dish/dish-item/dish-item.component';
+import { FavouriteComponent } from './modules/cocktails/favourite/favourite.component';
+import {MatGridListModule} from "@angular/material/grid-list";
 registerLocaleData(en);
 
 @NgModule({
@@ -142,6 +144,7 @@ registerLocaleData(en);
     UserCocktailsComponent,
     RecommendDishComponent,
     DishItemComponent,
+    FavouriteComponent,
   ],
   imports: [
     BrowserModule,
@@ -185,6 +188,7 @@ registerLocaleData(en);
     NzPaginationModule,
     MatCardModule,
     MatButtonModule,
+    MatGridListModule,
   ],
 
   providers: [

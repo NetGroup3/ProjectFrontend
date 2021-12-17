@@ -6,6 +6,7 @@ import {Cloudinary, CloudinaryImage} from "@cloudinary/url-gen";
 import {thumbnail} from "@cloudinary/url-gen/actions/resize";
 import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
 import {AuthService} from "../../auth/services/client/auth.service";
+import {DishFormat} from "../../core/models/dishFormat";
 
 @Component({
   selector: 'app-dish',
@@ -18,7 +19,7 @@ export class DishComponent implements OnInit {
   listOfSelectedValue = []
   limit: number = 10
   page: number = 0
-  Dishes: Dish[] = []
+  Dishes: DishFormat[] = [];
   key: string = ""
   category: string = ""
   desc: boolean = false
@@ -143,5 +144,13 @@ export class DishComponent implements OnInit {
         this.Dishes = response
       })
     }
+  }
+
+  favouriteToggle (favourite : boolean, dish : number) : boolean {
+    if (favourite) return this.moderatorService.removeFavourite(dish).subscribe().closed
+    return !this.moderatorService.addFavourite({
+      user: Number(this.authService.getUserId()),
+      dish: dish
+    }).subscribe().closed
   }
 }
