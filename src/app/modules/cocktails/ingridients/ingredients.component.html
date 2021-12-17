@@ -5,8 +5,8 @@
     <div class="wrapper">
       <input (keyup) ='search("")' class="search" type="text" placeholder="Search by name" [(ngModel)]="key">
       <input (keyup)='search("")' class="search" type="text" placeholder="Search by category" [(ngModel)]="category">
-      <input type="radio" name="select" id="option-2" [checked]="title" (click)="search('title')">
-      <input type="radio" name="select" id="option-3" [checked]="Category" (click)="search('category')">
+      <input type="radio" name="select" id="option-2" (click)="search('title')">
+      <input type="radio" name="select" id="option-3" (click)="search('category')">
       <label for="option-2" class="option option-2">
         <div class="dot"></div>
         <span>Title</span>
@@ -24,7 +24,7 @@
     </a>
   </div>
   <!--  [ngClass]="{'fixed-overlay': toggle, 'fixed': !toggle}-->
-  <div class="ingridient" *ngFor="let ingridient of Ingridients">
+  <div class="ingridient" *ngFor="let ingridient of ingredients">
     <div class="buttons">
       <i routerLink="/moderator/ingredients/{{ingridient.id}}" class="edit" nz-icon nzType="edit" nzTheme="outline"> </i>
       <i (click)="delete(ingridient)" nz-icon nzType="delete" id="delete" nzTheme="outline"></i>

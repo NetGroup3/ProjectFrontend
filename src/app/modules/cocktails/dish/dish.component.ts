@@ -13,23 +13,22 @@ import {AuthService} from "../../auth/services/client/auth.service";
   styleUrls: ['./dish.component.scss']
 })
 export class DishComponent implements OnInit {
-  listOfOption: Array<{ value: string; label: string; id: number; }> = [];
-  ingredients: Ingredient[] = [];
-  list: string [] = []
-  value: number [] = [];
-  listOfSelectedValue = [];
-  // defaultOption = [...this.listOfSelectedValue];
-
-  selectedValue = 'Default';
-  limit: number = 10;
-  page: number = 0;
-  Dishes: Dish[] = [];
+  listOfOption: Array<{ value: string; label: string; id: number; }> = []
+  ingredients: Ingredient[] = []
+  listOfSelectedValue = []
+  limit: number = 10
+  page: number = 0
+  Dishes: Dish[] = []
   key: string = ""
   category: string = ""
-  sortedBy: string = ""
   desc: boolean = false
+  toggle: boolean = true
+  editDelete: boolean = false
+  like: boolean = true
+  favourite: boolean = true
+  liked: boolean = false
 
-  role: string | null = localStorage.getItem("USER_ROLE");
+  role: string | null = localStorage.getItem("USER_ROLE")
 
   delDish: Dish = {
     id: 0,
@@ -46,41 +45,25 @@ export class DishComponent implements OnInit {
               private authService: AuthService) {
   }
 
-  toggle: boolean = true;
-  id: boolean = false;
-  title: boolean = false;
-  Category: boolean = false;
-  edit_delete: boolean = false;
-  like: boolean = true;
-  favourite: boolean = true;
-  liked: boolean = false;
-
-
   ngOnInit(): void {
     if (this.authService.getUserRole() == "MODERATOR") {
-      this.edit_delete = false
+      this.editDelete = false
     } else if (this.authService.getUserRole() == "USER") {
-      this.edit_delete = true
+      this.editDelete = true
       this.like = false
       this.favourite = false
     } else {
-      this.edit_delete = true
+      this.editDelete = true
       this.like = false
       this.favourite = true
     }
-    this.search("")
+    this.search(this.desc)
     this.getIngredients();
   }
 
-  isNotSelected(value: any): boolean {
-    console.log(value)
-    return this.listOfOption.indexOf(value) === -1;
-  }
-
-  getDishes(limit: number, page: number, desc: boolean, key: string, category: string, sortedBy: string, userId: number): void {
-    this.moderatorService.get_dishes(limit, page, desc, key, category, sortedBy, userId)
-      .subscribe((response: any) => {
-          console.log(response)
+  getDishes(limit: number, page: number, desc: boolean, key: string, category: string): void {
+    this.moderatorService.getDishes(limit, page, desc, key, category)
+      .subscribe((response) => {
           this.Dishes = response
           if (this.Dishes.length === 0) {
             this.page = -1
@@ -92,9 +75,8 @@ export class DishComponent implements OnInit {
   }
 
   getIngredients() {
-    this.moderatorService.get_ingridients(100, 0, "", "", "")
-      .subscribe((response: any) => {
-        console.log(response)
+    this.moderatorService.getIngredients(50, 0, "", "", "")
+      .subscribe((response) => {
         this.ingredients = response
         this.listOfOption = this.ingredients.map(item => ({
           value: item.title,
@@ -123,17 +105,12 @@ export class DishComponent implements OnInit {
 
   ok() {
     this.toggle = !this.toggle;
-    console.log(this.delDish)
-    this.moderatorService.delete_dish(this.delDish.id).subscribe((response: any) => {
-      console.log(response)
+    this.moderatorService.deleteDish(this.delDish.id).subscribe(() => {
       this.ngOnInit()
     });
   }
 
-  initImage(imageId
-              :
-              string
-  ):
+  initImage(imageId: string):
     CloudinaryImage {
     const cld = new Cloudinary({cloud: {cloudName: 'djcak19nu'}});
     return cld.image(imageId)
@@ -147,24 +124,22 @@ export class DishComponent implements OnInit {
 
   }
 
-  search(sortedBy: string) {
-    this.getDishes(this.limit, this.page, this.desc, this.key, this.category, sortedBy, +this.authService.getUserId());
+  search(desc: boolean) {
+    this.desc = desc
+    this.getDishes(this.limit, this.page, this.desc, this.key, this.category);
   }
 
   likes(id: number) {
     this.liked = !this.liked;
     if (this.liked) {
-      this.moderatorService.like(id).subscribe((response: any) => {
-        console.log(response)
+      this.moderatorService.like(id).subscribe(() => {
       })
     }
   }
 
   searchIngredients() {
-    console.log(this.listOfSelectedValue)
     if (this.listOfSelectedValue.length != 0) {
-      this.moderatorService.searchByIngredients(this.listOfSelectedValue, this.limit, this.page).subscribe((response: any) => {
-        console.log(response)
+      this.moderatorService.searchByIngredients(this.listOfSelectedValue, this.limit, this.page).subscribe((response) => {
         this.Dishes = response
       })
     }

@@ -25,7 +25,7 @@
       </a>
     </div>
 
-    <div class="kitchenware" *ngFor="let kitchenware of Kitchenware">
+    <div class="kitchenware" *ngFor="let kitchenware of kitchenware">
       <div class="buttons">
         <i routerLink="/moderator/kitchenware/{{kitchenware.id}}" class="edit" nz-icon nzType="edit" nzTheme="outline"> </i>
         <i (click)="delete(kitchenware)" nz-icon nzType="delete" id="delete" nzTheme="outline"></i>

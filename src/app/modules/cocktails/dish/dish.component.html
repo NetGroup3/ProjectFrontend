@@ -5,17 +5,17 @@
 
 
     <div class="wrapper">
-      <input (keyup)='search("")' class="search" type="text" placeholder="Search by name" [(ngModel)]="key">
-      <input (keyup)='search("")' class="search" type="text" placeholder="Search by category" [(ngModel)]="category">
-      <input type="radio" name="select" id="option-2" [checked]="title" (click)="search('title')">
-      <input type="radio" name="select" id="option-3" [checked]="Category" (click)="search('category')">
+      <input (keyup)='search(false)' class="search" type="text" placeholder="Search by name" [(ngModel)]="key">
+      <input (keyup)='search(false)' class="search" type="text" placeholder="Search by category" [(ngModel)]="category">
+      <input type="radio" name="select" id="option-2" (click)="search(false)">
+      <input type="radio" name="select" id="option-3" (click)="search(true)">
       <label for="option-2" class="option option-2">
         <div class="dot"></div>
-        <span>Title</span>
+        <span>ASC</span>
       </label>
       <label for="option-3" class="option option-3">
         <div class="dot"></div>
-        <span>Category</span>
+        <span>DASC</span>
       </label>
       <nz-select nzMode="multiple" nzPlaceHolder="Inserted are removed" [(ngModel)]="listOfSelectedValue">
         <nz-option

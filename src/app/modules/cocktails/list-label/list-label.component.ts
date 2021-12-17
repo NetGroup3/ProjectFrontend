@@ -79,9 +79,6 @@ export class ListLabelComponent implements OnInit {
     this.moderatorService.get_dish(id, +this.authService.getUserId())
       .subscribe((res: any) => callback(res));
   }
-  select(ret: TransferSelectChange): void {
-    console.log('nzSelectChange', ret);
-  }
 
   change(ret: TransferChange): void {
     ret.list.forEach(el => {

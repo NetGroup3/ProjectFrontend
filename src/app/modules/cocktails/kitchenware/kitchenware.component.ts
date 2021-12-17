@@ -8,17 +8,18 @@ import {Kitchenware} from "../../core/models/kitchenware";
   styleUrls: ['./kitchenware.component.scss']
 })
 export class KitchenwareComponent implements OnInit {
-  limit: number = 10;
-  page: number = 0;
-  Kitchenware: Kitchenware[] = [];
-  img: any;
+  limit: number = 10
+  page: number = 0
+  kitchenware: Kitchenware[] = []
+  img: any
   key: string = ""
   category: string = ""
   sortedBy: string = ""
-  id: boolean = false;
-  title: boolean = false;
-  Category: boolean = false;
-  kitchenware: Kitchenware = {
+  id: boolean = false
+  title: boolean = false
+  Category: boolean = false
+  toggle: boolean = true
+  delKitchenware: Kitchenware = {
     id: 0,
     title: "",
     description: "",
@@ -26,19 +27,17 @@ export class KitchenwareComponent implements OnInit {
     imageId: "",
     isActive: false
 }
-  constructor(private moderatorService: ModeratorService) {
-  }
-  toggle: boolean = true;
+  constructor(private moderatorService: ModeratorService) {}
+
   ngOnInit(): void {
     this.search("")
   }
 
   getKitchenware(limit: number, page: number, key: string, category: string, sortedBy: string): void {
-    this.moderatorService.get_Kitchenware(limit, page, key, category, sortedBy)
-      .subscribe((response:any)=>{
-        console.log(response)
-        this.Kitchenware = response
-        if (this.Kitchenware.length === 0) {
+    this.moderatorService.getKitchenware(limit, page, key, category, sortedBy)
+      .subscribe((response)=>{
+        this.kitchenware = response
+        if (this.kitchenware.length === 0) {
           this.page = -1
           this.next()
         }
@@ -57,22 +56,20 @@ export class KitchenwareComponent implements OnInit {
     }
   }
 
-  cancel() {
-    this.toggle = !this.toggle;
-  }
   change() {
     this.toggle = !this.toggle;
   }
 
   ok() {
     this.toggle = !this.toggle;
-    console.log(this.kitchenware)
-    this.moderatorService.delete_kitchenware(this.kitchenware.id).subscribe((response:any)=>{
+    console.log(this.delKitchenware)
+    this.moderatorService.deleteKitchenware(this.delKitchenware.id).subscribe(()=>{
       this.ngOnInit()
     });
   }
+
   delete(kitchenware: Kitchenware) {
-    this.kitchenware = kitchenware;
+    this.delKitchenware = kitchenware;
     this.toggle = !this.toggle;
   }
 

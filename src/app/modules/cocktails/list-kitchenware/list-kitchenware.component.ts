@@ -73,12 +73,8 @@ export class ListKitchenwareComponent implements OnInit {
     this.initDishService.listKitchenware = this.list
   }
   getKitchenware(callback: (res: any) => void): void {
-    this.moderatorService.get_Kitchenware(200, 0, "", "", "")
+    this.moderatorService.getKitchenware(200, 0, "", "", "")
       .subscribe((res: any) => callback(res));
-  }
-
-  select(ret: TransferSelectChange): void {
-    console.log('nzSelectChange', ret);
   }
 
   change(ret: TransferChange): void {
