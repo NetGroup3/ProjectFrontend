@@ -46,7 +46,7 @@ export class ListKitchenwareComponent implements OnInit {
 
   getDish(callback: (res: DishAll) => void): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.moderatorService.getDish(id, +this.authService.getUserId())
+    this.moderatorService.getDish(id)
       .subscribe((res) => callback(res));
   }
 

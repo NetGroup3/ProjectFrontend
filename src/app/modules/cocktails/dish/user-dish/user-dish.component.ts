@@ -67,7 +67,7 @@ export class UserDishComponent implements OnInit {
 
   getDish(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.moderatorService.getDish(id, +this.authService.getUserId())
+    this.moderatorService.getDish(id)
       .subscribe((response) => {
         this.dish.dish = response.dish
         this.dish.ingredients = response.ingredients
