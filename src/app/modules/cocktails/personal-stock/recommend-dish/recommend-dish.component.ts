@@ -12,7 +12,8 @@ export class RecommendDishComponent implements OnInit {
   public dishes: DishFormat [] = [];
   public limit: number = 5;
   public page: number = 0;
-  public pages: number = 2;
+  public pages: number = 0;
+  public isLoading: boolean = false;
   constructor(
     private stockService: StockService,
   ) { }
@@ -22,9 +23,23 @@ export class RecommendDishComponent implements OnInit {
   }
 
   getRecommendDishes() {
+    this.isLoading = true;
     this.stockService.getRecommendDishes(this.limit,this.page).subscribe(( dishes: DishFormat [])=>{
-      this.dishes=dishes;
+      this.dishes = dishes;
+      this.isLoading = false;
     });
   }
 
+  prev() {
+    if(!this.isLoading && this.page > 0) {
+      this.page--;
+      this.getRecommendDishes();
+    }
+  }
+
+  next() {
+    if(!this.isLoading && this.page < this.pages)
+    this.page++;
+    this.getRecommendDishes();
+  }
 }

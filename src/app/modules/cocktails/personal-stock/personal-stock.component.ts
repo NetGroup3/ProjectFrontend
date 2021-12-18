@@ -21,7 +21,7 @@ export class PersonalStockComponent implements OnInit {
   public showRecommendDish: boolean = false;
   public subscription!: Subscription;
 
-  private limit: number = 11;
+  private limit: number = 10;
   private page: number = 0;
   private pages: number = 0;
   private searchText: string = "";
@@ -32,7 +32,6 @@ export class PersonalStockComponent implements OnInit {
 
   public selectedIngredientId: number = 0;
   public amount: number = 1;
-
 
   constructor(
     private stockService: StockService,
@@ -91,6 +90,10 @@ export class PersonalStockComponent implements OnInit {
         this.storeStockService.stocks = stocks;
         this.isLoading = false;
         this.page++;
+        },
+      () => {
+        this.notification.error("Failed to download stocks", "");
+        this.isLoading = false;
       });
   }
 

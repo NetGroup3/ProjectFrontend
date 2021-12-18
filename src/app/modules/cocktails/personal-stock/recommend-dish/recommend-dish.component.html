@@ -1,11 +1,25 @@
-    <app-dish-item
-        *ngFor="let dish of dishes"
-        [dish]="dish"
-      >
-    </app-dish-item>
-    <nz-pagination
-      [nzPageSize]="limit"
-      [nzPageIndex]="page"
-      [nzTotal]="5"
-    >
-    </nz-pagination>
+<app-dish-item
+  *ngFor="let dish of dishes"
+  [dish]="dish"
+  >
+</app-dish-item>
+<div class="button">
+  <button
+     class="next"
+     nz-button
+     nzShape="circle"
+     (click)="prev()"
+     [disabled]="page == 0"
+     >
+     <
+  </button>
+  <button
+     class="next"
+     nz-button
+     nzShape="circle"
+     (click)="next()"
+     [disabled]="page == pages"
+     >
+     >
+  </button>
+</div>

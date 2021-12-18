@@ -18,14 +18,14 @@
         </app-button>
       </div>
     </header>
-    <app-recommend-dish
-      *ngIf="showRecommendDish">
-    </app-recommend-dish>
     <app-add-stock
       (onAddStock)="addStock($event)"
       [ingredient]="ingredient"
     >
     </app-add-stock>
+  <app-recommend-dish
+    *ngIf="showRecommendDish">
+  </app-recommend-dish>
       <div class="header_table" *ngIf="!showRecommendDish">
         <button class="title" nzTooltipTitle="Sort stock by title" nz-tooltip nzTooltipPlacement="top" nz-button (click)="sortedByTitle()">Title</button>
         <button class="category" nzTooltipTitle="Sort stock by category" nz-tooltip nzTooltipPlacement="top" nz-button (click)="sortedByCategory()">Category</button>

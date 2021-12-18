@@ -8,3 +8,18 @@ app-dish-item{
 app-button{
   height: auto;
 }
+.button {
+  margin-left: 44%;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+.next {
+  width: 50px;
+  float: left;
+  margin-left: 10px;
+}
+
+.buttons i:hover {
+  cursor: pointer;
+}
