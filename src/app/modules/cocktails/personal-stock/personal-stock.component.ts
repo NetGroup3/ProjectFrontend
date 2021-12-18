@@ -21,7 +21,7 @@ export class PersonalStockComponent implements OnInit {
   public showRecommendDish: boolean = false;
   public subscription!: Subscription;
 
-  private limit: number = 20;
+  private limit: number = 10;
   private page: number = 0;
   private pages: number = 0;
   private searchText: string = "";
@@ -33,7 +33,6 @@ export class PersonalStockComponent implements OnInit {
   public selectedIngredientId: number = 0;
   public amount: number = 1;
 
-
   constructor(
     private stockService: StockService,
     private uiService: UiService,
@@ -43,9 +42,6 @@ export class PersonalStockComponent implements OnInit {
     this.subscription = this.uiService
       .onShowAddStock()
       .subscribe(value => (this.showAddStock = value));
-/*    this.subscription = this.uiService
-      .onRecommendDish()
-      .subscribe(value => {this.showRecommendDish = value})*/
   }
 
   ngOnInit(): void {
@@ -94,6 +90,10 @@ export class PersonalStockComponent implements OnInit {
         this.storeStockService.stocks = stocks;
         this.isLoading = false;
         this.page++;
+        },
+      () => {
+        this.notification.error("Failed to download stocks", "");
+        this.isLoading = false;
       });
   }
 
@@ -176,18 +176,13 @@ export class PersonalStockComponent implements OnInit {
     this.showRecommendDish=!this.showRecommendDish;
   }
 
-
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
     let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
     if(pos == document.documentElement.scrollHeight )   {
+      console.log("load more")
       this.onLoadMore();
     }
   }
-/*
-  onScroll() {
-    console.log("scrolled to bottom");
-    //onLoadList();
-  }
-*/
+
 }

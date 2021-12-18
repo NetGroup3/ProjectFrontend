@@ -21,3 +21,6 @@
 .commentDiv {
   height: 90%;
 }
+.scrollable::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}

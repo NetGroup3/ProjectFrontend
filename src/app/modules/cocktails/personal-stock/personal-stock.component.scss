@@ -35,7 +35,7 @@ input {
 .demo-loadmore-list {
   min-height: 350px;
 }
-.loadmore {
+.download-more {
   text-align: center;
   margin-top: 12px;
   height: 32px;
@@ -71,4 +71,12 @@ h1{
 }
 app-button{
   margin: 4px;
+}
+
+.app-stock-item{
+  margin-bottom: 80px;
+}
+
+.scrollable {
+  height: 87%;
 }

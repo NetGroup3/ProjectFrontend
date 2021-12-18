@@ -39,7 +39,7 @@ $NetProjectFrontend-theme: mat.define-light-theme((
   height: 82%;
   padding: 4% 1% 1%;
   top: 10%;
-  right: 0%;
+  right: 0;
   background-color: #ece0fa;
 }
 
@@ -58,9 +58,9 @@ $NetProjectFrontend-theme: mat.define-light-theme((
   */
 }
 
-.scrollable::-webkit-scrollbar {
-  display: none;  /* Safari and Chrome */
-}
+/*.scrollable::-webkit-scrollbar {
+  display: none;  !* Safari and Chrome *!
+}*/
 
 .ia-title {
   font-family: Montserrat;
@@ -123,7 +123,7 @@ button:hover{
 .ant-btn-primary:hover{
   color: #fff;
   cursor: pointer;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 24px rgba(153, 33, 232, 0.5);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 0 24px rgba(153, 33, 232, 0.5);
 }
 
 html, body { height: 100%; }

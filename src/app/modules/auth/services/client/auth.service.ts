@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {UserLoginModel} from "../../models/user-login.model";
 
 @Injectable({
   providedIn: 'root'
@@ -47,12 +48,27 @@ export class AuthService {
     localStorage.setItem(this.USER_IMAGE_ID, this.imageId);
   }
 
+  public setUser(user: UserLoginModel): void {
+    this.id = user.id;
+    this.firstname = user.firstname;
+    this.lastname = user.lastname;
+    this.role = user.role;
+    this.imageId = user.imageId;
+    this.token = user.token;
+    localStorage.setItem(this.TOKEN_KEY, this.token);
+    localStorage.setItem(this.USER_ID, this.id);
+    localStorage.setItem(this.USER_FIRSTNAME, this.firstname);
+    localStorage.setItem(this.USER_LASTNAME, this.lastname);
+    localStorage.setItem(this.USER_ROLE, this.role);
+    localStorage.setItem(this.USER_IMAGE_ID, this.imageId);
+  }
+
   public setUserData(id: string, firstname: string, lastname: string, role: string, imageId: string): void{
     this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
     this.role = role;
-    this.imageId = imageId
+    this.imageId = imageId;
     localStorage.setItem(this.USER_ID, this.id);
     localStorage.setItem(this.USER_FIRSTNAME, this.firstname);
     localStorage.setItem(this.USER_LASTNAME, this.lastname);

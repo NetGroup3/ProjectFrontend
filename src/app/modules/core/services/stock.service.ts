@@ -6,6 +6,7 @@ import {Stock} from "../models/stock";
 import {StockAddDto} from "../models/StockAddDto";
 import {Ingredient} from "../models/ingredient";
 import {Dish} from "../models/dish";
+import {DishFormat} from "../models/dishFormat";
 
 @Injectable({
   providedIn: 'root'
@@ -62,8 +63,8 @@ export class StockService {
     });
   }
 
-  getRecommendDishes(limit: number, page: number): Observable<Dish[]>{
-    return this.http.get<Dish[]>(appLinks.recommendDish, {
+  getRecommendDishes(limit: number, page: number): Observable<DishFormat[]>{
+    return this.http.get<DishFormat[]>(appLinks.recommendDish, {
       params: new HttpParams().set('limit', limit).set('page', page)
     });
   }
