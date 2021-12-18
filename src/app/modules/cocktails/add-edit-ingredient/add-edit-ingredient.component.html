@@ -7,7 +7,7 @@
 
   <div class="scrollable" *ngIf="ingridient">
     <div class="add_edit">
-      <form ngNativeValidate (submit)="onAddClick()">
+      <form ngNativeValidate >
         <div class="description_picture">
           <div class="picture">
             <advanced-image [cldImg]="img"></advanced-image>
@@ -28,7 +28,7 @@
           <p>Description</p>
           <textarea required [(ngModel)]="ingridient.description"></textarea>
         </div>
-        <button class="ok">Ok!</button>
+        <button (submit)="onAddClick()" class="ok">Ok!</button>
       </form>
     </div>
   </div>
