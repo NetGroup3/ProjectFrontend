@@ -5,6 +5,7 @@ import {appLinks} from "../../../../app.links";
 import {Dish, Ingredient, Kitchenware, Label, Comment} from "./DataModel";
 import {ModeratorService} from "../../../core/services/moderator.service";
 import {AuthService} from "../../../auth/services/client/auth.service";
+import {DishAll} from "../../../core/models/dishAll";
 
 
 @Component({
@@ -21,17 +22,22 @@ export class UserDishComponent implements OnInit {
   ) {
   }
 
-  dish: Dish = {
-    active: false,
-    category: "",
-    description: "",
-    favourite: false,
-    id: 0,
-    imageId: "",
-    likes: 0,
-    receipt: "",
-    title: ""
-  };
+  dish: DishAll = {
+    dish: {
+      id: 0,
+      title: "",
+      description: "",
+      category: "",
+      receipt: "",
+      imageId: "",
+      active: false,
+      likes: 0
+    },
+    ingredients: [],
+    kitchenware: [],
+    labels: []
+
+  }
 
   dishId: number = 0;
   userId: number = 0;
@@ -62,9 +68,10 @@ export class UserDishComponent implements OnInit {
   getDish(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.moderatorService.getDish(id, +this.authService.getUserId())
-      .subscribe((response: any) => {
-        console.log(response)
-        this.dish = response.dish
+      .subscribe((response) => {
+        this.dish.dish = response.dish
+        this.dish.ingredients = response.ingredients
+        this.dish.kitchenware = response.kitchenware
       });
   }
 
