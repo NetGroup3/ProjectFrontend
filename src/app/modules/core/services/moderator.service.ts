@@ -87,8 +87,8 @@ export class ModeratorService {
       params: new HttpParams().set('id', id)
     });
   }
-  public getDish(id: number, userId: number): Observable<DishAll>{
-    return this.http.get<DishAll>(appLinks.dish, { params: new HttpParams().set('id', id).set('userId', userId)})
+  public getDish(id: number): Observable<DishAll>{
+    return this.http.get<DishAll>(appLinks.dish, { params: new HttpParams().set('id', id)})
   }
 
   public addDish (dishWrapperDto: DishWrapperDto): Observable<String>{

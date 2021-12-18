@@ -76,7 +76,6 @@ export class AddEditIngredientComponent implements OnInit {
       this.ingridient.imageId = response.public_id;
       console.log(this.ingridient.imageId)
       this.img = this.uploadService.initImage(this.ingridient.imageId);
-      //this.onAddClick();
     });
   }
 

@@ -80,7 +80,7 @@ export class ListComponent implements OnInit {
 
   getDish(callback: (res: any) => void): void {
 
-    this.moderatorService.getDish(this.id, +this.authService.getUserId())
+    this.moderatorService.getDish(this.id)
       .subscribe((res: any) => callback(res));
   }
 
