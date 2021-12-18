@@ -23,7 +23,7 @@ export class AddEditIngredientComponent implements OnInit {
     description: "",
     category: "",
     imageId: "",
-    isActive: false,
+    active: false,
     measurement: ""
   };
 

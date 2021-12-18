@@ -27,7 +27,7 @@ export class IngredientsComponent implements OnInit {
     description: "",
     category: "",
     imageId: "",
-    isActive: false,
+    active: false,
     measurement: ""
   }
 

@@ -140,7 +140,10 @@ export class PersonalStockComponent implements OnInit {
     this.stockService.delete(stock.ingredient.id).subscribe(() => {
       this.storeStockService.stocks = this.storeStockService.stocks.filter(stock=>stock.id!==id);
       this.notification.success(stock.ingredient.title + " successfully removed from your stock", "")
-      this.ingredient = stock.ingredient;
+
+      if(stock.ingredient.active) {
+        this.ingredient = stock.ingredient;
+      }
       },
       () => {
         this.notification.error("Failed to delete " + stock.ingredient.title, "");
@@ -180,7 +183,6 @@ export class PersonalStockComponent implements OnInit {
   onWindowScroll() {
     let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
     if(pos == document.documentElement.scrollHeight )   {
-      console.log("load more")
       this.onLoadMore();
     }
   }

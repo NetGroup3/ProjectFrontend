@@ -21,7 +21,8 @@ export class RecommendDishComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getRecommendDishes()
+    this.getRecommendDishes();
+    this.getPages();
   }
 
   getRecommendDishes() {
@@ -40,9 +41,10 @@ export class RecommendDishComponent implements OnInit {
   }
 
   next() {
-    if(!this.isLoading && this.page < this.pages)
-    this.page++;
-    this.getRecommendDishes();
+    if(!this.isLoading && this.page < this.pages){
+      this.page++;
+      this.getRecommendDishes();
+    }
   }
 
   getPages(): void {

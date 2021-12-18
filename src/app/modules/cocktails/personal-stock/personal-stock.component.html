@@ -3,6 +3,11 @@
     <header>
       <p class="ia-title">Stock</p>
       <input type="text" placeholder="search" #search (keyup)="upSearch(search.value)">
+      <app-add-stock
+        (onAddStock)="addStock($event)"
+        [ingredient]="ingredient"
+      >
+      </app-add-stock>
       <div>
         <app-button
           color = "{{showRecommendDish? '#495464' : '#9921E8' }}"
@@ -18,11 +23,6 @@
         </app-button>
       </div>
     </header>
-    <app-add-stock
-      (onAddStock)="addStock($event)"
-      [ingredient]="ingredient"
-    >
-    </app-add-stock>
   <app-recommend-dish
     *ngIf="showRecommendDish">
   </app-recommend-dish>

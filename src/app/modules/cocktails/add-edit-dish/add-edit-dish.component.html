@@ -11,7 +11,7 @@
         <input type="file" (change)="onFileSelect($event)" class="dn" #uploadFile>
         <button class="upload" (click)="uploadFile.click()">Upload photo</button>
       </div>
-      <form ngNativeValidate (submit)="onAddClick()">
+      <form ngNativeValidate>
       <div class="title">
         <div class="title_description">
           <p>Title</p>
@@ -39,7 +39,7 @@
           </div>
         </div>
       </div>
-      <button class="ok">Ok!</button>
+      <button (click)="onAddClick()" class="ok">Ok!</button>
       </form>
     </div>
   </div>
