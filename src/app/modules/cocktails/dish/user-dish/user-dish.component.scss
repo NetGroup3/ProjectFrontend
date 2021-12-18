@@ -1,5 +1,5 @@
 .example-card {
-  max-width: 400px;
+  height: 100%;
   float: right;
 }
 
@@ -8,4 +8,23 @@
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+.dish{
+  display: flex;
+}
+app-comments{
+  width: 50%;
+  margin-right: 5%;
+}
+.ingredients-kitchenware{
+  display: flex;
+}
+.ingredients{
+  width: 40%;
+}
+mat-card-content{
+  margin: 0;
+}
+mat-card-actions{
+  padding: 0;
 }
