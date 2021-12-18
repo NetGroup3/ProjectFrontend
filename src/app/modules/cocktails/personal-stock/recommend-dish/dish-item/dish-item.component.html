@@ -14,7 +14,7 @@
   </mat-card-header>
   <mat-card-content routerLink="/user/dish/{{dish.id}}">
     <advanced-image mat-card-image class="friend-image" [cldImg]="img"></advanced-image>
-    <p>{{dish.description}}</p>
-    <p>{{dish.receipt}}</p>
+<!--    <p>{{dish.description}}</p>-->
+    <p>{{dish.receipt | trimToSize}}</p>
   </mat-card-content>
 </mat-card>

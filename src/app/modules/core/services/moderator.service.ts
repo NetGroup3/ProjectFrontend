@@ -142,4 +142,9 @@ export class ModeratorService {
     })
   }
 
+  getPages(limit: number): Observable<number> {
+    return this.http.get<number>(appLinks.dishPages, {
+      params: new HttpParams().set('limit', limit)
+    });
+  }
 }

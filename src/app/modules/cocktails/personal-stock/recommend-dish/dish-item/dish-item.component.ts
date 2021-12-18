@@ -25,7 +25,7 @@ export class DishItemComponent implements OnInit {
   }
 
   initImage(): CloudinaryImage {
-    return this.uploadService.initImageWithSizeAndRadius(this.dish.imageId, 300, 300, 5);
+    return this.uploadService.initImageWithSizeAndRadius(this.dish.imageId, 300, 350, 0);
   }
 
   favouriteToggle (favourite : boolean, dish : number) : boolean {
