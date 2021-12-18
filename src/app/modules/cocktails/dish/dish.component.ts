@@ -49,13 +49,14 @@ export class DishComponent implements OnInit {
   ngOnInit(): void {
     if (this.authService.getUserRole() == "MODERATOR") {
       this.editDelete = false
+      this.liked = true
     } else if (this.authService.getUserRole() == "USER") {
       this.editDelete = true
       this.like = false
       this.favourite = false
     } else {
       this.editDelete = true
-      this.like = false
+      this.like = true
       this.favourite = true
     }
     this.search(this.desc)

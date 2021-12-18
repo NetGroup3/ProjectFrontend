@@ -11,6 +11,7 @@ import {DishWrapperDto} from "../models/dishWrapperDto";
 import {DishAll} from "../models/dishAll";
 import {Label} from "../models/label";
 import {DishFavourite} from "../models/dishFavourite";
+import {DishFormat} from "../models/dishFormat";
 
 @Injectable({
   providedIn: 'root'
@@ -98,14 +99,14 @@ export class ModeratorService {
     return this.http.put<String>(appLinks.addDish, dishWrapperDto);
   }
 
-  public getDishes(limit: number, page: number, desc: boolean, key: string, category: string) : Observable<Dish[]>{
+  public getDishes(limit: number, page: number, desc: boolean, key: string, category: string) : Observable<DishFormat[]>{
     const params = new HttpParams()
       .set('limit', limit.toString())
       .set('page', page.toString())
       .set('desc', desc)
       .set('title', key)
       .set('category', category);
-    return this.http.get<Dish[]>(appLinks.dishes, {params});
+    return this.http.get<DishFormat[]>(appLinks.dishes, {params});
   }
 
   public deleteDish(id: number) {
@@ -119,12 +120,12 @@ export class ModeratorService {
     return this.http.post(appLinks.dishLike, dish);
   }
 
-  public searchByIngredients (values: number[], limit: number, page: number): Observable<Dish[]>{
+  public searchByIngredients (values: number[], limit: number, page: number): Observable<DishFormat[]>{
     const params = new HttpParams()
       .set('values', values.toString())
       .set('limit', limit.toString())
       .set('page', page.toString());
-    return this.http.get<Dish[]>(appLinks.searchByIngredients, {params});
+    return this.http.get<DishFormat[]>(appLinks.searchByIngredients, {params});
   }
 
   public getFavourite() {
