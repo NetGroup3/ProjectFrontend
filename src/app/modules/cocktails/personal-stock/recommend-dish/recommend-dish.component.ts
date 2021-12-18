@@ -9,8 +9,10 @@ import {DishFormat} from "../../../core/models/dishFormat";
 })
 export class RecommendDishComponent implements OnInit {
 
-  dishes: DishFormat [] = [];
-
+  public dishes: DishFormat [] = [];
+  public limit: number = 5;
+  public page: number = 0;
+  public pages: number = 2;
   constructor(
     private stockService: StockService,
   ) { }
@@ -20,7 +22,7 @@ export class RecommendDishComponent implements OnInit {
   }
 
   getRecommendDishes() {
-    this.stockService.getRecommendDishes(5,0).subscribe(( dishes: DishFormat [])=>{
+    this.stockService.getRecommendDishes(this.limit,this.page).subscribe(( dishes: DishFormat [])=>{
       this.dishes=dishes;
     });
   }

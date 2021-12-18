@@ -1,6 +1,6 @@
 <app-user-sceleton></app-user-sceleton>
 <div class="insert-area">
-    <header >
+    <header>
       <p class="ia-title">Stock</p>
       <input type="text" placeholder="search" #search (keyup)="upSearch(search.value)">
       <div>
@@ -18,12 +18,6 @@
         </app-button>
       </div>
     </header>
-  <div class="scrollable search-results"
-       infiniteScroll
-       [infiniteScrollDistance]="2"
-       [infiniteScrollThrottle]="50"
-       [scrollWindow]="false"
-       (scrolled)="onLoadMore()">
     <app-recommend-dish
       *ngIf="showRecommendDish">
     </app-recommend-dish>
@@ -32,12 +26,20 @@
       [ingredient]="ingredient"
     >
     </app-add-stock>
-      <div class="header_table">
+      <div class="header_table" *ngIf="!showRecommendDish">
         <button class="title" nzTooltipTitle="Sort stock by title" nz-tooltip nzTooltipPlacement="top" nz-button (click)="sortedByTitle()">Title</button>
         <button class="category" nzTooltipTitle="Sort stock by category" nz-tooltip nzTooltipPlacement="top" nz-button (click)="sortedByCategory()">Category</button>
         <button class="description" nzTooltipTitle="Sort stock by description" nz-tooltip nzTooltipPlacement="top" nz-button (click)="sortedByDescription()">Description</button>
         <button class="amount" nzTooltipTitle="Sort stock by amount" nz-tooltip nzTooltipPlacement="top" nz-button (click)="sortedByAmount()">Amount</button>
       </div>
+  <div
+       *ngIf="!showRecommendDish"
+       class="scrollable search-results"
+       infiniteScroll
+       [infiniteScrollDistance]="2"
+       [infiniteScrollThrottle]="50"
+       [scrollWindow]="false"
+       (scrolled)="onLoadMore()">
     <app-stock-item
       *ngFor="let stock of storeStockService.stocks"
       [stock]="stock"

@@ -1,5 +1,11 @@
-<app-dish-item
-    *ngFor="let dish of dishes"
-    [dish]="dish"
-  ></app-dish-item>
-
+    <app-dish-item
+        *ngFor="let dish of dishes"
+        [dish]="dish"
+      >
+    </app-dish-item>
+    <nz-pagination
+      [nzPageSize]="limit"
+      [nzPageIndex]="page"
+      [nzTotal]="5"
+    >
+    </nz-pagination>
