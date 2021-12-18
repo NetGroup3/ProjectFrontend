@@ -16,26 +16,26 @@ import {compass} from "@cloudinary/url-gen/qualifiers/gravity";
 })
 
 export class ListComponent implements OnInit {
-  id = Number(this.route.snapshot.paramMap.get('id'));
+  id = Number(this.route.snapshot.paramMap.get('id'))
   list: TransferItem[] = []
   changes: any [] = []
-  $asTransferItems = (data: unknown): TransferItem[] => data as TransferItem[];
-  disabled = false;
-  showSearch = false;
-  ingredients: Ingredient [] = [];
+  $asTransferItems = (data: unknown): TransferItem[] => data as TransferItem[]
+  disabled = false
+  showSearch = false
+  ingredients: Ingredient [] = []
   ingredientsDish: Ingredient [] = []
+  dishIngredients: number[] = []
 
   constructor(private moderatorService: ModeratorService,
-              public initDishService: InitDishService,
+              private initDishService: InitDishService,
               private route: ActivatedRoute,
               private authService: AuthService,) {
   }
 
-  dishIngredients: number[] = []
-  ngOnInit(): void {
 
+  ngOnInit(): void {
     if(!isNaN(Number(this.route.snapshot.paramMap.get('id')))) {
-      this.getIngredients((all: any) => {
+      this.getIngredients((all) => {
         this.getDish((res: any) => {
           this.initList(all, res.ingredients)
         })
@@ -43,13 +43,13 @@ export class ListComponent implements OnInit {
       })
     }
     else {
-      this.getIngredients((all: any) => {
+      this.getIngredients((all) => {
         this.initList(all, [])
       })
     }
   }
 
-  initList(array: any[], right: any []){
+  initList(array: Ingredient[], right: Ingredient []){
    array.forEach(el =>{
      this.initDishService.ingredients.push(el.id)
    })
@@ -73,19 +73,15 @@ export class ListComponent implements OnInit {
     this.initDishService.listIngredients = this.list
   }
 
-  getIngredients(callback: (res: any) => void): void {
-    this.moderatorService.get_ingridients(200, 0, "", "", "")
-      .subscribe((res: any) => callback(res));
+  getIngredients(callback: (res: Ingredient[]) => void): void {
+    this.moderatorService.getIngredients(50, 0, "", "", "")
+      .subscribe((res) => callback(res));
   }
 
   getDish(callback: (res: any) => void): void {
 
-    this.moderatorService.get_dish(this.id, +this.authService.getUserId())
+    this.moderatorService.getDish(this.id, +this.authService.getUserId())
       .subscribe((res: any) => callback(res));
-  }
-
-  select(ret: TransferSelectChange): void {
-    console.log('nzSelectChange', ret);
   }
 
 
@@ -93,7 +89,6 @@ export class ListComponent implements OnInit {
     ret.list.forEach(el => {
       this.initDishService.changedIngredients.push(el)
     })
-    console.log('nzChange', ret);
     const listKeys = ret.list.map(l => l.key);
     const hasOwnKey = (e: TransferItem): boolean => e.hasOwnProperty('key');
     this.list =  this.list.map(e => {

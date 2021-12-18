@@ -11,8 +11,6 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class FavouriteComponent  implements OnInit {
   Dishes: DishFormat[] = [];
-  limit: number = 10;
-  page: number = 0;
 
   constructor(
     private moderatorService: ModeratorService,

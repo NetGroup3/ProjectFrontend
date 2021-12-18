@@ -11,13 +11,7 @@
 
 .friend {
   min-height: 100px;
-  //max-height: 300px; // max height of card
   height: 110%;
-  //text-align: center;
-  //
-  //margin-left: 1%;
-  //margin-right: 1%;
-  //margin-bottom: 3%;
   padding: 15px 20px;
   width: 100%;
   background: #FFFFFF;
@@ -97,10 +91,6 @@
   height: 40px;
 }
 
-i {
-  color: #495464;
-}
-
 .fixed-overlay {
   z-index: 100;
   position: fixed;
@@ -126,12 +116,4 @@ i {
   margin-top: 0;
   margin-bottom: 1em;
   margin-left: 40%;
-}
-.title-request-block {
-  margin-left: 87%;
-  font-family: Montserrat;
-  //font-size: 20px;
-}
-.title-request{
-  font-size: 20px;
 }
