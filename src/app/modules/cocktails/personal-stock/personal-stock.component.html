@@ -1,45 +1,83 @@
 <app-user-sceleton></app-user-sceleton>
 <div class="insert-area">
-    <header>
-      <p class="ia-title">Stock</p>
-      <input type="text" placeholder="search" #search (keyup)="upSearch(search.value)">
-      <app-add-stock
-        (onAddStock)="addStock($event)"
-        [ingredient]="ingredient"
+  <header>
+    <p class="ia-title">Stock</p>
+    <input type="text" placeholder="search" #search (keyup)="upSearch(search.value)">
+    <app-add-stock
+      (onAddStock)="addStock($event)"
+      [ingredient]="ingredient"
+    >
+    </app-add-stock>
+    <div>
+      <app-button
+        color = "{{showRecommendDish? '#495464' : '#9921E8' }}"
+        text = "{{showRecommendDish? 'Close recommend dish' : 'Show recommend dish' }}"
+        (btnClick)="toggleRecommendDish()"
       >
-      </app-add-stock>
-      <div>
-        <app-button
-          color = "{{showRecommendDish? '#495464' : '#9921E8' }}"
-          text = "{{showRecommendDish? 'Close recommend dish' : 'Show recommend dish' }}"
-          (btnClick)="toggleRecommendDish()"
-        >
-        </app-button>
-        <app-button
-          color = "{{showAddStock? '#495464' : '#9921E8' }}"
-          text = "{{showAddStock? 'Close Add' : 'Add Stock' }}"
-          (btnClick)="toggleAddStock()"
-        >
-        </app-button>
-      </div>
-    </header>
+      </app-button>
+      <app-button
+        color = "{{showAddStock? '#495464' : '#9921E8' }}"
+        text = "{{showAddStock? 'Close Add' : 'Add Stock' }}"
+        (btnClick)="toggleAddStock()"
+      >
+      </app-button>
+    </div>
+  </header>
   <app-recommend-dish
     *ngIf="showRecommendDish">
   </app-recommend-dish>
-      <div class="header_table" *ngIf="!showRecommendDish">
-        <button class="title" nzTooltipTitle="Sort stock by title" nz-tooltip nzTooltipPlacement="top" nz-button (click)="sortedByTitle()">Title</button>
-        <button class="category" nzTooltipTitle="Sort stock by category" nz-tooltip nzTooltipPlacement="top" nz-button (click)="sortedByCategory()">Category</button>
-        <button class="description" nzTooltipTitle="Sort stock by description" nz-tooltip nzTooltipPlacement="top" nz-button (click)="sortedByDescription()">Description</button>
-        <button class="amount" nzTooltipTitle="Sort stock by amount" nz-tooltip nzTooltipPlacement="top" nz-button (click)="sortedByAmount()">Amount</button>
-      </div>
   <div
-       *ngIf="!showRecommendDish"
-       class="scrollable search-results"
-       infiniteScroll
-       [infiniteScrollDistance]="2"
-       [infiniteScrollThrottle]="50"
-       [scrollWindow]="false"
-       (scrolled)="onLoadMore()">
+    class="header_table"
+    *ngIf="!showRecommendDish"
+  >
+    <button
+      class="title"
+      nzTooltipTitle="Sort stock by title"
+      nz-tooltip nzTooltipPlacement="top"
+      nz-button
+      (click)="sortedByTitle()"
+    >
+      Title
+    </button>
+    <button
+      class="category"
+      nzTooltipTitle="Sort stock by category"
+      nz-tooltip
+      nzTooltipPlacement="top"
+      nz-button
+      (click)="sortedByCategory()"
+    >
+      Category
+    </button>
+    <button
+      class="description"
+      nzTooltipTitle="Sort stock by description"
+      nz-tooltip
+      nzTooltipPlacement="top"
+      nz-button
+      (click)="sortedByDescription()"
+    >
+      Description
+    </button>
+    <button
+      class="amount"
+      nzTooltipTitle="Sort stock by amount"
+      nz-tooltip
+      nzTooltipPlacement="top"
+      nz-button
+      (click)="sortedByAmount()"
+    >
+      Amount
+    </button>
+  </div>
+  <div
+    *ngIf="!showRecommendDish"
+    class="scrollable search-results"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    [scrollWindow]="false"
+    (scrolled)="onLoadMore()">
     <app-stock-item
       *ngFor="let stock of storeStockService.stocks"
       [stock]="stock"
