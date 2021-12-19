@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {AuthRestService} from "../../services/rest/auth-rest.service";
 import {AuthService} from "../../services/client/auth.service";
 import { ActivatedRoute } from '@angular/router';
+import {UserLoginModel} from "../../models/user-login.model";
 
 @Component({
   selector: 'app-login-page',
@@ -38,16 +39,13 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
-
-
   public onLoginClick(): void {
     this.resetMessage();
     if (this.form.valid){
       this.authRestService.login(this.form.value).subscribe({
-        error: (): void => {this.messageError("User not found or password incorrect!")}, //error:HttpErrorResponse когда будут exceptions на этом контроллере
-        next: (response:any): void => {
-          this.authService.setToken(response.token);
-          this.authService.setUserData(response.id, response.firstname, response.lastname, response.role, response.imageId);
+        error: (): void => {this.messageError("User not found or password incorrect!")},
+        next: (user:UserLoginModel): void => {
+          this.authService.setUser(user);
           this.router.navigate(["/settings"]);
           },
       });

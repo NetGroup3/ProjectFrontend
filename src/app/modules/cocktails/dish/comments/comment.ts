@@ -1,4 +1,4 @@
-export interface Comment {
+export interface DishComment {
   id: number;
   userId: number;
   timestamp: string;
@@ -6,4 +6,5 @@ export interface Comment {
   lastname: string;
   imageId: string | null;
   text: string;
+  pagesTotal: number;
 }

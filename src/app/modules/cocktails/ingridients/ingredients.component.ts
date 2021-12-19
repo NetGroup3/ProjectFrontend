@@ -9,18 +9,18 @@ import {appLinks} from "../../../app.links";
 import {HttpParams} from "@angular/common/http";
 
 @Component({
-  selector: 'app-ingridients',
-  templateUrl: './ingridients.component.html',
-  styleUrls: ['./ingridients.component.scss']
+  selector: 'app-ingredients',
+  templateUrl: './ingredients.component.html',
+  styleUrls: ['./ingredients.component.scss']
 })
-export class IngridientsComponent implements OnInit {
-  limit: number = 10;
-  page: number = 0;
+export class IngredientsComponent implements OnInit {
+  limit: number = 10
+  page: number = 0
   key: string = ""
   category: string = ""
   sortedBy: string = ""
-  Ingridients: Ingredient[] = [];
-
+  ingredients: Ingredient[] = []
+  toggle: boolean = true
   delIngredient: Ingredient = {
     id: 0,
     title: "",
@@ -31,31 +31,22 @@ export class IngridientsComponent implements OnInit {
     measurement: ""
   }
 
-  constructor(private moderatorService: ModeratorService) {
-  }
-  toggle: boolean = true;
-  id: boolean = false;
-  title: boolean = false;
-  Category: boolean = false;
+  constructor(private moderatorService: ModeratorService) {}
 
   ngOnInit(): void {
     this.search("")
   }
 
-  getIngridients(limit: number, page: number, key: string, category: string, sortedBy: string): void {
-    console.log(key)
-    this.moderatorService.get_ingridients(limit, page, key, category, sortedBy)
-      .subscribe((response:any)=>{
-        console.log(response)
-        this.Ingridients = response
-        if (this.Ingridients.length === 0) {
+  getIngredients(limit: number, page: number, key: string, category: string, sortedBy: string): void {
+    this.moderatorService.getIngredients(limit, page, key, category, sortedBy)
+      .subscribe((response)=>{
+        this.ingredients = response
+        if (this.ingredients.length === 0) {
           this.page = -1
           this.next()
         }
       });
   }
-
-
 
   next() {
       this.page = this.page + 1;
@@ -76,19 +67,19 @@ export class IngridientsComponent implements OnInit {
 
   ok() {
     this.toggle = !this.toggle;
-    this.moderatorService.delete_ingredient(this.delIngredient.id).subscribe((response:any)=>{
+    this.moderatorService.deleteIngredient(this.delIngredient.id).subscribe(()=>{
       this.ngOnInit()
     });
   }
 
-  delete(ingridient: Ingredient) {
-    this.delIngredient = ingridient;
+  delete(ingredient: Ingredient) {
+    this.delIngredient = ingredient;
     this.toggle = !this.toggle;
 
   }
 
   search(sortedBy: string) {
-    this.getIngridients(this.limit, this.page, this.key, this.category, sortedBy);
+    this.getIngredients(this.limit, this.page, this.key, this.category, sortedBy);
   }
 
 }

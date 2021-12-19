@@ -10,13 +10,13 @@
     <div class="search-div">
 
       <div class="name-div">
-        <p class="ia-subtitle">Search for moderators:</p>
+        <p class="ia-subtitle">Search for moderators</p>
       </div>
 
       <div class="toolbox-div">
         <form [formGroup]="settingsForm">
 
-          <label for="search">Search by:</label>
+          <label for="search">Search by</label>
           <select id="search" formControlName="search" ngModel="email">
             <option value="firstname">Name</option>
             <option value="lastname">Surname</option>
@@ -25,7 +25,7 @@
 
           <input id="search-input" type="text" placeholder="Enter something" formControlName="searchInput">
 
-          <label for="sort">Sort by:</label>
+          <label for="sort">Sort by</label>
           <select id="sort" formControlName="sort" ngModel="timestamp">
             <option value="first_name">Name</option>
             <option value="last_name">Surname</option>
@@ -33,7 +33,7 @@
             <option value="timestamp" selected>Reg. date</option>
           </select>
 
-          <label for="sort-type">Order:</label>
+          <label for="sort-type">Order</label>
           <select id="sort-type" formControlName="sortType" ngModel="false">
             <option value="true">Ascending</option>
             <option value="false">Descending</option>

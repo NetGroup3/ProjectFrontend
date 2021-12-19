@@ -47,13 +47,13 @@ export class AddEditIngredientComponent implements OnInit {
   onAddClick(): void{
     console.log(this.ingridient)
     if(this.ingridient.id === 0){
-      this.moderatorService.add_ingredient(this.ingridient).subscribe((response:any)=>{
+      this.moderatorService.addIngredient(this.ingridient).subscribe((response:any)=>{
         this.router.navigate(['/moderator/ingredients'])
       });
     }
     else {
       console.log(this.ingridient.imageId)
-      this.moderatorService.edit_ingredient(this.ingridient).subscribe((response:any)=>{
+      this.moderatorService.editIngredient(this.ingridient).subscribe((response:any)=>{
         this.router.navigate(['/moderator/ingredients'])
       });
     }
@@ -62,7 +62,7 @@ export class AddEditIngredientComponent implements OnInit {
 
   getIngredient(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.moderatorService.get_ingridient(id)
+    this.moderatorService.getIngredient(id)
       .subscribe((response:any)=>{
         console.log(response)
         this.ingridient = response
@@ -76,7 +76,6 @@ export class AddEditIngredientComponent implements OnInit {
       this.ingridient.imageId = response.public_id;
       console.log(this.ingridient.imageId)
       this.img = this.uploadService.initImage(this.ingridient.imageId);
-      //this.onAddClick();
     });
   }
 

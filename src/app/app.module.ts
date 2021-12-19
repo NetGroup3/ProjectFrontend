@@ -26,7 +26,7 @@ import {UserSceletonComponent} from './modules/core/user-sceleton/user-sceleton.
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {AuthUserSettingsComponent} from './modules/settings/auth-user-settings.component';
 import {AuthInterceptor} from "./modules/core/common/interceptors/http-interceptors/auth-interceptor";
-import {IngridientsComponent} from './modules/cocktails/ingridients/ingridients.component';
+import {IngredientsComponent} from './modules/cocktails/ingridients/ingredients.component';
 import {AddEditIngredientComponent} from './modules/cocktails/add-edit-ingredient/add-edit-ingredient.component';
 
 import {CloudinaryModule} from '@cloudinary/angular';
@@ -92,6 +92,8 @@ import {MatButtonModule} from "@angular/material/button";
 import { UserCocktailsComponent } from './modules/user/pages/user-cocktails/user-cocktails.component';
 import { RecommendDishComponent } from './modules/cocktails/personal-stock/recommend-dish/recommend-dish.component';
 import { DishItemComponent } from './modules/cocktails/personal-stock/recommend-dish/dish-item/dish-item.component';
+import { FavouriteComponent } from './modules/cocktails/favourite/favourite.component';
+import {MatGridListModule} from "@angular/material/grid-list";
 registerLocaleData(en);
 
 @NgModule({
@@ -104,7 +106,7 @@ registerLocaleData(en);
     HomeComponent,
     UserSceletonComponent,
     AuthUserSettingsComponent,
-    IngridientsComponent,
+    IngredientsComponent,
     AddEditIngredientComponent,
     ModeratorIngredientsComponent,
     ModeratorKitchenwareComponent,
@@ -142,6 +144,7 @@ registerLocaleData(en);
     UserCocktailsComponent,
     RecommendDishComponent,
     DishItemComponent,
+    FavouriteComponent,
   ],
   imports: [
     BrowserModule,
@@ -185,6 +188,7 @@ registerLocaleData(en);
     NzPaginationModule,
     MatCardModule,
     MatButtonModule,
+    MatGridListModule,
   ],
 
   providers: [

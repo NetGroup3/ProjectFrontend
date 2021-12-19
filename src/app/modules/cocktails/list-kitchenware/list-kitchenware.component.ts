@@ -6,6 +6,7 @@ import {Kitchenware} from "../../core/models/kitchenware";
 import {InitDishService} from "../../core/services/init-dish.service";
 import {ActivatedRoute} from "@angular/router";
 import {AuthService} from "../../auth/services/client/auth.service";
+import {DishAll} from "../../core/models/dishAll";
 
 @Component({
   selector: 'app-list-kitchenware',
@@ -30,27 +31,27 @@ export class ListKitchenwareComponent implements OnInit {
 
   ngOnInit(): void {
     if(!isNaN(Number(this.route.snapshot.paramMap.get('id')))) {
-      this.getKitchenware((all: any) => {
-        this.getDish((res: any) => {
+      this.getKitchenware((all: Kitchenware[]) => {
+        this.getDish((res: DishAll) => {
           this.initList(all, res.kitchenware)
         })
       })
     }
     else {
-      this.getKitchenware((all: any) => {
+      this.getKitchenware((all: Kitchenware[]) => {
         this.initList(all, [])
       })
     }
   }
 
-  getDish(callback: (res: any) => void): void {
+  getDish(callback: (res: DishAll) => void): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.moderatorService.get_dish(id, +this.authService.getUserId())
-      .subscribe((res: any) => callback(res));
+    this.moderatorService.getDish(id)
+      .subscribe((res) => callback(res));
   }
 
 
-  initList(array: any[], right: any []){
+  initList(array: Kitchenware[], right: any []){
     array.forEach(el =>{
       this.initDishService.kitchenware.push(el.id)
     })
@@ -73,12 +74,8 @@ export class ListKitchenwareComponent implements OnInit {
     this.initDishService.listKitchenware = this.list
   }
   getKitchenware(callback: (res: any) => void): void {
-    this.moderatorService.get_Kitchenware(200, 0, "", "", "")
+    this.moderatorService.getKitchenware(50, 0, "", "", "")
       .subscribe((res: any) => callback(res));
-  }
-
-  select(ret: TransferSelectChange): void {
-    console.log('nzSelectChange', ret);
   }
 
   change(ret: TransferChange): void {

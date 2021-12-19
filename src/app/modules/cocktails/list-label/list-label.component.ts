@@ -6,6 +6,7 @@ import {InitDishService} from "../../core/services/init-dish.service";
 import {ActivatedRoute} from "@angular/router";
 import {AuthService} from "../../auth/services/client/auth.service";
 import {Label} from "../../core/models/label";
+import {DishAll} from "../../core/models/dishAll";
 
 @Component({
   selector: 'app-list-label',
@@ -30,15 +31,15 @@ export class ListLabelComponent implements OnInit {
 
   ngOnInit(): void {
     if(!isNaN(Number(this.route.snapshot.paramMap.get('id')))) {
-      this.getLabels((all: any) => {
-        this.getDish((res: any) => {
+      this.getLabels((all: Label[]) => {
+        this.getDish((res: DishAll) => {
           console.log(res.labels)
           this.initList(all, res.labels)
         })
       })
     }
     else {
-      this.getLabels((all: any) => {
+      this.getLabels((all: Label[]) => {
         this.initList(all, [])
       })
     }
@@ -69,18 +70,15 @@ export class ListLabelComponent implements OnInit {
     this.initDishService.listLabels = this.list
   }
 
-  getLabels(callback: (res: any) => void): void {
-    this.moderatorService.getLabels(200, 0)
-      .subscribe((res: any) => callback(res));
+  getLabels(callback: (res: Label[]) => void): void {
+    this.moderatorService.getLabels(50, 0)
+      .subscribe((res) => callback(res));
   }
 
-  getDish(callback: (res: any) => void): void {
+  getDish(callback: (res: DishAll) => void): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.moderatorService.get_dish(id, +this.authService.getUserId())
-      .subscribe((res: any) => callback(res));
-  }
-  select(ret: TransferSelectChange): void {
-    console.log('nzSelectChange', ret);
+    this.moderatorService.getDish(id)
+      .subscribe((res) => callback(res));
   }
 
   change(ret: TransferChange): void {

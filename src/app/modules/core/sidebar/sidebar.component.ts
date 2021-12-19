@@ -15,11 +15,8 @@ export class SidebarComponent {
   constructor(private tokenService: AuthService, public router: Router) {
     this.links.set(null, [{name: "Cocktails", link: "/dishes", icon: "coffee"}]);
     // @ts-ignore
-    this.links.set("USER", [{name: "Blog", link: "/user/blog", icon: "audit"},
-                            {name: "Stock", link: "/personal-stock", icon: "container"},
-                            {name: "Events", link: "/user/events", icon: "star"},
+    this.links.set("USER", [{name: "Stock", link: "/personal-stock", icon: "container"},
                             {name: "Friends", link: "/user/friends", icon: "team"},
-                            {name: "Calendar", link: "/user/calendar", icon: "calendar"},
                             {name: "Cocktails", link: "/dishes", icon: "coffee"},
                             {name: "Favourites", link: "/user/favourite", icon: "heart"},
                             {name: "Settings", link: "/settings", icon: "setting"}

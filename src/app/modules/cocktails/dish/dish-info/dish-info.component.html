@@ -3,26 +3,39 @@
 <div class="insert-area">
   <div class="scrollable">
 
-    <app-comments class="inline-block comment-div" [dishId]="dishId"></app-comments>
-
-    <mat-card class="example-card inline-block">
-      <mat-card-header>
-        <mat-card-title><h1>{{dish.title}}</h1></mat-card-title>
-        <mat-card-subtitle>{{dish.category}}</mat-card-subtitle>
-      </mat-card-header>
-      <advanced-image class="img" [cldImg]="dish.imageId | getPicture"></advanced-image><br>
-      <mat-card-content>
-        <p>Description:
-          {{dish.description}}<br>
-          Receipt:
-          {{dish.receipt}}
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions>
-    </mat-card>
-
+      <mat-card class="example-card inline-block">
+        <mat-card-header>
+          <mat-card-title><h1>{{dish.dish.title}}</h1></mat-card-title>
+          <mat-card-subtitle>{{dish.dish.category}}</mat-card-subtitle>
+        </mat-card-header>
+        <advanced-image class="img" [cldImg]="dish.dish.imageId | getPicture"></advanced-image>
+        <br>
+        <mat-card-content>
+          <h3>Description</h3>
+          <p>
+            {{dish.dish.description}}
+          </p>
+          <h3>Receipt</h3>
+          <p>
+            {{dish.dish.receipt}}
+          </p>
+          <div class="ingredients-kitchenware">
+            <div class="ingredients">
+              <h3>Ingredients</h3>
+              <p *ngFor="let ingredient of dish.ingredients">
+                {{ingredient.title}}
+              </p>
+            </div>
+            <div class="kitchenware">
+              <h3>Kitchenware</h3>
+              <p *ngFor="let kitchenware of dish.kitchenware">
+                {{kitchenware.title}}
+              </p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      
+      <app-comments [dishId]="dishId" class="comment-div inline-block"></app-comments>
   </div>
 </div>

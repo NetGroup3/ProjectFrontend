@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import {AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {appLinks} from "../../../../app.links";
+import {DishComment} from './comment';
+import {Cloudinary, CloudinaryImage} from "@cloudinary/url-gen";
 
 @Component({
   selector: 'app-comments',
@@ -8,6 +10,7 @@ import {appLinks} from "../../../../app.links";
   styleUrls: ['./comments.component.scss']
 })
 export class CommentsComponent implements OnInit, AfterViewChecked {
+  
   @ViewChild('scrollMe') private myScrollContainer: ElementRef | undefined;
 
   @Input() dishId: number = 0;
@@ -15,14 +18,16 @@ export class CommentsComponent implements OnInit, AfterViewChecked {
   currentPage: number = 0;
   perPage: number = 10;
   pagesTotal: number = 1;
+  userRole: string | null = null;
 
-  comments: Comment[] = [];
+  comments: DishComment[] = [];
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.loadMore();
     this.scrollToBottom();
+    this.userRole = localStorage.getItem("USER_ROLE");
   }
 
   ngAfterViewChecked() {
@@ -41,20 +46,22 @@ export class CommentsComponent implements OnInit, AfterViewChecked {
       return;
     }
     this.currentPage ++;
-    this.http.get(appLinks.commentList
+    this.http.get<DishComment[]>(appLinks.commentList
       + "?dishId=" + this.dishId + "&pageNo=" + this.currentPage + "&perPage=" + this.perPage)
-      .subscribe(res => {
-        // @ts-ignore
-        if (res.list !== null) {
-          /*/ @ts-ignore
-          for (const comment: Comment in res.list) {
-            if (comment.name)
-          }*/
-          // @ts-ignore
-          this.comments = res.list.concat(this.comments);
+      .subscribe(list => {
+        if (list !== null && list.length > 0) {
+          
+          for (const comment of list) {
+            if (comment.lastname === null) {
+              comment.firstname = "Anonimous";
+              comment.lastname = "user";
+            }
+            comment.timestamp = (new Date(comment.timestamp.toString())).toLocaleString();
+            
+          }
+          this.comments = list.concat(this.comments);
+          this.pagesTotal = list[0].pagesTotal;
         }
-        // @ts-ignore
-        this.pagesTotal = res.pagesTotal;
       });
   }
 
@@ -62,7 +69,8 @@ export class CommentsComponent implements OnInit, AfterViewChecked {
     this.http.post(appLinks.comment, {
       dishId: this.dishId,
       text: this.currentComment
-    }).subscribe(() => {
+    })
+    .subscribe(() => {
       this.comments = [];
       this.currentPage = 0;
       this.loadMore();

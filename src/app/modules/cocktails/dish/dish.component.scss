@@ -28,6 +28,9 @@ nz-select{
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 25px;
 }
+.ingridient:hover{
+cursor: pointer;
+}
 .title{
   margin-top: 15%;
   color: #495464;
@@ -262,5 +265,17 @@ i[_ngcontent-shd-c124]:focus {
 }
 .liked{
   font-size: 20px;
+  color: #9921E8;
+}
+
+.like{
+  transition: all .08s ease-in-out;
+  font-size: 20px;
+}
+.like:active{
+  transform: scale(1.22);
+  color: lime;
+}
+.like-active{
   color: #9921E8;
 }

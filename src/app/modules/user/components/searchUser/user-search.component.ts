@@ -26,7 +26,7 @@ export class UserSearchComponent implements OnInit {
   ngOnInit(): void {
     this.search$
       .pipe(debounceTime(300))
-      .subscribe((searchTerm) => {
+      .subscribe((searchTerm: string) => {
         this.getUsers(searchTerm);
       });
   }
@@ -42,7 +42,7 @@ export class UserSearchComponent implements OnInit {
 
   private getUsers(name: string): void {
     this.userService.getUsers(name)
-      .subscribe((userList) => {
+      .subscribe((userList: UserSearch[]) => {
         this.userList = userList;
         this.isLoading = false;
       });

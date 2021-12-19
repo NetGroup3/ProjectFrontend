@@ -20,7 +20,7 @@ export class UserRestService {
     return this.http.put(appLinks.userImage, body);
   }
 
-  public changePassword (body: ChangePasswordForm): Observable<any>{
+  public changePassword (body: ChangePasswordForm) {
     return this.http.put(appLinks.changePassword, body);
   }
 

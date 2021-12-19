@@ -8,7 +8,7 @@
 
       <nz-list [nzDataSource]="comments" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
         <ng-template #item let-item>
-          <nz-comment [nzAuthor]="item.firstname + ' ' + item.lastname"><!-- [nzDatetime]="item.timestamp">-->
+          <nz-comment [nzAuthor]="item.firstname + ' ' + item.lastname + ' | ' + item.timestamp">
             <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.imageId"></nz-avatar>
             <nz-comment-content>
               <p>{{ item.text }}</p>
@@ -18,7 +18,7 @@
       </nz-list>
   </div>
   <br>
-  <div class="writeCommentDiv">
+  <div class="writeCommentDiv" *ngIf="userRole !== 'ADMIN' && userRole !== 'MODERATOR'">
     <textarea class="text-input" type="text" [(ngModel)]="currentComment" placeholder="Write your comment here"></textarea>
     <button id="post" (click)="postComment()" [disabled]="currentComment === ''">Post</button>
   </div>

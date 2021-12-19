@@ -1,7 +1,7 @@
-export interface UserProfile{
+export interface UserProfile {
   id: number;
   firstName: string;
   lastName: string;
   imageId: string;
-  timestamp: object;
+  checkUser: boolean;
 }

@@ -11,18 +11,18 @@
         <input type="file" (change)="onFileSelect($event)" class="dn" #uploadFile>
         <button class="upload" (click)="uploadFile.click()">Upload photo</button>
       </div>
-      <form ngNativeValidate (submit)="onAddClick()">
+      <form ngNativeValidate>
       <div class="title">
         <div class="title_description">
           <p>Title</p>
-          <input class="title_input" required [(ngModel)]="dish.title" placeholder="Text">
+          <input class="title_input" required [(ngModel)]="dish.title" name="Text">
           <p>Category</p>
-          <input class="description" required [(ngModel)]="dish.category" placeholder="Text">
+          <input class="description" required [(ngModel)]="dish.category" name="Text1">
         </div>
         <p>Receipt</p>
-        <textarea class="receipt" required [(ngModel)]="dish.receipt" placeholder="Text"></textarea>
+        <textarea class="receipt" required [(ngModel)]="dish.receipt" name="Text2"></textarea>
         <p>Description</p>
-        <textarea  class="receipt" [(ngModel)]="dish.description" placeholder="Text"></textarea>
+        <textarea  class="receipt" [(ngModel)]="dish.description" name="Text3"></textarea>
       </div>
 
       <div class="description_picture">
@@ -39,7 +39,7 @@
           </div>
         </div>
       </div>
-      <button class="ok">Ok!</button>
+      <button (click)="onAddClick()" class="ok">Ok!</button>
       </form>
     </div>
   </div>

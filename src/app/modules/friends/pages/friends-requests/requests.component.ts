@@ -10,10 +10,10 @@ import {NzNotificationService} from 'ng-zorro-antd/notification';
   styleUrls: ['./requests.component.scss']
 })
 export class RequestsComponent implements OnInit {
-  limit: number = 10;
-  offset: number = 0;
-  friendRequests: FriendRequest[] = [];
-  toggle: boolean = true;
+  private limit: number = 10;
+  public offset: number = 0;
+  public friendRequests: FriendRequest[] = [];
+  public toggle: boolean = true;
 
   constructor(private friendService: FriendService,
               private notification: NzNotificationService) {
@@ -25,7 +25,7 @@ export class RequestsComponent implements OnInit {
 
   getFRequests(limit: number, offset: number): void {
     this.friendService.getRequests(limit, offset)
-      .subscribe((response) => {
+      .subscribe((response: FriendRequest[]) => {
         this.friendRequests = response
       });
   }
@@ -40,7 +40,7 @@ export class RequestsComponent implements OnInit {
     this.friendRequest = friendRequest;
     this.friendService.acceptInvite(this.friendRequest.id).subscribe({
       next: (): void => {
-        this.friendRequests = this.friendRequests.filter((req) => req.id !== this.friendRequest.id);
+        this.friendRequests = this.friendRequests.filter((req: FriendRequest) => req.id !== this.friendRequest.id);
       }
     });
   }
@@ -54,7 +54,7 @@ export class RequestsComponent implements OnInit {
     this.toggle = !this.toggle;
     this.friendService.declineInvite(this.friendRequest.id).subscribe({
       next: (): void => {
-        this.friendRequests = this.friendRequests.filter((req) => req.id !== this.friendRequest.id);
+        this.friendRequests = this.friendRequests.filter((req: FriendRequest) => req.id !== this.friendRequest.id);
         this.notification.blank('Invite declined', '', {});
       }
     });
