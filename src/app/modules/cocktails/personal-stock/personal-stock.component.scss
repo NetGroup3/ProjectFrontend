@@ -21,12 +21,15 @@ input {
 .title{
   width: 12%;
 }
+
 .category{
   width: 12%;
 }
+
 .description{
   width: 64%;
 }
+
 .amount {
   width: 12%;
 }
@@ -55,19 +58,22 @@ input {
 
 nz-spin {
   text-align: center;
+  border: 20px;
 }
 
 nz-select {
   width: 200px;
 }
+
 h1{
-  font-family: Montserrat;
+  font-family: Montserrat, serif;
   font-style: normal;
   font-weight: normal;
   font-size: 42px;
   color: #495464;
   margin-left: 2%;
 }
+
 app-button{
   margin: 4px;
 }

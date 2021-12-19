@@ -14,7 +14,6 @@ import {AdminModeratorsComponent} from "./modules/admin/admin-moderators/admin-m
 import {AddEditKitchenwareComponent} from "./modules/cocktails/add-edit-kitchenware/add-edit-kitchenware.component";
 import {AddEditDishComponent} from "./modules/cocktails/add-edit-dish/add-edit-dish.component";
 import {PersonalStockComponent} from "./modules/cocktails/personal-stock/personal-stock.component";
-import {DishComponent} from "./modules/cocktails/dish/dish.component";
 import {UserDishComponent} from "./modules/cocktails/dish/user-dish/user-dish.component";
 import {ListKitchenwareComponent} from "./modules/cocktails/list-kitchenware/list-kitchenware.component";
 import {PageNotFoundComponent} from "./modules/core/page-not-found/page-not-found.component";
@@ -32,7 +31,6 @@ const routes: Routes = [
   { path: '', redirectTo: '/dishes', pathMatch: 'full'},
   { path: 'recovery', component: RecoveryPageComponent },
   { path: 'home', component:HomeComponent, canActivate: [HomeGuard]},
-  // { path: 'home', component:HomeComponent},
   { path: 'settings', component:AuthUserSettingsComponent},
   { path: 'user/friends', component:FriendsComponent},
   { path: 'user/requests', component:RequestsComponent},

@@ -13,20 +13,25 @@
   display: inline-block;
   text-align: center;
 }
+
 .like{
   transition: all .08s ease-in-out;
   font-size: 20px;
 }
+
 .like:active{
   transform: scale(1.22);
   color: lime;
 }
+
 .like-active{
   color: #9921E8;
 }
+
 .ingredient {
   transition: all .2s ease-in-out;
 }
+
 .ingredient:hover {
   transform: scale(1.02);
 }
