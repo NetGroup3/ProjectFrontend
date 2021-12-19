@@ -5,8 +5,7 @@
       nz-input
       [(ngModel)]="firstname"
       placeholder="John"
-      formControlName="firstname"
-    />
+      formControlName="firstname"/>
   </nz-form-control>
   <nz-form-control>
     <p>Last name</p>
@@ -14,10 +13,9 @@
       nz-input
       [(ngModel)]="lastname"
       placeholder="Smith"
-      formControlName="lastname"
-    />
+      formControlName="lastname"/>
   </nz-form-control>
-  <div (click)="createBasicNotification()">
+  <div>
     <button (click)="savePersonalInformation()">
         Save changes
     </button>

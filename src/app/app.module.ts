@@ -94,6 +94,7 @@ import { RecommendDishComponent } from './modules/cocktails/personal-stock/recom
 import { DishItemComponent } from './modules/cocktails/personal-stock/recommend-dish/dish-item/dish-item.component';
 import { FavouriteComponent } from './modules/cocktails/favourite/favourite.component';
 import {MatGridListModule} from "@angular/material/grid-list";
+import {TrimPipe} from "./modules/core/trim.pipe";
 registerLocaleData(en);
 
 @NgModule({
@@ -145,6 +146,7 @@ registerLocaleData(en);
     RecommendDishComponent,
     DishItemComponent,
     FavouriteComponent,
+    TrimPipe,
   ],
   imports: [
     BrowserModule,

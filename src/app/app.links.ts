@@ -44,5 +44,5 @@ export const appLinks={
   userProfile: `${environment.serverUrl}/users/user-profile`,
   recommendDish: `${environment.serverUrl}/dish/recommend`,
   favourite:`${environment.serverUrl}/dish/favourite`,
-
+  dishPages:`${environment.serverUrl}/dish/pages`,
 }

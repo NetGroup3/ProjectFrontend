@@ -4,9 +4,6 @@ import {Observable} from "rxjs";
 import {appLinks} from "../../../app.links";
 import {Ingredient} from "../models/ingredient";
 import {Kitchenware} from "../models/kitchenware";
-import {Dish} from "../models/dish";
-import {Dish_ingredients} from "../models/dish_ingredients";
-import {Dish_kitchenware} from "../models/dish_kitchenware";
 import {DishWrapperDto} from "../models/dishWrapperDto";
 import {DishAll} from "../models/dishAll";
 import {Label} from "../models/label";
@@ -142,4 +139,9 @@ export class ModeratorService {
     })
   }
 
+  getPages(limit: number): Observable<number> {
+    return this.http.get<number>(appLinks.dishPages, {
+      params: new HttpParams().set('limit', limit)
+    });
+  }
 }

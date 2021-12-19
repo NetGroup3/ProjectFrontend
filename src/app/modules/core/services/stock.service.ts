@@ -5,7 +5,6 @@ import {appLinks} from "../../../app.links";
 import {Stock} from "../models/stock";
 import {StockAddDto} from "../models/StockAddDto";
 import {Ingredient} from "../models/ingredient";
-import {Dish} from "../models/dish";
 import {DishFormat} from "../models/dishFormat";
 
 @Injectable({

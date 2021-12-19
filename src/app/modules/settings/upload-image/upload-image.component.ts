@@ -13,8 +13,10 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
 })
 export class UploadImageComponent implements OnInit {
 
-  public imageId: string = "";
   public img: CloudinaryImage = this.initImage();
+  private imageId: string = "";
+  private imageWith = 300;
+  private imageHeight = 300;
 
   constructor(
     private fb: FormBuilder,
@@ -30,21 +32,30 @@ export class UploadImageComponent implements OnInit {
   }
 
   initImage(): CloudinaryImage {
-    return this.uploadService.initImageWithSize(this.imageId, 300, 300);
+    return this.uploadService.initImageWithSize(this.imageId, this.imageWith, this.imageHeight);
   }
 
   onFileSelect($event: any) {
-    this.uploadService.onUpLoad($event.target.files[0]).subscribe(response => {
+    this.uploadService.onUpLoad($event.target.files[0]).subscribe(
+      response => {
       this.imageId = response.public_id;
       this.img = this.initImage();
       this.saveImageId();
+      },
+      () => {
+        this.notification.error("Failed to change photo", "");
     });
   }
 
   saveImageId(): void {
-    this.userRestService.updateImage(this.imageForm().value).subscribe((response: any) => {
+    this.userRestService.updateImage(this.imageForm().value).subscribe(
+      () => {
       this.authService.setImageId(this.imageId);
-    })
+      this.notification.success('Photo changed', '');
+      },
+      () => {
+        this.notification.error("Failed to change photo", "");
+    });
   }
 
   /** form for send image Id to backend server*/
@@ -52,12 +63,6 @@ export class UploadImageComponent implements OnInit {
     return this.fb.group({
       id: this.authService.getUserId(),
       imageId: this.imageId
-    });
-  }
-
-  createBasicNotification(): void {
-    this.notification.blank('Personal information changed', '', {
-      nzKey: 'key'
     });
   }
 

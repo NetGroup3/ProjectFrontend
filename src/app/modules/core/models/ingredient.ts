@@ -4,6 +4,6 @@ export interface Ingredient {
   description: string;
   category: string;
   imageId: string;
-  isActive: boolean;
+  active: boolean;
   measurement: string;
 }

@@ -18,7 +18,7 @@
      nz-button
      nzShape="circle"
      (click)="next()"
-     [disabled]="page == pages"
+     [disabled]="!this.isLoading && this.page == this.pages-1 || this.dishes.length != this.limit"
      >
      >
   </button>

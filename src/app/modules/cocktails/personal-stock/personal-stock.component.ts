@@ -1,4 +1,4 @@
-import {Component, OnInit, HostListener} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {StockService} from "../../core/services/stock.service";
 import {Subscription} from "rxjs";
 import {Stock} from "../../core/models/stock";
@@ -6,7 +6,7 @@ import {Ingredient} from "../../core/models/ingredient";
 import {StockAddDto} from "../../core/models/StockAddDto";
 import {UiService} from "../../core/services/ui.service";
 import {NzNotificationService} from "ng-zorro-antd/notification";
-import {StoreStockService} from "./store-stock.service";
+import {StoreStockService} from "../../core/services/store-stock.service";
 
 @Component({
   selector: 'app-personal-stock',
@@ -31,7 +31,7 @@ export class PersonalStockComponent implements OnInit {
   public isLoading = false;
 
   public selectedIngredientId: number = 0;
-  public amount: number = 1;
+  public amount: number = 0;
 
   constructor(
     private stockService: StockService,
@@ -47,6 +47,33 @@ export class PersonalStockComponent implements OnInit {
   ngOnInit(): void {
     this.getStock();
     this.getPages();
+  }
+
+  getStock(){
+    this.isLoading = true;
+    this.stockService.search(
+      this.limit,
+      this.page,
+      this.searchText,
+      this.category,
+      this.sortedBy
+    ).subscribe(
+      (stocks: Stock[])=> {
+        this.isLoading = false;
+        this.storeStockService.stocks = stocks;
+        this.page++;
+      },
+      () => {
+        this.notification.error("Failed to download stocks", "");
+        this.isLoading = false;
+      });
+  }
+
+  getPages(): void {
+    this.stockService.getPages(this.limit).subscribe(
+      (pages: number) => {
+        this.pages = pages;
+      });
   }
 
   sortedByTitle(){
@@ -69,32 +96,13 @@ export class PersonalStockComponent implements OnInit {
     this.upSearch("")
   }
 
-  getPages(): void {
-    this.stockService.getPages(this.limit).subscribe( (pages: number) => {
-      this.pages = pages;
-    });
-  }
-
-  getStock(): void {
-    if (this.isLoading){
+  upSearch(value: string) {
+    this.searchText = value
+    if(this.isLoading){
       return;
     }
-    this.isLoading = true;
-    this.stockService.search(
-      this.limit,
-      this.page,
-      this.searchText,
-      this.category,
-      this.sortedBy
-    ).subscribe((stocks: Stock[]) => {
-        this.storeStockService.stocks = stocks;
-        this.isLoading = false;
-        this.page++;
-        },
-      () => {
-        this.notification.error("Failed to download stocks", "");
-        this.isLoading = false;
-      });
+    this.page = 0;
+    this.getStock();
   }
 
   onLoadMore(): void {
@@ -108,39 +116,30 @@ export class PersonalStockComponent implements OnInit {
       this.searchText,
       this.category,
       this.sortedBy
-    ).subscribe((stocks: Stock[]) => {
+    ).subscribe(
+      (stocks: Stock[]) => {
       this.isLoading = false;
       this.storeStockService.stocks = [...this.storeStockService.stocks, ...stocks];
       this.page++;
-    });
-  }
-
-  upSearch(value: string) {
-    this.searchText = value
-    if(this.isLoading){
-      return;
-    }
-    this.isLoading = true;
-    this.page = 0;
-    this.stockService.search(
-      this.limit,
-      this.page,
-      this.searchText,
-      this.category,
-      this.sortedBy
-    ).subscribe((stocks: Stock[])=> {
-      this.isLoading = false;
-      this.storeStockService.stocks = stocks;
-      this.page++;
-    });
+      },
+      () => {
+        this.notification.error("Failed to download stocks", "");
+        this.isLoading = false;
+      });
   }
 
   delete(stock: Stock) {
     const id: number = stock.id
-    this.stockService.delete(stock.ingredient.id).subscribe(() => {
+    this.stockService.delete(stock.ingredient.id).subscribe(
+      () => {
       this.storeStockService.stocks = this.storeStockService.stocks.filter(stock=>stock.id!==id);
       this.notification.success(stock.ingredient.title + " successfully removed from your stock", "")
-      this.ingredient = stock.ingredient;
+      if(stock.ingredient.active) {
+        this.ingredient = stock.ingredient;
+      }
+      if(this.storeStockService.stocks.length < this.limit){
+        this.onLoadMore();
+      }
       },
       () => {
         this.notification.error("Failed to delete " + stock.ingredient.title, "");
@@ -148,7 +147,8 @@ export class PersonalStockComponent implements OnInit {
   }
 
   change(stock: Stock) {
-    this.stockService.update(stock.ingredient.id, stock.amount).subscribe(()=>{
+    this.stockService.update(stock.ingredient.id, stock.amount).subscribe(
+      ()=>{
       this.notification.success("Stock  " + stock.ingredient.title + " changed", "")
       },
       () => {
@@ -157,10 +157,12 @@ export class PersonalStockComponent implements OnInit {
   }
 
   addStock(stockAdd: StockAddDto): void {
-    this.stockService.create(stockAdd).subscribe((stock: Stock)=> {
+    this.stockService.create(stockAdd).subscribe(
+      (stock: Stock)=> {
       this.storeStockService.stocks.push(stock);
       this.storeStockService.ingredients = this.storeStockService.ingredients.filter(
         ingredient=>ingredient.id!==stockAdd.ingredientId);
+      this.getPages();
       this.notification.success("You successfully added ingredient to your stock", "")
       },
       () => {
@@ -174,15 +176,6 @@ export class PersonalStockComponent implements OnInit {
 
   toggleRecommendDish() {
     this.showRecommendDish=!this.showRecommendDish;
-  }
-
-  @HostListener('window:scroll', ['$event'])
-  onWindowScroll() {
-    let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
-    if(pos == document.documentElement.scrollHeight )   {
-      console.log("load more")
-      this.onLoadMore();
-    }
   }
 
 }

@@ -19,6 +19,8 @@ export class LoginPageComponent implements OnInit {
   public success: boolean = false;
   public message: string = "";
 
+  public form: FormGroup = this.buildForm();
+
   constructor(
     private fb: FormBuilder,
     private authRestService: AuthRestService,
@@ -27,8 +29,6 @@ export class LoginPageComponent implements OnInit {
     private activateRoute: ActivatedRoute
   ) {
   }
-
-  public form: FormGroup = this.buildForm();
 
   ngOnInit(): void {
     this.activateRoute.queryParams.subscribe(params => {
@@ -63,15 +63,17 @@ export class LoginPageComponent implements OnInit {
     }
 
   private verifyCode(): void {
-      this.authRestService.code(this.verify).subscribe(() => {
+      this.authRestService.code(this.verify).subscribe(
+        () => {
         this.messageSuccess("Your mail verified! Please login.")
-      })
+      });
     }
 
   private recoveryCode(): void {
-      this.authRestService.code(this.recovery).subscribe(() => {
+      this.authRestService.code(this.recovery).subscribe(
+        () => {
         this.messageSuccess("A new login password has been sent to you by email")
-      })
+      });
     }
 
   private resetMessage(): void {
