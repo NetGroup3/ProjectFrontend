@@ -137,6 +137,9 @@ export class PersonalStockComponent implements OnInit {
       if(stock.ingredient.active) {
         this.ingredient = stock.ingredient;
       }
+      if(this.storeStockService.stocks.length < this.limit){
+        this.onLoadMore();
+      }
       },
       () => {
         this.notification.error("Failed to delete " + stock.ingredient.title, "");
@@ -159,6 +162,7 @@ export class PersonalStockComponent implements OnInit {
       this.storeStockService.stocks.push(stock);
       this.storeStockService.ingredients = this.storeStockService.ingredients.filter(
         ingredient=>ingredient.id!==stockAdd.ingredientId);
+      this.getPages();
       this.notification.success("You successfully added ingredient to your stock", "")
       },
       () => {

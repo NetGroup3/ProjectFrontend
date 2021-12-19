@@ -57,9 +57,9 @@ export class AddStockComponent implements OnInit, OnChanges {
     this.isLoading = true;
     this.page++;
     this.stockService.getIngredients(this.limit, this.page)
-      .subscribe(data => {
+      .subscribe((ingredients: Ingredient[]) => {
         this.isLoading = false;
-        this.storeStockService.ingredients = [...this.storeStockService.ingredients, ...data];
+        this.storeStockService.ingredients = [...this.storeStockService.ingredients, ...ingredients];
       });
   }
 
