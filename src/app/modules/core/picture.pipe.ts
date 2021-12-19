@@ -1,16 +1,21 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import {Cloudinary, CloudinaryImage} from "@cloudinary/url-gen";
-import {thumbnail} from "@cloudinary/url-gen/actions/resize";
-import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
+import {Pipe, PipeTransform} from '@angular/core';
+import {CloudinaryImage} from "@cloudinary/url-gen";
+import {UploadService} from "../auth/services/client/upload.service";
 
 @Pipe({
   name: 'getPicture'
 })
 export class PicturePipe implements PipeTransform {
+
+  private with: number = 150;
+  private height: number = 150;
+  private radius: number = 10;
+
+  constructor(
+    private uploadService: UploadService,
+  ) { }
+
   transform(imageId: string): CloudinaryImage {
-    const cld = new Cloudinary({cloud: {cloudName: 'djcak19nu'}});
-    return cld.image(imageId)
-      .resize(thumbnail().width(150).height(150))
-      .roundCorners(byRadius(10));
+    return this.uploadService.initImageWithSizeAndRadius(imageId, this.with, this.height, this.radius);
   }
 }

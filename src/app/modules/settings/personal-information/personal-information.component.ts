@@ -14,10 +14,12 @@ export class PersonalInformationComponent implements OnInit {
   public lastname: string = "";
   public form: FormGroup = this.personalInformationForm();
 
-  constructor(private authService: AuthService,
-              private userRestService: UserRestService,
-              private fb: FormBuilder,
-              private notification: NzNotificationService) {
+  constructor(
+    private authService: AuthService,
+    private userRestService: UserRestService,
+    private formBuilder: FormBuilder,
+    private notification: NzNotificationService
+  ) {
   }
 
   ngOnInit(): void {
@@ -27,25 +29,22 @@ export class PersonalInformationComponent implements OnInit {
 
   savePersonalInformation(): void {
     if (this.form.valid)
-      this.userRestService.updatePersonalInformation(this.form.value).subscribe((response: any) => {
-        console.log(this.form.value)
-        console.log(response)
+      this.userRestService.updatePersonalInformation(this.form.value).subscribe(
+        () => {
         this.authService.setUserFirstname(this.firstname);
         this.authService.serUserLastname(this.lastname);
-      })
+        this.notification.success("Personal information changed", "");
+        },
+        () => {
+          this.notification.error("Failed to change personal information", "");
+      });
   }
 
   private personalInformationForm(): FormGroup {
-    return this.fb.group({
+    return this.formBuilder.group({
       id: this.authService.getUserId(),
       firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]]
-    });
-  }
-
-  createBasicNotification(): void {
-    this.notification.blank('Personal information changed', '', {
-      nzKey: 'key'
     });
   }
 

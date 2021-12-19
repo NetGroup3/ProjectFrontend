@@ -4,7 +4,7 @@ import {Ingredient} from "../../../core/models/ingredient";
 import {StockAddDto} from "../../../core/models/StockAddDto";
 import {UiService} from "../../../core/services/ui.service";
 import {Subscription} from "rxjs";
-import {StoreStockService} from "../store-stock.service";
+import {StoreStockService} from "../../../core/services/store-stock.service";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 
 @Component({
@@ -57,9 +57,9 @@ export class AddStockComponent implements OnInit, OnChanges {
     this.isLoading = true;
     this.page++;
     this.stockService.getIngredients(this.limit, this.page)
-      .subscribe(data => {
+      .subscribe((ingredients: Ingredient[]) => {
         this.isLoading = false;
-        this.storeStockService.ingredients = [...this.storeStockService.ingredients, ...data];
+        this.storeStockService.ingredients = [...this.storeStockService.ingredients, ...ingredients];
       });
   }
 

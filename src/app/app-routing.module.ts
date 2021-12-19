@@ -31,7 +31,6 @@ const routes: Routes = [
   { path: '', redirectTo: '/dishes', pathMatch: 'full'},
   { path: 'recovery', component: RecoveryPageComponent },
   { path: 'home', component:HomeComponent, canActivate: [HomeGuard]},
-  // { path: 'home', component:HomeComponent},
   { path: 'settings', component:AuthUserSettingsComponent},
   { path: 'user/friends', component:FriendsComponent},
   { path: 'user/requests', component:RequestsComponent},

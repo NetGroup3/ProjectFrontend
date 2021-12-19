@@ -13,7 +13,9 @@ export class UploadService {
 
   private upload_preset: string = "ku2dutrm";
   private cloud_name: string = "djcak19nu";
-
+  private defaultRadius: number = 20;
+  private defaultWith: number = 200;
+  private defaultHeight: number = 200;
 
   constructor( private http: HttpClient) {}
 
@@ -29,15 +31,15 @@ export class UploadService {
   initImage(imageId: string): CloudinaryImage {
     const cld = new Cloudinary({cloud: {cloudName: this.cloud_name}});
     return cld.image(imageId)
-      .resize(thumbnail().width(200).height(200))
-      .roundCorners(byRadius(20));
+      .resize(thumbnail().width(this.defaultWith).height(this.defaultHeight))
+      .roundCorners(byRadius(this.defaultRadius));
   }
 
   initImageWithSize(imageId: string, width: number, height: number): CloudinaryImage {
     const cld = new Cloudinary({cloud: {cloudName: this.cloud_name}});
     return cld.image(imageId)
       .resize(thumbnail().width(width).height(height))
-      .roundCorners(byRadius(20));
+      .roundCorners(byRadius(this.defaultRadius));
   }
 
   initImageWithSizeAndRadius(imageId: string, width: number, height: number, radius: number): CloudinaryImage {

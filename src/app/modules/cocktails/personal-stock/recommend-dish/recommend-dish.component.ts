@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {StockService} from "../../../core/services/stock.service";
 import {DishFormat} from "../../../core/models/dishFormat";
+import {ModeratorService} from "../../../core/services/moderator.service";
 
 @Component({
   selector: 'app-recommend-dish',
@@ -16,10 +17,12 @@ export class RecommendDishComponent implements OnInit {
   public isLoading: boolean = false;
   constructor(
     private stockService: StockService,
+    private dishService: ModeratorService,
   ) { }
 
   ngOnInit(): void {
-    this.getRecommendDishes()
+    this.getRecommendDishes();
+    this.getPages();
   }
 
   getRecommendDishes() {
@@ -38,8 +41,15 @@ export class RecommendDishComponent implements OnInit {
   }
 
   next() {
-    if(!this.isLoading && this.page < this.pages)
-    this.page++;
-    this.getRecommendDishes();
+    if(!this.isLoading && this.page < this.pages){
+      this.page++;
+      this.getRecommendDishes();
+    }
+  }
+
+  getPages(): void {
+    this.dishService.getPages(this.limit).subscribe( (pages: number) => {
+      this.pages = pages;
+    });
   }
 }
