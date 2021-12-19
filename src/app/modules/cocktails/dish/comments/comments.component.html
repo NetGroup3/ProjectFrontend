@@ -1,14 +1,14 @@
-<div class="commentDiv">
-  <hr>
-  <div class="scrollable-container search-results" #scrollMe
+<div class="main">
+  <div class="scrollable-container" #scrollMe
      infiniteScroll
      [infiniteScrollDistance]="2"
      [infiniteScrollThrottle]="50"
      [scrollWindow]="false"
      (scrolledUp)="loadMore()">
+
       <nz-list [nzDataSource]="comments" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
         <ng-template #item let-item>
-          <nz-comment [nzAuthor]="item.firstname + ' ' + item.lastname" [nzDatetime]="item.timestamp">
+          <nz-comment [nzAuthor]="item.firstname + ' ' + item.lastname + ' | ' + item.timestamp">
             <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.imageId"></nz-avatar>
             <nz-comment-content>
               <p>{{ item.text }}</p>
@@ -17,9 +17,9 @@
         </ng-template>
       </nz-list>
   </div>
-  <hr>
-  <div class="writeCommentDiv">
-    <textarea id="textInput" type="text" [(ngModel)]="currentComment" placeholder="Write your comment here"></textarea>
+  <br>
+  <div class="writeCommentDiv" *ngIf="userRole !== 'ADMIN' && userRole !== 'MODERATOR'">
+    <textarea class="text-input" type="text" [(ngModel)]="currentComment" placeholder="Write your comment here"></textarea>
     <button id="post" (click)="postComment()" [disabled]="currentComment === ''">Post</button>
   </div>
 </div>

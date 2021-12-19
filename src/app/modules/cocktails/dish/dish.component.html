@@ -15,7 +15,7 @@
       </label>
       <label for="option-3" class="option option-3">
         <div class="dot"></div>
-        <span>DASC</span>
+        <span>DESC</span>
       </label>
       <nz-select nzMode="multiple" nzPlaceHolder="Ingredients" [(ngModel)]="listOfSelectedValue">
         <nz-option
@@ -28,7 +28,7 @@
 
     </div>
 
-    <div *ngIf="role === 'MODERATOR'">
+    <div *ngIf="role === 'MODERATOR' || role === 'ADMIN'">
       <a routerLink="/moderator/dish/add">
         <button class="absolute-right-button">
           Add cocktail
@@ -61,6 +61,7 @@
           </div>
         </div>
       </div>
+    </div>
 
       <div routerLink="/user/dish/{{dish.id}}">
         <p class="title">{{dish.title}}</p>
@@ -69,7 +70,6 @@
       </div>
     </div>
   </div>
-</div>
 
 <div class="button">
   <button (click)="prev()" class="next"><</button>

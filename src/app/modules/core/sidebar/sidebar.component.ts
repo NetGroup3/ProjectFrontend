@@ -28,7 +28,10 @@ export class SidebarComponent {
                                  {name: "Settings", link: "/settings", icon: "setting"}
     ]);
     // @ts-ignore
-    this.links.set("ADMIN", [{name: "Moderators", link: "/admin/moderators", icon: "audit"},
+    this.links.set("ADMIN", [{name: "Cocktails", link: "/moderator/cocktails", icon: "coffee"},
+                             {name: "Ingredients", link: "/moderator/ingredients", icon: "apple"},
+                             {name: "Kitchenware", link: "/moderator/kitchenware", icon: "experiment"},
+                             {name: "Moderators", link: "/admin/moderators", icon: "audit"},
                              {name: "Settings", link: "/settings", icon: "setting"}
     ])
   }

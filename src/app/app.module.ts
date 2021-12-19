@@ -53,7 +53,7 @@ import {HeaderComponent} from "./modules/core/header/header.component";
 import {NzSkeletonModule} from "ng-zorro-antd/skeleton";
 import {NzListModule} from "ng-zorro-antd/list";
 import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
-import {UserDishComponent} from './modules/cocktails/dish/user-dish/user-dish.component';
+import {DishInfoComponent} from './modules/cocktails/dish/dish-info/dish-info.component';
 import {ButtonComponent} from './components/button/button.component';
 import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 import {AddStockComponent} from "./modules/cocktails/personal-stock/add-stock/add-stock.component";
@@ -133,7 +133,7 @@ registerLocaleData(en);
     ListKitchenwareComponent,
     ListLabelComponent,
     StockItemComponent,
-    UserDishComponent,
+    DishInfoComponent,
     AddStockComponent,
     ButtonComponent,
     RequestsComponent,

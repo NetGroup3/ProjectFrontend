@@ -47,5 +47,9 @@
     <button class="button" [disabled]="buttonDisabled" (click)="onSubmit()">
       Submit
     </button>
+
+    <div *ngIf="isLoading" class="spinner">
+      <nz-spin nzSimple></nz-spin>
+    </div>
   </form>
 </div>

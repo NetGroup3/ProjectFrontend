@@ -29,8 +29,6 @@ label, select, input {
   margin-right: 1%;
 }
 
-/* ! ! ! ! ! */
-
 .round-button {
   height: 35px;
   width: 35px;
@@ -65,4 +63,13 @@ label, select, input {
   margin-left: 1%;
   margin-right: 1%;
   width: 30%;
+}
+
+.spinner {
+  width: fit-content;
+  margin: 1% auto 0;
+}
+
+input, select, label {
+  font-size: 1.2em;
 }

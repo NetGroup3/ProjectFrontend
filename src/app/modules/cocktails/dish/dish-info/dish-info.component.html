@@ -3,10 +3,7 @@
 <div class="insert-area">
   <div class="scrollable">
 
-    <div class="dish">
-      <app-comments [dishId]="dishId" [userId]="userId"></app-comments>
-
-      <mat-card class="example-card">
+      <mat-card class="example-card inline-block">
         <mat-card-header>
           <mat-card-title><h1>{{dish.dish.title}}</h1></mat-card-title>
           <mat-card-subtitle>{{dish.dish.category}}</mat-card-subtitle>
@@ -14,29 +11,31 @@
         <advanced-image class="img" [cldImg]="dish.dish.imageId | getPicture"></advanced-image>
         <br>
         <mat-card-content>
-          <p>Description:
-            {{dish.dish.description}}<br>
-            Receipt:
+          <h3>Description</h3>
+          <p>
+            {{dish.dish.description}}
+          </p>
+          <h3>Receipt</h3>
+          <p>
             {{dish.dish.receipt}}
           </p>
           <div class="ingredients-kitchenware">
             <div class="ingredients">
+              <h3>Ingredients</h3>
               <p *ngFor="let ingredient of dish.ingredients">
                 {{ingredient.title}}
               </p>
             </div>
             <div class="kitchenware">
+              <h3>Kitchenware</h3>
               <p *ngFor="let kitchenware of dish.kitchenware">
                 {{kitchenware.title}}
               </p>
             </div>
           </div>
         </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
       </mat-card>
-    </div>
+      
+      <app-comments [dishId]="dishId" class="comment-div inline-block"></app-comments>
   </div>
 </div>
