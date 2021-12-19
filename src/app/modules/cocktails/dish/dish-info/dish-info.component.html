@@ -3,10 +3,9 @@
 <div class="insert-area">
   <div class="scrollable">
 
-    <!--    <p>Lists like ingredients and kitchenware to be added soon</p>-->
-    <app-comments [dishId]="dishId" [userId]="userId"></app-comments>
+    <app-comments class="inline-block comment-div" [dishId]="dishId"></app-comments>
 
-    <mat-card class="example-card">
+    <mat-card class="example-card inline-block">
       <mat-card-header>
         <mat-card-title><h1>{{dish.title}}</h1></mat-card-title>
         <mat-card-subtitle>{{dish.category}}</mat-card-subtitle>

@@ -1,4 +1,4 @@
-export interface ModeratorModel {
+export interface ModerListItem {
   id: number;
   email: string;
   firstname: string;
@@ -6,4 +6,5 @@ export interface ModeratorModel {
   imageId: string;
   timestamp: string;
   status: string;
+  pagesTotal: number;
 }

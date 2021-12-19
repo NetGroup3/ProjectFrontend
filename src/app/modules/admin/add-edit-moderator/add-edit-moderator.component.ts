@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ModeratorModel} from "../admin-moderators/moderator.model";
+import {ModerListItem} from "../models/moderListItem";
 import {HttpClient} from "@angular/common/http";
 import {appLinks} from "../../../app.links";
 
@@ -11,15 +11,17 @@ import {appLinks} from "../../../app.links";
 })
 export class AddEditModeratorComponent {
 
-  buttonDisabled = false;
+  buttonDisabled: boolean = false;
   moderInfoForm: FormGroup;
+  isLoading: boolean = false;
 
-  moderData!: ModeratorModel;
+  moderData!: ModerListItem;
 
-  @Input() public inputModerData: ModeratorModel | undefined;
+  @Input() public inputModerData: ModerListItem | undefined;
 
-  @Output() closeEmit = new EventEmitter<boolean>();
+  @Output() closeEmit = new EventEmitter<void>();
   @Output() updateEmit = new EventEmitter<void>();
+  @Output() notifyEmit = new EventEmitter<string>();
 
   constructor(private http: HttpClient, private fb: FormBuilder) {
     this.moderInfoForm = this.fb.group({
@@ -32,7 +34,6 @@ export class AddEditModeratorComponent {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['inputModerData'].currentValue !== undefined) {
       this.moderData = Object.assign({}, changes['inputModerData'].currentValue);
-      //this.moderData.timestamp = {};
     }
     else {
       this.moderData = {
@@ -42,7 +43,8 @@ export class AddEditModeratorComponent {
         lastname: 'Doe',
         timestamp: "",
         imageId: '',
-        status: ''
+        status: '',
+        pagesTotal: 0
       };
     }
   }
@@ -50,26 +52,39 @@ export class AddEditModeratorComponent {
   onSubmit() {
     if (this.moderInfoForm.valid) {
       this.buttonDisabled = true;
-      let formData = this.moderInfoForm.value;
+      this.isLoading = true;
+      const formData = this.moderInfoForm.value;
+
       if (this.inputModerData !== undefined) {
         this.moderData.firstname = formData.firstname;
         this.moderData.lastname = formData.lastname;
         this.moderData.email = formData.email;
 
-        console.log(this.moderData);
-        let moderInfo = Object.assign({}, this.moderData);
+        const moderInfo = Object.assign({}, this.moderData);
         // @ts-ignore
         delete moderInfo.timestamp;
-        console.log(moderInfo);
+        // @ts-ignore
+        delete moderInfo.pagesTotal;
 
         this.http.put<void>(appLinks.moderator, moderInfo).subscribe(() => {
-          this.close();
+          this.closeEmit.emit();
+          this.notifyEmit.emit("Updated successfully");
           this.updateEmit.emit();
+        },
+        () => {
+          this.closeEmit.emit();
+          this.notifyEmit.emit("Oh snap. This email is already registered. Try another one.");
         });
-      } else {
-        this.http.post<void>(appLinks.moderator, formData).subscribe((res:any) => {
-          this.close();
+      }
+      else {
+        this.http.post<void>(appLinks.moderator, formData).subscribe(() => {
+          this.closeEmit.emit();
+          this.notifyEmit.emit("Added successfully");
           this.updateEmit.emit();
+        },
+        () => {
+          this.closeEmit.emit();
+          this.notifyEmit.emit("Oh snap. This email is already registered. Try another one.");
         });
       }
     }
@@ -79,7 +94,6 @@ export class AddEditModeratorComponent {
   }
 
   close() {
-    this.closeEmit.emit(false);
+    this.closeEmit.emit();
   }
-
 }

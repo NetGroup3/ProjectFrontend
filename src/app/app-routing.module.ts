@@ -14,8 +14,7 @@ import {AdminModeratorsComponent} from "./modules/admin/admin-moderators/admin-m
 import {AddEditKitchenwareComponent} from "./modules/cocktails/add-edit-kitchenware/add-edit-kitchenware.component";
 import {AddEditDishComponent} from "./modules/cocktails/add-edit-dish/add-edit-dish.component";
 import {PersonalStockComponent} from "./modules/cocktails/personal-stock/personal-stock.component";
-import {DishComponent} from "./modules/cocktails/dish/dish.component";
-import {UserDishComponent} from "./modules/cocktails/dish/user-dish/user-dish.component";
+import {DishInfoComponent} from "./modules/cocktails/dish/dish-info/dish-info.component";
 import {ListKitchenwareComponent} from "./modules/cocktails/list-kitchenware/list-kitchenware.component";
 import {PageNotFoundComponent} from "./modules/core/page-not-found/page-not-found.component";
 import {FriendsComponent} from "./modules/friends/pages/friends/friends.component";
@@ -49,7 +48,7 @@ const routes: Routes = [
   { path: 'admin/moderators', component: AdminModeratorsComponent},
   { path: 'personal-stock', component: PersonalStockComponent},
   { path: 'dishes', component: UserCocktailsComponent},
-  { path: 'user/dish/:id', component: UserDishComponent},
+  { path: 'user/dish/:id', component: DishInfoComponent},
   { path: 'list', component: ListKitchenwareComponent},
   { path: "**", component: PageNotFoundComponent},
 ];

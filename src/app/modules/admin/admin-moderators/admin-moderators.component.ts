@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {appLinks} from "../../../app.links";
-import {ModeratorModel} from "./moderator.model";
-import {PagResModel} from "./pag-res.model";
+import {ModerListItem} from "../models/moderListItem";
 import {toBoolean} from "ng-zorro-antd/core/util";
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-admin-moderators',
@@ -13,9 +13,11 @@ import {toBoolean} from "ng-zorro-antd/core/util";
 })
 export class AdminModeratorsComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {}
+  constructor(private fb: FormBuilder,
+              private http: HttpClient,
+              private notification: NzNotificationService) {}
 
-  moderatorList!: ModeratorModel[];
+  moderatorList: ModerListItem[] = [];
   pageNo: number = 1;
   pagesTotal: number = 1;
 
@@ -30,14 +32,15 @@ export class AdminModeratorsComponent implements OnInit {
 
   showInjected: boolean = false;
   showConfirm: boolean = true;
-  emptyList: boolean = true;
+  emptyList: boolean = false;
+  isLoading: boolean = true;
   buttonDisabled: boolean = false;
   idToDelete: number = -1;
 
   buttonB: boolean = false;
   buttonF: boolean = false;
 
-  inputData: ModeratorModel | undefined;
+  inputData: ModerListItem | undefined;
 
   settingsForm = new FormGroup({
     search: new FormControl(''),
@@ -47,10 +50,7 @@ export class AdminModeratorsComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.loadList({sortProps: [{
-      column: "timestamp",
-      asc: false
-    }]});
+    this.onSubmit();
   }
 
   changeElementsState() {
@@ -67,10 +67,11 @@ export class AdminModeratorsComponent implements OnInit {
     this.formValue.perPage = 10;
   }
 
-  onSubmit() {
+  setUpFormValue() {
     const formData = this.settingsForm.value;
     this.clearFormValue();
-    if (formData.searchInput !== "") {
+
+    if (formData.searchInput !== null) {
       if (formData.search === "firstname") {
         this.formValue.searchFirstname = formData.searchInput;
       }
@@ -81,19 +82,31 @@ export class AdminModeratorsComponent implements OnInit {
         this.formValue.searchEmail = formData.searchInput;
       }
     }
+
+    if (formData.sort === "") {
+      formData.sort = "timestamp";
+    }
+    if (formData.sortType === "") {
+      formData.sortType = "false";
+    }
+
     // @ts-ignore
     this.formValue.sortProps.push({column: formData.sort, asc: toBoolean(formData.sortType)});
-    this.loadList(this.formValue);
+  }
+
+  onSubmit() {
+    this.setUpFormValue();
+    this.loadList();
   }
 
   onForward() {
-    this.formValue.pageNo++;
-    this.loadList(this.formValue);
+    this.formValue.pageNo ++;
+    this.loadList();
   }
 
   onBackward() {
     this.formValue.pageNo --;
-    this.loadList(this.formValue);
+    this.loadList();
   }
 
   setShowInjected(value: boolean) {
@@ -113,7 +126,7 @@ export class AdminModeratorsComponent implements OnInit {
     }
   }
 
-  onAddEditClicked(moder: ModeratorModel | undefined) {
+  onAddEditClicked(moder: ModerListItem | undefined) {
     this.inputData = moder;
     this.setShowInjected(true);
   }
@@ -127,7 +140,11 @@ export class AdminModeratorsComponent implements OnInit {
     this.changeElementsState();
     this.http.delete(appLinks.moderator + "/" + this.idToDelete)
       .subscribe(() => {
-        this.loadList(this.formValue);
+        this.loadList();
+        this.notify("Deleted successfully.");
+    },
+    () => {
+        this.notify("Oh snap. That didn't work. Please try again later.");
     });
   }
 
@@ -150,16 +167,19 @@ export class AdminModeratorsComponent implements OnInit {
     }
   }
 
-  loadList (obj: Object) {
-    this.http.post<PagResModel>(appLinks.moderatorList, obj).subscribe(
+  loadList () {
+    this.isLoading = true;
+    this.emptyList = false;
+    this.http.post<ModerListItem[]>(appLinks.moderatorList, this.formValue).subscribe(
     (res) => {
-      this.moderatorList = res.list;
-      this.pageNo = res.pageNo;
-      this.pagesTotal = res.pagesTotal;
-      if (res.list === null) {
+      this.isLoading = false;
+      this.moderatorList = res;
+      this.pageNo = this.formValue.pageNo;
+      if (res === null || res.length === 0) {
         this.emptyList = true;
       }
       else {
+        this.pagesTotal = this.moderatorList[0].pagesTotal;
         for (const moder of this.moderatorList) {
           moder.timestamp = (new Date(moder.timestamp.toString())).toLocaleString();
         }
@@ -167,8 +187,17 @@ export class AdminModeratorsComponent implements OnInit {
       }
       this.setNavButtons();
     },
-    (err) => {
+    () => {
       this.emptyList = true;
+      this.notify("Oh snap. We are having troubles here. Please try again later.");
     });
+  }
+
+  notify(text: string) {
+    this.notification
+      .blank(
+        'Notification',
+        text
+      )
   }
 }

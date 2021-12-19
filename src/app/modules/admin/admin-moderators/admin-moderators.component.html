@@ -68,6 +68,10 @@
         </tbody>
       </table>
 
+      <div *ngIf="isLoading" class="spinner">
+        <nz-spin nzSimple></nz-spin>
+      </div>
+
       <div class="nav-button-div">
         <button class="round-button" [disabled]="buttonDisabled || !buttonB" (click)="onBackward()"><</button>
         <p style="display: inline-block;"><b>&emsp;{{formValue.pageNo}}&emsp;of&emsp;{{pagesTotal}}&emsp;</b></p>
@@ -93,8 +97,9 @@
 
   <app-add-edit-moderator
       [inputModerData]="inputData"
-      (closeEmit)="setShowInjected($event)"
-      (updateEmit)="loadList(formValue)"
+      (closeEmit)="setShowInjected(false)"
+      (updateEmit)="loadList()"
+      (notifyEmit)="notify($event)"
       *ngIf="showInjected">
   </app-add-edit-moderator>
 

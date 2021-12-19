@@ -11,7 +11,6 @@ export class CommentsComponent implements OnInit, AfterViewChecked {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef | undefined;
 
   @Input() dishId: number = 0;
-  @Input() userId: number = 0;
   currentComment: string = "";
   currentPage: number = 0;
   perPage: number = 10;
@@ -34,8 +33,7 @@ export class CommentsComponent implements OnInit, AfterViewChecked {
     try {
       // @ts-ignore
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    }
-    catch(err) { }
+    } catch {}
   }
 
   loadMore() {
@@ -48,6 +46,10 @@ export class CommentsComponent implements OnInit, AfterViewChecked {
       .subscribe(res => {
         // @ts-ignore
         if (res.list !== null) {
+          /*/ @ts-ignore
+          for (const comment: Comment in res.list) {
+            if (comment.name)
+          }*/
           // @ts-ignore
           this.comments = res.list.concat(this.comments);
         }
@@ -58,7 +60,6 @@ export class CommentsComponent implements OnInit, AfterViewChecked {
 
   postComment() {
     this.http.post(appLinks.comment, {
-      userId: this.userId,
       dishId: this.dishId,
       text: this.currentComment
     }).subscribe(() => {
