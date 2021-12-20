@@ -1,17 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import {AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {appLinks} from "../../../../app.links";
+import {Component, Input, OnInit} from '@angular/core';
 import {DishComment} from './comment';
-import {Cloudinary, CloudinaryImage} from "@cloudinary/url-gen";
+import {NzNotificationService} from 'ng-zorro-antd/notification';
+import {CommentService} from 'src/app/modules/core/services/comment.service';
 
 @Component({
   selector: 'app-comments',
   templateUrl: './comments.component.html',
   styleUrls: ['./comments.component.scss']
 })
-export class CommentsComponent implements OnInit, AfterViewChecked {
-  
-  @ViewChild('scrollMe') private myScrollContainer: ElementRef | undefined;
+export class CommentsComponent implements OnInit {
 
   @Input() dishId: number = 0;
   currentComment: string = "";
@@ -22,23 +19,14 @@ export class CommentsComponent implements OnInit, AfterViewChecked {
 
   comments: DishComment[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private notification: NzNotificationService,
+    private service: CommentService
+  ) {}
 
   ngOnInit(): void {
-    this.loadMore();
-    this.scrollToBottom();
     this.userRole = localStorage.getItem("USER_ROLE");
-  }
-
-  ngAfterViewChecked() {
-    this.scrollToBottom();
-  }
-
-  scrollToBottom(): void {
-    try {
-      // @ts-ignore
-      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    } catch {}
+    this.loadMore();
   }
 
   loadMore() {
@@ -46,8 +34,8 @@ export class CommentsComponent implements OnInit, AfterViewChecked {
       return;
     }
     this.currentPage ++;
-    this.http.get<DishComment[]>(appLinks.commentList
-      + "?dishId=" + this.dishId + "&pageNo=" + this.currentPage + "&perPage=" + this.perPage)
+
+    this.service.getPaginatedComments(this.dishId, this.currentPage, this.perPage)
       .subscribe(list => {
         if (list !== null && list.length > 0) {
           
@@ -57,7 +45,6 @@ export class CommentsComponent implements OnInit, AfterViewChecked {
               comment.lastname = "user";
             }
             comment.timestamp = (new Date(comment.timestamp.toString())).toLocaleString();
-            
           }
           this.comments = list.concat(this.comments);
           this.pagesTotal = list[0].pagesTotal;
@@ -66,19 +53,22 @@ export class CommentsComponent implements OnInit, AfterViewChecked {
   }
 
   postComment() {
-    this.http.post(appLinks.comment, {
-      dishId: this.dishId,
-      text: this.currentComment
-    })
-    .subscribe(() => {
-      this.comments = [];
-      this.currentPage = 0;
-      this.loadMore();
-      this.scrollToBottom();
-    });
-  }
-
-  onScroll() {
-    this.loadMore();
+    if (this.currentComment === "") {
+      return;
+    }
+    this.service.postComment(this.dishId, this.currentComment)
+      .subscribe(() => {
+        this.currentComment = "";
+        this.comments = [];
+        this.currentPage = 0;
+        this.loadMore();
+      },
+      () => {
+        this.notification
+        .blank(
+          "",
+          "Oh snap. Couldn't post your comment. Please try again later"
+        )
+      });
   }
 }

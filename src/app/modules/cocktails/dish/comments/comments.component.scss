@@ -1,23 +1,18 @@
 .scrollable-container {
-  height: 65%;
+  height: 80%;
   overflow-y: scroll;
   background-color: white;
   padding: 1%;
 }
 
 .writeCommentDiv {
-  height: 25%;
+  height: 20%;
 }
 
 .text-input {
   width: 100%;
-  height: 60%;
+  height: 100%;
   resize: none;
-}
-
-#post {
-  float: left;
-  margin-top: 1%;
 }
 
 .main {

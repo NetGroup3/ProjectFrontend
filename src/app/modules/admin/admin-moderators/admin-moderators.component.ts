@@ -1,33 +1,39 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {appLinks} from "../../../app.links";
+import {FormControl, FormGroup} from "@angular/forms";
 import {ModerListItem} from "../models/moderListItem";
 import {toBoolean} from "ng-zorro-antd/core/util";
-import { NzNotificationService } from 'ng-zorro-antd/notification';
+import {NzNotificationService} from 'ng-zorro-antd/notification';
+import {ModeratorListService} from '../../core/services/moderator-list.service';
+import {RequestBody} from '../models/requestBody';
+import {AddEditModer} from '../models/addEditModer';
 
 @Component({
   selector: 'app-admin-moderators',
   templateUrl: './admin-moderators.component.html',
   styleUrls: ['./admin-moderators.component.scss']
 })
+
 export class AdminModeratorsComponent implements OnInit {
 
-  constructor(private fb: FormBuilder,
-              private http: HttpClient,
-              private notification: NzNotificationService) {}
+  constructor(
+    private notification: NzNotificationService,
+    private service: ModeratorListService
+  ) {}
+
+  defaultPerPage: number = 10;
+  defaultPageNo: number = 1;
 
   moderatorList: ModerListItem[] = [];
   pageNo: number = 1;
   pagesTotal: number = 1;
 
-  formValue = {
+  formValue: RequestBody = {
     searchFirstname: "",
     searchLastname: "",
     searchEmail: "",
     sortProps: [],
-    pageNo: 1,
-    perPage: 10
+    pageNo: this.defaultPageNo,
+    perPage: this.defaultPerPage
   };
 
   showInjected: boolean = false;
@@ -40,7 +46,7 @@ export class AdminModeratorsComponent implements OnInit {
   buttonB: boolean = false;
   buttonF: boolean = false;
 
-  inputData: ModerListItem | undefined;
+  inputData: AddEditModer | undefined;
 
   settingsForm = new FormGroup({
     search: new FormControl(''),
@@ -63,8 +69,8 @@ export class AdminModeratorsComponent implements OnInit {
     this.formValue.searchLastname = "";
     this.formValue.searchEmail = "";
     this.formValue.sortProps = [];
-    this.formValue.pageNo = 1;
-    this.formValue.perPage = 10;
+    this.formValue.pageNo = this.defaultPageNo;
+    this.formValue.perPage = this.defaultPerPage;
   }
 
   setUpFormValue() {
@@ -89,8 +95,6 @@ export class AdminModeratorsComponent implements OnInit {
     if (formData.sortType === "") {
       formData.sortType = "false";
     }
-
-    // @ts-ignore
     this.formValue.sortProps.push({column: formData.sort, asc: toBoolean(formData.sortType)});
   }
 
@@ -127,7 +131,17 @@ export class AdminModeratorsComponent implements OnInit {
   }
 
   onAddEditClicked(moder: ModerListItem | undefined) {
-    this.inputData = moder;
+    if (moder === undefined) {
+      this.inputData = undefined;
+    }
+    else {
+      this.inputData = {
+        id: moder.id,
+        email: moder.email,
+        firstname: moder.firstname,
+        lastname: moder.lastname
+      }
+    }
     this.setShowInjected(true);
   }
 
@@ -138,14 +152,14 @@ export class AdminModeratorsComponent implements OnInit {
 
   deleteModer() {
     this.changeElementsState();
-    this.http.delete(appLinks.moderator + "/" + this.idToDelete)
+    this.service.deleteModerator(this.idToDelete)
       .subscribe(() => {
         this.loadList();
         this.notify("Deleted successfully.");
-    },
-    () => {
-        this.notify("Oh snap. That didn't work. Please try again later.");
-    });
+      },
+      () => {
+          this.notify("Oh snap. That didn't work. Please try again later.");
+      });
   }
 
   setNavButtons() {
@@ -170,33 +184,33 @@ export class AdminModeratorsComponent implements OnInit {
   loadList () {
     this.isLoading = true;
     this.emptyList = false;
-    this.http.post<ModerListItem[]>(appLinks.moderatorList, this.formValue).subscribe(
-    (res) => {
-      this.isLoading = false;
-      this.moderatorList = res;
-      this.pageNo = this.formValue.pageNo;
-      if (res === null || res.length === 0) {
-        this.emptyList = true;
-      }
-      else {
-        this.pagesTotal = this.moderatorList[0].pagesTotal;
-        for (const moder of this.moderatorList) {
-          moder.timestamp = (new Date(moder.timestamp.toString())).toLocaleString();
+    this.service.getPaginatedModerators(this.formValue)
+      .subscribe((res) => {
+        this.isLoading = false;
+        this.moderatorList = res;
+        if (res === null || res.length === 0) {
+          this.emptyList = true;
         }
-        this.emptyList = false;
-      }
-      this.setNavButtons();
-    },
-    () => {
-      this.emptyList = true;
-      this.notify("Oh snap. We are having troubles here. Please try again later.");
-    });
+        else {
+          this.pagesTotal = this.moderatorList[0].pagesTotal;
+          for (const moder of this.moderatorList) {
+            moder.timestamp = (new Date(moder.timestamp.toString())).toLocaleString();
+          }
+          this.pageNo = this.formValue.pageNo;
+          this.emptyList = false;
+          this.setNavButtons();
+        }
+      },
+      () => {
+        this.emptyList = true;
+        this.notify("Oh snap. We are having troubles here. Please try again later.");
+      });
   }
 
   notify(text: string) {
     this.notification
       .blank(
-        'Notification',
+        "",
         text
       )
   }
