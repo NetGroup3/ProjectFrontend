@@ -20,10 +20,10 @@ export class RequestsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getFRequests(this.limit, this.offset)
+    this.getFriendRequests(this.limit, this.offset)
   }
 
-  getFRequests(limit: number, offset: number): void {
+  getFriendRequests(limit: number, offset: number): void {
     this.friendService.getRequests(limit, offset)
       .subscribe((response: FriendRequest[]) => {
         this.friendRequests = response
@@ -68,14 +68,14 @@ export class RequestsComponent implements OnInit {
     if (this.friendRequests.length === 0 || this.friendRequests.length < 10) {
     } else {
       this.offset = this.offset + 10;
-      this.getFRequests(this.limit, this.offset);
+      this.getFriendRequests(this.limit, this.offset);
     }
   }
 
   prev() {
     if (this.offset > 0) {
       this.offset = this.offset - 10;
-      this.getFRequests(this.limit, this.offset);
+      this.getFriendRequests(this.limit, this.offset);
     }
   }
 
