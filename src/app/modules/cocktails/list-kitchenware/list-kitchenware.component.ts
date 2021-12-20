@@ -7,7 +7,11 @@ import {InitDishService} from "../../core/services/init-dish.service";
 import {ActivatedRoute} from "@angular/router";
 import {AuthService} from "../../auth/services/client/auth.service";
 import {DishAll} from "../../core/models/dishAll";
+import {lt_LT} from "ng-zorro-antd/i18n";
+import {AutoUnsubscribe} from "ngx-auto-unsubscribe";
+import {Subscription} from "rxjs";
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-list-kitchenware',
   templateUrl: './list-kitchenware.component.html',
@@ -15,18 +19,18 @@ import {DishAll} from "../../core/models/dishAll";
 })
 export class ListKitchenwareComponent implements OnInit {
 
-
-  changes: any [] = []
-  list: TransferItem[] = [];
-  $asTransferItems = (data: unknown): TransferItem[] => data as TransferItem[];
-  disabled = false;
-  showSearch = false;
-  kitchenware: Kitchenware [] = [];
+  public changes: any [] = []
+  public list: TransferItem[] = [];
+  public $asTransferItems = (data: unknown): TransferItem[] => data as TransferItem[];
+  public disabled = false;
+  public showSearch = false;
+  public limit = 20
+  public page = 0
+  subscriptions: Subscription = new Subscription();
 
   constructor(private moderatorService: ModeratorService,
               private initDishService: InitDishService,
-              private route: ActivatedRoute,
-              private authService: AuthService,) {
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -46,15 +50,13 @@ export class ListKitchenwareComponent implements OnInit {
 
   getDish(callback: (res: DishAll) => void): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.moderatorService.getDish(id)
-      .subscribe((res) => callback(res));
+    this.subscriptions.add(
+      this.moderatorService.getDish(id)
+      .subscribe((res: DishAll) => callback(res)))
   }
 
 
   initList(array: Kitchenware[], right: any []){
-    array.forEach(el =>{
-      this.initDishService.kitchenware.push(el.id)
-    })
     this.list = []
     for (let i = 0; i < array.length; i++) {
       this.list.push({
@@ -74,17 +76,14 @@ export class ListKitchenwareComponent implements OnInit {
     this.initDishService.listKitchenware = this.list
   }
   getKitchenware(callback: (res: any) => void): void {
-    this.moderatorService.getKitchenware(50, 0, "", "", "")
-      .subscribe((res: any) => callback(res));
+    this.subscriptions.add(
+      this.moderatorService.getKitchenware(this.limit, this.page, "", "", "")
+      .subscribe((res: any) => callback(res)))
   }
 
   change(ret: TransferChange): void {
-    ret.list.forEach(el => {
-      this.initDishService.changedKitchenware.push(el)
-    })
-    console.log('nzChange', ret);
-    const listKeys = ret.list.map(l => l.key);
-    const hasOwnKey = (e: TransferItem): boolean => e.hasOwnProperty('key');
+    let listKeys = ret.list.map(l => l.key);
+    let hasOwnKey = (e: TransferItem): boolean => e.hasOwnProperty('key');
     this.list = this.list.map(e => {
       if (listKeys.includes(e.key) && hasOwnKey(e)) {
         if (ret.to === 'left') {
@@ -97,5 +96,5 @@ export class ListKitchenwareComponent implements OnInit {
     });
     this.initDishService.listKitchenware = this.list
   }
-
+  ngOnDestroy() {}
 }

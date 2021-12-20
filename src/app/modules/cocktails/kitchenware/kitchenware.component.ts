@@ -1,7 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ModeratorService} from "../../core/services/moderator.service";
 import {Kitchenware} from "../../core/models/kitchenware";
+import {debounceTime} from "rxjs/operators";
+import {AutoUnsubscribe} from "ngx-auto-unsubscribe";
+import {Subscription} from "rxjs";
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-kitchenware',
   templateUrl: './kitchenware.component.html',
@@ -15,9 +19,6 @@ export class KitchenwareComponent implements OnInit {
   key: string = ""
   category: string = ""
   sortedBy: string = ""
-  id: boolean = false
-  title: boolean = false
-  Category: boolean = false
   toggle: boolean = true
   delKitchenware: Kitchenware = {
     id: 0,
@@ -26,7 +27,9 @@ export class KitchenwareComponent implements OnInit {
     category: "",
     imageId: "",
     isActive: false
-}
+  }
+  subscriptions: Subscription = new Subscription()
+
   constructor(private moderatorService: ModeratorService) {}
 
   ngOnInit(): void {
@@ -34,14 +37,16 @@ export class KitchenwareComponent implements OnInit {
   }
 
   getKitchenware(limit: number, page: number, key: string, category: string, sortedBy: string): void {
-    this.moderatorService.getKitchenware(limit, page, key, category, sortedBy)
-      .subscribe((response)=>{
+    this.subscriptions.add(
+      this.moderatorService.getKitchenware(limit, page, key, category, sortedBy)
+      .pipe(debounceTime(300))
+      .subscribe((response: Kitchenware[])=>{
         this.kitchenware = response
         if (this.kitchenware.length === 0) {
           this.page = -1
           this.next()
         }
-      });
+      }))
   }
 
   next() {
@@ -62,10 +67,10 @@ export class KitchenwareComponent implements OnInit {
 
   ok() {
     this.toggle = !this.toggle;
-    console.log(this.delKitchenware)
-    this.moderatorService.deleteKitchenware(this.delKitchenware.id).subscribe(()=>{
+    this.subscriptions.add(
+      this.moderatorService.deleteKitchenware(this.delKitchenware.id).subscribe(()=>{
       this.ngOnInit()
-    });
+    }))
   }
 
   delete(kitchenware: Kitchenware) {
@@ -76,4 +81,6 @@ export class KitchenwareComponent implements OnInit {
   search(sortedBy: string) {
     this.getKitchenware(this.limit, this.page, this.key, this.category, sortedBy);
   }
+
+  ngOnDestroy() {}
 }

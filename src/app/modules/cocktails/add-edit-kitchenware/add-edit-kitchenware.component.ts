@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ModeratorService} from "../../core/services/moderator.service";
 import {Location} from "@angular/common";
 import {Kitchenware} from "../../core/models/kitchenware";
 import {UploadService} from "../../auth/services/client/upload.service";
+import {AutoUnsubscribe} from "ngx-auto-unsubscribe";
+import {Subscription} from "rxjs";
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-add-edit-kitchenware',
   templateUrl: './add-edit-kitchenware.component.html',
@@ -21,16 +24,19 @@ export class AddEditKitchenwareComponent implements OnInit {
     isActive: false,
   };
   public img: any;
+  subscriptions: Subscription = new Subscription();
+
   constructor(
     private route: ActivatedRoute,
     private moderatorService: ModeratorService,
     private location: Location,
-  private uploadService: UploadService,
+    private uploadService: UploadService,
     private router: Router
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    if(Number(this.route.snapshot.paramMap.get('id')) > 0){
+    if (Number(this.route.snapshot.paramMap.get('id')) > 0) {
       this.getKitchenware();
     }
   }
@@ -39,40 +45,38 @@ export class AddEditKitchenwareComponent implements OnInit {
     this.location.back();
   }
 
-  onAddClick():void{
-    console.log(this.kitchenware)
-    if(this.kitchenware.id === 0){
-      this.moderatorService.addKitchenware(this.kitchenware).subscribe((response:any)=>{
-        console.log(response)
+  onAddClick(): void {
+    if (this.kitchenware.id === 0) {
+      this.subscriptions.add(
+        this.moderatorService.addKitchenware(this.kitchenware).subscribe((response: any) => {
         this.router.navigate(['/moderator/kitchenware'])
-      });
-    }
-    else {
-      this.moderatorService.editKitchenware(this.kitchenware).subscribe((response:any)=>{
-        console.log(response)
+      }))
+    } else {
+      this.subscriptions.add(
+      this.moderatorService.editKitchenware(this.kitchenware).subscribe((response: any) => {
         this.router.navigate(['/moderator/kitchenware'])
-      });
+      }))
     }
-    console.log(this.kitchenware)
 
   }
 
   getKitchenware(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.moderatorService.getKitchenwareById(id)
-      .subscribe((response:any)=>{
-        console.log(response)
+    this.subscriptions.add(
+      this.moderatorService.getKitchenwareById(id)
+      .subscribe((response: Kitchenware) => {
         this.kitchenware = response
         this.img = this.uploadService.initImage(this.kitchenware.imageId);
-      });
+      }))
   }
 
   onFileSelect($event: any) {
-    this.uploadService.onUpLoad($event.target.files[0]).subscribe(response =>{
+    this.subscriptions.add(
+    this.uploadService.onUpLoad($event.target.files[0]).subscribe(response => {
       this.kitchenware.imageId = response.public_id;
       this.img = this.uploadService.initImage(this.kitchenware.imageId);
-      //this.onAddClick();
-    });
+    }))
   }
 
+  ngOnDestroy() {}
 }

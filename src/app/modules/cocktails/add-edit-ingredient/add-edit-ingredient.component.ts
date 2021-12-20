@@ -5,7 +5,10 @@ import {Ingredient} from "../../core/models/ingredient";
 import {Location} from '@angular/common';
 import {UploadService} from "../../auth/services/client/upload.service";
 import {Router} from "@angular/router";
+import {Subscription} from "rxjs";
+import {AutoUnsubscribe} from "ngx-auto-unsubscribe";
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-add-edit-ingredient',
   templateUrl: './add-edit-ingredient.component.html',
@@ -14,9 +17,7 @@ import {Router} from "@angular/router";
 export class AddEditIngredientComponent implements OnInit {
 
   public img: any;
-  description: string = "";
-  title: string = "";
-
+  subscriptions: Subscription = new Subscription();
   ingridient: Ingredient = {
     id: 0,
     title: "",
@@ -45,38 +46,38 @@ export class AddEditIngredientComponent implements OnInit {
   }
 
   onAddClick(): void{
-    console.log(this.ingridient)
     if(this.ingridient.id === 0){
-      this.moderatorService.addIngredient(this.ingridient).subscribe((response:any)=>{
+      this.subscriptions.add(
+        this.moderatorService.addIngredient(this.ingridient).subscribe((response:any)=>{
         this.router.navigate(['/moderator/ingredients'])
-      });
+      }))
     }
     else {
-      console.log(this.ingridient.imageId)
-      this.moderatorService.editIngredient(this.ingridient).subscribe((response:any)=>{
+      this.subscriptions.add(
+        this.moderatorService.editIngredient(this.ingridient).subscribe((response:any)=>{
         this.router.navigate(['/moderator/ingredients'])
-      });
+      }))
     }
 
   }
 
   getIngredient(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.moderatorService.getIngredient(id)
-      .subscribe((response:any)=>{
-        console.log(response)
+    this.subscriptions.add(
+      this.moderatorService.getIngredient(id)
+      .subscribe((response:Ingredient)=>{
         this.ingridient = response
-        console.log(this.ingridient.imageId)
         this.img = this.uploadService.initImage(this.ingridient.imageId);
-      });
+      }))
   }
 
   onFileSelect($event: any) {
-    this.uploadService.onUpLoad($event.target.files[0]).subscribe(response =>{
+    this.subscriptions.add(
+      this.uploadService.onUpLoad($event.target.files[0]).subscribe(response =>{
       this.ingridient.imageId = response.public_id;
-      console.log(this.ingridient.imageId)
       this.img = this.uploadService.initImage(this.ingridient.imageId);
-    });
+    }))
   }
 
+  ngOnDestroy() {}
 }

@@ -7,7 +7,10 @@ import {ActivatedRoute} from "@angular/router";
 import {AuthService} from "../../auth/services/client/auth.service";
 import {Label} from "../../core/models/label";
 import {DishAll} from "../../core/models/dishAll";
+import {AutoUnsubscribe} from "ngx-auto-unsubscribe";
+import {Subscription} from "rxjs";
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-list-label',
   templateUrl: './list-label.component.html',
@@ -15,25 +18,23 @@ import {DishAll} from "../../core/models/dishAll";
 })
 export class ListLabelComponent implements OnInit {
 
-
-  changes: any [] = []
-  list: TransferItem[] = [];
-  $asTransferItems = (data: unknown): TransferItem[] => data as TransferItem[];
-  disabled = false;
-  showSearch = false;
-  labels: Label [] = [];
+  public list: TransferItem[] = []
+  public $asTransferItems = (data: unknown): TransferItem[] => data as TransferItem[];
+  public disabled = false
+  public showSearch = false
+  public limit = 10
+  public page = 0
+  subscriptions: Subscription = new Subscription();
 
   constructor(private moderatorService: ModeratorService,
               private initDishService: InitDishService,
-              private route: ActivatedRoute,
-              private authService: AuthService,) {
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     if(!isNaN(Number(this.route.snapshot.paramMap.get('id')))) {
       this.getLabels((all: Label[]) => {
         this.getDish((res: DishAll) => {
-          console.log(res.labels)
           this.initList(all, res.labels)
         })
       })
@@ -47,9 +48,6 @@ export class ListLabelComponent implements OnInit {
   }
 
   initList(array: any[], right: any []){
-    array.forEach(el =>{
-      this.initDishService.label.push(el.id)
-    })
     this.list = []
     for (let i = 0; i < array.length; i++) {
       this.list.push({
@@ -71,23 +69,21 @@ export class ListLabelComponent implements OnInit {
   }
 
   getLabels(callback: (res: Label[]) => void): void {
-    this.moderatorService.getLabels(50, 0)
-      .subscribe((res) => callback(res));
+    this.subscriptions.add(
+      this.moderatorService.getLabels(this.limit, this.page)
+      .subscribe((res: Label[]) => callback(res)))
   }
 
   getDish(callback: (res: DishAll) => void): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.moderatorService.getDish(id)
-      .subscribe((res) => callback(res));
+    this.subscriptions.add(
+      this.moderatorService.getDish(id)
+      .subscribe((res: DishAll) => callback(res)))
   }
 
   change(ret: TransferChange): void {
-    ret.list.forEach(el => {
-      this.initDishService.changedLabel.push(el)
-    })
-    console.log('nzChange', ret);
-    const listKeys = ret.list.map(l => l.key);
-    const hasOwnKey = (e: TransferItem): boolean => e.hasOwnProperty('key');
+    let listKeys = ret.list.map(l => l.key);
+    let hasOwnKey = (e: TransferItem): boolean => e.hasOwnProperty('key');
     this.list = this.list.map(e => {
       if (listKeys.includes(e.key) && hasOwnKey(e)) {
         if (ret.to === 'left') {
@@ -101,5 +97,6 @@ export class ListLabelComponent implements OnInit {
     this.initDishService.listLabels = this.list
   }
 
+  ngOnDestroy() {}
 
 }
