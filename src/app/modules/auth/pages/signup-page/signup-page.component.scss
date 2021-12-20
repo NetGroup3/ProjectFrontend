@@ -1,7 +1,28 @@
 .signup{
-  width: 100vw;
-  height: 100vh;
+  position: fixed;
+  top: 0%;
+  right: 0%;
+  width: 100%;
+  height: 100%;
   background: linear-gradient(180deg, #5F72BE 0%, #EBD3FB 100%);
+}
+
+.inner {
+  position: absolute;
+  top: 15%;
+  left: 10%;
+  background: #FFFFFF;
+  border-radius: 3vmin;
+  width: 30%;
+  height: 70%;
+}
+
+.picture{
+  position: absolute;
+  top: 0%;
+  right: -2%;
+  height: 100%;
+  width: 50%;
 }
 
 .fixed-overlay {
@@ -51,16 +72,9 @@
 h1{
   color: #495464;
 }
-.picture{
-  height: 100vh;
-  width: auto;
-  float: right;
-  margin-left: 10%;
-}
 .picture img{
-  height: 100vh;
-  width: 800px;
-  margin: 0;
+  height: 100%;
+  width: 100%;
 }
 .signup-page {
 
@@ -95,14 +109,3 @@ h1{
     margin-top: 16px;
   }
 }
-
-.inner {
-  position: absolute;
-  background: #FFFFFF;
-  border-radius: 32px;
-  width: 30%;
-  height: 70%;
-  margin-top: 10%;
-  margin-left: 5%;
-}
-

@@ -2,86 +2,86 @@
   <div class="picture">
     <img src="assets/kitchen.png">
   </div>
-<div class="inner">
+  <div class="inner">
 
-  <div [ngClass]="{'fixed-overlay': toggle, 'fixed': !toggle}" class="fixed-overlay">
-    <div class="modal">
-      <div class="popup">
-        <div class="field"></div>
-        <span>Confirm email</span>
-        <div class="field"></div>
-        <a routerLink="/login">Login here</a>
+    <div [ngClass]="{'fixed-overlay': toggle, 'fixed': !toggle}" class="fixed-overlay">
+      <div class="modal">
+        <div class="popup">
+          <div class="field"></div>
+          <span>Confirm email</span>
+          <div class="field"></div>
+          <a routerLink="/login">Login here</a>
+        </div>
+      </div>
+    </div>
+    <div
+      class="signup-page__form"
+      [formGroup]="form"
+    ><h1>Sign up</h1>
+      <nz-form-control
+        [nzValidateStatus]="form.controls.email.touched &&  form.controls.email.errors ? 'error' : ''  "
+        nzErrorTip="email error"
+      >
+        <input
+          class="signup-page__input"
+          nz-input
+          placeholder="E-mail"
+          formControlName="email"
+        />
+      </nz-form-control>
+      <input
+        class="signup-page__input"
+        nz-input
+        placeholder="First Name"
+        formControlName="firstname"
+      />
+      <input
+        class="signup-page__input"
+        nz-input
+        placeholder="Last Name"
+        formControlName="lastname"
+      />
+      <nz-form-control
+        [nzValidateStatus]="form.controls.password.touched &&  form.controls.password.errors ? 'error' : ''  "
+        nzErrorTip="password must be more then 8 characters"
+      >
+        <input
+          class="signup-page__input"
+          nz-input
+          placeholder="Password"
+          type="password"
+          formControlName="password"
+        />
+      </nz-form-control>
+      <nz-form-control
+        [nzValidateStatus]="form.controls.confirmPassword.touched &&  form.controls.confirmPassword.errors ? 'error' : ''  "
+        nzErrorTip="confirm password must match"
+      >
+        <input
+          class="signup-page__input"
+          nz-input
+          placeholder="Confirm Password"
+          type="password"
+          formControlName="confirmPassword"
+        />
+      </nz-form-control>
+
+      <button
+        class="signup-page__controller"
+        nz-button
+        nzType="primary"
+        (click)="onLoginClick()"
+      >
+        Sign up
+      </button>
+      <p *ngIf="error">
+        <nz-alert nzType="error" nzMessage="{{message}}" nzShowIcon></nz-alert>
+      </p>
+      <div class="signup-page__link">
+        <a routerLink="/login">Log in</a><br>
+        <a routerLink="/recovery">Recover password</a><br>
+        <a routerLink="/">Go to main page</a><br>
       </div>
     </div>
   </div>
-  <div
-    class="signup-page__form"
-    [formGroup]="form"
-  ><h1>Sign up</h1>
-    <nz-form-control
-      [nzValidateStatus]="form.controls.email.touched &&  form.controls.email.errors ? 'error' : ''  "
-      nzErrorTip="email error"
-    >
-      <input
-        class="signup-page__input"
-        nz-input
-        placeholder="E-mail"
-        formControlName="email"
-      />
-    </nz-form-control>
-    <input
-      class="signup-page__input"
-      nz-input
-      placeholder="First Name"
-      formControlName="firstname"
-    />
-    <input
-      class="signup-page__input"
-      nz-input
-      placeholder="Last Name"
-      formControlName="lastname"
-    />
-    <nz-form-control
-      [nzValidateStatus]="form.controls.password.touched &&  form.controls.password.errors ? 'error' : ''  "
-      nzErrorTip="password must be more then 8 characters"
-    >
-      <input
-        class="signup-page__input"
-        nz-input
-        placeholder="Password"
-        type="password"
-        formControlName="password"
-      />
-    </nz-form-control>
-    <nz-form-control
-      [nzValidateStatus]="form.controls.confirmPassword.touched &&  form.controls.confirmPassword.errors ? 'error' : ''  "
-      nzErrorTip="confirm password must match"
-    >
-      <input
-        class="signup-page__input"
-        nz-input
-        placeholder="Confirm Password"
-        type="password"
-        formControlName="confirmPassword"
-      />
-    </nz-form-control>
-
-    <button
-      class="signup-page__controller"
-      nz-button
-      nzType="primary"
-      (click)="onLoginClick()"
-    >
-      Sign up
-    </button>
-    <p *ngIf="error">
-      <nz-alert nzType="error" nzMessage="{{message}}" nzShowIcon></nz-alert>
-    </p>
-    <div class="signup-page__link">
-      <p>Already have an account?
-        <a routerLink="/login">Login here</a>
-      </p>
-    </div>
-  </div>
-</div>
 </div>

@@ -2,43 +2,41 @@
   <div class="picture">
     <img src="assets/kitchen.png">
   </div>
-<div class="inner">
+  <div class="inner">
 
-  <div
-    class="recovery-page__form"
-    [formGroup]="form"
-  ><h1>Forgot your password?</h1>
-    <nz-form-control
-      [nzValidateStatus]="form.controls.email.touched && form.controls.email.errors ? 'error' : ''  "
-      nzErrorTip="Enter valid email"
-    >
-      <input
-        class="recovery-page__input"
-        nz-input
-        placeholder="E-mail"
-        formControlName="email"
-      />
-    </nz-form-control>
+    <div class="recovery-page__form" [formGroup]="form">
+      <h1>Forgot your password?</h1>
+      <nz-form-control
+        [nzValidateStatus]="form.controls.email.touched && form.controls.email.errors ? 'error' : ''  "
+        nzErrorTip="Enter valid email"
+      >
+        <input
+          class="recovery-page__input"
+          nz-input
+          placeholder="E-mail"
+          formControlName="email"
+        />
+      </nz-form-control>
 
-    <button
-      class="recovery-page__controller"
-      nz-button
-      nzType="primary"
-      (click)="onRecoveryClick()"
-    >
-      Send list on email
-    </button>
-    <p *ngIf="error">
-      <nz-alert nzType="error" nzMessage="{{message}}" nzShowIcon></nz-alert>
-    </p>
-    <p *ngIf="success">
-      <nz-alert nzType="success" nzMessage="{{message}}" nzShowIcon></nz-alert>
-    </p>
-    <div class="recovery-page__link">
-      <p>
-        <a routerLink="/login">Return to Login</a>
+      <button
+        class="recovery-page__controller"
+        nz-button
+        nzType="primary"
+        (click)="onRecoveryClick()"
+      >
+        Send link to email
+      </button>
+      <p *ngIf="error">
+        <nz-alert nzType="error" nzMessage="{{message}}" nzShowIcon></nz-alert>
       </p>
+      <p *ngIf="success">
+        <nz-alert nzType="success" nzMessage="{{message}}" nzShowIcon></nz-alert>
+      </p>
+      <div class="recovery-page__link">
+        <a routerLink="/login">Log in</a><br>
+        <a routerLink="/signup">Sign up</a><br>
+        <a routerLink="/">Go to main page</a><br>
+      </div>
     </div>
   </div>
-</div>
 </div>

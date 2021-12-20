@@ -44,10 +44,9 @@
         Login
       </button>
       <div class="login-page__link">
-        <a routerLink="/recovery"> Forgot password? </a>
-        <p>Don’t have an account?
-          <a routerLink="/signup">Sign Up </a>
-        </p>
+        <a routerLink="/recovery">Forgot password?</a><br>
+        <a routerLink="/signup">Don’t have an account?</a><br>
+        <a routerLink="/">Go to main page</a><br>
         <p *ngIf="error">
           <nz-alert nzType="error" nzMessage="{{message}}" nzShowIcon></nz-alert>
         </p>
@@ -57,5 +56,4 @@
       </div>
     </div>
   </div>
-
-
+</div>
