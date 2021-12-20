@@ -1,12 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ModeratorService} from "../../core/services/moderator.service";
 import {Ingredient} from "../../core/models/ingredient";
-import {Cloudinary, CloudinaryImage} from "@cloudinary/url-gen";
-import {thumbnail} from "@cloudinary/url-gen/actions/resize";
-import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
-import {Observable, Subscription} from "rxjs";
-import {appLinks} from "../../../app.links";
-import {HttpParams} from "@angular/common/http";
+import {Subscription} from "rxjs";
 import {debounceTime} from "rxjs/operators";
 import {AutoUnsubscribe} from "ngx-auto-unsubscribe";
 

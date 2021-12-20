@@ -15,7 +15,7 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
 export class AddStockComponent implements OnInit, OnChanges {
 
   private isLoading = false;
-  private limit: number = 10;
+  private limit: number = 100;
   private page: number = 0;
 
   @Output() onAddStock: EventEmitter<StockAddDto> = new EventEmitter<StockAddDto>();
