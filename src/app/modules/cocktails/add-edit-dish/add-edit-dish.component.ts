@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Self} from '@angular/core';
 import {Ingredient} from "../../core/models/ingredient";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ModeratorService} from "../../core/services/moderator.service";
@@ -14,23 +14,23 @@ import {DishIngredientDto} from "../../core/models/dishIngredientDto";
 import {DishKitchenwareDto} from "../../core/models/DishKitchenwareDto";
 import {DishLabelDto} from "../../core/models/DishLabelDto";
 import {Label} from "../../core/models/label";
+import {DishAll} from "../../core/models/dishAll";
+import {Subscription} from "rxjs";
+import {AutoUnsubscribe} from "ngx-auto-unsubscribe";
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-add-edit-dish',
   templateUrl: './add-edit-dish.component.html',
   styleUrls: ['./add-edit-dish.component.scss'],
-  providers: [ListComponent]
 })
 export class AddEditDishComponent implements OnInit {
 
-  dishIngredients: Ingredient [] = []
-  dishKitchenware: Kitchenware [] = []
-  dishLabels: Label [] = []
-
-  disabled = false;
-  description: string = ""
-  title: string = ""
-  dish: Dish = {
+  public dishIngredients: Ingredient [] = []
+  public dishKitchenware: Kitchenware [] = []
+  public dishLabels: Label [] = []
+  subscriptions: Subscription = new Subscription();
+  public dish: Dish = {
     id: 0,
     title: "",
     description: "",
@@ -40,11 +40,11 @@ export class AddEditDishComponent implements OnInit {
     active: false,
     likes: 0
   }
-  img: any
-  kitchenware: DishKitchenwareDto [] = []
-  labels: DishLabelDto [] = []
-  ingredients: DishIngredientDto [] = []
-  dishWrapperDto: DishWrapperDto = {
+  public img: any
+  public kitchenware: DishKitchenwareDto [] = []
+  public labels: DishLabelDto [] = []
+  public ingredients: DishIngredientDto [] = []
+  public dishWrapperDto: DishWrapperDto = {
     dish: this.dish,
     ingredients: this.ingredients,
     kitchenware: this.kitchenware,
@@ -54,12 +54,9 @@ export class AddEditDishComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private moderatorService: ModeratorService,
-    private location: Location,
     private uploadService: UploadService,
     private router: Router,
-    private ingredientList: ListComponent,
-    private authService: AuthService,
-    private initDishService: InitDishService
+    private initDishService: InitDishService,
   ) {
   }
 
@@ -110,28 +107,26 @@ export class AddEditDishComponent implements OnInit {
 
   getDish(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.moderatorService.getDish(id)
-      .subscribe((response) => {
-        this.dish.id = response.dish.id
-        this.dish.title = response.dish.title
-        this.dish.imageId = response.dish.imageId
-        this.dish.active = response.dish.active
-        this.dish.description = response.dish.description
-        this.dish.receipt = response.dish.receipt
-        this.dish.category = response.dish.category
-        this.img = this.uploadService.initImage(this.dish.imageId);
-        this.dishIngredients = response.ingredients
-        this.dishKitchenware = response.kitchenware
-        this.dishLabels = response.labels
-      });
+    this.subscriptions.add(
+      this.moderatorService.getDish(id)
+        .subscribe((response: DishAll) => {
+          this.dish = response.dish
+          this.img = this.uploadService.initImage(this.dish.imageId);
+          this.dishIngredients = response.ingredients
+          this.dishKitchenware = response.kitchenware
+          this.dishLabels = response.labels
+        }))
   }
 
 
   onFileSelect($event: any) {
-    this.uploadService.onUpLoad($event.target.files[0]).subscribe(response => {
-      this.dish.imageId = response.public_id;
-      console.log(this.dish.imageId)
-      this.img = this.uploadService.initImage(this.dish.imageId);
-    });
+    this.subscriptions.add(
+      this.uploadService.onUpLoad($event.target.files[0]).subscribe(response => {
+        this.dish.imageId = response.public_id;
+        this.img = this.uploadService.initImage(this.dish.imageId);
+      }))
+  }
+
+  ngOnDestroy() {
   }
 }

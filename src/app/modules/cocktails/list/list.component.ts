@@ -1,14 +1,14 @@
-import {Component, NgModule, OnInit} from '@angular/core';
-import {TransferChange, TransferItem, TransferSelectChange} from "ng-zorro-antd/transfer";
+import {Component, OnInit} from '@angular/core';
+import {TransferChange, TransferItem} from "ng-zorro-antd/transfer";
 import {ModeratorService} from "../../core/services/moderator.service";
 import {Ingredient} from "../../core/models/ingredient";
-import {AddEditDishComponent} from "../add-edit-dish/add-edit-dish.component";
 import {InitDishService} from "../../core/services/init-dish.service";
-import {Dish} from "../../core/models/dish";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AuthService} from "../../auth/services/client/auth.service";
-import {compass} from "@cloudinary/url-gen/qualifiers/gravity";
+import {ActivatedRoute} from "@angular/router";
+import {DishAll} from "../../core/models/dishAll";
+import {AutoUnsubscribe} from "ngx-auto-unsubscribe";
+import {Subscription} from "rxjs";
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -16,43 +16,37 @@ import {compass} from "@cloudinary/url-gen/qualifiers/gravity";
 })
 
 export class ListComponent implements OnInit {
-  id = Number(this.route.snapshot.paramMap.get('id'))
-  list: TransferItem[] = []
-  changes: any [] = []
-  $asTransferItems = (data: unknown): TransferItem[] => data as TransferItem[]
-  disabled = false
-  showSearch = false
-  ingredients: Ingredient [] = []
-  ingredientsDish: Ingredient [] = []
-  dishIngredients: number[] = []
+  public id = Number(this.route.snapshot.paramMap.get('id'))
+  public list: TransferItem[] = []
+  public $asTransferItems = (data: unknown): TransferItem[] => data as TransferItem[]
+  public disabled = false
+  public showSearch = false
+  public limit = 50
+  public page = 0
+  subscriptions: Subscription = new Subscription();
 
   constructor(private moderatorService: ModeratorService,
               private initDishService: InitDishService,
-              private route: ActivatedRoute,
-              private authService: AuthService,) {
+              private route: ActivatedRoute) {
   }
 
 
   ngOnInit(): void {
-    if(!isNaN(Number(this.route.snapshot.paramMap.get('id')))) {
-      this.getIngredients((all) => {
-        this.getDish((res: any) => {
+    if (!isNaN(Number(this.route.snapshot.paramMap.get('id')))) {
+      this.getIngredients((all: Ingredient[]) => {
+        this.getDish((res: DishAll) => {
           this.initList(all, res.ingredients)
         })
 
       })
-    }
-    else {
-      this.getIngredients((all) => {
+    } else {
+      this.getIngredients((all: Ingredient[]) => {
         this.initList(all, [])
       })
     }
   }
 
-  initList(array: Ingredient[], right: Ingredient []){
-   array.forEach(el =>{
-     this.initDishService.ingredients.push(el.id)
-   })
+  initList(array: Ingredient[], right: Ingredient []) {
     this.list = []
     for (let i = 0; i < array.length; i++) {
       this.list.push({
@@ -65,7 +59,7 @@ export class ListComponent implements OnInit {
     }
     for (let i = 0; i < right.length; i++) {
       this.list.forEach(el => {
-        if(el.key == right[i].id){
+        if (el.key == right[i].id) {
           el.direction = 'right'
         }
       })
@@ -74,24 +68,23 @@ export class ListComponent implements OnInit {
   }
 
   getIngredients(callback: (res: Ingredient[]) => void): void {
-    this.moderatorService.getIngredients(50, 0, "", "", "")
-      .subscribe((res) => callback(res));
+    this.subscriptions.add(
+      this.moderatorService.getIngredients(
+        this.limit, this.page, "", "", "")
+        .subscribe((res: Ingredient[]) => callback(res)))
   }
 
   getDish(callback: (res: any) => void): void {
-
-    this.moderatorService.getDish(this.id)
-      .subscribe((res: any) => callback(res));
+    this.subscriptions.add(
+      this.moderatorService.getDish(this.id)
+        .subscribe((res: DishAll) => callback(res)))
   }
 
 
   change(ret: TransferChange): void {
-    ret.list.forEach(el => {
-      this.initDishService.changedIngredients.push(el)
-    })
-    const listKeys = ret.list.map(l => l.key);
-    const hasOwnKey = (e: TransferItem): boolean => e.hasOwnProperty('key');
-    this.list =  this.list.map(e => {
+    let listKeys = ret.list.map(l => l.key);
+    let hasOwnKey = (e: TransferItem): boolean => e.hasOwnProperty('key');
+    this.list = this.list.map(e => {
       if (listKeys.includes(e.key) && hasOwnKey(e)) {
         if (ret.to === 'left') {
           delete e.hide;
@@ -103,4 +96,6 @@ export class ListComponent implements OnInit {
     });
     this.initDishService.listIngredients = this.list
   }
+
+  ngOnDestroy() {}
 }

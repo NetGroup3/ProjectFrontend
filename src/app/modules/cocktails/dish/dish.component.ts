@@ -7,7 +7,11 @@ import {thumbnail} from "@cloudinary/url-gen/actions/resize";
 import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
 import {AuthService} from "../../auth/services/client/auth.service";
 import {DishFormat} from "../../core/models/dishFormat";
+import {debounceTime} from "rxjs/operators";
+import {AutoUnsubscribe} from "ngx-auto-unsubscribe";
+import {Subscription} from "rxjs";
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-dish',
   templateUrl: './dish.component.html',
@@ -17,9 +21,10 @@ export class DishComponent implements OnInit {
   listOfOption: Array<{ value: string; label: string; id: number; }> = []
   ingredients: Ingredient[] = []
   listOfSelectedValue = []
+  subscriptions: Subscription = new Subscription();
   limit: number = 10
   page: number = 0
-  Dishes: DishFormat[] = [];
+  Dishes: DishFormat[] = []
   key: string = ""
   category: string = ""
   desc: boolean = false
@@ -67,28 +72,30 @@ export class DishComponent implements OnInit {
   }
 
   getDishes(limit: number, page: number, desc: boolean, key: string, category: string): void {
-    this.moderatorService.getDishes(limit, page, desc, key, category)
-      .subscribe((response) => {
+    this.subscriptions.add(
+      this.moderatorService.getDishes(limit, page, desc, key, category)
+      .pipe(debounceTime(300))
+      .subscribe((response: DishFormat[]) => {
           this.Dishes = response
           if (this.Dishes.length === 0) {
             this.page = -1
             this.next()
           }
         }
-      )
-    ;
+      ))
   }
 
   getIngredients() {
-    this.moderatorService.getIngredients(50, 0, "", "", "")
-      .subscribe((response) => {
+    this.subscriptions.add(
+      this.moderatorService.getIngredients(50, 0, "", "", "")
+      .subscribe((response: Ingredient[]) => {
         this.ingredients = response
         this.listOfOption = this.ingredients.map(item => ({
           value: item.title,
           label: item.title,
           id: item.id
         }));
-      });
+      }))
   }
 
   next() {
@@ -110,9 +117,10 @@ export class DishComponent implements OnInit {
 
   ok() {
     this.toggle = !this.toggle;
-    this.moderatorService.deleteDish(this.delDish.id).subscribe(() => {
+    this.subscriptions.add(
+      this.moderatorService.deleteDish(this.delDish.id).subscribe(() => {
       this.ngOnInit()
-    });
+    }))
   }
 
   initImage(imageId: string):
@@ -134,19 +142,13 @@ export class DishComponent implements OnInit {
     this.getDishes(this.limit, this.page, this.desc, this.key, this.category);
   }
 
-  likes(id: number) {
-    this.liked = !this.liked;
-    if (this.liked) {
-      this.moderatorService.like(id).subscribe(() => {
-      })
-    }
-  }
 
   searchIngredients() {
     if (this.listOfSelectedValue.length != 0) {
-      this.moderatorService.searchByIngredients(this.listOfSelectedValue, this.limit, this.page).subscribe((response) => {
+      this.subscriptions.add(
+        this.moderatorService.searchByIngredients(this.listOfSelectedValue, this.limit, this.page).subscribe((response) => {
         this.Dishes = response
-      })
+      }))
     }
   }
 
@@ -157,4 +159,6 @@ export class DishComponent implements OnInit {
       dish: dish
     }).subscribe().closed
   }
+
+  ngOnDestroy() {}
 }

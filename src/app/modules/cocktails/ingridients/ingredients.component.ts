@@ -4,10 +4,13 @@ import {Ingredient} from "../../core/models/ingredient";
 import {Cloudinary, CloudinaryImage} from "@cloudinary/url-gen";
 import {thumbnail} from "@cloudinary/url-gen/actions/resize";
 import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {appLinks} from "../../../app.links";
 import {HttpParams} from "@angular/common/http";
+import {debounceTime} from "rxjs/operators";
+import {AutoUnsubscribe} from "ngx-auto-unsubscribe";
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-ingredients',
   templateUrl: './ingredients.component.html',
@@ -30,7 +33,7 @@ export class IngredientsComponent implements OnInit {
     active: false,
     measurement: ""
   }
-
+  subscriptions: Subscription = new Subscription();
   constructor(private moderatorService: ModeratorService) {}
 
   ngOnInit(): void {
@@ -38,14 +41,16 @@ export class IngredientsComponent implements OnInit {
   }
 
   getIngredients(limit: number, page: number, key: string, category: string, sortedBy: string): void {
-    this.moderatorService.getIngredients(limit, page, key, category, sortedBy)
-      .subscribe((response)=>{
+    this.subscriptions.add(
+      this.moderatorService.getIngredients(limit, page, key, category, sortedBy)
+      .pipe(debounceTime(300))
+      .subscribe((response: Ingredient[])=>{
         this.ingredients = response
         if (this.ingredients.length === 0) {
           this.page = -1
           this.next()
         }
-      });
+      }))
   }
 
   next() {
@@ -67,9 +72,10 @@ export class IngredientsComponent implements OnInit {
 
   ok() {
     this.toggle = !this.toggle;
-    this.moderatorService.deleteIngredient(this.delIngredient.id).subscribe(()=>{
+    this.subscriptions.add(
+      this.moderatorService.deleteIngredient(this.delIngredient.id).subscribe(()=>{
       this.ngOnInit()
-    });
+    }))
   }
 
   delete(ingredient: Ingredient) {
@@ -81,5 +87,5 @@ export class IngredientsComponent implements OnInit {
   search(sortedBy: string) {
     this.getIngredients(this.limit, this.page, this.key, this.category, sortedBy);
   }
-
+  ngOnDestroy() {}
 }
