@@ -1,13 +1,10 @@
-import {Component, OnInit, Self} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Ingredient} from "../../core/models/ingredient";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ModeratorService} from "../../core/services/moderator.service";
-import {Location} from "@angular/common";
 import {UploadService} from "../../auth/services/client/upload.service";
 import {Dish} from "../../core/models/dish";
 import {Kitchenware} from "../../core/models/kitchenware";
-import {ListComponent} from "../list/list.component";
-import {AuthService} from "../../auth/services/client/auth.service";
 import {InitDishService} from "../../core/services/init-dish.service";
 import {DishWrapperDto} from "../../core/models/dishWrapperDto";
 import {DishIngredientDto} from "../../core/models/dishIngredientDto";
@@ -26,9 +23,6 @@ import {AutoUnsubscribe} from "ngx-auto-unsubscribe";
 })
 export class AddEditDishComponent implements OnInit {
 
-  public dishIngredients: Ingredient [] = []
-  public dishKitchenware: Kitchenware [] = []
-  public dishLabels: Label [] = []
   subscriptions: Subscription = new Subscription();
   public dish: Dish = {
     id: 0,
@@ -63,6 +57,7 @@ export class AddEditDishComponent implements OnInit {
   ngOnInit(): void {
     if (Number(this.route.snapshot.paramMap.get('id')) > 0) {
       this.getDish();
+
     }
   }
 
@@ -112,9 +107,6 @@ export class AddEditDishComponent implements OnInit {
         .subscribe((response: DishAll) => {
           this.dish = response.dish
           this.img = this.uploadService.initImage(this.dish.imageId);
-          this.dishIngredients = response.ingredients
-          this.dishKitchenware = response.kitchenware
-          this.dishLabels = response.labels
         }))
   }
 

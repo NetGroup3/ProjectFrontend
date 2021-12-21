@@ -96,7 +96,7 @@ export class ModeratorService {
     return this.http.put<String>(appLinks.addDish, dishWrapperDto);
   }
 
-  public getDishes(limit: number, page: number, desc: boolean, key: string, category: string) : Observable<DishFormat[]>{
+  public getDishes(limit: number, page: number, desc: boolean, key: string, category: string): Observable<DishFormat[]>{
     const params = new HttpParams()
       .set('limit', limit.toString())
       .set('page', page.toString())
