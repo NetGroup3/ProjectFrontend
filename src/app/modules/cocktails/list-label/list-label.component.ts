@@ -34,7 +34,7 @@ export class ListLabelComponent implements OnInit {
   ngOnInit(): void {
     if(!isNaN(Number(this.route.snapshot.paramMap.get('id')))) {
       this.getLabels((all: Label[]) => {
-        this.getDish((res: DishAll) => {
+        this.getDishLabels((res: DishAll) => {
           this.initList(all, res.labels)
         })
       })
@@ -74,7 +74,7 @@ export class ListLabelComponent implements OnInit {
       .subscribe((res: Label[]) => callback(res)))
   }
 
-  getDish(callback: (res: DishAll) => void): void {
+  getDishLabels(callback: (res: DishAll) => void): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.subscriptions.add(
       this.moderatorService.getDish(id)

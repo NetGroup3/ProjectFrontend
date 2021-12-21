@@ -18,6 +18,7 @@ import {Subscription} from "rxjs";
   styleUrls: ['./dish.component.scss']
 })
 export class DishComponent implements OnInit {
+
   listOfOption: Array<{ value: string; label: string; id: number; }> = []
   ingredients: Ingredient[] = []
   listOfSelectedValue = []
@@ -32,7 +33,6 @@ export class DishComponent implements OnInit {
   editDelete: boolean = false
   like: boolean = true
   favourite: boolean = true
-  liked: boolean = false
 
   role: string | null = localStorage.getItem("USER_ROLE")
 
@@ -54,10 +54,10 @@ export class DishComponent implements OnInit {
   ngOnInit(): void {
     if (this.authService.getUserRole() == "ADMIN") {
       this.editDelete = false
-      this.liked = true
+      this.like = true
     } else if (this.authService.getUserRole() == "MODERATOR") {
       this.editDelete = false
-      this.liked = true
+      this.like = true
     } else if (this.authService.getUserRole() == "USER") {
       this.editDelete = true
       this.like = false
